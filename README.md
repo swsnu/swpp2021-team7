@@ -1,6 +1,6 @@
 # swpp2021-team7
 
-## Main Page
+## Search keyword
 ### Meta specs
 |        Index                             |                                                                        Content                                                                       |
 |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
@@ -57,6 +57,7 @@ WHEN the User clicks "IU" in `Hottest idol tab`
 THEN the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
 ```
 
+## See idol ranking
 ### Meta specs
 |        Index                             |                                                                        Content                                                                       |
 |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
@@ -76,7 +77,45 @@ WHEN the User clicks `Hottest idol tab`
 THEN the User shuold be redirected to to `Ranking Page('/rank')`.
 ```
 
-## Search Result Page
+### Meta specs
+|        Index                             |                                                                        Content                                                                       |
+|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| FeatureName                        |User can see idol rankings          |
+| Actors                                   |User|
+| Precondition                         |User is on `Ranking Page('/rank')`|
+
+### Scenario
+- **GIVEN** the User is on `Ranking Page('/rank')`
+- **WHEN** the User on the n'th page
+- **THEN** the User can see the 10*n-9 ~ 10*n'th idols.
+
+### Acceptance test
+```
+GIVEN the User is on `Ranking Page('/rank')`
+WHEN the User clicks the 9'th page
+THEN the User shuold see the 81 ~ 90'th idols.
+```
+
+### Meta specs
+|        Index                             |                                                                        Content                                                                       |
+|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| FeatureName                        |User can click each idol in `Ranking Page('/rank')` and be redirected to `Search Result Page(/search)`          |
+| Actors                                   |User|
+| Precondition                         |User is on `Ranking Page('/rank')`|
+
+### Scenario
+- **GIVEN** the User is on `Ranking Page('/rank')`
+- **WHEN** the User clicks one of the idols
+- **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information.
+
+### Acceptance test
+```
+GIVEN the User is on `Ranking Page('/rank')` and there is "IU" in ranking
+WHEN the User clicks "IU"
+THEN the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
+```
+
+## Create & like comment
 ### Meta specs
 |        Index                             |                                                                        Content                                                                       |
 |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
@@ -106,4 +145,23 @@ THEN the User can't click `comment-create` button.
 GIVEN the User is on `Search Result Page('/search')` and the User hasn't liked first comment before
 WHEN the User clicks `comment-like` button next to first comment
 THEN Likes on the first comment increase by 1.
+```
+
+### Meta specs
+|        Index                             |                                                                        Content                                                                       |
+|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| FeatureName                        |User can click `go-video-indexing-button` and be redirected to `Video Indexing Page('/vidoe/indexing')`               |
+| Actors                                   |User|
+| Precondition                         |User is on `Search Result Page('/search')`|
+
+### Scenario
+- **GIVEN** the User is on `Search Result Page('/search')`
+- **WHEN** the User clicks `go-video-indexing-button` button
+- **THEN** the User shuold be redirected to `Video Indexing Page('/vidoe/indexing')`.
+- 
+### Acceptance test
+```
+GIVEN the User is on `Search Result Page('/search')`
+WHEN the User clicks `go-video-indexing-button` button
+THEN the User shuold be redirected to `Video Indexing Page('/vidoe/indexing')`.
 ```
