@@ -57,6 +57,25 @@ WHEN the User clicks "IU" in `Hottest idol tab`
 THEN the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
 ```
 
+### Meta specs
+|        Index                             |                                                                        Content                                                                       |
+|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| FeatureName                        |User can click `go-video-indexing-button` and be redirected to `Video Indexing Page('/vidoe/indexing')`               |
+| Actors                                   |User|
+| Precondition                         |User is on `Search Result Page('/search')`|
+
+### Scenario
+- **GIVEN** the User is on `Search Result Page('/search')`
+- **WHEN** the User clicks `go-video-indexing-button` button
+- **THEN** the User shuold be redirected to `Video Indexing Page('/vidoe/indexing')`.
+- 
+### Acceptance test
+```
+GIVEN the User is on `Search Result Page('/search')`
+WHEN the User clicks `go-video-indexing-button` button
+THEN the User shuold be redirected to `Video Indexing Page('/vidoe/indexing')`.
+```
+
 ## See idol ranking
 ### Meta specs
 |        Index                             |                                                                        Content                                                                       |
@@ -147,21 +166,55 @@ WHEN the User clicks `comment-like` button next to first comment
 THEN Likes on the first comment increase by 1.
 ```
 
+## Edit & delete comment
 ### Meta specs
 |        Index                             |                                                                        Content                                                                       |
 |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-| FeatureName                        |User can click `go-video-indexing-button` and be redirected to `Video Indexing Page('/vidoe/indexing')`               |
+| FeatureName                        |User can edit a comment                 |
 | Actors                                   |User|
-| Precondition                         |User is on `Search Result Page('/search')`|
+| Precondition                         |User logged in , User is on `Search Result Page('/search')`, User is author of comment|
 
 ### Scenario
-- **GIVEN** the User is on `Search Result Page('/search')`
-- **WHEN** the User clicks `go-video-indexing-button` button
-- **THEN** the User shuold be redirected to `Video Indexing Page('/vidoe/indexing')`.
-- 
+- **GIVEN** the User is on `Search Result Page('/search')` and  the User is author of the comment
+- **WHEN** the User clicks `comment-edit` button next to the comment
+- **THEN** the comment becomes editable.
+- **GIVEN** the User is author of the comment and the comment is editable
+- **WHEN** the User types other content and clicks `comment-edit` button
+- **THEN** the comment is edited.
+
 ### Acceptance test
 ```
-GIVEN the User is on `Search Result Page('/search')`
-WHEN the User clicks `go-video-indexing-button` button
-THEN the User shuold be redirected to `Video Indexing Page('/vidoe/indexing')`.
+GIVEN the User is on `Search Result Page('/search')` and  User is author of comment1
+WHEN the User clicks `comment-edit` button next to the comment1
+THEN the comment1 becomes editable.
+
+GIVEN the User is author of the comment1 and the comment1 is editable
+WHEN the User types "this is edited comment" and clicks `comment-edit` button
+THEN the content of comment1 is "this is edited comment".
+```
+
+### Meta specs
+|        Index                             |                                                                        Content                                                                       |
+|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| FeatureName                        |User can delete a comment                 |
+| Actors                                   |User|
+| Precondition                         |User logged in , User is on `Search Result Page('/search')`, User is author of comment|
+
+### Scenario
+- **GIVEN** the User is on `Search Result Page('/search')` and  the User is author of the comment
+- **WHEN** the User clicks `comment-delete` button next to the comment
+- **THEN** `delete-comment-confirm` pops up.
+- **GIVEN** the `delete-comment-confirm` poped up on `Search Result Page('/search')`
+- **WHEN** the User clicks `confirm` button
+- **THEN** the comment is deleted.
+
+### Acceptance test
+```
+GIVEN the User is on `Search Result Page('/search')` and  User is author of comment1
+WHEN the User clicks `comment-delete` button next to the comment1
+THEN confirm[Are you sure delete this comment?] pops up.
+
+GIVEN the `delete-comment-confirm` poped up on `Search Result Page('/search')`
+WHEN the User clicks `confirm` button
+THEN the comment1 is deleted.
 ```
