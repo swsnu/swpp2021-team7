@@ -23,7 +23,7 @@ THEN a list of idols' length must be 1.
 ### Meta specs
 |        Index                             |                                                                        Content                                                                       |
 |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-| FeatureName                        |User can click each idol that comes up as a result of a search and be redirected to Search Result Page          |
+| FeatureName                        |User can click each idol that comes up as a result of a search and be redirected to `Search Result Page(/search)`           |
 | Actors                                   |User|
 | Precondition                         |User is on `Main Page('/')`, User types a search keyword and clicks `search-button` button and get results(results' length > 0)|
 
@@ -37,6 +37,43 @@ THEN a list of idols' length must be 1.
 GIVEN the User is on `Main Page('/')` and there are one more search results
 WHEN the User clicks "IU" in the search results
 THEN the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
+```
+### Meta specs
+|        Index                             |                                                                        Content                                                                       |
+|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| FeatureName                        |User can click each idol in `Hottest idol tab` and be redirected to `Search Result Page(/search)`          |
+| Actors                                   |User|
+| Precondition                         |User is on `Main Page('/')`|
+
+### Scenario
+- **GIVEN** the User is on `Main Page('/')`
+- **WHEN** the User clicks one of the idols in `Hottest idol tab`
+- **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information.
+
+### Acceptance test
+```
+GIVEN the User is on `Main Page('/')` and there is "IU" in `Hottest idol tab`
+WHEN the User clicks "IU" in `Hottest idol tab`
+THEN the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
+```
+
+### Meta specs
+|        Index                             |                                                                        Content                                                                       |
+|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+| FeatureName                        |User can go to `Rank page('/rank')`          |
+| Actors                                   |User|
+| Precondition                         |User is on `Main Page('/')`|
+
+### Scenario
+- **GIVEN** the User is on `Main Page('/')`
+- **WHEN** the User clicks `Hottest idol tab`
+- **THEN** the User shuold be redirected to `Ranking Page('/rank')`.
+
+### Acceptance test
+```
+GIVEN the User is on `Main Page('/')`
+WHEN the User clicks `Hottest idol tab`
+THEN the User shuold be redirected to to `Ranking Page('/rank')`.
 ```
 
 ## Search Result Page
