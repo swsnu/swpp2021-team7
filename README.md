@@ -19,78 +19,141 @@ Specifically, Vidol can give best user experience for those
 
 ---
 
-#### Case 8. List of my idols
+## Case 8. List of my idols
 
-- Meta specs
+### Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | List of user's favorite idol |
-  | Actors       | User                         |
-  | Precondition | User is on `My Page`         |
+| Index        | Content                      |
+| ------------ | ---------------------------- |
+| FeatureName  | List of user's favorite idol |
+| Actors       | User                         |
+| Precondition | User is on `My Page`         |
 
-- Scenario
+### Scenario
 
-  >  i. The user is on the `MyPage` page.
+- **GIVEN** the user is on the <em>```MyPage```</em> 
 
-  >  ii. Idols who clicked like on the<em> `Search Result Page (Case 5)`</em> appear in this list.
+- **WHEN** the user scroll down to see <em>```List of my idols```</em> 
 
-  > iii. The user click the idol name to get specific information of idol.
+- **THEN** appear idol list who clicked like on the <em> `Search Result Page (Case 5)`</em>
 
-  > - The user is redirected to <em> `Search Result Page`</em>
+  
 
-> iv. The user can edit this list.
->
-> - The user profile is updated.
-> - The user is redirected to<em> `MyPage`</em> page.
+- **GIVEN** the user is on the <em>```List of my idols```</em> 
 
-#### Case 9. Scraped articles
+- **WHEN** the user click idol name
 
-- Meta specs
+- **THEN** user is redirected to <em> `Search Result Page (Case 5)`</em> and see specific information of idol.
 
-  | Index        | Content                         |
-  | ------------ | ------------------------------- |
-  | FeatureName  | List of user's scraped articles |
-  | Actors       | User                            |
-  | Precondition | User is on `My Page`            |
+  
 
-- Scenario
+- **GIVEN** the user is on the <em>```List of my idols```</em> 
 
-  > i. The user is on the <em>MyPage</em> page.
+- **WHEN** the user click 'edit' or 'cancel like' button
 
-  >  ii. Scraped articles on the <em>`Search Result Page (Case 5)` </em> appear in this list.
+- **THEN** user is redirected to <em> `MyPage`</em> and profile is updated.
 
-  > iii. The user click the idol name to go to article page.
+### Acceptance test
 
-  > - The user is redirected to article page in <em>`Search Result Page` </em>.
+```
+GIVEN the user is on the `MyPage`
 
-  > iv. The user can edit this list.
-  >
-  > - The user profile is updated.
-  > - The user is redirected to <em>`MyPage`</em> page.
+WHEN the user scroll down to see `List of my idols` 
 
-#### Case 10. My Comments
+THEN appear idol list who clicked like on the `Search Result Page (Case 5)`
 
-- Meta specs
+  
 
-  | Index        | Content                 |
-  | ------------ | ----------------------- |
-  | FeatureName  | List of user's comments |
-  | Actors       | User                    |
-  | Precondition | User is on `My Page`    |
+GIVEN the user is on the `List of my idols`
 
-- Scenario
+WHEN the user click idol name
 
-  > i. The user is on the <em>MyPage</em> page.
+THEN user is redirected to `Search Result Page (Case 5)` and see specific information of idol.
 
-  >  ii. This list show list of my comments on the <em> `Search Result Page (Case 5)`</em> .
+  
 
-  > iii. When the user click the comment, go to<em> `Search Result Page`</em> where comment exist. 
+GIVEN the user is on the `List of my idols` 
 
-  > - The user is redirected to comment list in <em> `Search Result Page`</em> .
-  > - The user can edit their comment in <em>`Search Result Page`</em>.
+WHEN the user click 'edit' or 'cancel like' button
+
+THEN user is redirected to `MyPage` and profile is updated.
+```
 
 
+
+## Case 9. Scraped articles
+
+### Meta specs
+
+| Index        | Content                         |
+| ------------ | ------------------------------- |
+| FeatureName  | List of user's scraped articles |
+| Actors       | User                            |
+| Precondition | User is on `My Page`            |
+
+### Scenario
+
+- **GIVEN** the user is on the <em>```MyPage```</em> 
+- **WHEN** the user scroll down to see <em>```Scraped articles```</em> 
+- **THEN** appear article list which scraped from the <em> `Search Result Page (Case 5)`</em> 
+
+- **GIVEN** the user is on the <em>```Scraped articles```</em> 
+- **WHEN** the user click article name
+- **THEN** user is redirected to article page in <em> `Search Result Page (Case 5)`</em> and see article of idol.
+
+- **GIVEN** the user is on the <em>```Scraped Articles```</em> 
+- **WHEN** the user click 'delete' button
+- **THEN** user can delete scraped article and redirected to <em> `MyPage`</em> and profile is updated.
+
+### Acceptance test
+
+```
+GIVEN the user is on the `MyPage`
+WHEN the user scroll down to see `Scraped articles`
+THEN appear article list which scraped from the `Search Result Page (Case 5)`
+
+GIVEN the user is on the `Scraped articles` 
+WHEN the user click article name
+THEN user is redirected to article page in `Search Result Page (Case 5)` and see article of idol.
+
+GIVEN the user is on the `Scraped Articles` 
+WHEN the user click 'delete' button
+THEN user can delete scraped article and redirected to `MyPage` and profile is updated.
+```
+
+## Case 10. My Comments 
+
+### Meta specs
+
+| Index        | Content                 |
+| ------------ | ----------------------- |
+| FeatureName  | List of user's comments |
+| Actors       | User                    |
+| Precondition | User is on `My Page`    |
+
+### Scenario
+
+- **GIVEN** the user is on the <em>```MyPage```</em>  
+- **WHEN** the user scroll down to see <em>```My Comments ```</em> 
+- **THEN** appear list of comments which is in the<em> `Search Result Page (Case 5)`</em>
+
+- **GIVEN** the user is on the <em>```My Comments```</em> 
+- **WHEN** the user click comment content
+- **THEN** user is redirected to<em> `Search Result Page (Case 5)`</em> of idol and can delete or edit their comment.
+
+### Acceptance test
+
+```
+GIVEN the user is on the `MyPage`  
+WHEN the user scroll down to see `My Comments` 
+THEN appear list of comments which is in the`Search Result Page (Case 5)`
+
+GIVEN the user is on the `My Comments` 
+WHEN the user click comment content
+THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete or edit their comment.
+```
+
+### 
 
 
 
