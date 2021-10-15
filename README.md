@@ -174,9 +174,33 @@ Specifically, Vidol can give best user experience for those
 
 ### Search Result
 
-### 1. Comment
+### 1. See content of search result
 
-#### 1.1 Create & like comment
+#### 1.1 content
+
+- Meta specs
+
+  |        Index                             |                                                                        Content                                                                         |
+  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
+  | FeatureName                        |User can see contents               |
+  | Actors                                   |User|
+  | Precondition                         |User is on `Search Result Page('/search')`|
+
+- Scenario
+
+  - **GIVEN** the User is on `Search Result Page('/search')`
+  - **WHEN** 
+  - **THEN** the User should see crawled information from Internet, SNS, Youtube and shared indexed video.
+ 
+
+- Acceptance test
+  - GIVEN the User is on `Search Result Page('/search')`
+  - WHEN 
+  - THEN the User should see `info from Internet tab`, `info from SNS tab`, `info from Youtube tab`, `shared indexed video tab`.
+
+### 2. Comment
+
+#### 2.1 Create & like comment
 - Meta specs
 
   |        Index                             |                                                                        Content                                                                       |
@@ -209,7 +233,7 @@ Specifically, Vidol can give best user experience for those
   - THEN Likes on the first comment increase by 1.
 
 
-#### 1.2 Edit & delete comment
+#### 2.2 Edit & delete comment
 
 - Meta specs
 
@@ -264,9 +288,9 @@ Specifically, Vidol can give best user experience for those
   - WHEN the User clicks `confirm` button
   - THEN the comment1 is deleted.
 
-### 2. Move page
+### 3. Move page
 
-#### 2.1 Move to Video Indexing Page
+#### 3.1 Move to Video Indexing Page
 
 - Meta specs
 
