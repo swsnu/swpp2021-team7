@@ -20,17 +20,17 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
 
 - Scenario
 
- - **GIVEN** the user is on Video Indexing - Entry Page.
- - **WHEN** the user types the link of the video to index and clicks `Cut Scenes` button.
- - **THEN** the user is redirected to <em>`Scene Cut Page`</em>.
+  - **GIVEN** the user is on Video Indexing - Entry Page.
+  - **WHEN** the user types the link of the video to index and clicks `Cut Scenes` button.
+  - **THEN** the user is redirected to <em>`Scene Cut Page`</em>.
 
 - Execptions
- - The link user inputs is not working.
- - The link user inputs is not from Youtube.
+  - The link user inputs is not working.
+  - The link user inputs is not from Youtube.
  
 - Acceptance test
- - 'Cut Scenes' button gets active when the user inputs a valid link.
- - When user clicks the button, video scanning process starts and user sees loader until the process ends and finally gets redirected to the result page.
+  - 'Cut Scenes' button gets active when the user inputs a valid link.
+  - When user clicks the button, video scanning process starts and user sees loader until the process ends and finally gets redirected to the result page.
 
 
 #### 1.2 Edit Video
@@ -45,18 +45,18 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
 
 - Scenario
 
- - **GIVEN** the user is on Video Indexing - Result Page.
- - **WHEN** the user checks videos and picks the parts to keep by clicking scenes
- - **THEN** the selected scenes are marked with colors and total length of the selected parts appears
+  - **GIVEN** the user is on Video Indexing - Result Page.
+  - **WHEN** the user checks videos and picks the parts to keep by clicking scenes
+  - **THEN** the selected scenes are marked with colors and total length of the selected parts appears
 
 - Execptions
- - The link user inputs is not working.
- - The link user inputs is not from Youtube.
+  - The link user inputs is not working.
+  - The link user inputs is not from Youtube.
  
 - Acceptance test
- - When the user clicks a scene, it gets played immediately in the player on top.
- - When the user right-clicks the scene not selected, the scene gets coloured.
- - When the user right-clicks the scene already selected, the scene gets back to the initial state(white).
+  - When the user clicks a scene, it gets played immediately in the player on top.
+  - When the user right-clicks the scene not selected, the scene gets coloured.
+  - When the user right-clicks the scene already selected, the scene gets back to the initial state(white).
  
  
  #### 1.3 Save Video
@@ -71,13 +71,13 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
 
 - Scenario
 
- - **GIVEN** the user is on Video Indexing - Result Page.
- - **WHEN** the user clicks 'Save Selected Scenes' button.
- - **THEN** downloading the video of selected scenes in the user's device starts.
+  - **GIVEN** the user is on Video Indexing - Result Page.
+  - **WHEN** the user clicks 'Save Selected Scenes' button.
+  - **THEN** downloading the video of selected scenes in the user's device starts.
 
 - Execptions
- - No scene is selected.
+  - No scene is selected.
  
 - Acceptance test
- - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready.
+  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready.
 
