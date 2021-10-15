@@ -24,7 +24,7 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
   - **WHEN** the user types the link of the video to index and clicks `Cut Scenes` button.
   - **THEN** the user is redirected to <em>`Scene Cut Page`</em>.
 
-- Execptions
+- Exceptions
   - The link user inputs is not working.
   - The link user inputs is not from Youtube.
  
@@ -49,10 +49,6 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
   - **WHEN** the user checks videos and picks the parts to keep by clicking scenes
   - **THEN** the selected scenes are marked with colors and total length of the selected parts appears
 
-- Execptions
-  - The link user inputs is not working.
-  - The link user inputs is not from Youtube.
- 
 - Acceptance test
   - When the user clicks a scene, it gets played immediately in the player on top.
   - When the user right-clicks the scene not selected, the scene gets coloured.
@@ -75,7 +71,7 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
   - **WHEN** the user clicks 'Save Selected Scenes' button.
   - **THEN** downloading the video of selected scenes in the user's device starts.
 
-- Execptions
+- Exceptions
   - No scene is selected.
  
 - Acceptance test
