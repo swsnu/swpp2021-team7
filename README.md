@@ -45,9 +45,9 @@ Specifically, Vidol can give best user experience for those
 
 - Scenario
 
-  - **GIVEN** the user is on `Sign in Page`.
-  - **WHEN** the user type email and password, then click submit button.  
-  - **THEN** if email and password are correct, the user gets redirected to main page
+  - **GIVEN** the user is on `Sign in Page(/login)`
+  - **WHEN** the user type email and password, then click submit button
+  - **THEN** if email and password are correct, the user gets redirected to ```main page('/')```
 
 - Exceptions
   - User's input has wrong email format
@@ -55,8 +55,8 @@ Specifically, Vidol can give best user experience for those
   - Wrong credential data
 
 - Acceptance test
-  - When user clicks the submit button, loader appears and the server checks the correctness of user's email and password.
-  - When the checking is finished, the user is redirected to main page('/').
+  - When user clicks the submit button, loader appears and the server checks the correctness of user's email and password
+  - When the checking is finished, the user is redirected to ```main page('/')```
 
 
 ### 2. Sign up
@@ -71,9 +71,9 @@ Specifically, Vidol can give best user experience for those
 
 - Scenario
 
-  - **GIVEN** the user is on `Sign up Page`.
-  - **WHEN** the user type email, password, and name, then click submit button.  
-  - **THEN** if all fields' inputs are correct, create account and redirect to main page('/')
+  - **GIVEN** the user is on `Sign up Page(/login)`
+  - **WHEN** the user type email, password, and name, then click submit button
+  - **THEN** if all fields' inputs are correct, create account and redirect to ```main page('/')```
 
 - Exceptions
   - User's input has wrong email format
@@ -82,8 +82,8 @@ Specifically, Vidol can give best user experience for those
   - An account with the given email already exists
 
 - Acceptance test
-  - When user clicks the submit button, loader appears and the server checks the email address is overlapped and creates account.
-  - When user is typing the input fields, the correctness of format appears to the user with color.
+  - When user clicks the submit button, loader appears and the server checks the email address is overlapped and creates account
+  - When user is typing the input fields, the correctness of format appears to the user with color
 
 ---
 
@@ -109,28 +109,28 @@ Specifically, Vidol can give best user experience for those
 - Acceptance test
   - **GIVEN** the User is on `Main Page('/')` and there is 1 searh result for "IU" keyword
   - **WHEN** the User clicks `search-input` input and types "IU" and clicks `search-button` button
-  - **THEN** a list of idols' length must be 1.
+  - **THEN** a list of idols' length must be 1
 
 #### 1.2 Select idol
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can click each idol that comes up as a result of a search and be redirected to `Search Result Page(/search)`           |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Main Page('/')`, User types a search keyword and clicks `search-button` button and get results(results' length > 0)|
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can click each idol that comes up as a result of a search and be redirected to `Search Result Page(/search)` |
+  | Actors       | User                                                         |
+  | Precondition | User is on `Main Page('/')`, User types a search keyword and clicks `search-button` button and get results(results' length > 0) |
 
 - Scenario
   - **GIVEN** the User is on `Main Page('/')` and get search results
   - **WHEN** the User clicks one of the idols in the search results
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information.
+  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information
 
 - Acceptance test
 
   - **GIVEN** the User is on `Main Page('/')` and there are one more search results
   - **WHEN** the User clicks "IU" in the search results
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
+  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information
 
 ### 2. Ranking
 
@@ -138,22 +138,22 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can click each idol in `Hottest idol tab` and be redirected to `Search Result Page(/search)`          |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Main Page('/')`|
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can click each idol in `Hottest idol tab` and be redirected to `Search Result Page('/search')` |
+  | Actors       | User                                                         |
+  | Precondition | User is on `Main Page('/')`                                  |
 
 - Scenario
 
   - **GIVEN** the User is on `Main Page('/')`
   - **WHEN** the User clicks one of the idols in `Hottest idol tab`
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information.
+  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information
 
 - Acceptance test
   - **GIVEN** the User is on `Main Page('/')` and there is "IU" in `Hottest idol tab`
   - **WHEN** the User clicks "IU" in `Hottest idol tab`
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
+  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information
 
 #### 2.1 Move to Ranking Page
 
@@ -169,12 +169,12 @@ Specifically, Vidol can give best user experience for those
 
   - **GIVEN** the User is on `Main Page('/')`
   - **WHEN** the User clicks `Hottest idol tab`
-  - **THEN** the User shuold be redirected to `Ranking Page('/rank')`.
+  - **THEN** the User shuold be redirected to `Ranking Page('/rank')`
 
 - Acceptance test
   - **GIVEN** the User is on `Main Page('/')`
   - **WHEN** the User clicks `Hottest idol tab`
-  - **THEN** the User shuold be redirected to to `Ranking Page('/rank')`.
+  - **THEN** the User shuold be redirected to to `Ranking Page('/rank')`
 
 ---
 
@@ -196,12 +196,12 @@ Specifically, Vidol can give best user experience for those
 
   - **GIVEN** the User is on `Ranking Page('/rank')`
   - **WHEN** the User on the n'th page
-  - **THEN** the User can see the 10*n-9 ~ 10*n'th idols.
+  - **THEN** the User can see the 10*n-9 ~ 10*n'th idols
 
 - Acceptance test
   - **GIVEN** the User is on `Ranking Page('/rank')`
   - **WHEN** the User clicks the 9'th page
-  - **THEN** the User shuold see the 81 ~ 90'th idols.
+  - **THEN** the User shuold see the 81 ~ 90'th idols
 
 
 ### 2. Move page
@@ -210,22 +210,22 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can click each idol in `Ranking Page('/rank')` and be redirected to `Search Result Page(/search)`          |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Ranking Page('/rank')`|
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can click each idol in `Ranking Page('/rank')` and be redirected to `Search Result Page('/search')` |
+  | Actors       | User                                                         |
+  | Precondition | User is on `Ranking Page('/rank')`                           |
 
 - Scenario
 
   - **GIVEN** the User is on `Ranking Page('/rank')`
   - **WHEN** the User clicks one of the idols
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information.
+  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information
 
 - Acceptance test
   - **GIVEN** the User is on `Ranking Page('/rank')` and there is "IU" in ranking
   - **WHEN** the User clicks "IU"
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information.
+  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information
 
 ---
 
@@ -294,7 +294,7 @@ Specifically, Vidol can give best user experience for those
   - **GIVEN** the User is on `Search Result Page('/search')`
   - **WHEN** the User clicks `comment-like` button next to a comment
   - **THEN** Likes on the comment increase by 1.
- 
+
 - Exceptions
     - The user already clicked like on the comment.
 
@@ -374,13 +374,13 @@ Specifically, Vidol can give best user experience for those
   - **GIVEN** the User is on `Search Result Page('/search')`
   - **WHEN** the User clicks `go-video-indexing-button` button
   - **THEN** the User should be redirected to `Video Indexing Page('/video')`.
- 
+
 - Exceptions
-    - The user is not logged in.
+    - The user is not logged in
 
 - Acceptance test
-  - When logged in user clicks the button, the user gets redirected to Video Indexing Page.
-  - When user not logged in clicks the button, the user gets redirected to login page.
+  - When logged in user clicks the button, the user gets redirected to Video Indexing Page
+  - When user not logged in clicks the button, the user gets redirected to login page
 
 ---
 
@@ -392,62 +392,62 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-| Index        | Content                      |
-| ------------ | ---------------------------- |
-| FeatureName  | List of user's favorite idol |
-| Actors       | User                         |
-| Precondition | User is on `My Page`         |
+| Index        | Content                             |
+| ------------ | ----------------------------------- |
+| FeatureName  | List of user's favorite idol        |
+| Actors       | User                                |
+| Precondition | User is on `My Page('/mypage/:id')` |
 
 - Scenario
 
- - **GIVEN** the user is on the <em>```MyPage```</em>
- - **WHEN** the user scroll down to see <em>```List of my idols```</em>
- - **THEN** idol list of on whom the user clicked 'Like' button on the <em> `Search Result Page`</em>
+     - **GIVEN** the user is on the `My Page('/mypage/:id')`
+     - **WHEN** the user scroll down to see ```List of my idols```
+     - **THEN** idol list of on whom the user clicked 'Like' button on the `Search Result Page('/search')`
 
 - Exceptions
     - The user is not logged in(common exception for all features in mypage - would be omitted in later features)
- 
+
 - Acceptance Test
- - When user not logged in approaches mypage, the user would be redirected to login page.
- - When user scrolls down, the list appears.
- - If there is no idol the user clicked like on, the list is empty.
+     - When user not logged in approaches mypage, the user would be redirected to login page
+     - When user scrolls down, the list appears
+     - If there is no idol the user clicked like on, the list is empty
 
 #### 1.2 Move to Search Result Page
 
 - Meta specs
 
-| Index        | Content                      |
-| ------------ | ---------------------------- |
-| FeatureName  | List of user's favorite idol |
-| Actors       | User                         |
-| Precondition | User is on `My Page` and seeing the list         |
+| Index        | Content                                                   |
+| ------------ | --------------------------------------------------------- |
+| FeatureName  | List of user's favorite idol                              |
+| Actors       | User                                                      |
+| Precondition | User is on ``My Page('/mypage/:id')`` and seeing the list |
 
 - Scenario
 
- - **GIVEN** the user is on the <em>```List of my idols```</em>
- - **WHEN** the user clicks one idol
- - **THEN** user is redirected to <em> `Search Result Page(/search)`</em> and see specific information of the idol.
- 
+   - **GIVEN** the user is on the ```List of my idols```
+   - **WHEN** the user clicks one idol
+   - **THEN** user is redirected to  `Search Result Page('/search')` and see specific information of the idol.
+
 - Acceptance Test
- - When clicking one idol, loader appears and the user is redirected to Search Result Page('/search').
+   - When clicking one idol, loader appears and the user is redirected to Search Result Page('/search').
 
 #### 1.3 Cancel like
 
 - Meta specs
 
-| Index        | Content                      |
-| ------------ | ---------------------------- |
-| FeatureName  | List of user's favorite idol |
-| Actors       | User                         |
-| Precondition | User is on `My Page` and seeing the list         |
+| Index        | Content                                                   |
+| ------------ | --------------------------------------------------------- |
+| FeatureName  | List of user's favorite idol                              |
+| Actors       | User                                                      |
+| Precondition | User is on ``My Page('/mypage/:id')`` and seeing the list |
 
 - Scenario
- - **GIVEN** the user is on the <em>```List of my idols```</em>
- - **WHEN** the user click 'cancel like' button
- - **THEN** the idol user clicked gets removed from the list
+   - **GIVEN** the user is on the ```List of my idols```
+   - **WHEN** the user click 'cancel like' button
+   - **THEN** the idol user clicked gets removed from the list
 
 - Acceptance Test
- - Loader appears right after the user clicks cancel button and when the server successfully handles the request, loader disappears and the idol gets removed from the list.
+   - Loader appears right after the user clicks cancel button and when the server successfully handles the request, loader disappears and the idol gets removed from the list
 
 ### 2. Scraped articles
 
@@ -456,62 +456,62 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-| Index        | Content                         |
-| ------------ | ------------------------------- |
-| FeatureName  | List of user's scraped articles |
-| Actors       | User                            |
-| Precondition | User is on `My Page`            |
+| Index        | Content                               |
+| ------------ | ------------------------------------- |
+| FeatureName  | List of user's scraped articles       |
+| Actors       | User                                  |
+| Precondition | User is on ``My Page('/mypage/:id')`` |
 
 - Scenario
 
- - **GIVEN** the user is on the <em>```MyPage```</em>
- - **WHEN** the user scroll down to see <em>```Scraped articles```</em>
- - **THEN** appear article list which scraped from the <em> `Search Result Page (Case 5)`</em>
+   - **GIVEN** the user is on the ``My Page('/mypage/:id')``
+   - **WHEN** the user scroll down to see ```Scraped articles```
+   - **THEN** appear article list which scraped from the  `Search Result Page('/search')`
 
 - Acceptance Test
- - Articles appear with only titles when user scrolls down.
- - When the user scrapped nothing, nothing appears.
+   - Articles appear with only titles when user scrolls down
+   - When the user scrapped nothing, nothing appears
 
 #### 2.2 Move to Search Result Page
 
 - Meta specs
 
-| Index        | Content                         |
-| ------------ | ------------------------------- |
-| FeatureName  | List of user's scraped articles |
-| Actors       | User                            |
-| Precondition | User is on `My Page` and on scraped articles section            |
+| Index        | Content                                                      |
+| ------------ | ------------------------------------------------------------ |
+| FeatureName  | List of user's scraped articles                              |
+| Actors       | User                                                         |
+| Precondition | User is on ``My Page('/mypage/:id')`` and on scraped articles section |
 
 - Scenario
 
- - **GIVEN** the user is on the <em>```Scraped articles```</em>
+ - **GIVEN** the user is on the ```Scraped articles```
  - **WHEN** the user click article name
- - **THEN** user is redirected to article page in <em> `Search Result Page (Case 5)`</em> and see article of idol.
+ - **THEN** user is redirected to article page in `Search Result Page('/search')` and see article of idol.
 
- 
+
 - Acceptance Test
  - The loader appears when clicking the article and the user gets redirected to Search Result Page('/search').
- 
+
 
 #### 2.3 Cancel scrap
 
 - Meta specs
 
-| Index        | Content                         |
-| ------------ | ------------------------------- |
-| FeatureName  | List of user's scraped articles |
-| Actors       | User                            |
-| Precondition | User is on `My Page` and on scraped articles section            |
+| Index        | Content                                                      |
+| ------------ | ------------------------------------------------------------ |
+| FeatureName  | List of user's scraped articles                              |
+| Actors       | User                                                         |
+| Precondition | User is on ``My Page('/mypage/:id')`` and on scraped articles section |
 
 - Scenario
- - **GIVEN** the user is on the <em>```Scraped Articles```</em>
- - **WHEN** the user click 'delete' button on one article
- - **THEN** the article gets removed from the list
- 
-- Acceptance Test
- - The loader appears when clicking delete and disappears when the server finishes handling the request.
- 
+   - **GIVEN** the user is on the ```Scraped Articles```
+   - **WHEN** the user click 'delete' button on one article
+   - **THEN** the article gets removed from the list
 
+- Acceptance Test
+   - The loader appears when clicking delete and disappears when the server finishes handling the request
+
+     
 
 ### 3. My Comments
 
@@ -519,40 +519,40 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-| Index        | Content                 |
-| ------------ | ----------------------- |
-| FeatureName  | List of user's comments |
-| Actors       | User                    |
-| Precondition | User is on `My Page`    |
+| Index        | Content                               |
+| ------------ | ------------------------------------- |
+| FeatureName  | List of user's comments               |
+| Actors       | User                                  |
+| Precondition | User is on ``My Page('/mypage/:id')`` |
 
 - Scenario
 
- - **GIVEN** the user is on the <em>```MyPage```</em>  
- - **WHEN** the user scroll down to see <em>```My Comments ```</em>
- - **THEN** appear list of comments which is in the<em> `Search Result Page (Case 5)`</em>
+   - **GIVEN** the user is on the ``My Page('/mypage/:id')``  
+   - **WHEN** the user scroll down to see ```My Comments ```
+   - **THEN** appear list of comments which is in the `Search Result Page('/search')`
 
 - Acceptance test
- - The comments user wrote appears with the format of '[idol] comment'.
- - When no comment exists, nothing appears.
+   - The comments user wrote appears with the format of '[idol] comment'.
+   - When no comment exists, nothing appears.
 
 #### 3.2 Move to Search Result Page
 
 - Meta specs
 
-| Index        | Content                 |
-| ------------ | ----------------------- |
-| FeatureName  | List of user's comments |
-| Actors       | User                    |
-| Precondition | User is on `My Page`    |
+| Index        | Content                               |
+| ------------ | ------------------------------------- |
+| FeatureName  | List of user's comments               |
+| Actors       | User                                  |
+| Precondition | User is on ``My Page('/mypage/:id')`` |
 
 - Scenario
 
- - **GIVEN** the user is on the <em>```My Comments```</em>
- - **WHEN** the user click comment content
- - **THEN** the user is redirected to<em> `Search Result Page (/search)`</em> of idol and can delete or edit their comment.
+   - **GIVEN** the user is on the ```My Comments```
+   - **WHEN** the user click comment content
+   - **THEN** the user is redirected to `Search Result Page('/search')` of idol and can delete or edit their comment
 
 - Acceptance Test
- - When the user clicks a comment, the loader appears and the user gets redirected to Search Result Page(/search).
+   - When the user clicks a comment, the loader appears and the user gets redirected to  `Search Result Page('/search')`
 
 ---
 
@@ -564,17 +564,17 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Input Video by Youtube Link  |
-  | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Page(/video)`         |
+  | Index        | Content                                    |
+  | ------------ | ------------------------------------------ |
+  | FeatureName  | Input Video by Youtube Link                |
+  | Actors       | User                                       |
+  | Precondition | User is on `Video Indexing Page('/video')` |
 
 - Scenario
 
-  - **GIVEN** the user is on Video Indexing - Entry Page.
-  - **WHEN** the user types the link of the video to index and clicks `Cut Scenes` button.
-  - **THEN** the user is redirected to <em>`Scene Cut Page`</em>.
+  - **GIVEN** the user is on Video Indexing - Entry Page
+  - **WHEN** the user types the link of the video to index and clicks `Cut Scenes` button
+  - **THEN** the user is redirected to `Scene Cut Page`
 
 - Exceptions
   - The link user inputs is not working.
@@ -582,9 +582,9 @@ Specifically, Vidol can give best user experience for those
   - The user is not logged in(common for all features in video indexing - omitted later on)
 
 - Acceptance test
-  - When the user is not logged in, the user gets redirected to login page('/login').
-  - 'Cut Scenes' button gets active when the user inputs a valid link.
-  - When user clicks the button, video scanning process starts and user sees loader until the process ends and finally gets redirected to the result page.
+  - When the user is not logged in, the user gets redirected to `login page('/login')`
+  - 'Cut Scenes' button gets active when the user inputs a valid link
+  - When user clicks the button, video scanning process starts and user sees loader until the process ends and finally gets redirected to the result page
 
 
 #### 1.2 Edit Video
@@ -595,7 +595,7 @@ Specifically, Vidol can give best user experience for those
   | ------------ | ---------------------------- |
   | FeatureName  | Edit video with the indexing  |
   | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page(/video/result)`         |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
 
 - Scenario
 
@@ -604,9 +604,9 @@ Specifically, Vidol can give best user experience for those
   - **THEN** the selected scenes are marked with colors and total length of the selected parts appears
 
 - Acceptance test
-  - When the user clicks a scene, it gets played immediately in the player on top.
-  - When the user right-clicks the scene not selected, the scene gets coloured.
-  - When the user right-clicks the scene already selected, the scene gets back to the initial state(white).
+  - When the user clicks a scene, it gets played immediately in the player on top
+  - When the user right-clicks the scene not selected, the scene gets coloured
+  - When the user right-clicks the scene already selected, the scene gets back to the initial state(white)
 
 
  #### 1.3 Save Video
@@ -617,19 +617,19 @@ Specifically, Vidol can give best user experience for those
   | ------------ | ---------------------------- |
   | FeatureName  | Save Video of Selected Parts  |
   | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page(/video/result)`         |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
 
 - Scenario
 
-  - **GIVEN** the user is on Video Indexing - Result Page.
-  - **WHEN** the user clicks 'Save Selected Scenes' button.
-  - **THEN** downloading the video of selected scenes in the user's device starts.
+  - **GIVEN** the user is on Video Indexing - Result Page
+  - **WHEN** the user clicks 'Save Selected Scenes' button
+  - **THEN** downloading the video of selected scenes in the user's device starts
 
 - Exceptions
-  - No scene is selected.
+  - No scene is selected
 
 - Acceptance test
-  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready.
+  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready
 
 
 ### 2. Extract Parts of Selected Idol
@@ -638,24 +638,24 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Input Video by Youtube Link  |
-  | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Page(/video)`         |
+  | Index        | Content                                    |
+  | ------------ | ------------------------------------------ |
+  | FeatureName  | Input Video by Youtube Link                |
+  | Actors       | User                                       |
+  | Precondition | User is on `Video Indexing Page('/video')` |
 
 - Scenario
 
-  - **GIVEN** the user is on Video Indexing - Entry Page.
-  - **WHEN** the user types the link of the video to index and clicks `Extract My Idol Parts` button.
-  - **THEN** the user is redirected to <em>`Search and Select Idol Page`</em>.
+  - **GIVEN** the user is on Video Indexing - Entry Page
+  - **WHEN** the user types the link of the video to index and clicks `Extract My Idol Parts` button
+  - **THEN** the user is redirected to `Search and Select Idol Page`
 
 - Execptions
-  - The link user inputs is not working.
-  - The link user inputs is not from Youtube.
+  - The link user inputs is not working
+  - The link user inputs is not from Youtube
 
 - Acceptance test
-  - 'Extract My Idol Parts' button gets active when the user inputs a valid link.
+  - 'Extract My Idol Parts' button gets active when the user inputs a valid link
 
 
 #### 2.2 Search Idol
@@ -675,10 +675,10 @@ Specifically, Vidol can give best user experience for those
   - **THEN** the search result with each idol's availabilty(of pre-trained model) appears
 
 - Exceptions
-  - The keyword has less than 2 letters.
+  - The keyword has less than 2 letters
 
 - Acceptance test
-  - When the user clicks search button, list of idols matching the keyword appears at the bottom of search bar.
+  - When the user clicks search button, list of idols matching the keyword appears at the bottom of search bar
 
 #### 2.3 Request Support(ML training)
 
@@ -693,11 +693,11 @@ Specifically, Vidol can give best user experience for those
 - Scenario
 
   - **GIVEN** the user searched idol and is seeing the search result
-  - **WHEN** the user clicks 'Request Support' button next to one of the idol not supported
-  - **THEN** the user gets toast message 'Successfully submitted'.
+  - **WHEN** the user clicks `'Request Support'` button next to one of the idol not supported
+  - **THEN** the user gets toast message 'Successfully submitted'
 
 - Acceptance test
-  - When the user clicks the 'Request Support' button, toast message appears and disappears a bit later.
+  - When the user clicks the `'Request Support'` button, toast message appears and disappears a bit later
 
 
 #### 2.4 Select Idol
@@ -714,10 +714,10 @@ Specifically, Vidol can give best user experience for those
 
   - **GIVEN** the user searched idol and is seeing the search result
   - **WHEN** the user clicks one of the idol
-  - **THEN** the user is redirected to the result page.
+  - **THEN** the user is redirected to the result page
 
 - Acceptance test
-  - When the user clicks the idol, loader appears on the screen and when video processing is done, the user is redirected to the result page.
+  - When the user clicks the idol, loader appears on the screen and when video processing is done, the user is redirected to the result page
 
 #### 2.5 Edit Video
 
@@ -727,19 +727,19 @@ Specifically, Vidol can give best user experience for those
   | ------------ | ---------------------------- |
   | FeatureName  | Edit video with the indexing  |
   | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page(/video/result)`         |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
 
 - Scenario
 
-    - **GIVEN** the user is on Video Indexing - Result Page.
+    - **GIVEN** the user is on Video Indexing - Result Page
     - **WHEN** the user checks videos and picks the parts to keep by clicking scenes
     - **THEN** the selected scenes are marked with check mark and total length of the selected parts appears
 
 - Acceptance test
-  - The parts with selected idol is coloured.
-  - When the user clicks a scene, it gets played immediately in the player on top.
-  - When the user right-clicks the scene not selected, a check mark added on the scene.
-  - When the user right-clicks the scene already selected, the scene gets back to the initial state(no check mark).
+  - The parts with selected idol is coloured
+  - When the user clicks a scene, it gets played immediately in the player on top
+  - When the user right-clicks the scene not selected, a check mark added on the scene
+  - When the user right-clicks the scene already selected, the scene gets back to the initial state(no check mark)
 
 
  #### 2.6 Save Video
@@ -750,19 +750,19 @@ Specifically, Vidol can give best user experience for those
   | ------------ | ---------------------------- |
   | FeatureName  | Save Video of Selected Parts  |
   | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page(/video/result)`         |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
 
 - Scenario
 
-  - **GIVEN** the user is on Video Indexing - Result Page.
-  - **WHEN** the user clicks 'Save Selected Scenes' button.
+  - **GIVEN** the user is on Video Indexing - Result Page
+  - **WHEN** the user clicks 'Save Selected Scenes' button
   - **THEN** downloading the video of selected scenes in the user's device starts.
 
 - Exceptions
-  - No scene is selected.
+  - No scene is selected
 
 - Acceptance test
-  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready.
+  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready
 
 
 # User Interface Requirements
