@@ -11,10 +11,10 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
 
 Vidol is for all who loves K-Pop idol.
 
-Specifically, Vidol can give best user experience for those 
+Specifically, Vidol can give best user experience for those
 
 * Tired of finding information about idols scattered around.
-* Who wants to gather their favorite idols from one place. 
+* Who wants to gather their favorite idols from one place.
 * Who manually made the idol cut video.
 * Who spends a lot of time manually finding editing point.
 
@@ -189,13 +189,13 @@ Specifically, Vidol can give best user experience for those
 - Scenario
 
   - **GIVEN** the User is on `Search Result Page('/search')`
-  - **WHEN** 
+  - **WHEN**
   - **THEN** the User should see crawled information from Internet, SNS, Youtube and shared indexed video.
- 
+
 
 - Acceptance test
   - GIVEN the User is on `Search Result Page('/search')`
-  - WHEN 
+  - WHEN
   - THEN the User should see `info from Internet tab`, `info from SNS tab`, `info from Youtube tab`, `shared indexed video tab`.
 
 ### 2. Comment
@@ -305,7 +305,7 @@ Specifically, Vidol can give best user experience for those
   - **GIVEN** the User is on `Search Result Page('/search')`
   - **WHEN** the User clicks `go-video-indexing-button` button
   - **THEN** the User shuold be redirected to `Video Indexing Page('/vidoe/indexing')`.
- 
+
 - Acceptance test
   - GIVEN the User is on `Search Result Page('/search')`
   - WHEN the User clicks `go-video-indexing-button` button
@@ -325,23 +325,23 @@ Specifically, Vidol can give best user experience for those
 
 ### Scenario
 
-- **GIVEN** the user is on the <em>```MyPage```</em> 
+- **GIVEN** the user is on the <em>```MyPage```</em>
 
-- **WHEN** the user scroll down to see <em>```List of my idols```</em> 
+- **WHEN** the user scroll down to see <em>```List of my idols```</em>
 
 - **THEN** appear idol list who clicked like on the <em> `Search Result Page (Case 5)`</em>
 
-  
 
-- **GIVEN** the user is on the <em>```List of my idols```</em> 
+
+- **GIVEN** the user is on the <em>```List of my idols```</em>
 
 - **WHEN** the user click idol name
 
 - **THEN** user is redirected to <em> `Search Result Page (Case 5)`</em> and see specific information of idol.
 
-  
 
-- **GIVEN** the user is on the <em>```List of my idols```</em> 
+
+- **GIVEN** the user is on the <em>```List of my idols```</em>
 
 - **WHEN** the user click 'edit' or 'cancel like' button
 
@@ -352,11 +352,11 @@ Specifically, Vidol can give best user experience for those
 ```
 GIVEN the user is on the `MyPage`
 
-WHEN the user scroll down to see `List of my idols` 
+WHEN the user scroll down to see `List of my idols`
 
 THEN appear idol list who clicked like on the `Search Result Page (Case 5)`
 
-  
+
 
 GIVEN the user is on the `List of my idols`
 
@@ -364,9 +364,9 @@ WHEN the user click idol name
 
 THEN user is redirected to `Search Result Page (Case 5)` and see specific information of idol.
 
-  
 
-GIVEN the user is on the `List of my idols` 
+
+GIVEN the user is on the `List of my idols`
 
 WHEN the user click 'edit' or 'cancel like' button
 
@@ -387,15 +387,15 @@ THEN user is redirected to `MyPage` and profile is updated.
 
 ### Scenario
 
-- **GIVEN** the user is on the <em>```MyPage```</em> 
-- **WHEN** the user scroll down to see <em>```Scraped articles```</em> 
-- **THEN** appear article list which scraped from the <em> `Search Result Page (Case 5)`</em> 
+- **GIVEN** the user is on the <em>```MyPage```</em>
+- **WHEN** the user scroll down to see <em>```Scraped articles```</em>
+- **THEN** appear article list which scraped from the <em> `Search Result Page (Case 5)`</em>
 
-- **GIVEN** the user is on the <em>```Scraped articles```</em> 
+- **GIVEN** the user is on the <em>```Scraped articles```</em>
 - **WHEN** the user click article name
 - **THEN** user is redirected to article page in <em> `Search Result Page (Case 5)`</em> and see article of idol.
 
-- **GIVEN** the user is on the <em>```Scraped Articles```</em> 
+- **GIVEN** the user is on the <em>```Scraped Articles```</em>
 - **WHEN** the user click 'delete' button
 - **THEN** user can delete scraped article and redirected to <em> `MyPage`</em> and profile is updated.
 
@@ -406,16 +406,16 @@ GIVEN the user is on the `MyPage`
 WHEN the user scroll down to see `Scraped articles`
 THEN appear article list which scraped from the `Search Result Page (Case 5)`
 
-GIVEN the user is on the `Scraped articles` 
+GIVEN the user is on the `Scraped articles`
 WHEN the user click article name
 THEN user is redirected to article page in `Search Result Page (Case 5)` and see article of idol.
 
-GIVEN the user is on the `Scraped Articles` 
+GIVEN the user is on the `Scraped Articles`
 WHEN the user click 'delete' button
 THEN user can delete scraped article and redirected to `MyPage` and profile is updated.
 ```
 
-## Case 10. My Comments 
+## Case 10. My Comments
 
 ### Meta specs
 
@@ -428,10 +428,10 @@ THEN user can delete scraped article and redirected to `MyPage` and profile is u
 ### Scenario
 
 - **GIVEN** the user is on the <em>```MyPage```</em>  
-- **WHEN** the user scroll down to see <em>```My Comments ```</em> 
+- **WHEN** the user scroll down to see <em>```My Comments ```</em>
 - **THEN** appear list of comments which is in the<em> `Search Result Page (Case 5)`</em>
 
-- **GIVEN** the user is on the <em>```My Comments```</em> 
+- **GIVEN** the user is on the <em>```My Comments```</em>
 - **WHEN** the user click comment content
 - **THEN** user is redirected to<em> `Search Result Page (Case 5)`</em> of idol and can delete or edit their comment.
 
@@ -439,10 +439,10 @@ THEN user can delete scraped article and redirected to `MyPage` and profile is u
 
 ```
 GIVEN the user is on the `MyPage`  
-WHEN the user scroll down to see `My Comments` 
+WHEN the user scroll down to see `My Comments`
 THEN appear list of comments which is in the`Search Result Page (Case 5)`
 
-GIVEN the user is on the `My Comments` 
+GIVEN the user is on the `My Comments`
 WHEN the user click comment content
 THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete or edit their comment.
 ```
@@ -469,7 +469,7 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
 - Exceptions
   - The link user inputs is not working.
   - The link user inputs is not from Youtube.
- 
+
 - Acceptance test
   - 'Cut Scenes' button gets active when the user inputs a valid link.
   - When user clicks the button, video scanning process starts and user sees loader until the process ends and finally gets redirected to the result page.
@@ -495,8 +495,8 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
   - When the user clicks a scene, it gets played immediately in the player on top.
   - When the user right-clicks the scene not selected, the scene gets coloured.
   - When the user right-clicks the scene already selected, the scene gets back to the initial state(white).
- 
- 
+
+
  #### 1.3 Save Video
 
 - Meta specs
@@ -515,7 +515,7 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
 
 - Exceptions
   - No scene is selected.
- 
+
 - Acceptance test
   - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready.
 
@@ -541,7 +541,7 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
 - Execptions
   - The link user inputs is not working.
   - The link user inputs is not from Youtube.
- 
+
 - Acceptance test
   - 'Extract My Idol Parts' button gets active when the user inputs a valid link.
 
@@ -561,13 +561,13 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
   - **GIVEN** the user is on Video Indexing - Search Page
   - **WHEN** the user types the keyword of idol and clicks search button
   - **THEN** the search result with each idol's availabilty(of pre-trained model) appears
- 
+
 - Exceptions
   - The keyword has less than 2 letters.
- 
+
 - Acceptance test
   - When the user clicks search button, list of idols matching the keyword appears at the bottom of search bar.
-  
+
 #### 2.3 Request Support(ML training)
 
 - Meta specs
@@ -606,7 +606,7 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
 
 - Acceptance test
   - When the user clicks the idol, loader appears on the screen and when video processing is done, the user is redirected to the result page.
- 
+
 #### 2.5 Edit Video
 
 - Meta specs
@@ -628,8 +628,8 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
   - When the user clicks a scene, it gets played immediately in the player on top.
   - When the user right-clicks the scene not selected, a check mark added on the scene.
   - When the user right-clicks the scene already selected, the scene gets back to the initial state(no check mark).
- 
- 
+
+
  #### 2.6 Save Video
 
 - Meta specs
@@ -648,6 +648,61 @@ THEN user is redirected to `Search Result Page (Case 5)` of idol and can delete 
 
 - Exceptions
   - No scene is selected.
- 
+
 - Acceptance test
   - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready.
+
+
+## Case 11. User sign
+
+### User Login
+
+### 1. User sign in
+
+- Meta specs
+
+  | Index        | Content                      |
+  | ------------ | ---------------------------- |
+  | FeatureName  | User can sign in to access application |
+  | Actors       | User                         |
+  | Precondition | User is on `Sign in Page(/login)`         |
+
+- Scenario
+
+  - **GIVEN** the user is on `Sign in Page`.
+  - **WHEN** the user type email and password, then click submit button.  
+  - **THEN** if email and password are correct, redirect to index page
+
+- Exceptions
+  - User's input has wrong email format
+  - User's input has wrong password format
+  - Wrong credential data
+
+- Acceptance test
+  - When user clicks the submit button, check the correctness of user's email and password.
+
+
+### 2. User sign up
+
+- Meta specs
+
+  | Index        | Content                      |
+  | ------------ | ---------------------------- |
+  | FeatureName  | User can sign up to access application (create account) |
+  | Actors       | User                         |
+  | Precondition | User is on `Sign up Page(/join)`         |
+
+- Scenario
+
+  - **GIVEN** the user is on `Sign up Page`.
+  - **WHEN** the user type email, password, and name, then click submit button.  
+  - **THEN** if all fields' inputs are correct, create account and redirect to sign in page
+
+- Exceptions
+  - User's input has wrong email format
+  - User's input has wrong password format
+  - User's input has wrong name format
+
+- Acceptance test
+  - When user clicks the submit button, check the email address is overlapped and create account.
+  - When user is typing the input fields, check the correctness of format.
