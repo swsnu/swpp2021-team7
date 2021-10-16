@@ -1,11 +1,12 @@
 
-# swpp2021-team7
-
-## Project Abstract
+# Project Abstract
 Vidol is a K-POP related web service that helps idol fans enjoy their favorite idols' contents much more diversely. and conveniently. There are two main problems idol fans encounter when following up K-POP contents: they are so scattered and it is extremely hard to exclude unwanted parts in video contents. Therefore,  Vidol provides two main features: serving integrated data and extracting user-wanted parts in videos.<br/><br/>Vidol collects and processes data of idols in advance by crawling. With the well-organized data we provide, users can follow up updates of their favorites easily. All users need to do is just typing the name of  idols. It is the same in video indexing service. When users input the video url and the idol they want to extract parts of, with machine learning, Vidol scans the video and index it either by scene change or appearing figures. With the result, users can recreate contents by saving and editing it.<br/><br/>Our goal is to boost K-POP fanship culture up by enabling effiecient content consumption and recreation. As K-POP market is growing and Vidol itself promotes creating contents, the importance and the utility of Vidol would get more significant over time.
 
+# Document Revision History
 
-## Customer
+       Rev. 1.0 2021-10-16 - initial version
+
+# Customer
 
 Vidol is for all who loves K-Pop idol.
 
@@ -17,7 +18,7 @@ Specifically, Vidol can give best user experience for those
 * Who spends a lot of time manually finding editing point.
 
 
-## Competitive Landscape
+# Competitive Landscape
 
   According to the rapid growth of the K-pop idol market, many idol businesses and services are launched for fans of idols such as, IDOLPICK, IDOL Live and Choi-Ae-dol in south Korea. Their service provides some information of specific idols and some participatory features such as, quiz or scheduler.
  </br>
@@ -28,9 +29,9 @@ Specifically, Vidol can give best user experience for those
  </br>
  Second, we manage abroad range of idol data scope by crawling from many platforms provided information of K-pop idol. Many existing services offered only few datasets of idol or stored data by manually typed. But VIDOL offers a large dataset by crawling from search engines or social media such as, Naver, Instagram and Youtube. Users who want to get information of their favorite idol can get information easily without excessive effort by searching.
 
-## User Stories
+# User Stories
 
-### Authentification
+## Authentification
 
 ### 1. Sign in
 
@@ -86,7 +87,7 @@ Specifically, Vidol can give best user experience for those
 
 ---
 
-### Main Page
+## Main Page
 
 ### 1. Search keyword
 
@@ -228,7 +229,7 @@ Specifically, Vidol can give best user experience for those
 
 ---
 
-### Search Result Page
+## Search Result Page
 
 ### 1. See content of search result
 
@@ -383,7 +384,7 @@ Specifically, Vidol can give best user experience for those
 
 ---
 
-### My Page
+## My Page
 
 ### 1. List of my idols
 
@@ -555,7 +556,7 @@ Specifically, Vidol can give best user experience for those
 
 ---
 
-### Video Indexing
+## Video Indexing
 
 ### 1. Index Video by Scene Changes
 
