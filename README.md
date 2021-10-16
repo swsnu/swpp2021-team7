@@ -1,6 +1,5 @@
-
 # Project Abstract
-Vidol is a K-POP related web service that helps idol fans enjoy their favorite idols' contents much more diversely. and conveniently. There are two main problems idol fans encounter when following up K-POP contents: they are so scattered and it is extremely hard to exclude unwanted parts in video contents. Therefore,  Vidol provides two main features: serving integrated data and extracting user-wanted parts in videos.<br/><br/>Vidol collects and processes data of idols in advance by crawling. With the well-organized data we provide, users can follow up updates of their favorites easily. All users need to do is just typing the name of  idols. It is the same in video indexing service. When users input the video url and the idol they want to extract parts of, with machine learning, Vidol scans the video and index it either by scene change or appearing figures. With the result, users can recreate contents by saving and editing it.<br/><br/>Our goal is to boost K-POP fanship culture up by enabling effiecient content consumption and recreation. As K-POP market is growing and Vidol itself promotes creating contents, the importance and the utility of Vidol would get more significant over time.
+Vidol is a K-POP-related web service that helps idol fans enjoy their favorite idols' contents much more diversely. and conveniently. There are two main problems idol fans encounter when following up on K-POP content: they are so scattered and it is extremely hard to exclude unwanted parts in video content. Therefore, Vidol provides two main features: serving integrated data and extracting user-wanted parts in videos.<br/><br/>Vidol collects and processes data of idols in advance by crawling. With the well-organized data we provide, users can follow up updates of their favorites easily. All users need to do is just typing the name of idols. It is the same in video indexing services. When users input the video URL and the idol they want to extract parts of, with machine learning, Vidol scans the video and index it either by scene change or appearing figures. With the result, users can recreate content by saving and editing it.<br/><br/>Our goal is to boost K-POP fanship culture up by enabling efficient content consumption and recreation. As K-POP market is growing and Vidol itself promotes creating content, the importance and the utility of Vidol would get more significant over time.
 
 # Document Revision History
 
@@ -8,26 +7,26 @@ Vidol is a K-POP related web service that helps idol fans enjoy their favorite i
 
 # Customer
 
-Vidol is for all who loves K-Pop idol.
+Vidol is for all who love K-Pop idols.
 
-Specifically, Vidol can give best user experience for those
+Specifically, Vidol can give the best user experience for those
 
 * Tired of finding information about idols scattered around.
 * Who wants to gather their favorite idols from one place.
 * Who manually made the idol cut video.
-* Who spends a lot of time manually finding editing point.
+* Who spends a lot of time manually finding editing points.
 
 
 # Competitive Landscape
 
-  According to the rapid growth of the K-pop idol market, many idol businesses and services are launched for fans of idols such as, IDOLPICK, IDOL Live and Choi-Ae-dol in south Korea. Their service provides some information of specific idols and some participatory features such as, quiz or scheduler.
+  According to the rapid growth of the K-pop idol market, many idol businesses and services are launched for fans of idols such as IDOLPICK, IDOL Live, and Choi-Ae-dol in south Korea. Their service provides some information about specific idols and some participatory features such as quiz or schedulers.
  </br>
 ![Competitive Landscape](vidol_landscape.png)
-  In our service, VIDOL, we could be a game changer of K-pop idol market through special features and distinctive ideas.
+  In our service, VIDOL, we could be a game-changer of the K-pop idol market through special features and distinctive ideas.
  </br>
-  First, VIDOL offers higher user engagement than the others. Users can leave comments on all content in VIDOL. It means that users can express their opinions free and participate on complementary discussion. Function of extracting video clips from the original also improve user engagement. Users who want to get own video clips which their favorite idols come out. It could be the most famous and innovative idea in this market.
+  First, VIDOL offers higher user engagement than the others. Users can leave comments on all content in VIDOL. It means that users can express their opinions free and participate in the complimentary discussion. The function of extracting video clips from the original also improves user engagement. Users who want to get their video clips from which their favorite idols come out. It could be the most famous and innovative idea in this market.
  </br>
- Second, we manage abroad range of idol data scope by crawling from many platforms provided information of K-pop idol. Many existing services offered only few datasets of idol or stored data by manually typed. But VIDOL offers a large dataset by crawling from search engines or social media such as, Naver, Instagram and Youtube. Users who want to get information of their favorite idol can get information easily without excessive effort by searching.
+ Second, we manage a broad range of idol data scope by crawling from many platforms provided information on K-pop idol. Many existing services offered only a few datasets of idols or stored data manually typed. But VIDOL offers a large dataset by crawling from search engines or social media such as Naver, Instagram, and Youtube. Users who want to get information about their favorite idols can get information easily without excessive effort by searching.
 
 # User Stories
 
@@ -37,25 +36,25 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
+  | Index        | Content                                |
+  | ------------ | -------------------------------------- |
   | FeatureName  | User can sign in to access application |
-  | Actors       | User                         |
-  | Precondition | User is on `Sign in Page(/login)`         |
+  | Actors       | User                                   |
+  | Precondition | User is on `Sign in Page(/login)`      |
 
 - Scenario
 
   - **GIVEN** the user is on `Sign in Page(/login)`
-  - **WHEN** the user type email and password, then click submit button
+  - **WHEN** the user types email and password, then click submit button
   - **THEN** if email and password are correct, the user gets redirected to ```main page('/')```
 
 - Exceptions
-  - User's input has wrong email format
-  - User's input has wrong password format
+  - User's input has the wrong email format
+  - User's input has the wrong password format
   - Wrong credential data
 
 - Acceptance test
-  - When user clicks the submit button, loader appears and the server checks the correctness of user's email and password
+  - When a user clicks the submit button, loader appears and the server checks the correctness of the user's email and password
   - When the checking is finished, the user is redirected to ```main page('/')```
 
 
@@ -63,27 +62,27 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
+  | Index        | Content                                                 |
+  | ------------ | ------------------------------------------------------- |
   | FeatureName  | User can sign up to access application (create account) |
-  | Actors       | User                         |
-  | Precondition | User is on `Sign up Page(/join)`         |
+  | Actors       | User                                                    |
+  | Precondition | User is on `Sign up Page(/join)`                        |
 
 - Scenario
 
   - **GIVEN** the user is on `Sign up Page(/login)`
-  - **WHEN** the user type email, password, and name, then click submit button
+  - **WHEN** the user types email, password, and name, then click submit button
   - **THEN** if all fields' inputs are correct, create account and redirect to ```main page('/')```
 
 - Exceptions
-  - User's input has wrong email format
-  - User's input has wrong password format
-  - User's input has wrong name format
+  - User's input has the wrong email format
+  - User's input has the wrong password format
+  - User's input has the wrong name format
   - An account with the given email already exists
 
 - Acceptance test
-  - When user clicks the submit button, loader appears and the server checks the email address is overlapped and creates account
-  - When user is typing the input fields, the correctness of format appears to the user with color
+  - When a user clicks the submit button, loader appears and the server checks the email address is overlapped and creates an account
+  - When a user is typing the input fields, the correctness of the format appears to the user with color
 
 ---
 
@@ -94,11 +93,11 @@ Specifically, Vidol can give best user experience for those
 #### 1.1 Type keyword
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can type a search keyword             |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Main Page('/')`|
+  | Index        | Content                        |
+  | ------------ | :----------------------------- |
+  | FeatureName  | User can type a search keyword |
+  | Actors       | User                           |
+  | Precondition | User is on `Main Page('/')`    |
 
 - Scenario
 
@@ -159,11 +158,11 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can go to `Rank page('/rank')`          |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Main Page('/')`|
+  | Index        | Content                             |
+  | ------------ | :---------------------------------- |
+  | FeatureName  | User can go to `Rank page('/rank')` |
+  | Actors       | User                                |
+  | Precondition | User is on `Main Page('/')`         |
 
 - Scenario
 
@@ -186,11 +185,11 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can see idol rankings          |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Ranking Page('/rank')`|
+  | Index        | Content                            |
+  | ------------ | :--------------------------------- |
+  | FeatureName  | User can see idol rankings         |
+  | Actors       | User                               |
+  | Precondition | User is on `Ranking Page('/rank')` |
 
 - Scenario
 
@@ -237,11 +236,11 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                         |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can see contents               |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Search Result Page('/search')`|
+  | Index        | Content                                    |
+  | ------------ | :----------------------------------------- |
+  | FeatureName  | User can see contents                      |
+  | Actors       | User                                       |
+  | Precondition | User is on `Search Result Page('/search')` |
 
 - Scenario
 
@@ -260,11 +259,11 @@ Specifically, Vidol can give best user experience for those
 #### 2.1 Create comment
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can type a comment or like comment                  |
-  | Actors                                   |User|
-  | Precondition                         |User logged in , User is on `Search Result Page('/search')`|
+  | Index        | Content                                                     |
+  | ------------ | :---------------------------------------------------------- |
+  | FeatureName  | User can type a comment or like comment                     |
+  | Actors       | User                                                        |
+  | Precondition | User logged in , User is on `Search Result Page('/search')` |
 
 - Scenario
 
@@ -277,18 +276,18 @@ Specifically, Vidol can give best user experience for those
     - User is not logged in.
 
 - Acceptance test
-  - When user inputs nothing, 'comment-create' button is disabled and gets active when user inputs letters.
-  - The comment is saved in the sever after user clicks create button and the comment is added at the top of comments.
-  - When user not logged in clicks create button, alert message is out and the user is redirected to the login page('/login').
+  - When the user inputs nothing, the 'comment-create' button is disabled and gets active when the user inputs letters.
+  - The comment is saved in the server after the user clicks create button and the comment is added at the top of comments.
+  - When the user not logged in clicks create button, an alert message is out and the user is redirected to the login page('/login').
 
 #### 2.2  Like comment
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can type a comment or like comment                  |
-  | Actors                                   |User|
-  | Precondition                         |User logged in , User is on `Search Result Page('/search')`|
+  | Index        | Content                                                     |
+  | ------------ | :---------------------------------------------------------- |
+  | FeatureName  | User can type a comment or like comment                     |
+  | Actors       | User                                                        |
+  | Precondition | User logged in , User is on `Search Result Page('/search')` |
 
 - Scenario
   - **GIVEN** the User is on `Search Result Page('/search')`
@@ -299,20 +298,20 @@ Specifically, Vidol can give best user experience for those
     - The user already clicked like on the comment.
 
 - Acceptance test
-  - When the user clicks button on the comment not clicked like on before, the request is handled and the number of likes increases by 1.
+  - When the user clicks a button on the comment not clicked like on before, the request is handled and the number of likes increases by 1.
   - The 'comment-like' button does not appear on the comments user wrote.
-  - When the user clicks button on the comment already the user clicked like on, alert message appears and the request is not handled.
+  - When the user clicks a button on the comment already the user clicked like on, an alert message appears and the request is not handled.
 
 
 #### 2.3 Edit comment
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                         |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can edit a comment                 |
-  | Actors                                   |User|
-  | Precondition                         |User logged in , User is on `Search Result Page('/search')`, User is author of comment|
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can edit a comment                                      |
+  | Actors       | User                                                         |
+  | Precondition | User logged in , User is on `Search Result Page('/search')`, User is author of comment |
 
 - Scenario
 
@@ -327,18 +326,18 @@ Specifically, Vidol can give best user experience for those
     - User confirms editing with empty content.
 
 - Acceptance test
-  - When the user clicks 'comment-edit', the comment field appears with input tag.
-  - When confirm editing with empty content, alert message appears and nothing is done.
+  - When the user clicks 'comment-edit', the comment field appears with an input tag.
+  - When confirming editing with empty content, an alert message appears and nothing is done.
 
 #### 2.4 Delete comment
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can delete a comment                 |
-  | Actors                                   |User|
-  | Precondition                         |User logged in , User is on `Search Result Page('/search')`, User is author of comment|
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can delete a comment                                    |
+  | Actors       | User                                                         |
+  | Precondition | User logged in , User is on `Search Result Page('/search')`, User is author of comment |
 
 - Scenario
 
@@ -363,11 +362,11 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  |        Index                             |                                                                        Content                                                                       |
-  |---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-  | FeatureName                        |User can click `go-video-indexing-button` and be redirected to `Video Indexing Page('/video')`               |
-  | Actors                                   |User|
-  | Precondition                         |User is on `Search Result Page('/search')`|
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can click `go-video-indexing-button` and be redirected to `Video Indexing Page('/video')` |
+  | Actors       | User                                                         |
+  | Precondition | User is on `Search Result Page('/search')`                   |
 
 - Scenario
 
@@ -380,7 +379,7 @@ Specifically, Vidol can give best user experience for those
 
 - Acceptance test
   - When logged in user clicks the button, the user gets redirected to Video Indexing Page
-  - When user not logged in clicks the button, the user gets redirected to login page
+  - When the user not logged in clicks the button, the user gets redirected to the login page
 
 ---
 
@@ -408,8 +407,8 @@ Specifically, Vidol can give best user experience for those
     - The user is not logged in(common exception for all features in mypage - would be omitted in later features)
 
 - Acceptance Test
-     - When user not logged in approaches mypage, the user would be redirected to login page
-     - When user scrolls down, the list appears
+     - When the user not logged in approaches mypage, the user would be redirected to login page
+     - When the user scrolls down, the list appears
      - If there is no idol the user clicked like on, the list is empty
 
 #### 1.2 Move to Search Result Page
@@ -424,9 +423,9 @@ Specifically, Vidol can give best user experience for those
 
 - Scenario
 
-   - **GIVEN** the user is on the ```List of my idols```
+   - **GIVEN** the user is on the ```List of my idols```
    - **WHEN** the user clicks one idol
-   - **THEN** user is redirected to  `Search Result Page('/search')` and see specific information of the idol.
+   - **THEN** user is redirected to  `Search Result Page('/search')` and see specific information of the idol.
 
 - Acceptance Test
    - When clicking one idol, loader appears and the user is redirected to Search Result Page('/search').
@@ -442,12 +441,12 @@ Specifically, Vidol can give best user experience for those
 | Precondition | User is on ``My Page('/mypage/:id')`` and seeing the list |
 
 - Scenario
-   - **GIVEN** the user is on the ```List of my idols```
-   - **WHEN** the user click 'cancel like' button
+   - **GIVEN** the user is on the ```List of my idols```
+   - **WHEN** the user click 'cancel-like' button
    - **THEN** the idol user clicked gets removed from the list
 
 - Acceptance Test
-   - Loader appears right after the user clicks cancel button and when the server successfully handles the request, loader disappears and the idol gets removed from the list
+   - Loader appears right after the user clicks the cancel button and when the server successfully handles the request, the loader disappears and the idol gets removed from the list
 
 ### 2. Scraped articles
 
@@ -465,7 +464,7 @@ Specifically, Vidol can give best user experience for those
 - Scenario
 
    - **GIVEN** the user is on the ``My Page('/mypage/:id')``
-   - **WHEN** the user scroll down to see ```Scraped articles```
+   - **WHEN** the user scroll down to see ```Scraped articles```
    - **THEN** appear article list which scraped from the  `Search Result Page('/search')`
 
 - Acceptance Test
@@ -484,7 +483,7 @@ Specifically, Vidol can give best user experience for those
 
 - Scenario
 
- - **GIVEN** the user is on the ```Scraped articles```
+ - **GIVEN** the user is on the ```Scraped articles```
  - **WHEN** the user click article name
  - **THEN** user is redirected to article page in `Search Result Page('/search')` and see article of idol.
 
@@ -504,7 +503,7 @@ Specifically, Vidol can give best user experience for those
 | Precondition | User is on ``My Page('/mypage/:id')`` and on scraped articles section |
 
 - Scenario
-   - **GIVEN** the user is on the ```Scraped Articles```
+   - **GIVEN** the user is on the ```Scraped Articles```
    - **WHEN** the user click 'delete' button on one article
    - **THEN** the article gets removed from the list
 
@@ -528,7 +527,7 @@ Specifically, Vidol can give best user experience for those
 - Scenario
 
    - **GIVEN** the user is on the ``My Page('/mypage/:id')``  
-   - **WHEN** the user scroll down to see ```My Comments ```
+   - **WHEN** the user scroll down to see ```My Comments ```
    - **THEN** appear list of comments which is in the `Search Result Page('/search')`
 
 - Acceptance test
@@ -547,7 +546,7 @@ Specifically, Vidol can give best user experience for those
 
 - Scenario
 
-   - **GIVEN** the user is on the ```My Comments```
+   - **GIVEN** the user is on the ```My Comments```
    - **WHEN** the user click comment content
    - **THEN** the user is redirected to `Search Result Page('/search')` of idol and can delete or edit their comment
 
@@ -577,35 +576,35 @@ Specifically, Vidol can give best user experience for those
   - **THEN** the user is redirected to `Scene Cut Page`
 
 - Exceptions
-  - The link user inputs is not working.
-  - The link user inputs is not from Youtube.
+  - The link user inputs are not working.
+  - The link user inputs are not from Youtube.
   - The user is not logged in(common for all features in video indexing - omitted later on)
 
 - Acceptance test
   - When the user is not logged in, the user gets redirected to `login page('/login')`
   - 'Cut Scenes' button gets active when the user inputs a valid link
-  - When user clicks the button, video scanning process starts and user sees loader until the process ends and finally gets redirected to the result page
+  - When a user clicks the button, the video scanning process starts and the user sees the loader until the process ends and finally gets redirected to the result page
 
 
 #### 1.2 Edit Video
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Edit video with the indexing  |
-  | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
+  | Index        | Content                                                  |
+  | ------------ | -------------------------------------------------------- |
+  | FeatureName  | Edit video with the indexing                             |
+  | Actors       | User                                                     |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')` |
 
 - Scenario
 
   - **GIVEN** the user is on Video Indexing - Result Page.
   - **WHEN** the user checks videos and picks the parts to keep by clicking scenes
-  - **THEN** the selected scenes are marked with colors and total length of the selected parts appears
+  - **THEN** the selected scenes are marked with colors and the total length of the selected parts appears
 
 - Acceptance test
   - When the user clicks a scene, it gets played immediately in the player on top
-  - When the user right-clicks the scene not selected, the scene gets coloured
+  - When the user right-clicks the scene not selected, the scene gets colored
   - When the user right-clicks the scene already selected, the scene gets back to the initial state(white)
 
 
@@ -613,11 +612,11 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Save Video of Selected Parts  |
-  | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
+  | Index        | Content                                                  |
+  | ------------ | -------------------------------------------------------- |
+  | FeatureName  | Save Video of Selected Parts                             |
+  | Actors       | User                                                     |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')` |
 
 - Scenario
 
@@ -629,7 +628,7 @@ Specifically, Vidol can give best user experience for those
   - No scene is selected
 
 - Acceptance test
-  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready
+  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen, and downloading starts when the video is ready
 
 
 ### 2. Extract Parts of Selected Idol
@@ -647,12 +646,12 @@ Specifically, Vidol can give best user experience for those
 - Scenario
 
   - **GIVEN** the user is on Video Indexing - Entry Page
-  - **WHEN** the user types the link of the video to index and clicks `Extract My Idol Parts` button
+  - **WHEN** the user types the link of the video to index and clicks the` Extract My Idol Parts` button
   - **THEN** the user is redirected to `Search and Select Idol Page`
 
-- Execptions
-  - The link user inputs is not working
-  - The link user inputs is not from Youtube
+- Exceptions
+  - The link user inputs are not working
+  - The link user inputs are not from Youtube
 
 - Acceptance test
   - 'Extract My Idol Parts' button gets active when the user inputs a valid link
@@ -662,58 +661,58 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Search idol to extract parts of |
-  | Actors       | User                         |
-  | Precondition | User submitted the link of the video         |
+  | Index        | Content                              |
+  | ------------ | ------------------------------------ |
+  | FeatureName  | Search idol to extract parts of      |
+  | Actors       | User                                 |
+  | Precondition | User submitted the link of the video |
 
 - Scenario
 
   - **GIVEN** the user is on Video Indexing - Search Page
-  - **WHEN** the user types the keyword of idol and clicks search button
-  - **THEN** the search result with each idol's availabilty(of pre-trained model) appears
+  - **WHEN** the user types the keyword of idol and clicks the search button
+  - **THEN** the search result with each idol's availability(of the pre-trained model) appears
 
 - Exceptions
   - The keyword has less than 2 letters
 
 - Acceptance test
-  - When the user clicks search button, list of idols matching the keyword appears at the bottom of search bar
+  - When the user clicks the search button, a list of idols matching the keyword appears at the bottom of the search bar
 
 #### 2.3 Request Support(ML training)
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Request training on idols Vidol doesn't have pre-trained model of  |
-  | Actors       | User                         |
-  | Precondition | User searched idol and is seeing the search result         |
+  | Index        | Content                                                      |
+  | ------------ | ------------------------------------------------------------ |
+  | FeatureName  | Request training on idols Vidol doesn't have a pre-trained model of |
+  | Actors       | User                                                         |
+  | Precondition | User searched idol and is seeing the search result           |
 
 - Scenario
 
   - **GIVEN** the user searched idol and is seeing the search result
-  - **WHEN** the user clicks `'Request Support'` button next to one of the idol not supported
+  - **WHEN** the user clicks `'Request Support'` button next to one of the idols not supported
   - **THEN** the user gets toast message 'Successfully submitted'
 
 - Acceptance test
-  - When the user clicks the `'Request Support'` button, toast message appears and disappears a bit later
+  - When the user clicks the `'Request Support'` button, a toast message appears and disappears a bit later
 
 
 #### 2.4 Select Idol
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Select idol to extract parts of  |
-  | Actors       | User                         |
-  | Precondition | User searched idol and is seeing the search result         |
+  | Index        | Content                                            |
+  | ------------ | -------------------------------------------------- |
+  | FeatureName  | Select idol to extract parts of                    |
+  | Actors       | User                                               |
+  | Precondition | User searched idol and is seeing the search result |
 
 - Scenario
 
   - **GIVEN** the user searched idol and is seeing the search result
-  - **WHEN** the user clicks one of the idol
+  - **WHEN** the user clicks one of the idols
   - **THEN** the user is redirected to the result page
 
 - Acceptance test
@@ -723,34 +722,34 @@ Specifically, Vidol can give best user experience for those
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Edit video with the indexing  |
-  | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
+  | Index        | Content                                                  |
+  | ------------ | -------------------------------------------------------- |
+  | FeatureName  | Edit video with the indexing                             |
+  | Actors       | User                                                     |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')` |
 
 - Scenario
 
     - **GIVEN** the user is on Video Indexing - Result Page
     - **WHEN** the user checks videos and picks the parts to keep by clicking scenes
-    - **THEN** the selected scenes are marked with check mark and total length of the selected parts appears
+    - **THEN** the selected scenes are marked with checkmark and total length of the selected parts appears
 
 - Acceptance test
-  - The parts with selected idol is coloured
+  - The parts with the selected idol is colored
   - When the user clicks a scene, it gets played immediately in the player on top
-  - When the user right-clicks the scene not selected, a check mark added on the scene
-  - When the user right-clicks the scene already selected, the scene gets back to the initial state(no check mark)
+  - When the user right-clicks the scene not selected, a checkmark added on the scene
+  - When the user right-clicks the scene already selected, the scene gets back to the initial state(no checkmark)
 
 
  #### 2.6 Save Video
 
 - Meta specs
 
-  | Index        | Content                      |
-  | ------------ | ---------------------------- |
-  | FeatureName  | Save Video of Selected Parts  |
-  | Actors       | User                         |
-  | Precondition | User is on `Video Indexing Result Page('/video/result')`      |
+  | Index        | Content                                                  |
+  | ------------ | -------------------------------------------------------- |
+  | FeatureName  | Save Video of Selected Parts                             |
+  | Actors       | User                                                     |
+  | Precondition | User is on `Video Indexing Result Page('/video/result')` |
 
 - Scenario
 
@@ -762,7 +761,7 @@ Specifically, Vidol can give best user experience for those
   - No scene is selected
 
 - Acceptance test
-  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready
+  - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen, and downloading starts when the video is ready
 
 
 # User Interface Requirements
