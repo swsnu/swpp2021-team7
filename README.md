@@ -763,3 +763,9 @@ Specifically, Vidol can give best user experience for those
 
 - Acceptance test
   - When the user clicks the 'Save Selected Scenes' button, loader appears on the screen and downloading starts when the video is ready.
+
+
+# User Interface Requirements
+![swpp wireframe - Frame 1](https://user-images.githubusercontent.com/52434833/137576862-bdc16bab-3fec-4d32-b677-04bae43652b8.jpg)
+You can check the original version at: https://miro.com/app/board/o9J_lsOtDfA=/?invite_link_id=908977330974
+
