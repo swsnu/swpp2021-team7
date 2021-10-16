@@ -273,8 +273,8 @@ Specifically, Vidol can give best user experience for those
   - **THEN** the user's comment is added to the page.
   
 - Exceptions
- - User inputs nothing.
- - User is not logged in.
+    - User inputs nothing.
+    - User is not logged in.
 
 - Acceptance test
   - When user inputs nothing, 'comment-create' button is disabled and gets active when user inputs letters.
@@ -296,7 +296,7 @@ Specifically, Vidol can give best user experience for those
   - **THEN** Likes on the comment increase by 1.
  
 - Exceptions
- - The user already clicked like on the comment.
+    - The user already clicked like on the comment.
 
 - Acceptance test
   - When the user clicks button on the comment not clicked like on before, the request is handled and the number of likes increases by 1.
@@ -324,7 +324,7 @@ Specifically, Vidol can give best user experience for those
   - **THEN** the comment is edited.
   
 - Exceptions
- - User confirms editing with empty content.
+    - User confirms editing with empty content.
 
 - Acceptance test
   - When the user clicks 'comment-edit', the comment field appears with input tag.
@@ -376,7 +376,7 @@ Specifically, Vidol can give best user experience for those
   - **THEN** the User should be redirected to `Video Indexing Page('/video')`.
  
 - Exceptions
- - The user is not logged in.
+    - The user is not logged in.
 
 - Acceptance test
   - When logged in user clicks the button, the user gets redirected to Video Indexing Page.
@@ -405,7 +405,7 @@ Specifically, Vidol can give best user experience for those
  - **THEN** idol list of on whom the user clicked 'Like' button on the <em> `Search Result Page`</em>
 
 - Exceptions
- - The user is not logged in(common exception for all features in mypage - would be omitted in later features)
+    - The user is not logged in(common exception for all features in mypage - would be omitted in later features)
  
 - Acceptance Test
  - When user not logged in approaches mypage, the user would be redirected to login page.
