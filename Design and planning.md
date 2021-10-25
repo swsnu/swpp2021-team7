@@ -22,3 +22,6 @@ User interface for our view design is as follows:
 4. Ranking Page ('/rank')
 - Users can check all the idol search rankings
 - User can click one of the idol in the page. When user clicks one of the idol, user is redirected to `Search Result Page('/search/:id')`
+
+## **Frontend Components**<br />
+Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
