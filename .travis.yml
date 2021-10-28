@@ -15,7 +15,7 @@ jobs:
         - coverage xml
 
     - language: node_js
-      node_js: 14
+      node_js: 14.17.0
       install:
         - cd frontend
         - yarn install
