@@ -6,15 +6,13 @@ module.exports = {
         jest: true
     },
     "extends": [
-        'plugin:react/recommended',
         "plugin:react/recommended",
-        "airbnb"
     ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 13,
+        "ecmaVersion": 12,
         "sourceType": "module"
     },
     "plugins": [
