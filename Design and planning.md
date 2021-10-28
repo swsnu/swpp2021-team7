@@ -1,4 +1,23 @@
+# **Design and Planning** 
+
+
+
+## **Member ** <br />
+
+Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
+
+## **System Architecture** <br />
+
+## **Model** <br />
+
+Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
+
+![ERDiagram](VIDOL-ver2.pdf)
+
+Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
+
 ## **View**<br />
+
 User interface for our view design is as follows:
 ![UI Specification](https://user-images.githubusercontent.com/52434833/137576862-bdc16bab-3fec-4d32-b677-04bae43652b8.jpg)
 
