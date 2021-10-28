@@ -1,6 +1,7 @@
 ## **View**<br />
 User interface for our view design is as follows:
 ![UI Specification](https://user-images.githubusercontent.com/52434833/137576862-bdc16bab-3fec-4d32-b677-04bae43652b8.jpg)
+
 2. Main Page ('/')
 - User can check the top 10 idol search rankings in `hottest-idol-tab`
 - User can click one of the idol in the `hottest-idol-tab`. When user clicks one of the idol in the `hottest-idol-tab`, user is redirected to `Search Result Page('/search/:id')`
@@ -18,10 +19,22 @@ User interface for our view design is as follows:
 - If user already wrote a comment, the user can click `comment-delete` button
 - After clicking `comment-delete` button, `delete-comment-confirm` pops up
 - After clicking `confirm` button in `delete-comment-confirm`, corresponding comment is deleted
-- User can click `go-video-indexing` button. When user clicks `go-video-indexing` button, user is redirected to Video Indexing Page('/video')
+- User can click `go-video-indexing` button. When user clicks `go-video-indexing` button, user is redirected to `Video Indexing Page('/video')`
 4. Ranking Page ('/rank')
 - Users can check all the idol search rankings
 - User can click one of the idol in the page. When user clicks one of the idol, user is redirected to `Search Result Page('/search/:id')`
+
+5. My Page('/mypage/:id')
+
+- Users can check my activities in `My Page('/mypage/:id')`
+- Users can see their favorite idols list in `List of my idols`
+- When user clicks one of the idol in `List of my idols`, user is redirected to `Search Result Page('/search/:id')`
+- When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page. 
+- Users can see their scraped articles list in `Scraped articles`
+- When user clicks one of the articles in `Scraped articles`, user is redirected to `Search Result Page('/search/:id')` where that article exists
+- When user clicks `delete` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
+- Users can see their comments in `My Comments`
+- When user clicks comment's content, user is redirected to `Search Result Page('/search/:id')`
 
 ## **Frontend Components**<br />
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.

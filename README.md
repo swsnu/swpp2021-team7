@@ -4,6 +4,7 @@ Vidol is a K-POP-related web service that helps idol fans enjoy their favorite i
 # Document Revision History
 
        Rev. 1.0 2021-10-16 - initial version
+       Rev. 1.1 2021-10-26 - redirection link revised
 
 # Customer
 
@@ -116,20 +117,20 @@ Specifically, Vidol can give the best user experience for those
 
   | Index        | Content                                                      |
   | ------------ | :----------------------------------------------------------- |
-  | FeatureName  | User can click each idol that comes up as a result of a search and be redirected to `Search Result Page(/search)` |
+  | FeatureName  | User can click each idol that comes up as a result of a search and be redirected to `Search Result Page(/search/:id)` |
   | Actors       | User                                                         |
   | Precondition | User is on `Main Page('/')`, User types a search keyword and clicks `search-button` button and get results(results' length > 0) |
 
 - Scenario
   - **GIVEN** the User is on `Main Page('/')` and get search results
   - **WHEN** the User clicks one of the idols in the search results
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information
+  - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing idol information
 
 - Acceptance test
 
   - **GIVEN** the User is on `Main Page('/')` and there are one more search results
   - **WHEN** the User clicks "IU" in the search results
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information
+  - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing "IU" information
 
 ### 2. Ranking
 
@@ -139,7 +140,7 @@ Specifically, Vidol can give the best user experience for those
 
   | Index        | Content                                                      |
   | ------------ | :----------------------------------------------------------- |
-  | FeatureName  | User can click each idol in `Hottest idol tab` and be redirected to `Search Result Page('/search')` |
+  | FeatureName  | User can click each idol in `Hottest idol tab` and be redirected to `Search Result Page('/search/:id')` |
   | Actors       | User                                                         |
   | Precondition | User is on `Main Page('/')`                                  |
 
@@ -147,12 +148,12 @@ Specifically, Vidol can give the best user experience for those
 
   - **GIVEN** the User is on `Main Page('/')`
   - **WHEN** the User clicks one of the idols in `Hottest idol tab`
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information
+  - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing idol information
 
 - Acceptance test
   - **GIVEN** the User is on `Main Page('/')` and there is "IU" in `Hottest idol tab`
   - **WHEN** the User clicks "IU" in `Hottest idol tab`
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information
+  - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing "IU" information
 
 #### 2.1 Move to Ranking Page
 
@@ -211,7 +212,7 @@ Specifically, Vidol can give the best user experience for those
 
   | Index        | Content                                                      |
   | ------------ | :----------------------------------------------------------- |
-  | FeatureName  | User can click each idol in `Ranking Page('/rank')` and be redirected to `Search Result Page('/search')` |
+  | FeatureName  | User can click each idol in `Ranking Page('/rank')` and be redirected to `Search Result Page('/search/:id')` |
   | Actors       | User                                                         |
   | Precondition | User is on `Ranking Page('/rank')`                           |
 
@@ -219,12 +220,12 @@ Specifically, Vidol can give the best user experience for those
 
   - **GIVEN** the User is on `Ranking Page('/rank')`
   - **WHEN** the User clicks one of the idols
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing idol information
+  - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing idol information
 
 - Acceptance test
   - **GIVEN** the User is on `Ranking Page('/rank')` and there is "IU" in ranking
   - **WHEN** the User clicks "IU"
-  - **THEN** the User shuold be redirected to `Search Result Page('/search')` containing "IU" information
+  - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing "IU" information
 
 ---
 
@@ -236,21 +237,21 @@ Specifically, Vidol can give the best user experience for those
 
 - Meta specs
 
-  | Index        | Content                                    |
-  | ------------ | :----------------------------------------- |
-  | FeatureName  | User can see contents                      |
-  | Actors       | User                                       |
-  | Precondition | User is on `Search Result Page('/search')` |
+  | Index        | Content                                        |
+  | ------------ | :--------------------------------------------- |
+  | FeatureName  | User can see contents                          |
+  | Actors       | User                                           |
+  | Precondition | User is on `Search Result Page('/search/:id')` |
 
 - Scenario
 
-  - **GIVEN** the User is on `Search Result Page('/search')`
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
   - **WHEN**
   - **THEN** the User should see crawled information from Internet, SNS, Youtube and shared indexed video.
 
 
 - Acceptance test
-  - **GIVEN** the User is on `Search Result Page('/search')`
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
   - **WHEN**
   - **THEN** the User should see `info from Internet tab`, `info from SNS tab`, `info from Youtube tab`, `shared indexed video tab`.
 
@@ -259,15 +260,15 @@ Specifically, Vidol can give the best user experience for those
 #### 2.1 Create comment
 - Meta specs
 
-  | Index        | Content                                                     |
-  | ------------ | :---------------------------------------------------------- |
-  | FeatureName  | User can type a comment or like comment                     |
-  | Actors       | User                                                        |
-  | Precondition | User logged in , User is on `Search Result Page('/search')` |
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can type a comment or like comment                      |
+  | Actors       | User                                                         |
+  | Precondition | User logged in , User is on `Search Result Page('/search/:id')` |
 
 - Scenario
 
-  - **GIVEN** the user is on `Search Result Page('/search')`
+  - **GIVEN** the user is on `Search Result Page('/search/:id')`
   - **WHEN** the user types content in `comment-input` input and clicks `comment-create` button
   - **THEN** the user's comment is added to the page.
   
@@ -283,14 +284,14 @@ Specifically, Vidol can give the best user experience for those
 #### 2.2  Like comment
 - Meta specs
 
-  | Index        | Content                                                     |
-  | ------------ | :---------------------------------------------------------- |
-  | FeatureName  | User can type a comment or like comment                     |
-  | Actors       | User                                                        |
-  | Precondition | User logged in , User is on `Search Result Page('/search')` |
+  | Index        | Content                                                      |
+  | ------------ | :----------------------------------------------------------- |
+  | FeatureName  | User can type a comment or like comment                      |
+  | Actors       | User                                                         |
+  | Precondition | User logged in , User is on `Search Result Page('/search/:id')` |
 
 - Scenario
-  - **GIVEN** the User is on `Search Result Page('/search')`
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
   - **WHEN** the User clicks `comment-like` button next to a comment
   - **THEN** Likes on the comment increase by 1.
 
@@ -311,11 +312,11 @@ Specifically, Vidol can give the best user experience for those
   | ------------ | :----------------------------------------------------------- |
   | FeatureName  | User can edit a comment                                      |
   | Actors       | User                                                         |
-  | Precondition | User logged in , User is on `Search Result Page('/search')`, User is author of comment |
+  | Precondition | User logged in , User is on `Search Result Page('/search/:id')`, User is author of comment |
 
 - Scenario
 
-  - **GIVEN** the User is on `Search Result Page('/search')` and  the User is author of the comment
+  - **GIVEN** the User is on `Search Result Page('/search/:id')` and  the User is author of the comment
   - **WHEN** the User clicks `comment-edit` button next to the comment
   - **THEN** the comment becomes editable.<br><br>
   - **GIVEN** the User is author of the comment and the comment is editable
@@ -337,22 +338,22 @@ Specifically, Vidol can give the best user experience for those
   | ------------ | :----------------------------------------------------------- |
   | FeatureName  | User can delete a comment                                    |
   | Actors       | User                                                         |
-  | Precondition | User logged in , User is on `Search Result Page('/search')`, User is author of comment |
+  | Precondition | User logged in , User is on `Search Result Page('/search/:id')`, User is author of comment |
 
 - Scenario
 
-  - **GIVEN** the User is on `Search Result Page('/search')` and  the User is author of the comment
+  - **GIVEN** the User is on `Search Result Page('/search/:id')` and  the User is author of the comment
   - **WHEN** the User clicks `comment-delete` button next to the comment
   - **THEN** `delete-comment-confirm` pops up.<br><br>
-  - **GIVEN** the `delete-comment-confirm` poped up on `Search Result Page('/search')`
+  - **GIVEN** the `delete-comment-confirm` poped up on `Search Result Page('/search/:id')`
   - **WHEN** the User clicks `confirm` button
   - **THEN** the comment is deleted.
 
 - Acceptance test
-  - **GIVEN** the User is on `Search Result Page('/search')` and  User is author of comment1
+  - **GIVEN** the User is on `Search Result Page('/search/:id')` and  User is author of comment1
   - **WHEN** the User clicks `comment-delete` button next to the comment1
   - **THEN** confirm[Are you sure to delete this comment?] pops up.<br><br>
-  - **GIVEN** the `delete-comment-confirm` poped up on `Search Result Page('/search')`
+  - **GIVEN** the `delete-comment-confirm` poped up on `Search Result Page('/search/:id')`
   - **WHEN** the User clicks `confirm` button
   - **THEN** the comment1 is deleted.
 
@@ -366,11 +367,11 @@ Specifically, Vidol can give the best user experience for those
   | ------------ | :----------------------------------------------------------- |
   | FeatureName  | User can click `go-video-indexing-button` and be redirected to `Video Indexing Page('/video')` |
   | Actors       | User                                                         |
-  | Precondition | User is on `Search Result Page('/search')`                   |
+  | Precondition | User is on `Search Result Page('/search/:id')`               |
 
 - Scenario
 
-  - **GIVEN** the User is on `Search Result Page('/search')`
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
   - **WHEN** the User clicks `go-video-indexing-button` button
   - **THEN** the User should be redirected to `Video Indexing Page('/video')`.
 
@@ -401,7 +402,7 @@ Specifically, Vidol can give the best user experience for those
 
      - **GIVEN** the user is on the `My Page('/mypage/:id')`
      - **WHEN** the user scroll down to see ```List of my idols```
-     - **THEN** idol list of on whom the user clicked 'Like' button on the `Search Result Page('/search')`
+     - **THEN** idol list of on whom the user clicked 'Like' button on the `Search Result Page('/search/:id')`
 
 - Exceptions
     - The user is not logged in(common exception for all features in mypage - would be omitted in later features)
@@ -425,10 +426,10 @@ Specifically, Vidol can give the best user experience for those
 
    - **GIVEN** the user is on the ```List of my idols```
    - **WHEN** the user clicks one idol
-   - **THEN** user is redirected to  `Search Result Page('/search')` and see specific information of the idol.
+   - **THEN** user is redirected to  `Search Result Page('/search/:id')` and see specific information of the idol.
 
 - Acceptance Test
-   - When clicking one idol, loader appears and the user is redirected to Search Result Page('/search').
+   - When clicking one idol, loader appears and the user is redirected to `Search Result Page('/search/:id')`.
 
 #### 1.3 Cancel like
 
@@ -465,7 +466,7 @@ Specifically, Vidol can give the best user experience for those
 
    - **GIVEN** the user is on the ``My Page('/mypage/:id')``
    - **WHEN** the user scroll down to see ```Scraped articles```
-   - **THEN** appear article list which scraped from the  `Search Result Page('/search')`
+   - **THEN** appear article list which scraped from the  `Search Result Page('/search/:id')`
 
 - Acceptance Test
    - Articles appear with only titles when user scrolls down
@@ -485,11 +486,11 @@ Specifically, Vidol can give the best user experience for those
 
  - **GIVEN** the user is on the ```Scraped articles```
  - **WHEN** the user click article name
- - **THEN** user is redirected to article page in `Search Result Page('/search')` and see article of idol.
+ - **THEN** user is redirected to article page in `Search Result Page('/search/:id')` and see article of idol.
 
 
 - Acceptance Test
- - The loader appears when clicking the article and the user gets redirected to Search Result Page('/search').
+ - The loader appears when clicking the article and the user gets redirected to Search Result Page('/search/:id').
 
 
 #### 2.3 Cancel scrap
@@ -528,7 +529,7 @@ Specifically, Vidol can give the best user experience for those
 
    - **GIVEN** the user is on the ``My Page('/mypage/:id')``  
    - **WHEN** the user scroll down to see ```My Comments ```
-   - **THEN** appear list of comments which is in the `Search Result Page('/search')`
+   - **THEN** appear list of comments which is in the `Search Result Page('/search/:id')`
 
 - Acceptance test
    - The comments user wrote appears with the format of '[idol] comment'.
@@ -548,10 +549,10 @@ Specifically, Vidol can give the best user experience for those
 
    - **GIVEN** the user is on the ```My Comments```
    - **WHEN** the user click comment content
-   - **THEN** the user is redirected to `Search Result Page('/search')` of idol and can delete or edit their comment
+   - **THEN** the user is redirected to `Search Result Page('/search/:id')` of idol and can delete or edit their comment
 
 - Acceptance Test
-   - When the user clicks a comment, the loader appears and the user gets redirected to  `Search Result Page('/search')`
+   - When the user clicks a comment, the loader appears and the user gets redirected to  `Search Result Page('/search/:id')`
 
 ---
 
