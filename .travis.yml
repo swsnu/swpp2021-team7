@@ -9,8 +9,8 @@ jobs:
       addons:
         sonarcloud:
           organization: swsnu
-          token: "mjhTVQkq04A/GqHEVX8kA0DYxTtZ1ND0664YDWxqBAce52FA4mZzFx+VIB2sMYwXm8eHPAS1XA0wB2+RLZZkG4fRMaK/1zfqOqjcwiPaNTCPmSPHlxccFUWdfBx6+K5flnj/SIHFRJJnc+YWjWowKT4a8iEm08sHJY/XqhjPKiIQcCxigrg9C86N74djknmoNU5BqhSO+1CAJMRmEhMkUr/BfAfBW3fi5cZTwPlyFEuESIhI3upVBBqxCh6DIADghBlE0jbVYsgg64Upg+Lz9kH0tD1UavwrpJdHUKtM9KHwAqVrnzGkh7u75OUlAf2shKspxHvgV2yQ3PqQx+9TFuxnzm8vRxhnsAyC7ae61DfoGr2h8/Y+ZpAn0adAqZX4JT3U4stovhNAbBOdRFPeQJFLLweOfFkazq+fwFv/LuBDIKiiq3aguHxy+R0H38Ync7jcj2HmaJHROMrDxdEzxM1+Uxp4Iz18ccOiEXbGkWfO1wdZ0R1pKR0HJiX+R1xmaYPqMK+UlNf4y2XRVg5G1/7JOMmnCJ7zZZ3gYFxx+9LIpUe4xRYH5EDRIZNDsH7TeytFIAdHZPw2ULUzX/+Sy7hvlVODQIOsQnHwBEEPjUVRZBZCGwmwcuYokzgeNlCoqJNujovSai6R5P091mAfouMLUfDPLX83xAemMkpEd0M="
-            secure: 
+          token: 
+            secure: "mjhTVQkq04A/GqHEVX8kA0DYxTtZ1ND0664YDWxqBAce52FA4mZzFx+VIB2sMYwXm8eHPAS1XA0wB2+RLZZkG4fRMaK/1zfqOqjcwiPaNTCPmSPHlxccFUWdfBx6+K5flnj/SIHFRJJnc+YWjWowKT4a8iEm08sHJY/XqhjPKiIQcCxigrg9C86N74djknmoNU5BqhSO+1CAJMRmEhMkUr/BfAfBW3fi5cZTwPlyFEuESIhI3upVBBqxCh6DIADghBlE0jbVYsgg64Upg+Lz9kH0tD1UavwrpJdHUKtM9KHwAqVrnzGkh7u75OUlAf2shKspxHvgV2yQ3PqQx+9TFuxnzm8vRxhnsAyC7ae61DfoGr2h8/Y+ZpAn0adAqZX4JT3U4stovhNAbBOdRFPeQJFLLweOfFkazq+fwFv/LuBDIKiiq3aguHxy+R0H38Ync7jcj2HmaJHROMrDxdEzxM1+Uxp4Iz18ccOiEXbGkWfO1wdZ0R1pKR0HJiX+R1xmaYPqMK+UlNf4y2XRVg5G1/7JOMmnCJ7zZZ3gYFxx+9LIpUe4xRYH5EDRIZNDsH7TeytFIAdHZPw2ULUzX/+Sy7hvlVODQIOsQnHwBEEPjUVRZBZCGwmwcuYokzgeNlCoqJNujovSai6R5P091mAfouMLUfDPLX83xAemMkpEd0M="
       install:
         - cd backend
         - pip install -r requirements.txt
