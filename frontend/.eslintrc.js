@@ -6,15 +6,13 @@ module.exports = {
         jest: true
     },
     "extends": [
-        'plugin:react/recommended',
-        "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
     ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 13,
+        "ecmaVersion": 12,
         "sourceType": "module"
     },
     "plugins": [
