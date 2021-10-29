@@ -2,7 +2,7 @@
 
 
 
-## **Member ** <br />
+## **Member**
 
 Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
@@ -16,7 +16,7 @@ Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
 Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
-![ERDiagram](VIDOL-ver2.pdf)
+![ERDiagram](https://user-images.githubusercontent.com/20149216/139463894-0ef22a97-d5a5-4430-8cad-dde421f7e0f1.jpg)
 
 Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
 
@@ -91,15 +91,20 @@ The functionality and requirement for each page are as follows:
 - If user have had an account already, click `find-account-login-button` and redirect to `signin page`.
 - If user wanted to create new account, click `find-account-create-button` and redirect to `signup page`.
 
+#### **2. Main Page**
 
-2. Main Page ('/')
+2-1. Main Page ('/')
+
 - User can check the top 10 idol search rankings in `hottest-idol-tab`
 - User can click one of the idol in the `hottest-idol-tab`. When user clicks one of the idol in the `hottest-idol-tab`, user is redirected to `Search Result Page('/search/:id')`
 - User can click `hottest-idol-tab`. When user clicks `hottest-idol-tab`, user is redirected to `Ranking Page('/rank')`
 - User can type idol search keyword in `search-input` input and click `search-button` button
 - After searching, user can check the search result list
 - User can click one of the search result list. When user clicks one one of the search result list, user is redirected to `Search Result Page('/search/:id')`
-3. Search Result Page ('/search/:id')
+#### **3. Search Result Page**
+
+3-1. Search Result Page ('/search/:id')
+
 - User can see crawled information from Internet, SNS, Youtube and shared indexed video 
 - User can see comments for the corresponding idol
 - If user types content in `comment-input` input and clicks `comment-create` button, a new comment written by the user is posted to the current page
@@ -110,27 +115,16 @@ The functionality and requirement for each page are as follows:
 - After clicking `comment-delete` button, `delete-comment-confirm` pops up
 - After clicking `confirm` button in `delete-comment-confirm`, corresponding comment is deleted
 - User can click `go-video-indexing` button. When user clicks `go-video-indexing` button, user is redirected to `Video Indexing Page('/video')`
-4. Ranking Page ('/rank')
+#### **4. Ranking Page**
+
+4-1. Ranking Page ('/rank')
+
 - Users can check all the idol search rankings
 - User can click one of the idol in the page. When user clicks one of the idol, user is redirected to `Search Result Page('/search/:id')`
 
-5. My Page('/mypage/:id')
+#### 5. **Video Indexing**
 
-- Users can check my activities in `My Page('/mypage/:id')`
-- Users can see their favorite idols list in `List of my idols`
-- When user clicks one of the idol in `List of my idols`, user is redirected to `Search Result Page('/search/:id')`
-- When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page. 
-- Users can see their scraped articles list in `Scraped articles`
-- When user clicks one of the articles in `Scraped articles`, user is redirected to `Search Result Page('/search/:id')` where that article exists
-- When user clicks `delete` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
-- Users can see their comments in `My Comments`
-- When user clicks comment's content, user is redirected to `Search Result Page('/search/:id')`
-
-​	####2. Video Indexing
-
-#### 2. Video Indexing
-
-2-1. Entry Page ('/video')
+5-1. Entry Page ('/video')
 
 | Field name                   | Type                       |
 | ---------------------------- | -------------------------- |
@@ -145,7 +139,7 @@ The functionality and requirement for each page are as follows:
 - Server starts to get the video from the link and index it.
 - If the link is invalid, which means that the format is appropriate but the video is deleted or is private, alert appears and the page does not change.
 
-2-2. Search Idol Page ('/video/search/')
+5-2. Search Idol Page ('/video/search/')
 
 | Field name             | Type   |
 | ---------------------- | ------ |
@@ -164,7 +158,7 @@ The functionality and requirement for each page are as follows:
 - When clicking 'Request support' button, request gets sent to the server.
 - 'Request support' button gets diasbled when once clicked.
 
-2-3. Scene Cut Page ('/video/result')
+5-3. Scene Cut Page ('/video/result')
 
 | Field name                  | Type   |
 | --------------------------- | ------ |
@@ -178,7 +172,7 @@ The functionality and requirement for each page are as follows:
 - If no scene is selected, Save Selected Scenes button is disabled.
 - When clicking Save Selected Scenes button, the video with selected scenes gets downloaded. User can stay at the page and keep editing.
 
-2-4. Extracting Selected Idol Page ('/video/result')
+5-4. Extracting Selected Idol Page ('/video/result')
 
 | Field name                  | Type   |
 | --------------------------- | ------ |
@@ -195,6 +189,20 @@ The functionality and requirement for each page are as follows:
 - When clicking Share Timelines button, the server saves the timeline and matches it to the seleted idol.
 - When sharing process is done, confirm button suggesting moving to the search result page of the idol to check the shared timelines appears.
 
+#### **6. My Page**
+
+6-1. My Page('mypage/:id')
+
+- Users can check my activities in `My Page('/mypage/:id')`
+- Users can see their favorite idols list in `List of my idols`
+- When user clicks one of the idol in `List of my idols`, user is redirected to `Search Result Page('/search/:id')`
+- When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page. 
+- Users can see their scraped articles list in `Scraped articles`
+- When user clicks one of the articles in `Scraped articles`, user is redirected to `Search Result Page('/search/:id')` where that article exists
+- When user clicks `delete` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
+- Users can see their comments in `My Comments`
+- When user clicks comment's content, user is redirected to `Search Result Page('/search/:id')`
+
 ### **Controller** <br />
 
 
@@ -207,13 +215,20 @@ The functionality and requirement for each page are as follows:
 
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
 
+![Frontend Component](https://user-images.githubusercontent.com/20149216/139467203-4e348779-9c88-4585-96a9-157200613508.jpg)
+
 ### **Frontend Algorithms** <br />
 
-
-
-### **Frontend Relations** <br />
-
-
+1. MyPage
+   - onClickBackButton() : Redirect to `Main Page('/')`
+2. FavoriteIdol
+   - onClickCancelIdolButton() : Call backend API(DELETE /:user_id/idols/:idol_id) and redirect to `My Page(/mypage/:id)`
+   - onClickFavoriteIdol() : Redirect to `Search Result Page('/search/:id')` of selected Idol.
+3. Article
+   - onClickDeleteArticleButton(): Call backend API(DELETE /:user_id/articles/:article_id) and redirect to `My Page(/mypage/:id)`
+   - onClickScrapedArticle(): Redirect to `Search Result Page('/search/:id')` of selected article.
+4. MyComment
+   - onClickMyComment(): Redirect to `Search Result Page('/search/:id')` where my comment at. 
 
 ### **Backend Design** <br />
 
