@@ -91,19 +91,33 @@ The functionality and requirement for each page are as follows:
 - If user have had an account already, click `find-account-login-button` and redirect to `signin page`.
 - If user wanted to create new account, click `find-account-create-button` and redirect to `signup page`.
 
-#### **2. Main Page**
+
+#### **2. Search & Ranking**
 
 2-1. Main Page ('/')
 
-- User can check the top 10 idol search rankings in `hottest-idol-tab`
-- User can click one of the idol in the `hottest-idol-tab`. When user clicks one of the idol in the `hottest-idol-tab`, user is redirected to `Search Result Page('/search/:id')`
-- User can click `hottest-idol-tab`. When user clicks `hottest-idol-tab`, user is redirected to `Ranking Page('/rank')`
+| Field name             | Type   |
+| ---------------------- | ------ |
+| go-rank-button         | Button |
+| search-input           | Input  |
+| search-button          | Button |
+
+- User can check the top 10 idol search rankings in `HotRankingList`
+- User can click one of the idol in the `HotRankingList`. When user clicks one of the idol in the `HotRankingList`, user is redirected to `Search Result Page('/search/:id')`
+- User can click `go-rank-button` button. When user clicks `go-rank-button` button, user is redirected to `Ranking Page('/rank')`
 - User can type idol search keyword in `search-input` input and click `search-button` button
 - After searching, user can check the search result list
 - User can click one of the search result list. When user clicks one one of the search result list, user is redirected to `Search Result Page('/search/:id')`
-#### **3. Search Result Page**
 
-3-1. Search Result Page ('/search/:id')
+2-2. Search Result Page ('/search/:id')
+
+| Field name             | Type   |
+| ---------------------- | ------ |
+| comment-input          | Input  |
+| comment-create         | Button |
+| comment-edit           | Button |
+| comment-delete         | Button |
+| go-video-indexing      | Button |
 
 - User can see crawled information from Internet, SNS, Youtube and shared indexed video 
 - User can see comments for the corresponding idol
@@ -112,19 +126,17 @@ The functionality and requirement for each page are as follows:
 - After clicking `comment-edit` button, corresponding comment becomes editable and user can change comment content.
 - After changing comment content, user can click `comment-edit` button and the corresponding comment becomes uneditable
 - If user already wrote a comment, the user can click `comment-delete` button
-- After clicking `comment-delete` button, `delete-comment-confirm` pops up
-- After clicking `confirm` button in `delete-comment-confirm`, corresponding comment is deleted
+- After clicking `comment-delete` button, delete-comment-confirm pops up
+- After clicking "confirm" in delete-comment-confirm, corresponding comment is deleted
 - User can click `go-video-indexing` button. When user clicks `go-video-indexing` button, user is redirected to `Video Indexing Page('/video')`
-#### **4. Ranking Page**
 
-4-1. Ranking Page ('/rank')
-
+2-3. Ranking Page ('/rank')
 - Users can check all the idol search rankings
 - User can click one of the idol in the page. When user clicks one of the idol, user is redirected to `Search Result Page('/search/:id')`
 
-#### 5. **Video Indexing**
+#### 3. **Video Indexing**
 
-5-1. Entry Page ('/video')
+3-1. Entry Page ('/video')
 
 | Field name                   | Type                       |
 | ---------------------------- | -------------------------- |
@@ -139,7 +151,7 @@ The functionality and requirement for each page are as follows:
 - Server starts to get the video from the link and index it.
 - If the link is invalid, which means that the format is appropriate but the video is deleted or is private, alert appears and the page does not change.
 
-5-2. Search Idol Page ('/video/search/')
+3-2. Search Idol Page ('/video/search/')
 
 | Field name             | Type   |
 | ---------------------- | ------ |
@@ -158,7 +170,7 @@ The functionality and requirement for each page are as follows:
 - When clicking 'Request support' button, request gets sent to the server.
 - 'Request support' button gets diasbled when once clicked.
 
-5-3. Scene Cut Page ('/video/result')
+3-3. Scene Cut Page ('/video/result')
 
 | Field name                  | Type   |
 | --------------------------- | ------ |
@@ -172,7 +184,7 @@ The functionality and requirement for each page are as follows:
 - If no scene is selected, Save Selected Scenes button is disabled.
 - When clicking Save Selected Scenes button, the video with selected scenes gets downloaded. User can stay at the page and keep editing.
 
-5-4. Extracting Selected Idol Page ('/video/result')
+3-4. Extracting Selected Idol Page ('/video/result')
 
 | Field name                  | Type   |
 | --------------------------- | ------ |
@@ -189,9 +201,9 @@ The functionality and requirement for each page are as follows:
 - When clicking Share Timelines button, the server saves the timeline and matches it to the seleted idol.
 - When sharing process is done, confirm button suggesting moving to the search result page of the idol to check the shared timelines appears.
 
-#### **6. My Page**
+#### **4. My Page**
 
-6-1. My Page('mypage/:id')
+4-1. My Page('mypage/:id')
 
 - Users can check my activities in `My Page('/mypage/:id')`
 - Users can see their favorite idols list in `List of my idols`
@@ -206,7 +218,6 @@ The functionality and requirement for each page are as follows:
 ### **Controller** <br />
 
 
-
 ---
 
 ## **Design Details** <br />
@@ -214,21 +225,33 @@ The functionality and requirement for each page are as follows:
 ### **Frontend Components** <br />
 
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
-
 ![Frontend Component](https://user-images.githubusercontent.com/20149216/139467203-4e348779-9c88-4585-96a9-157200613508.jpg)
 
 ### **Frontend Algorithms** <br />
-
-1. MyPage
-   - onClickBackButton() : Redirect to `Main Page('/')`
-2. FavoriteIdol
-   - onClickCancelIdolButton() : Call backend API(DELETE /:user_id/idols/:idol_id) and redirect to `My Page(/mypage/:id)`
-   - onClickFavoriteIdol() : Redirect to `Search Result Page('/search/:id')` of selected Idol.
-3. Article
-   - onClickDeleteArticleButton(): Call backend API(DELETE /:user_id/articles/:article_id) and redirect to `My Page(/mypage/:id)`
-   - onClickScrapedArticle(): Redirect to `Search Result Page('/search/:id')` of selected article.
-4. MyComment
-   - onClickMyComment(): Redirect to `Search Result Page('/search/:id')` where my comment at. 
+Algorithms required for implementation are written below, based on their component.
+1. Main
+- `onClickSearchButton()`: User gets the search result of the keyword user typed in `search-input` input
+2. HotRankingList
+- `onClickGoRankButton()`: Redirect to `Ranking Page ('/rank')`
+3. RankItem
+- `onClickName()`: Redirect to `Search Result Page ('/search/:id')`
+4. SearchResult
+- `onClickGoVideoIndexingButton()`: Redirect to `Video Indexing Page ('/video')`
+5. CommentList
+- `onClickCreateCommentButton()`: User creates comment with content user typed in `comment-input` input
+6. Comment
+- `onClickEditButton()`: If comment is not editable, make comment editable. If comment is editable, update comment's content to current content and make comment uneditable
+- `onClickDeleteButton()`: Pops up delete-comment-confirm and if user clicks "confirm", delete the comment.
+7. MyPage
+- `onClickBackButton()` : Redirect to `Main Page('/')`
+8. FavoriteIdol
+- `onClickCancelIdolButton()` : Call backend API(DELETE /:user_id/idols/:idol_id) and redirect to `My Page(/mypage/:id)`
+- `onClickFavoriteIdol()` : Redirect to `Search Result Page('/search/:id')` of selected Idol.
+9. Article
+- `onClickDeleteArticleButton()`: Call backend API(DELETE /:user_id/articles/:article_id) and redirect to `My Page(/mypage/:id)`
+- `onClickScrapedArticle()`: Redirect to `Search Result Page('/search/:id')` of selected article.
+10. MyComment
+- `onClickMyComment()`: Redirect to `Search Result Page('/search/:id')` where my comment at. 
 
 ### **Backend Design** <br />
 
