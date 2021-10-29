@@ -28,7 +28,7 @@ Specifically, Vidol can give the best user experience for those
 
   According to the rapid growth of the K-pop idol market, many idol businesses and services are launched for fans of idols such as IDOLPICK, IDOL Live, and Choi-Ae-dol in south Korea. Their service provides some information about specific idols and some participatory features such as quiz or schedulers.
  </br>
-![Competitive Landscape](vidol_landscape.png)
+![Competitive Landscape](https://user-images.githubusercontent.com/20149216/139473583-8ef299ac-189a-46e2-9926-8d44fcd42770.png)
   In our service, VIDOL, we could be a game-changer of the K-pop idol market through special features and distinctive ideas.
  </br>
   First, VIDOL offers higher user engagement than the others. Users can leave comments on all content in VIDOL. It means that users can express their opinions free and participate in the complimentary discussion. The function of extracting video clips from the original also improves user engagement. Users who want to get their video clips from which their favorite idols come out. It could be the most famous and innovative idea in this market.
