@@ -6,9 +6,13 @@
 
 Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
+---
+
+
+
 ## **System Architecture** <br />
 
-## **Model** <br />
+### **Model** <br />
 
 Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
@@ -16,12 +20,15 @@ Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
 Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
 
-## **View**<br />
+### **View** <br />
 
 User interface for our view design is as follows:
 ![UI Specification](https://user-images.githubusercontent.com/52434833/137576862-bdc16bab-3fec-4d32-b677-04bae43652b8.jpg)
 
-## 1. Login
+The functionality and requirement for each page are as follows:
+
+#### 1. Login
+
 1-1. Signin Page ('/sign/login')
 
 | Field name  | Type |
@@ -119,16 +126,17 @@ User interface for our view design is as follows:
 - Users can see their comments in `My Comments`
 - When user clicks comment's content, user is redirected to `Search Result Page('/search/:id')`
 
-## **Frontend Components**<br />
-Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
+​	####2. Video Indexing
 
-## Video Indexing
-1-1. Entry Page ('/video')
-| Field name  | Type |
-| ------------- | ------------- |
-| Video link  | YouTube video link (regex) |
-| Cut Scenes Button | Button  |
-| Extract my idol parts button  | Button  |
+#### 2. Video Indexing
+
+2-1. Entry Page ('/video')
+
+| Field name                   | Type                       |
+| ---------------------------- | -------------------------- |
+| Video link                   | YouTube video link (regex) |
+| Cut Scenes Button            | Button                     |
+| Extract my idol parts button | Button                     |
 
 - User can type the link of the video to get indexed.
 - If typing nothing or link with wrong format, the buttons are disabled.
@@ -137,14 +145,14 @@ Tables below are the frontend components. The attributes and the methods of each
 - Server starts to get the video from the link and index it.
 - If the link is invalid, which means that the format is appropriate but the video is deleted or is private, alert appears and the page does not change.
 
-1-2. Search Idol Page ('/video/search/')
+2-2. Search Idol Page ('/video/search/')
 
-| Field name  | Type |
-| ------------- | ------------- |
-| Search input  | text |
-| Search button  | Button |
-| Search result button  | Button |
-| Request support button  | Button  |
+| Field name             | Type   |
+| ---------------------- | ------ |
+| Search input           | text   |
+| Search button          | Button |
+| Search result button   | Button |
+| Request support button | Button |
 
 - User can type the name of the idol trying to get parts of. 
 - If user types nothing, search button is disabled.
@@ -156,12 +164,12 @@ Tables below are the frontend components. The attributes and the methods of each
 - When clicking 'Request support' button, request gets sent to the server.
 - 'Request support' button gets diasbled when once clicked.
 
-1-3. Scene Cut Page ('/video/result')
+2-3. Scene Cut Page ('/video/result')
 
-| Field name  | Type |
-| ------------- | ------------- |
-| Save Selected Scenes Button  | Button |
-| Scene  | Button  |
+| Field name                  | Type   |
+| --------------------------- | ------ |
+| Save Selected Scenes Button | Button |
+| Scene                       | Button |
 
 - Users can see the timeline of the video indexed with scene changes.
 - Users can click each scene to include or exclude it in the final video.
@@ -170,13 +178,13 @@ Tables below are the frontend components. The attributes and the methods of each
 - If no scene is selected, Save Selected Scenes button is disabled.
 - When clicking Save Selected Scenes button, the video with selected scenes gets downloaded. User can stay at the page and keep editing.
 
-1-4. Extracting Selected Idol Page ('/video/result')
+2-4. Extracting Selected Idol Page ('/video/result')
 
-| Field name  | Type |
-| ------------- | ------------- |
-| Save Selected Scenes Button  | Button |
-| Share Timelines Button | Button |
-| Scene  | Button  |
+| Field name                  | Type   |
+| --------------------------- | ------ |
+| Save Selected Scenes Button | Button |
+| Share Timelines Button      | Button |
+| Scene                       | Button |
 
 - Users can see the timeline of the video indexed with the selected idol.
 - Users can click each scene to include or exclude it in the final video.
@@ -186,3 +194,42 @@ Tables below are the frontend components. The attributes and the methods of each
 - When clicking Save Selected Scenes button, the video with selected scenes gets downloaded. User can stay at the page and keep editing.
 - When clicking Share Timelines button, the server saves the timeline and matches it to the seleted idol.
 - When sharing process is done, confirm button suggesting moving to the search result page of the idol to check the shared timelines appears.
+
+### **Controller** <br />
+
+
+
+---
+
+## **Design Details** <br />
+
+### **Frontend Components** <br />
+
+Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
+
+### **Frontend Algorithms** <br />
+
+
+
+### **Frontend Relations** <br />
+
+
+
+### **Backend Design** <br />
+
+---
+
+
+
+## Implementation Plan
+
+---
+
+
+
+## Testing Plan
+
+
+
+
+
