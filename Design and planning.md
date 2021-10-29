@@ -91,15 +91,34 @@ The functionality and requirement for each page are as follows:
 - If user have had an account already, click `find-account-login-button` and redirect to `signin page`.
 - If user wanted to create new account, click `find-account-create-button` and redirect to `signup page`.
 
+#### 2. Search & Ranking
 
-2. Main Page ('/')
-- User can check the top 10 idol search rankings in `hottest-idol-tab`
-- User can click one of the idol in the `hottest-idol-tab`. When user clicks one of the idol in the `hottest-idol-tab`, user is redirected to `Search Result Page('/search/:id')`
-- User can click `hottest-idol-tab`. When user clicks `hottest-idol-tab`, user is redirected to `Ranking Page('/rank')`
+2-1. Main Page ('/')
+
+| Field name             | Type   |
+| ---------------------- | ------ |
+| go-rank-button         | Button |
+| search-input           | Input  |
+| search-button          | Button |
+
+- User can check the top 10 idol search rankings in `HotRankingList`
+- User can click one of the idol in the `HotRankingList`. When user clicks one of the idol in the `HotRankingList`, user is redirected to `Search Result Page('/search/:id')`
+- User can click `go-rank-button` button. When user clicks `go-rank-button` button, user is redirected to `Ranking Page('/rank')`
 - User can type idol search keyword in `search-input` input and click `search-button` button
 - After searching, user can check the search result list
 - User can click one of the search result list. When user clicks one one of the search result list, user is redirected to `Search Result Page('/search/:id')`
-3. Search Result Page ('/search/:id')
+
+2-2. Search Result Page ('/search/:id')
+
+| Field name             | Type   |
+| ---------------------- | ------ |
+| comment-input          | Input  |
+| comment-create         | Button |
+| comment-edit           | Button |
+| comment-delete         | Button |
+| delete-comment-confirm | Confirm|
+| go-video-indexing      | Button |
+
 - User can see crawled information from Internet, SNS, Youtube and shared indexed video 
 - User can see comments for the corresponding idol
 - If user types content in `comment-input` input and clicks `comment-create` button, a new comment written by the user is posted to the current page
@@ -110,7 +129,8 @@ The functionality and requirement for each page are as follows:
 - After clicking `comment-delete` button, `delete-comment-confirm` pops up
 - After clicking `confirm` button in `delete-comment-confirm`, corresponding comment is deleted
 - User can click `go-video-indexing` button. When user clicks `go-video-indexing` button, user is redirected to `Video Indexing Page('/video')`
-4. Ranking Page ('/rank')
+
+2-3. Ranking Page ('/rank')
 - Users can check all the idol search rankings
 - User can click one of the idol in the page. When user clicks one of the idol, user is redirected to `Search Result Page('/search/:id')`
 
@@ -128,9 +148,9 @@ The functionality and requirement for each page are as follows:
 
 ​	####2. Video Indexing
 
-#### 2. Video Indexing
+#### 3. Video Indexing
 
-2-1. Entry Page ('/video')
+3-1. Entry Page ('/video')
 
 | Field name                   | Type                       |
 | ---------------------------- | -------------------------- |
@@ -145,7 +165,7 @@ The functionality and requirement for each page are as follows:
 - Server starts to get the video from the link and index it.
 - If the link is invalid, which means that the format is appropriate but the video is deleted or is private, alert appears and the page does not change.
 
-2-2. Search Idol Page ('/video/search/')
+3-2. Search Idol Page ('/video/search/')
 
 | Field name             | Type   |
 | ---------------------- | ------ |
@@ -164,7 +184,7 @@ The functionality and requirement for each page are as follows:
 - When clicking 'Request support' button, request gets sent to the server.
 - 'Request support' button gets diasbled when once clicked.
 
-2-3. Scene Cut Page ('/video/result')
+3-3. Scene Cut Page ('/video/result')
 
 | Field name                  | Type   |
 | --------------------------- | ------ |
@@ -178,7 +198,7 @@ The functionality and requirement for each page are as follows:
 - If no scene is selected, Save Selected Scenes button is disabled.
 - When clicking Save Selected Scenes button, the video with selected scenes gets downloaded. User can stay at the page and keep editing.
 
-2-4. Extracting Selected Idol Page ('/video/result')
+3-4. Extracting Selected Idol Page ('/video/result')
 
 | Field name                  | Type   |
 | --------------------------- | ------ |
