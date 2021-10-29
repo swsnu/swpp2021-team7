@@ -167,3 +167,38 @@ Tables below are the frontend components. The attributes and the methods of each
 - When clicking Save Selected Scenes button, the video with selected scenes gets downloaded. User can stay at the page and keep editing.
 - When clicking Share Timelines button, the server saves the timeline and matches it to the seleted idol.
 - When sharing process is done, confirm button suggesting moving to the search result page of the idol to check the shared timelines appears.
+
+## **Frontend Algorithms**<br />
+Algorithms required for implementation are written below, based on their component.
+
+nn. VideoIndexingEntry
+- `onClickCutScenes`: Redirect to Scene Cut Result page (/video/result)
+- `onClickExtractIdol`: Redirect to Search Idol page for video indexing (/video/search)
+
+nn. SearchIdolForVideo
+- `onClickSearch`: 
+
+nn. SearchResultForVideo
+- `onClickIdol`:
+- `onClickRequest`:
+
+nn. SceneCutResult
+- `onClickSaveSelected`:
+
+nn. ExtractIdolResult
+- `onClickShareTimelines`:
+- `onClickSaveSelected`:
+
+nn. IndexedVideo:
+- `onClickScene`:
+
+
+## **Frontend Relations**<br />
+Relations between components listed above are as follows:
+
+## **Backend Design**<br />
+In the backend design, we use models which have been discussed in the MVC architecture sections.
+Detailed specifications of RESTful APIs are as following:
+
+
+
