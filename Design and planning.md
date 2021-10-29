@@ -228,6 +228,20 @@ The functionality and requirement for each page are as follows:
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
 
 ### **Frontend Algorithms** <br />
+Algorithms required for implementation are written below, based on their component.
+1. Main
+- `onClickSearchButton()`: User gets the search result of the keyword user typed in `search-input` input
+2. HotRankingList
+- `onClickGoRankButton()`: Redirect to Ranking Page ('/rank')
+3. RankItem
+- `onClickName()`: Redirect to Search Result Page ('/search/:id')
+4. SearchResult
+- `onClickGoVideoIndexingButton()`: Redirect to Video Indexing Page ('/video')
+5. CommentList
+- `onClickCreateCommentButton()`: User creates comment with content user typed in `comment-input` input
+6. Comment
+- `onClickEditButton()`: If comment is not editable, make comment editable. If comment is editable, update comment's content to current content and make comment uneditable
+- `onClickDeleteButton()`: Pops up delete-comment-confirm and if user clicks "confirm", delete the comment.
 
 
 
