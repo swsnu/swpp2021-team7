@@ -140,28 +140,28 @@ Specifically, Vidol can give the best user experience for those
 
 ### 2. Ranking
 
-#### 2.1 Ranking in `Hottest idol tab`
+#### 2.1 Ranking in `HotRankingList`
 
 - Meta specs
 
   | Index        | Content                                                      |
   | ------------ | :----------------------------------------------------------- |
-  | FeatureName  | User can click each idol in `Hottest idol tab` and be redirected to `Search Result Page('/search/:id')` |
+  | FeatureName  | User can click each idol in `HotRankingList` and be redirected to `Search Result Page('/search/:id')` |
   | Actors       | User                                                         |
   | Precondition | User is on `Main Page('/')`                                  |
 
 - Scenario
 
   - **GIVEN** the User is on `Main Page('/')`
-  - **WHEN** the User clicks one of the idols in `Hottest idol tab`
+  - **WHEN** the User clicks one of the idols in `HotRankingList`
   - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing idol information
 
 - Acceptance test
-  - **GIVEN** the User is on `Main Page('/')` and there is "IU" in `Hottest idol tab`
-  - **WHEN** the User clicks "IU" in `Hottest idol tab`
+  - **GIVEN** the User is on `Main Page('/')` and there is "IU" in `HotRankingList`
+  - **WHEN** the User clicks "IU" in `HotRankingList`
   - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing "IU" information
 
-#### 2.1 Move to Ranking Page
+#### 2.2 Move to Ranking Page
 
 - Meta specs
 
@@ -174,12 +174,12 @@ Specifically, Vidol can give the best user experience for those
 - Scenario
 
   - **GIVEN** the User is on `Main Page('/')`
-  - **WHEN** the User clicks `Hottest idol tab`
+  - **WHEN** the User clicks `go-rank-button` button
   - **THEN** the User shuold be redirected to `Ranking Page('/rank')`
 
 - Acceptance test
   - **GIVEN** the User is on `Main Page('/')`
-  - **WHEN** the User clicks `Hottest idol tab`
+  - **WHEN** the User clicks `go-rank-button` button
   - **THEN** the User shuold be redirected to to `Ranking Page('/rank')`
 
 ---
