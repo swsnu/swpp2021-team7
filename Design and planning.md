@@ -251,7 +251,22 @@ Algorithms required for implementation are written below, based on their compone
 - `onClickDeleteArticleButton()`: Call backend API(DELETE /:user_id/articles/:article_id) and redirect to `My Page(/mypage/:id)`
 - `onClickScrapedArticle()`: Redirect to `Search Result Page('/search/:id')` of selected article.
 10. MyComment
-- `onClickMyComment()`: Redirect to `Search Result Page('/search/:id')` where my comment at. 
+- `onClickMyComment()`: Redirect to `Search Result Page('/search/:id')` where my comment at.
+11. VideoIndexingEntry
+- `onClickCutScenes`: Call backend API (POST /video/scene) and redirect to Scene Cut Result page (/video/result) when getting response.
+- `onClickExtractIdol`: Redirect to Search Idol page for video indexing (/video/search)
+12. SearchIdolForVideo
+- `onClickSearch`: Call backend API (GET /video/search/:keyword) and update search result.
+13. SearchResultForVideo
+- `onClickIdol`: Call backend API (POST /video/idol) and redirect to Extract Idol Result page (/video/result) when getting response.
+- `onClickRequest`: Call backend API (POST /video/request).
+14. SceneCutResult
+- `onClickSaveSelected`: Call backend API (POST /video/save).
+15. ExtractIdolResult
+- `onClickShareTimelines`: Call backend API (POST /video/share).
+- `onClickSaveSelected`: Call backend API (POST /video/save).
+16. IndexedVideo:
+- `onClickScene`: Add the scene to selected scenes if the scene is not selected. Remove the scene from selected scenes if it is already seleted. In both cases, play the scene.
 
 ### **Backend Design** <br />
 
@@ -266,8 +281,6 @@ Algorithms required for implementation are written below, based on their compone
 
 
 ## Testing Plan
-
-
 
 
 
