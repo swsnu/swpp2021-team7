@@ -16,7 +16,7 @@ Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
 Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
-![ERDiagram](VIDOL-ver2-1.jpg)
+![ERDiagram](https://user-images.githubusercontent.com/20149216/139463894-0ef22a97-d5a5-4430-8cad-dde421f7e0f1.jpg)
 
 Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
 
@@ -215,7 +215,7 @@ The functionality and requirement for each page are as follows:
 
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
 
-![Frontend Component](/Users/eunbin/VSCode/swpp2021-team7/frontend_component.jpg)
+![Frontend Component](https://user-images.githubusercontent.com/20149216/139463670-22b0e567-3329-4344-82c2-dbabf30ae8b3.jpg)
 
 ### **Frontend Algorithms** <br />
 
