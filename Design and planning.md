@@ -116,7 +116,6 @@ The functionality and requirement for each page are as follows:
 | comment-create         | Button |
 | comment-edit           | Button |
 | comment-delete         | Button |
-| delete-comment-confirm | Confirm|
 | go-video-indexing      | Button |
 
 - User can see crawled information from Internet, SNS, Youtube and shared indexed video 
@@ -126,8 +125,8 @@ The functionality and requirement for each page are as follows:
 - After clicking `comment-edit` button, corresponding comment becomes editable and user can change comment content.
 - After changing comment content, user can click `comment-edit` button and the corresponding comment becomes uneditable
 - If user already wrote a comment, the user can click `comment-delete` button
-- After clicking `comment-delete` button, `delete-comment-confirm` pops up
-- After clicking `confirm` button in `delete-comment-confirm`, corresponding comment is deleted
+- After clicking `comment-delete` button, delete-comment-confirm pops up
+- After clicking "confirm" in delete-comment-confirm, corresponding comment is deleted
 - User can click `go-video-indexing` button. When user clicks `go-video-indexing` button, user is redirected to `Video Indexing Page('/video')`
 
 2-3. Ranking Page ('/rank')
