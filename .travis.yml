@@ -1,0 +1,30 @@
+# CI Environment
+dist: bionic
+
+# Job Configurations
+jobs:
+  include:
+    - language: python
+      python: "3.7.9"
+      addons:
+        sonarcloud:
+          organization: swsnu
+          token: 
+            secure: "i1ge1XaZE74ld3rWtTurdJrGcNYqRwC5+omD8TNyZmmHoY0rY7TmX5hJF+qR2Xiz8sYxCcazFfvkShFun2BKswh/TVqSZ04ELpCAfS1Ujjfhn8bM0/7xXLjASCbdOVaGk1cI4SjCblx0T4VWanNdRg7/pddzvNz/LujFEq/0o2JmYPCIPY6XRdFuDjRoCBvsXZGB4jXdN0JH8siV+JG3MMjb7d7GD5L6uPu1uHRhbP/FGJBCN4/JBGZw8vg8E4qxXD92r76cEaDjimiArCO93gATIo8slYVsZ47wiU4iHiLKKK0DQo0tNJHWnBoRhzZapZ9ZUn867rcaffYooVkY3MZb6s4d4kdK56QcPpHJhrg9hDz5krxOwE2OAKVsD/R5FKTnvsElC69sWDeqOU+kqtgVk+mNHtkSQy1cQXWpj/1M7ARG39Hb5724K8VBIOGEDkM7i9YHcyITkrKNYf/zq/wgrqDw5m29G6RXaoc4HuhSQdcpHf3Q1NFq6JC4djuFyaAEVe9Bt2po/Q+8Z5qzJPH4Oe6J4JOZBmk3JhZcKPSxoJpo58pcPKTB19fRjditjqP7YxyT8S8Nt6yZmyFRRcmWvVjWQe8HgNCOe7dz7LjA0oFmjqePH3lBmn6bNLmIlyY65gVpFK9+8uN6jTUcY61pN10Y/mqwQd9k+PKUpPM="
+      install:
+        - cd backend
+        - pip install -r requirements.txt
+      script:
+        - pylint **/*.py --load-plugins pylint_django
+        - coverage run --source='.' manage.py test
+        - coverage xml
+        - cd .. && sonar-scanner
+        
+    - language: node_js
+      node_js: 14.17.0
+      install:
+        - cd frontend
+        - yarn install
+      script:
+        - ./node_modules/.bin/eslint src
+        - yarn test --coverage --watchAll=false

@@ -1,3 +1,9 @@
+# Vidol
+---
+## Badges
+[![Build Status](https://travis-ci.com/swsnu/swpp2021-team7.svg?branch=main)](https://travis-ci.com/swsnu/swpp2021-team7)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=swsnu_swpp2021-team7&metric=alert_status)](https://sonarcloud.io/dashboard?id=swsnu_swpp2021-team7)
+---
 # Project Abstract
 Vidol is a K-POP-related web service that helps idol fans enjoy their favorite idols' contents much more diversely. and conveniently. There are two main problems idol fans encounter when following up on K-POP content: they are so scattered and it is extremely hard to exclude unwanted parts in video content. Therefore, Vidol provides two main features: serving integrated data and extracting user-wanted parts in videos.<br/><br/>Vidol collects and processes data of idols in advance by crawling. With the well-organized data we provide, users can follow up updates of their favorites easily. All users need to do is just typing the name of idols. It is the same in video indexing services. When users input the video URL and the idol they want to extract parts of, with machine learning, Vidol scans the video and index it either by scene change or appearing figures. With the result, users can recreate content by saving and editing it.<br/><br/>Our goal is to boost K-POP fanship culture up by enabling efficient content consumption and recreation. As K-POP market is growing and Vidol itself promotes creating content, the importance and the utility of Vidol would get more significant over time.
 
@@ -134,28 +140,28 @@ Specifically, Vidol can give the best user experience for those
 
 ### 2. Ranking
 
-#### 2.1 Ranking in `Hottest idol tab`
+#### 2.1 Ranking in `HotRankingList`
 
 - Meta specs
 
   | Index        | Content                                                      |
   | ------------ | :----------------------------------------------------------- |
-  | FeatureName  | User can click each idol in `Hottest idol tab` and be redirected to `Search Result Page('/search/:id')` |
+  | FeatureName  | User can click each idol in `HotRankingList` and be redirected to `Search Result Page('/search/:id')` |
   | Actors       | User                                                         |
   | Precondition | User is on `Main Page('/')`                                  |
 
 - Scenario
 
   - **GIVEN** the User is on `Main Page('/')`
-  - **WHEN** the User clicks one of the idols in `Hottest idol tab`
+  - **WHEN** the User clicks one of the idols in `HotRankingList`
   - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing idol information
 
 - Acceptance test
-  - **GIVEN** the User is on `Main Page('/')` and there is "IU" in `Hottest idol tab`
-  - **WHEN** the User clicks "IU" in `Hottest idol tab`
+  - **GIVEN** the User is on `Main Page('/')` and there is "IU" in `HotRankingList`
+  - **WHEN** the User clicks "IU" in `HotRankingList`
   - **THEN** the User shuold be redirected to `Search Result Page('/search/:id')` containing "IU" information
 
-#### 2.1 Move to Ranking Page
+#### 2.2 Move to Ranking Page
 
 - Meta specs
 
@@ -168,12 +174,12 @@ Specifically, Vidol can give the best user experience for those
 - Scenario
 
   - **GIVEN** the User is on `Main Page('/')`
-  - **WHEN** the User clicks `Hottest idol tab`
+  - **WHEN** the User clicks `go-rank-button` button
   - **THEN** the User shuold be redirected to `Ranking Page('/rank')`
 
 - Acceptance test
   - **GIVEN** the User is on `Main Page('/')`
-  - **WHEN** the User clicks `Hottest idol tab`
+  - **WHEN** the User clicks `go-rank-button` button
   - **THEN** the User shuold be redirected to to `Ranking Page('/rank')`
 
 ---
