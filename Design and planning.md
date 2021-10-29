@@ -2,7 +2,7 @@
 
 
 
-## **Member ** <br />
+## **Member**
 
 Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
@@ -16,7 +16,7 @@ Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
 Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
-![ERDiagram](VIDOL-ver2.pdf)
+![ERDiagram](https://user-images.githubusercontent.com/20149216/139463894-0ef22a97-d5a5-4430-8cad-dde421f7e0f1.jpg)
 
 Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
 
@@ -91,7 +91,8 @@ The functionality and requirement for each page are as follows:
 - If user have had an account already, click `find-account-login-button` and redirect to `signin page`.
 - If user wanted to create new account, click `find-account-create-button` and redirect to `signup page`.
 
-#### 2. Search & Ranking
+
+#### **2. Search & Ranking**
 
 2-1. Main Page ('/')
 
@@ -133,21 +134,7 @@ The functionality and requirement for each page are as follows:
 - Users can check all the idol search rankings
 - User can click one of the idol in the page. When user clicks one of the idol, user is redirected to `Search Result Page('/search/:id')`
 
-5. My Page('/mypage/:id')
-
-- Users can check my activities in `My Page('/mypage/:id')`
-- Users can see their favorite idols list in `List of my idols`
-- When user clicks one of the idol in `List of my idols`, user is redirected to `Search Result Page('/search/:id')`
-- When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page. 
-- Users can see their scraped articles list in `Scraped articles`
-- When user clicks one of the articles in `Scraped articles`, user is redirected to `Search Result Page('/search/:id')` where that article exists
-- When user clicks `delete` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
-- Users can see their comments in `My Comments`
-- When user clicks comment's content, user is redirected to `Search Result Page('/search/:id')`
-
-​	####2. Video Indexing
-
-#### 3. Video Indexing
+#### 3. **Video Indexing**
 
 3-1. Entry Page ('/video')
 
@@ -214,8 +201,21 @@ The functionality and requirement for each page are as follows:
 - When clicking Share Timelines button, the server saves the timeline and matches it to the seleted idol.
 - When sharing process is done, confirm button suggesting moving to the search result page of the idol to check the shared timelines appears.
 
-### **Controller** <br />
+#### **4. My Page**
 
+4-1. My Page('mypage/:id')
+
+- Users can check my activities in `My Page('/mypage/:id')`
+- Users can see their favorite idols list in `List of my idols`
+- When user clicks one of the idol in `List of my idols`, user is redirected to `Search Result Page('/search/:id')`
+- When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page. 
+- Users can see their scraped articles list in `Scraped articles`
+- When user clicks one of the articles in `Scraped articles`, user is redirected to `Search Result Page('/search/:id')` where that article exists
+- When user clicks `delete` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
+- Users can see their comments in `My Comments`
+- When user clicks comment's content, user is redirected to `Search Result Page('/search/:id')`
+
+### **Controller** <br />
 
 
 ---
@@ -225,28 +225,33 @@ The functionality and requirement for each page are as follows:
 ### **Frontend Components** <br />
 
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
+![Frontend Component](https://user-images.githubusercontent.com/20149216/139467203-4e348779-9c88-4585-96a9-157200613508.jpg)
 
 ### **Frontend Algorithms** <br />
 Algorithms required for implementation are written below, based on their component.
 1. Main
 - `onClickSearchButton()`: User gets the search result of the keyword user typed in `search-input` input
 2. HotRankingList
-- `onClickGoRankButton()`: Redirect to Ranking Page ('/rank')
+- `onClickGoRankButton()`: Redirect to `Ranking Page ('/rank')`
 3. RankItem
-- `onClickName()`: Redirect to Search Result Page ('/search/:id')
+- `onClickName()`: Redirect to `Search Result Page ('/search/:id')`
 4. SearchResult
-- `onClickGoVideoIndexingButton()`: Redirect to Video Indexing Page ('/video')
+- `onClickGoVideoIndexingButton()`: Redirect to `Video Indexing Page ('/video')`
 5. CommentList
 - `onClickCreateCommentButton()`: User creates comment with content user typed in `comment-input` input
 6. Comment
 - `onClickEditButton()`: If comment is not editable, make comment editable. If comment is editable, update comment's content to current content and make comment uneditable
 - `onClickDeleteButton()`: Pops up delete-comment-confirm and if user clicks "confirm", delete the comment.
-
-
-
-### **Frontend Relations** <br />
-
-
+7. MyPage
+- `onClickBackButton()` : Redirect to `Main Page('/')`
+8. FavoriteIdol
+- `onClickCancelIdolButton()` : Call backend API(DELETE /:user_id/idols/:idol_id) and redirect to `My Page(/mypage/:id)`
+- `onClickFavoriteIdol()` : Redirect to `Search Result Page('/search/:id')` of selected Idol.
+9. Article
+- `onClickDeleteArticleButton()`: Call backend API(DELETE /:user_id/articles/:article_id) and redirect to `My Page(/mypage/:id)`
+- `onClickScrapedArticle()`: Redirect to `Search Result Page('/search/:id')` of selected article.
+10. MyComment
+- `onClickMyComment()`: Redirect to `Search Result Page('/search/:id')` where my comment at. 
 
 ### **Backend Design** <br />
 
