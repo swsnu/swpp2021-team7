@@ -2,7 +2,7 @@
 
 
 
-## **Member ** <br />
+## **Member**
 
 Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
@@ -215,11 +215,20 @@ The functionality and requirement for each page are as follows:
 
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
 
-![Frontend Component](https://user-images.githubusercontent.com/20149216/139463670-22b0e567-3329-4344-82c2-dbabf30ae8b3.jpg)
+![Frontend Component](https://user-images.githubusercontent.com/20149216/139467203-4e348779-9c88-4585-96a9-157200613508.jpg)
 
 ### **Frontend Algorithms** <br />
 
-
+1. MyPage
+   - onClickBackButton() : Redirect to `Main Page('/')`
+2. FavoriteIdol
+   - onClickCancelIdolButton() : Call backend API(DELETE /:user_id/idols/:idol_id) and redirect to `My Page(/mypage/:id)`
+   - onClickFavoriteIdol() : Redirect to `Search Result Page('/search/:id')` of selected Idol.
+3. Article
+   - onClickDeleteArticleButton(): Call backend API(DELETE /:user_id/articles/:article_id) and redirect to `My Page(/mypage/:id)`
+   - onClickScrapedArticle(): Redirect to `Search Result Page('/search/:id')` of selected article.
+4. MyComment
+   - onClickMyComment(): Redirect to `Search Result Page('/search/:id')` where my comment at. 
 
 ### **Backend Design** <br />
 
