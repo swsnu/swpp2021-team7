@@ -172,25 +172,25 @@ Tables below are the frontend components. The attributes and the methods of each
 Algorithms required for implementation are written below, based on their component.
 
 nn. VideoIndexingEntry
-- `onClickCutScenes`: Redirect to Scene Cut Result page (/video/result)
+- `onClickCutScenes`: Call backend API (POST /video/scene) and redirect to Scene Cut Result page (/video/result) when getting response.
 - `onClickExtractIdol`: Redirect to Search Idol page for video indexing (/video/search)
 
 nn. SearchIdolForVideo
-- `onClickSearch`: 
+- `onClickSearch`: Call backend API (GET /video/search/:keyword) and update search result.
 
 nn. SearchResultForVideo
-- `onClickIdol`:
-- `onClickRequest`:
+- `onClickIdol`: Call backend API (POST /video/idol) and redirect to Extract Idol Result page (/video/result) when getting response.
+- `onClickRequest`: Call backend API (POST /video/request).
 
 nn. SceneCutResult
-- `onClickSaveSelected`:
+- `onClickSaveSelected`: Call backend API (POST /video/save).
 
 nn. ExtractIdolResult
-- `onClickShareTimelines`:
-- `onClickSaveSelected`:
+- `onClickShareTimelines`: Call backend API (POST /video/share).
+- `onClickSaveSelected`: Call backend API (POST /video/save).
 
 nn. IndexedVideo:
-- `onClickScene`:
+- `onClickScene`: Add the scene to selected scenes if the scene is not selected. Remove the scene from selected scenes if it is already seleted. In both cases, play the scene.
 
 
 ## **Frontend Relations**<br />
@@ -199,6 +199,5 @@ Relations between components listed above are as follows:
 ## **Backend Design**<br />
 In the backend design, we use models which have been discussed in the MVC architecture sections.
 Detailed specifications of RESTful APIs are as following:
-
 
 
