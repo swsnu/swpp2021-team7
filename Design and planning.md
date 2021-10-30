@@ -8,8 +8,6 @@ Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
 ---
 
-
-
 ## **System Architecture** <br />
 
 ### **Model** <br />
@@ -291,7 +289,22 @@ TBD
 
 ## Testing Plan
 
-TBD
+All tests will be conducted automatically with the testing frameworks specified below. This strategy will ensure more robust and safer codes along the entire project sprints.
 
+**Unit Testing**
+Every component and module needs to be unit tested before being commited. Code coverage will be kept over 90%. External components(database, JSON requests, etc.) will be mocked in the unit test. 
 
+Frontend (React): Jest, Enzyme 
+
+Backend (Django): Python Unit Test
+
+**Functional Testing**
+Every API will be tested with Jest/Enzyme and Python Unit Test. Our models will be mocked for API tests. 
+
+Frontend (React): Jest, Enzyme 
+
+Backend (Django): Python Unit Test
+
+**Acceptance & Integration Testing**
+We will use Travis CI for the continuous integration and SonarCloud for code quality static analysis. 
 
