@@ -14,14 +14,15 @@ Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
 Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
-![ERDiagram](https://user-images.githubusercontent.com/20149216/139517075-db5e3ad6-497e-4547-aecc-506260d69c25.png)
+![ERDiagram]
 
 Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
 
 ### **View** <br />
 
 User interface for our view design is as follows:
-![UI Specification](https://user-images.githubusercontent.com/52434833/137576862-bdc16bab-3fec-4d32-b677-04bae43652b8.jpg)
+![swpp wireframe (2)](https://user-images.githubusercontent.com/35980235/139518374-84222e1c-cb50-41a2-b6a3-0868c5fd650d.jpg)
+
 
 The functionality and requirement for each page are as follows:
 
@@ -111,6 +112,8 @@ The functionality and requirement for each page are as follows:
 
 | Field name             | Type   |
 | ---------------------- | ------ |
+| idol-like              | Button |
+| scrap                  | Button |
 | comment-input          | Input  |
 | comment-create         | Button |
 | comment-edit           | Button |
@@ -118,6 +121,10 @@ The functionality and requirement for each page are as follows:
 | go-video-indexing      | Button |
 
 - User can see crawled information from Internet, SNS, Youtube and shared indexed video 
+- User can click `idol-like` button
+- After clicking `idol-like` button, current idol member or group is saved in My Page
+- User can click `scrap` button
+- After clicking `scrap` button, corresponding article address is saved in My Page
 - User can see comments for the corresponding idol
 - If user types content in `comment-input` input and clicks `comment-create` button, a new comment written by the user is posted to the current page
 - If user already wrote a comment, the user can click `comment-edit` button
@@ -222,62 +229,63 @@ The functionality and requirement for each page are as follows:
 
 ### **Controller** <br />
 
-![controller](https://user-images.githubusercontent.com/20149216/139517190-b398d671-edcc-4179-80d5-8125eae75159.jpg)
+![swpp wireframe (3)](https://user-images.githubusercontent.com/35980235/139518534-025dfb8c-471f-498b-82bd-789b0f47d67e.jpg)
 
-
----
 
 ## **Design Details** <br />
 
 ### **Frontend Components** <br />
 
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
-![frontend_component](https://user-images.githubusercontent.com/20149216/139517242-e0277705-147f-40c2-afa4-03afb122b34e.jpg)
+![swpp wireframe (1)](https://user-images.githubusercontent.com/35980235/139518546-e6734b7c-0f3d-4747-9a14-37f2fdee8608.jpg)
 
 ### **Frontend Algorithms** <br />
 Algorithms required for implementation are written below, based on their component.
 1. Main
-- `onClickSearchButton()`: User gets the search result of the keyword user typed in `search-input` input
+- `onClickSearchButton()`: Call backend API(GET /api/search/:keyword)
 2. HotRankingList
 - `onClickGoRankButton()`: Redirect to `Ranking Page ('/rank')`
 3. RankItem
 - `onClickName()`: Redirect to `Search Result Page ('/search/:id')`
 4. SearchResult
 - `onClickGoVideoIndexingButton()`: Redirect to `Video Indexing Page ('/video')`
+- `onClickIdolLikeButton()` : Call backend API(POST /:user_id/idols/:idol_id)
 5. CommentList
-- `onClickCreateCommentButton()`: User creates comment with content user typed in `comment-input` input
+- `onClickCreateCommentButton()`: Call backend API(POST /api/comment/member/:member_id or POST /api/comment/group/:group_id)
 6. Comment
-- `onClickEditButton()`: If comment is not editable, make comment editable. If comment is editable, update comment's content to current content and make comment uneditable
-- `onClickDeleteButton()`: Pops up delete-comment-confirm and if user clicks "confirm", delete the comment.
-7. MyPage
+- `onClickEditButton()`: If comment is not editable, make comment editable. If comment is editable, call backend API(PUT /api/comment/:comment_id/member/:member_id or PUT /api/comment/:comment_id/group/:group_id)
+- `onClickDeleteButton()`: Pops up delete-comment-confirm and if user clicks "confirm", call backend API(DELETE /api/comment/:comment_id/member/:member_id or DELETE /api/comment/:comment_id/group/:group_id)
+7. CrawledLinkItem
+- `onClickScrapButton()` : Call backend API(POST /:user_id/articles/:article_id)
+8. MyPage
 - `onClickBackButton()` : Redirect to `Main Page('/')`
-8. FavoriteIdol
+9. FavoriteIdol
 - `onClickCancelIdolButton()` : Call backend API(DELETE /:user_id/idols/:idol_id) and redirect to `My Page(/mypage/:id)`
 - `onClickFavoriteIdol()` : Redirect to `Search Result Page('/search/:id')` of selected Idol.
-9. Article
+10. Article
 - `onClickDeleteArticleButton()`: Call backend API(DELETE /:user_id/articles/:article_id) and redirect to `My Page(/mypage/:id)`
 - `onClickScrapedArticle()`: Redirect to `Search Result Page('/search/:id')` of selected article.
-10. MyComment
+11. MyComment
 - `onClickMyComment()`: Redirect to `Search Result Page('/search/:id')` where my comment at.
-11. VideoIndexingEntry
+12. VideoIndexingEntry
 - `onClickCutScenes`: Call backend API (POST /video/scene) and redirect to Scene Cut Result page (/video/result) when getting response.
 - `onClickExtractIdol`: Redirect to Search Idol page for video indexing (/video/search)
-12. SearchIdolForVideo
+13. SearchIdolForVideo
 - `onClickSearch`: Call backend API (GET /video/search/:keyword) and update search result.
-13. SearchResultForVideo
+14. SearchResultForVideo
 - `onClickIdol`: Call backend API (POST /video/idol) and redirect to Extract Idol Result page (/video/result) when getting response.
 - `onClickRequest`: Call backend API (POST /video/request).
-14. SceneCutResult
+15. SceneCutResult
 - `onClickSaveSelected`: Call backend API (POST /video/save).
-15. ExtractIdolResult
+16. ExtractIdolResult
 - `onClickShareTimelines`: Call backend API (POST /video/share).
 - `onClickSaveSelected`: Call backend API (POST /video/save).
-16. IndexedVideo:
+17. IndexedVideo:
 - `onClickScene`: Add the scene to selected scenes if the scene is not selected. Remove the scene from selected scenes if it is already seleted. In both cases, play the scene.
 
 ### **Backend Design** <br />
 
-![backend_design](https://user-images.githubusercontent.com/20149216/139517192-e2a8f6a7-c440-4959-8e74-c03588acae27.jpg)
+![swpp wireframe (4)](https://user-images.githubusercontent.com/35980235/139518782-d3b18641-3e9a-49c1-9356-cc31b51f8bbe.jpg)
 
 ---
 

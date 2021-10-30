@@ -11,6 +11,7 @@ Vidol is a K-POP-related web service that helps idol fans enjoy their favorite i
 
        Rev. 1.0 2021-10-16 - initial version
        Rev. 1.1 2021-10-26 - redirection link revised
+       Rev. 1.2 2021-10-30 - scrap & idol like feature added in Search Result Page
 
 # Customer
 
@@ -260,6 +261,50 @@ Specifically, Vidol can give the best user experience for those
   - **GIVEN** the User is on `Search Result Page('/search/:id')`
   - **WHEN**
   - **THEN** the User should see `info from Internet tab`, `info from SNS tab`, `info from Youtube tab`, `shared indexed video tab`.
+
+#### 1.2 Scrap
+
+- Meta specs
+
+  | Index        | Content                                        |
+  | ------------ | :--------------------------------------------- |
+  | FeatureName  | User can scrap contents                          |
+  | Actors       | User                                           |
+  | Precondition | User is on `Search Result Page('/search/:id')` |
+
+- Scenario
+
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
+  - **WHEN** the User click `scrap` button
+  - **THEN** the User can scrap crawled link information from SNS, Youtube and shared indexed video.
+
+
+- Acceptance test
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
+  - **WHEN** the User click `scrap` button of specific link information
+  - **THEN** the specific link information is saved in My Page.
+
+#### 1.3 Like idol
+
+- Meta specs
+
+  | Index        | Content                                        |
+  | ------------ | :--------------------------------------------- |
+  | FeatureName  | User can click like button                          |
+  | Actors       | User                                           |
+  | Precondition | User is on `Search Result Page('/search/:id')` |
+
+- Scenario
+
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
+  - **WHEN** the User click `idol-like` button
+  - **THEN** the idol memeber/group is added to My Page.
+
+
+- Acceptance test
+  - **GIVEN** the User is on `Search Result Page('/search/:id')`
+  - **WHEN** the User click `idol-like` button
+  - **THEN** the idol memeber/group is added to My Page.
 
 ### 2. Comment
 
