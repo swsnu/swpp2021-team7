@@ -4,7 +4,7 @@
 
 ## **Member**
 
-Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
+Eunbin Kang, Sohyun Kim, Jiho Park, Youngchae Yoon
 
 ---
 
