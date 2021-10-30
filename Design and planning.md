@@ -1,4 +1,4 @@
-# **Design and Planning** 
+# **Design and Planning**
 
 
 
@@ -120,7 +120,7 @@ The functionality and requirement for each page are as follows:
 | comment-delete         | Button |
 | go-video-indexing      | Button |
 
-- User can see crawled information from Internet, SNS, Youtube and shared indexed video 
+- User can see crawled information from Internet, SNS, Youtube and shared indexed video
 - User can click `idol-like` button
 - After clicking `idol-like` button, current idol member or group is saved in My Page
 - User can click `scrap` button
@@ -165,7 +165,7 @@ The functionality and requirement for each page are as follows:
 | Search result button   | Button |
 | Request support button | Button |
 
-- User can type the name of the idol trying to get parts of. 
+- User can type the name of the idol trying to get parts of.
 - If user types nothing, search button is disabled.
 - If user clicks search button with input, search result appears under the input box.
 - Buttons of idols that we have pretrained model are activated.
@@ -220,7 +220,7 @@ The functionality and requirement for each page are as follows:
 - User can go to `Main page('/')` by clicking `go-back`
 - Users can see their favorite idols list in `List of my idols`
 - When user clicks one of the idol in `List of my idols`, user is redirected to `Search Result Page('/search/:id')`
-- When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page. 
+- When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page.
 - Users can see their scraped articles list in `Scraped articles`
 - When user clicks one of the articles in `Scraped articles`, user is redirected to `Search Result Page('/search/:id')` where that article exists
 - When user clicks `delete-article` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
@@ -291,6 +291,10 @@ Algorithms required for implementation are written below, based on their compone
 
 ## Implementation Plan
 
+ We are going to make planned outcomes for each sprint. There are several features that we should implement. First, we are going to work on basic features. At sprint 2, we focused on designing and planning for our service such as Controllers, Models, and Backend designs. Moreover, we are going to set up skeleton code for our web application by react and Django. At sprint 3, we planned that implement about users’ authentication function and view, and users’ information page (my page). AI module that could be working face recognition and indexing video by scene change is hard and essential part of our project, so we are going to prepare data for training our AI models. At sprint 4, we implement Main page and Search result. At the end of sprint4, face recognition model and indexing video model will be implemented simply and begin testing. At sprint 5, idols’ ranking algorithm will be applied our service. Finally inspecting for all code used in our project will be done.
+
+Testing is an important step for our project, so unit tests and integration tests are required. Implementation plan is organized in table below, you can check difficulties of each part and when we implemented.
+
 ![implementation_plan](https://user-images.githubusercontent.com/20149216/139517081-043a3a30-14c8-41dc-bf3b-ada173609323.jpg)
 
 ---
@@ -300,19 +304,18 @@ Algorithms required for implementation are written below, based on their compone
 All tests will be conducted automatically with the testing frameworks specified below. This strategy will ensure more robust and safer codes along the entire project sprints.
 
 **Unit Testing**
-Every component and module needs to be unit tested before being commited. Code coverage will be kept over 90%. External components(database, JSON requests, etc.) will be mocked in the unit test. 
+Every component and module needs to be unit tested before being commited. Code coverage will be kept over 90%. External components(database, JSON requests, etc.) will be mocked in the unit test.
 
-Frontend (React): Jest, Enzyme 
+Frontend (React): Jest, Enzyme
 
 Backend (Django): Python Unit Test
 
 **Functional Testing**
-Every API will be tested with Jest/Enzyme and Python Unit Test. Our models will be mocked for API tests. 
+Every API will be tested with Jest/Enzyme and Python Unit Test. Our models will be mocked for API tests.
 
-Frontend (React): Jest, Enzyme 
+Frontend (React): Jest, Enzyme
 
 Backend (Django): Python Unit Test
 
 **Acceptance & Integration Testing**
-We will use Travis CI for the continuous integration and SonarCloud for code quality static analysis. 
-
+We will use Travis CI for the continuous integration and SonarCloud for code quality static analysis.
