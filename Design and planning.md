@@ -1,10 +1,12 @@
 # **Design and Planning**
 
+## **Document Revision History**
 
+Rev. 1.0 2021-10-30 - initial version
 
 ## **Member**
 
-Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
+Eunbin Kang, Sohyun Kim, Jiho Park, Youngchae Yoon
 
 ---
 
@@ -14,7 +16,7 @@ Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
 Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
-![ERDiagram]
+<img src="https://user-images.githubusercontent.com/35527037/139521871-30cfa028-2182-46d4-ae10-332c69771269.png" width="1024">
 
 Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
 
