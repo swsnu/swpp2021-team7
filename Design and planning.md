@@ -205,17 +205,26 @@ The functionality and requirement for each page are as follows:
 
 4-1. My Page('mypage/:id')
 
+| Field name     | Type   |
+| -------------- | ------ |
+| go-back        | Button |
+| cancel-like    | Button |
+| delete-article | Button |
+
 - Users can check my activities in `My Page('/mypage/:id')`
+- User can go to `Main page('/')` by clicking `go-back`
 - Users can see their favorite idols list in `List of my idols`
 - When user clicks one of the idol in `List of my idols`, user is redirected to `Search Result Page('/search/:id')`
 - When user clicks `cancel-like` button next to idol's name, that idol is removed from `List of my idols` and user redirects to updated page. 
 - Users can see their scraped articles list in `Scraped articles`
 - When user clicks one of the articles in `Scraped articles`, user is redirected to `Search Result Page('/search/:id')` where that article exists
-- When user clicks `delete` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
+- When user clicks `delete-article` button next to article, that article is removed from `Scraped articles` and user redirects to updated page
 - Users can see their comments in `My Comments`
 - When user clicks comment's content, user is redirected to `Search Result Page('/search/:id')`
 
 ### **Controller** <br />
+
+TBD(in Miro)
 
 
 ---
@@ -270,17 +279,19 @@ Algorithms required for implementation are written below, based on their compone
 
 ### **Backend Design** <br />
 
+TBD (In Miro)
+
 ---
-
-
 
 ## Implementation Plan
 
+TBD
+
 ---
 
-
-
 ## Testing Plan
+
+TBD
 
 
 
