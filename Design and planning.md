@@ -14,7 +14,7 @@ Eunbin Kang, Sohyun Kim, Jiho Kim, Youngchae Yoon
 
 Entity-Relationship diagram (E-R Diagram) of out model design is as follows:
 
-![ERDiagram](https://user-images.githubusercontent.com/20149216/139463894-0ef22a97-d5a5-4430-8cad-dde421f7e0f1.jpg)
+![ERDiagram](https://user-images.githubusercontent.com/20149216/139517075-db5e3ad6-497e-4547-aecc-506260d69c25.png)
 
 Each square means Entity and Entities are connected by a line, which means Relationship. This means that when a line enters an entity in multiple branches, several entities may correspond.
 
@@ -222,7 +222,7 @@ The functionality and requirement for each page are as follows:
 
 ### **Controller** <br />
 
-TBD(in Miro)
+![controller](https://user-images.githubusercontent.com/20149216/139517190-b398d671-edcc-4179-80d5-8125eae75159.jpg)
 
 
 ---
@@ -232,7 +232,7 @@ TBD(in Miro)
 ### **Frontend Components** <br />
 
 Tables below are the frontend components. The attributes and the methods of each component are listed in each box.
-![Frontend Component](https://user-images.githubusercontent.com/20149216/139467203-4e348779-9c88-4585-96a9-157200613508.jpg)
+![frontend_component](https://user-images.githubusercontent.com/20149216/139517242-e0277705-147f-40c2-afa4-03afb122b34e.jpg)
 
 ### **Frontend Algorithms** <br />
 Algorithms required for implementation are written below, based on their component.
@@ -277,13 +277,13 @@ Algorithms required for implementation are written below, based on their compone
 
 ### **Backend Design** <br />
 
-TBD (In Miro)
+![backend_design](https://user-images.githubusercontent.com/20149216/139517192-e2a8f6a7-c440-4959-8e74-c03588acae27.jpg)
 
 ---
 
 ## Implementation Plan
 
-TBD
+![implementation_plan](https://user-images.githubusercontent.com/20149216/139517081-043a3a30-14c8-41dc-bf3b-ada173609323.jpg)
 
 ---
 
