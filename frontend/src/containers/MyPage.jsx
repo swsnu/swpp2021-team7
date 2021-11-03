@@ -1,39 +1,27 @@
 import React, { Component } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+
+import FavoriteIdolList from '../components/MyPage/FavoriteIdolList';
+import MyCommentList from '../components/MyPage/MyCommentList';
+import MyArticleList from '../components/MyPage/MyArticleList';
 
 export default class MyPage extends Component {
     render() {
         return (
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/images/BTS_V.jpg" />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary="Brunch this weekend?"
-                        secondary={
-                            <React.Fragment>
-                                <Typography
-                                    sx={{ display: 'inline' }}
-                                    component="span"
-                                    variant="body2"
-                                    color="text.primary"
-                                >
-                                    Ali Connors
-                                </Typography>
-                                {" — I'll be in your neighborhood doing errands this…s"}
-                            </React.Fragment>
-                        }
-                    />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-            </List>
+            <React.Fragment>
+                <Container maxWidth="sm">
+                    <h1>My Idols</h1>
+                    <FavoriteIdolList></FavoriteIdolList>
+                </Container>
+                <Container maxWidth="sm">
+                    <h1>My Comments</h1>
+                    <MyCommentList></MyCommentList>
+                </Container>
+                <Container maxWidth="sm">
+                    <h1>My Scraps</h1>
+                    <MyArticleList></MyArticleList>
+                </Container>
+            </React.Fragment>
         )
     }
 }
