@@ -27,7 +27,7 @@ export default class MyPage extends Component {
                                 >
                                     Ali Connors
                                 </Typography>
-                                {" — I'll be in your neighborhood doing errands this…"}
+                                {" — I'll be in your neighborhood doing errands this…s"}
                             </React.Fragment>
                         }
                     />
