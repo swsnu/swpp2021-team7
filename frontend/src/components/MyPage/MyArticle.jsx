@@ -7,13 +7,17 @@ import Button from '@mui/material/Button';
 
 
 export default class MyArticle extends Component {
+    onClickScrapedArticle = () => {
+        console.log(this.props.history)
+        console.log("click onClickScrapedArticle")
+    }
     render() {
         return (
             <React.Fragment>
                 <ListItem>
                     <ListItemText
                         sx={{ display: 'block'}}
-                        primary="Title : Scrap1"
+                        primary={<a onClick={this.onClickScrapedArticle}>{"Title : Scrap1"}</a>}
                         secondary={
                             <React.Fragment>
                                 <Typography
