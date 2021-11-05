@@ -14,12 +14,12 @@ export default class FavoriteIdolList extends Component {
                     overflow: 'auto',
                     maxHeight: 300,
                 }}>
-                    <FavoriteIdol></FavoriteIdol>
-                    <FavoriteIdol></FavoriteIdol>
-                    <FavoriteIdol></FavoriteIdol>
-                    <FavoriteIdol></FavoriteIdol>
-                    <FavoriteIdol></FavoriteIdol>
-                    <FavoriteIdol></FavoriteIdol>
+                    <FavoriteIdol/>
+                    <FavoriteIdol/>
+                    <FavoriteIdol/>
+                    <FavoriteIdol/>
+                    <FavoriteIdol/>
+                    <FavoriteIdol/>
                 </List>
             </React.Fragment>
         )
