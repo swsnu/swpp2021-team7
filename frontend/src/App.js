@@ -1,26 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import PropTypes from 'prop-types'
 
-function App() {
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import Header from './components/common/Header';
+
+
+import MyPage from './containers/MyPage';
+import Ranking from './containers/Ranking';
+
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConnectedRouter history={props.history}>
+      <Header></Header>
+      <div className="App" >
+        <Switch>
+          <Route path='/mypage/:id' exact render={() => <MyPage />} />
+          <Route path='/rank' exact render={() => <Ranking />} />
+          <Route render={() => <h1>Not Found</h1>} />
+        </Switch>
+      </div >
+    </ConnectedRouter>
   );
+}
+
+App.propTypes = {
+  history: PropTypes.object
 }
 
 export default App;
