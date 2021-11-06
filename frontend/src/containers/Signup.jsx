@@ -6,34 +6,34 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { FormControlLabel } from '@mui/material';
-import { Checkbox } from '@mui/material';
 import logo from '../image/256w/자산 1_256.png';
 import { withRouter } from 'react-router';
 
 
-export default function Signup(props) { 
+function Signup(props) { 
     const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    props.history.push('/');
-  };
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log({
+        email: data.get('email'),
+        firstName: data.get('firstName'),
+        lastName: data.get('lastName'),
+        password: data.get('password'),
+        });
+        props.history.push('/sign/login');
+    };
 
   return (
     <React.Fragment>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+            sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
         >
             <img 
               src={logo}
@@ -120,3 +120,5 @@ export default function Signup(props) {
     </React.Fragment>
   );
 }
+
+export default withRouter(Signup);
