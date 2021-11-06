@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import Pagination from '@mui/material/Pagination';
+import {
+    Container,
+    Box,
+    Typography,
+    List,
+    Pagination,
+} from '@mui/material';
 import { withStyles } from "@material-ui/core/styles";
 import Fire from "@mui/icons-material/LocalFireDepartment"
 import RankItem from '../Ranking/RankItem';
-import { Typography } from '@mui/material';
-import { Box } from '@mui/material';
 
 const StyledPagination = withStyles({
     ul: {

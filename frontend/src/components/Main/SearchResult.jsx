@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-
+import {
+    Typography,
+    ListItem,
+    ListItemText,
+    ListItemAvatar,
+    Avatar,
+} from '@mui/material';
 
 export default class RankItem extends Component {
     render() {

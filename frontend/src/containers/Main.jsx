@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+import React from 'react';
+import {
+    Container,
+    CssBaseline,
+    TextField,
+    Box,
+    Typography,
+    IconButton,
+    Grid,
+    Link
+} from '@mui/material';
 import logo from '../image/256w/자산 1_256.png';
 import { withRouter } from 'react-router';
 import Search from '@mui/icons-material/Search';
-import { IconButton } from '@mui/material';
-import { Grid } from '@mui/material';
-import { Link } from '@mui/material';
 import HotRankingList from '../components/Main/HotRankingList';
 import SearchResult from '../components/Main/SearchResult';
-
 
 function Main() {
     const [submitDone, setSubmitDone] = React.useState(false);
