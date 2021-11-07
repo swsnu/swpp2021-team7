@@ -1,9 +1,15 @@
-import React from "react";
+import * as React from 'react';
+import List from '@mui/material/List';
+import Tweet from './Tweet';
 
-const Twitter = () => {
+export default function Twitter({tweets}) {
 
-    return <h1>트위터</h1>
-
+  return <>
+    <h3>On Twitter</h3>
+    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+        {tweets.map((tweet, i) => {
+            return <Tweet {...tweet} key={i} />
+        })}
+    </List>
+  </>
 }
-
-export default Twitter;

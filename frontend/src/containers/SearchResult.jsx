@@ -1,9 +1,10 @@
-import { CircularProgress, Grid } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import CustomGridRow from '../components/common/CustomGridRow';
 import BasicInfo from '../components/SearchResult/BasicInfo';
 import Twitter from '../components/SearchResult/Twitter';
 import Youtube from '../components/SearchResult/Youtube';
+import styled from "@emotion/styled";
 
 const SearchResult = (props) => {
 
@@ -15,6 +16,10 @@ const SearchResult = (props) => {
                     {title: '레드벨벳 슬기, 러블리한 매력 폭발..인형이라 해도 믿겠어♥', url: 'https://entertain.naver.com/read?oid=112&aid=0003493956'},
                     {title: '아이린x슬기x예리, 방구석 핼러윈 파티 인증샷 공개', url: 'https://entertain.naver.com/read?oid=009&aid=0004872615'}]
         },
+        tweets: [{author: 'gomseulgi', content: 'Seulgi is god', avatar: '/static/images/avatar/1.jpg'},
+                {author: '휴먼히읗', content: "FINNALY TAEYONG AND SEULGI SINGING ROSE LIVE 😭😭", avatar: "/static/images/avatar/2.jpg"},
+                {author: "슬기.zip", content: "#슬기zip 완벽 재현📸 2021 ver. 프링글슬기👶🏻 쥔님 방부제 미모 어떡해😆 옛날도 지금도 변함 없는 사실❗️#슬기 는 세상에서 제일 귀여운 존재💞 #NOW온에어 화요일 투슬✌🏻레전드 발라더 #2am 전격 방문🏡 감성 가득 슬기zip 절대 본방사수👀", avatar: "/static/images/avatar/3.jpg", image: "https://pbs.twimg.com/media/FDWz92hakAEnzFV?format=jpg&name=4096x4096"}
+        ]
     }
 
     const [isLoading, setIsloading] = useState(true);
@@ -35,10 +40,16 @@ const SearchResult = (props) => {
     }, [data])
 
     if (isLoading) return <CircularProgress />
-    return <>
-        <CustomGridRow components={[<BasicInfo {...dummy.basicInfo} key="basicInfo" />, <Twitter key="twitter" />]} />
+    return <SearchResultRoot>
+        <CustomGridRow components={[<BasicInfo {...dummy.basicInfo} key="basicInfo" />, <Twitter key="twitter" tweets={dummy.tweets} />]} />
         <Youtube />
-    </>
+    </SearchResultRoot>
 }
+
+const SearchResultRoot = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
 
 export default SearchResult;
