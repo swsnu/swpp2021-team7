@@ -22,7 +22,7 @@ const CommentInputConatiner = styled.div`
     padding: 5px 0;
     background: #fff9c4;
     border: 1px;
-    z-index: 9999;
+    z-index: 1200;
 `
 
 const TextButtonContainer = styled.div`
