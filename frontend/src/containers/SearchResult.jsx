@@ -1,9 +1,9 @@
 import { CircularProgress, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import CustomGridRow from '../components/common/CustomGridRow';
-import BasicInfo from '../components/SearchResult.jsx/BasicInfo';
-import Twitter from '../components/SearchResult.jsx/Twitter';
-import Youtube from '../components/SearchResult.jsx/Youtube';
+import BasicInfo from '../components/SearchResult/BasicInfo';
+import Twitter from '../components/SearchResult/Twitter';
+import Youtube from '../components/SearchResult/Youtube';
 
 const SearchResult = (props) => {
 
