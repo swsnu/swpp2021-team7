@@ -8,7 +8,6 @@ import {
     Typography
 } from '@mui/material';
 
-
 export default class RankItem extends Component {
     render() {
         return (

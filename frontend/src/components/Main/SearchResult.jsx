@@ -7,7 +7,7 @@ import {
     Avatar,
 } from '@mui/material';
 
-export default class RankItem extends Component {
+export default class SearchResult extends Component {
     render() {
         return (
             <React.Fragment>
