@@ -18,7 +18,11 @@ const SearchResult = (props) => {
         },
         tweets: [{author: 'gomseulgi', content: 'Seulgi is god', avatar: '/static/images/avatar/1.jpg'},
                 {author: '휴먼히읗', content: "FINNALY TAEYONG AND SEULGI SINGING ROSE LIVE 😭😭", avatar: "/static/images/avatar/2.jpg"},
-                {author: "슬기.zip", content: "#슬기zip 완벽 재현📸 2021 ver. 프링글슬기👶🏻 쥔님 방부제 미모 어떡해😆 옛날도 지금도 변함 없는 사실❗️#슬기 는 세상에서 제일 귀여운 존재💞 #NOW온에어 화요일 투슬✌🏻레전드 발라더 #2am 전격 방문🏡 감성 가득 슬기zip 절대 본방사수👀", avatar: "/static/images/avatar/3.jpg", image: "https://pbs.twimg.com/media/FDWz92hakAEnzFV?format=jpg&name=4096x4096"}
+                {author: "슬기.zip", content: "#슬기zip 완벽 재현📸 2021 ver. 프링글슬기👶🏻 쥔님 방부제 미모 어떡해😆 옛날도 지금도 변함 없는 사실❗️#슬기 는 세상에서 제일 귀여운 존재💞 #NOW온에어 화요일 투슬✌🏻레전드 발라더 #2am 전격 방문🏡 감성 가득 슬기zip 절대 본방사수👀", avatar: "/static/images/avatar/3.jpg", image: "https://pbs.twimg.com/media/FDWz92hakAEnzFV?format=jpg&name=4096x4096"}],
+        youtubes: [
+            {uploadDate: '5일 전', title: "2022 Red Velvet SEASON’S GREETINGS CONCEPT TRAILER #RedVelvet", thumbnail: 'https://i.ytimg.com/vi/cTjSbnA4WhI/hq2.jpg', url: 'https://youtube.com/shorts/cTjSbnA4WhI?feature=share'},
+            {uploadDate: '1개월 전', title: "Red Velvet 레드벨벳 'Queendom' Compilation", thumbnail: 'https://i.ytimg.com/vi/i8wv1PWGFoo/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCO8nmPu2Nwrt6IvF_cvt9ws2kl2w', url: 'https://youtu.be/i8wv1PWGFoo'},
+            {uploadDate: '2개월 전', title: "Red Velvet 레드벨벳 '다시, 여름 (Hello, Sunset)' Special VideoㅣRV Collection", thumbnail: "https://i.ytimg.com/vi/DDokLv2ujyk/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCfAQ0rcg8KK4im3SY8Ok_jdwIoWgz", url: "https://youtu.be/DDokLv2ujyk"},
         ]
     }
 
@@ -42,7 +46,8 @@ const SearchResult = (props) => {
     if (isLoading) return <CircularProgress />
     return <SearchResultRoot>
         <CustomGridRow components={[<BasicInfo {...dummy.basicInfo} key="basicInfo" />, <Twitter key="twitter" tweets={dummy.tweets} />]} />
-        <Youtube />
+        <div style={{marginTop: "30px"}}></div>
+        <Youtube videos={dummy.youtubes} />
     </SearchResultRoot>
 }
 

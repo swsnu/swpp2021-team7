@@ -1,9 +1,11 @@
 import React from "react";
+import CustomGridRow from "../common/CustomGridRow";
+import YoutubeVideo from "./YoutubeVideo";
 
-const Youtube = () => {
+const Youtube = ({videos}) => {
 
-    return <h1>유튜브</h1>
-
+    const videoComponents = videos.map((v, i) => <YoutubeVideo {...v} key={i} />);
+    return <CustomGridRow components={videoComponents} />
 };
 
 export default Youtube;
