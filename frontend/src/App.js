@@ -9,6 +9,7 @@ import Header from './components/common/Header';
 
 import MyPage from './containers/MyPage';
 import Ranking from './containers/Ranking';
+import SearchResult from './containers/SearchResult';
 
 function App(props) {
   return (
@@ -18,6 +19,7 @@ function App(props) {
         <Switch>
           <Route path='/mypage/:id' exact render={() => <MyPage />} />
           <Route path='/rank' exact render={() => <Ranking />} />
+          <Route path="/search/:id" exact component={SearchResult} />
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </div >
