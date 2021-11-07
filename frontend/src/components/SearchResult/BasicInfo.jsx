@@ -18,6 +18,8 @@ const BasicInfo = ({image, info: {name, group, birth, debut}, news}) => {
                     <Chip label={birth} />
                     <Chip label={debut} />
                 </Stack>
+                <div style={{marginTop: "20px"}}></div>
+                <Chip label="❤️ Like Seulgi" color="info" />
             </Box>
         </Box>
 
