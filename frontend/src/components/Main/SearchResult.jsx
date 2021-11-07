@@ -1,31 +1,22 @@
 import React, { Component } from 'react';
 import {
+    Typography,
     ListItem,
-    Divider,
     ListItemText,
     ListItemAvatar,
     Avatar,
-    Typography
 } from '@mui/material';
 
-export default class RankItem extends Component {
+export default class SearchResult extends Component {
     render() {
         return (
             <React.Fragment>
                 <ListItem alignItems="flex-start">
-                    <ListItemText
-                        sx={{
-                            flexGrow : 0.5,
-                            marginTop : 2
-                        }}
-                        primary={this.props.rank}
-                        dense
-                    />
                     <ListItemAvatar sx={{
                         flexGrow : 1,
                         height: '50%'
                         }}>
-                        <Avatar alt="Remy Sharp" src="/images/BTS_V.jpg" />
+                        <Avatar alt="IU" src="/images/IU.jpg" />
                     </ListItemAvatar>
                     <ListItemText
                         sx={{
@@ -42,7 +33,6 @@ export default class RankItem extends Component {
                         }
                     />
                 </ListItem>
-                <Divider sx={{marginLeft : 0}} variant="inset" component="li" />
             </React.Fragment>
         )
     }
