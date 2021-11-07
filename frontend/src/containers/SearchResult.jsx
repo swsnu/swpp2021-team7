@@ -5,6 +5,7 @@ import BasicInfo from '../components/SearchResult/BasicInfo';
 import Twitter from '../components/SearchResult/Twitter';
 import Youtube from '../components/SearchResult/Youtube';
 import styled from "@emotion/styled";
+import SharedVideos from '../components/SearchResult/SharedVideos';
 
 const SearchResult = (props) => {
 
@@ -23,6 +24,11 @@ const SearchResult = (props) => {
             {uploadDate: '5일 전', title: "2022 Red Velvet SEASON’S GREETINGS CONCEPT TRAILER #RedVelvet", thumbnail: 'https://i.ytimg.com/vi/cTjSbnA4WhI/hq2.jpg', url: 'https://youtube.com/shorts/cTjSbnA4WhI?feature=share'},
             {uploadDate: '1개월 전', title: "Red Velvet 레드벨벳 'Queendom' Compilation", thumbnail: 'https://i.ytimg.com/vi/i8wv1PWGFoo/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCO8nmPu2Nwrt6IvF_cvt9ws2kl2w', url: 'https://youtu.be/i8wv1PWGFoo'},
             {uploadDate: '2개월 전', title: "Red Velvet 레드벨벳 '다시, 여름 (Hello, Sunset)' Special VideoㅣRV Collection", thumbnail: "https://i.ytimg.com/vi/DDokLv2ujyk/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCfAQ0rcg8KK4im3SY8Ok_jdwIoWgz", url: "https://youtu.be/DDokLv2ujyk"},
+        ],
+        shared: [
+            {uploader: 'seulseul', title: "[STATION X 0] 슬기(SEULGI)X신비(여자친구)X청하X소연 'Wow Thing' MV", thumbnail: 'https://i.ytimg.com/vi/KR5CtMLuiqQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC_9ZgdbeD0mNkN1VGoG2Vzd3U8IQ', url: 'https://youtu.be/KR5CtMLuiqQ'},
+            {uploader: 'kang', title: "Red Velvet 레드벨벳 'Queendom' MV BehindㅣRV Collection", thumbnail: 'https://i.ytimg.com/vi/nbfJU8WkcO4/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDZJAE8Uq5Aae-pk352Ga7KBYXoBg', url: 'https://youtu.be/KR5CtMLuiqQ'},
+            {uploader: 'rvfanboy', title: "Red Velvet 레드벨벳 'Queendom' MV", thumbnail: 'https://i.ytimg.com/vi/c9RzZpV460k/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAkifyd7qlRi1nUBuDnELaT-rxnLQ', url: 'https://youtu.be/KR5CtMLuiqQ'},
         ]
     }
 
@@ -48,6 +54,7 @@ const SearchResult = (props) => {
         <CustomGridRow components={[<BasicInfo {...dummy.basicInfo} key="basicInfo" />, <Twitter key="twitter" tweets={dummy.tweets} />]} />
         <div style={{marginTop: "30px"}}></div>
         <Youtube videos={dummy.youtubes} />
+        <SharedVideos videos={dummy.shared} />
     </SearchResultRoot>
 }
 
