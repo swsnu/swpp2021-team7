@@ -11,7 +11,7 @@ import { withRouter } from 'react-router';
 
 
 class RankItem extends Component {
-    handleClick = () => {
+    redirectSearchResult = () => {
         this.props.history.push('/search/1');
     }
 
