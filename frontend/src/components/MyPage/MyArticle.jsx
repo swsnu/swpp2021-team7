@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import {ListItem, Button, Divider, ListItemText, Typography} from '@mui/material';
 
 
 export default class MyArticle extends Component {
-    onClickScrapedArticle = () => {
-        console.log(this.props.history)
-        console.log("click onClickScrapedArticle")
+    deleteScrapedArticle = () => {
+        console.log("click deleteScrapedArticle")
     }
     render() {
         return (
@@ -31,7 +26,7 @@ export default class MyArticle extends Component {
                             </React.Fragment>
                         }
                     />
-                    <Button variant="outlined">delete</Button>
+                    <Button variant="contained" onClick={()=>this.deleteScrapedArticle()}>delete</Button>
                 </ListItem>
                 <Divider variant="inset" component="li" />
             </React.Fragment>

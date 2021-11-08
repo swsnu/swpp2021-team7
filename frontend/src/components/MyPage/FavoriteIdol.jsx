@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import {
+    ListItem,
+    Divider,
+    ListItemText,
+    ListItemAvatar,
+    Avatar,
+    Button,
+    Chip
+} from '@mui/material';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router'
 
-export default class FavoriteIdol extends Component {
+
+class FavoriteIdol extends Component {
+    cancelFavoriteIdol = () => {
+        console.log("cancelFavoriteIdol")
+    }
+
+    redirectSearchResult = () => {
+        this.props.push('/search/1')
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -15,12 +29,15 @@ export default class FavoriteIdol extends Component {
                         <Avatar alt="Remy Sharp" src="/images/BTS_V.jpg" />
                     </ListItemAvatar>
                     <ListItemText
-                        primary="V"
+                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`뷔 (V)`} />}
+                        secondary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={'방탄소년단 (BTS)'} color="primary"/>}
                     />
-                    <Button variant="outlined">cancel</Button>
-                </ListItem> 
+                    <Button onClick={() => {this.cancelFavoriteIdol()}} variant="contained">cancel</Button>
+                </ListItem>
                 <Divider variant="inset" component="li" />
             </React.Fragment>
         )
     }
 }
+
+export default connect(null, { push })(FavoriteIdol)
