@@ -5,10 +5,16 @@ import {
     ListItemText,
     ListItemAvatar,
     Avatar,
-    Typography
+    Chip
 } from '@mui/material';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router'
 
-export default class RankItem extends Component {
+class RankItem extends Component {
+    redirectSearchResult = () => {
+        this.props.push('/search/1')
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -31,15 +37,8 @@ export default class RankItem extends Component {
                         sx={{
                             flexGrow : 10,
                         }}
-                        primary={
-                            <Typography 
-                                component="span"
-                                sx={{ 
-                                    fontSize : 26
-                                }}>
-                                    {this.props.name}
-                            </Typography>
-                        }
+                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`뷔 (V)`} />}
+                        secondary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={'방탄소년단 (BTS)'} color="primary"/>}
                     />
                 </ListItem>
                 <Divider sx={{marginLeft : 0}} variant="inset" component="li" />
@@ -47,3 +46,5 @@ export default class RankItem extends Component {
         )
     }
 }
+
+export default connect(null, { push })(RankItem)

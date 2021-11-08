@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import Container from '@mui/material/Container';
+import {
+    Container,
+    Button,
+    Menu,
+    MenuItem,
+    Typography,
+} from '@mui/material'
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 import FavoriteIdolList from '../components/MyPage/FavoriteIdolList';
 import MyCommentList from '../components/MyPage/MyCommentList';
 import MyArticleList from '../components/MyPage/MyArticleList';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
+
 
 
 export default function MyPage(props) {
@@ -35,15 +40,7 @@ export default function MyPage(props) {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    <Typography
-                        component="span"
-                        variant="h6"
-                        sx={{
-                            color: 'rgba(0, 0, 0, 1)'
-                        }}
-                    >
-                        INFO
-                    </Typography>
+                    <AccountCircleIcon fontSize="large" color="action"></AccountCircleIcon>
                 </Button>
                 <Menu
                     id="basic-menu"

@@ -4,8 +4,6 @@ import {
     Button,
     Divider,
     ListItemText,
-    Typography,
-    Chip,
     ListItemButton
 } from '@mui/material';
 
