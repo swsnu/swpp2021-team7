@@ -6,12 +6,17 @@ import {
     ListItemAvatar,
     Avatar,
 } from '@mui/material';
+import { withRouter } from 'react-router';
 
-export default class SearchResult extends Component {
+class SearchResult extends Component {
+    handleClick = () => {
+        this.props.history.push('/search/1');
+    }
+
     render() {
         return (
             <React.Fragment>
-                <ListItem alignItems="flex-start">
+                <ListItem alignItems="flex-start" onClick={this.handleClick}>
                     <ListItemAvatar sx={{
                         flexGrow : 1,
                         height: '50%'
@@ -37,3 +42,5 @@ export default class SearchResult extends Component {
         )
     }
 }
+
+export default withRouter(SearchResult);
