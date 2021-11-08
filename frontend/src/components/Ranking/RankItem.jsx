@@ -7,18 +7,18 @@ import {
     Avatar,
     Chip
 } from '@mui/material';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router'
+import { withRouter } from 'react-router';
+
 
 class RankItem extends Component {
-    redirectSearchResult = () => {
-        this.props.push('/search/1')
+    handleClick = () => {
+        this.props.history.push('/search/1');
     }
 
     render() {
         return (
             <React.Fragment>
-                <ListItem alignItems="flex-start">
+                <ListItem alignItems="flex-start" onClick={this.handleClick}>
                     <ListItemText
                         sx={{
                             flexGrow : 0.5,
@@ -47,4 +47,4 @@ class RankItem extends Component {
     }
 }
 
-export default connect(null, { push })(RankItem)
+export default withRouter(RankItem);

@@ -9,6 +9,7 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import Fire from "@mui/icons-material/LocalFireDepartment"
 import RankItem from '../Ranking/RankItem';
+import { withRouter } from 'react-router';
 
 const StyledPagination = withStyles({
     ul: {
@@ -17,7 +18,11 @@ const StyledPagination = withStyles({
   })(Pagination);
 
 
-export default class HotRankingList extends Component {
+class HotRankingList extends Component {
+    handleClick = () => {
+        this.props.history.push('/rank');
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -27,8 +32,8 @@ export default class HotRankingList extends Component {
                         flexDirection="row"
                         justifyContent="center"
                     >
-                        <Fire sx={{color: 'red'}}/>
-                        <Typography variant="h6" color="red"> Hottest Idols </Typography>                    
+                        <Fire sx={{color: 'red'}} onClick={this.handleClick}/>
+                        <Typography variant="h6" color="red" onClick={this.handleClick}> Hottest Idols </Typography>                    
                     </Box>
                     <List sx={{
                         width: '100%',
@@ -44,3 +49,5 @@ export default class HotRankingList extends Component {
         )
     }
 }
+
+export default withRouter(HotRankingList);

@@ -8,8 +8,8 @@ import {
     Button,
     Chip
 } from '@mui/material';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router'
+import { withRouter } from 'react-router';
+
 
 
 class FavoriteIdol extends Component {
@@ -18,7 +18,7 @@ class FavoriteIdol extends Component {
     }
 
     redirectSearchResult = () => {
-        this.props.push('/search/1')
+        this.props.history.push('/search/1');
     }
 
     render() {
@@ -40,4 +40,5 @@ class FavoriteIdol extends Component {
     }
 }
 
-export default connect(null, { push })(FavoriteIdol)
+export default withRouter(FavoriteIdol);
+
