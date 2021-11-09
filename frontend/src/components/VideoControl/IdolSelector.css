@@ -1,0 +1,69 @@
+*{
+    box-sizing: border-box;
+}
+div.idol-selector{
+    position:relative;
+    width:100%;
+    margin:12px 0px;
+    border:1px solid #007aff;
+    border-radius:8px;
+    padding:16px;
+    box-sizing: border-box;
+}
+div.idol-selector > p.idol-title{
+    position:relative;
+    width:100%;
+    margin-bottom:8px;
+    font-size:16px;
+}
+div.idol-image{
+    position:relative;
+    width:84px;
+    height:84px;
+    margin-right:12px;
+    border-radius:50%;
+    object-fit:cover;
+    display:inline-block;
+}
+img.idol-image{
+    position:absolute;
+    width:84px;
+    height:84px;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    border-radius:50%;
+    object-fit:cover;
+}
+div.idol-image div.idol-hover{
+    position:absolute;
+    display:none;
+    top:0px;
+    left:0px;
+    bottom:0px;
+    right:0px;
+    background-color:rgba(0,0,0,.8);
+    border-radius:50%;
+    min-height:inherit;
+  
+  align-items: center;
+  justify-content: center;
+  -ms-flex-align:center;
+  -ms-flex-pack: center;
+}
+div.idol-image div.idol-hover p.idol-hover{
+    position:relatve;
+    width:100%;
+    margin:0px;
+    line-height:1;
+    color:#ffffff;
+}
+div.idol-image.is-active{
+    border:2px solid #007aff;
+}
+div.idol-image:hover div.idol-hover{
+    display: flex;
+    display: -ms-flexbox;
+  display: -webkit-flex;
+}
