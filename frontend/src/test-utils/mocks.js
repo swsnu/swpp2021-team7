@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';                                           
-import { connectRouterc} from 'connected-react-router';
+import { connectRouter} from 'connected-react-router';
 
 import { history, middlewares } from '../store/store';
 

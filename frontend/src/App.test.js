@@ -1,9 +1,13 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { Provider } from 'react-redux';;
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+
 
 import App from './App';
+import { getMockStore } from './test-utils/mocks';
 import { history } from './store/store';
+
+const mockStore = getMockStore({});
 
 describe('App', () => {
   let app;
