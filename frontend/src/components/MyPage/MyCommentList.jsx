@@ -12,7 +12,7 @@ export default class MyCommentList extends Component {
                     bgcolor: 'background.paper', 
                     position: 'relative',
                     overflow: 'auto',
-                    maxHeight: 300,
+                    maxHeight: 400,
                 }}>
                     <MyComment></MyComment>
                     <MyComment></MyComment>

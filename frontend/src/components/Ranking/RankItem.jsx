@@ -5,13 +5,13 @@ import {
     ListItemText,
     ListItemAvatar,
     Avatar,
-    Typography
+    Chip
 } from '@mui/material';
 import { withRouter } from 'react-router';
 
 
 class RankItem extends Component {
-    handleClick = () => {
+    redirectSearchResult = () => {
         this.props.history.push('/search/1');
     }
 
@@ -37,15 +37,8 @@ class RankItem extends Component {
                         sx={{
                             flexGrow : 10,
                         }}
-                        primary={
-                            <Typography 
-                                component="span"
-                                sx={{ 
-                                    fontSize : 26
-                                }}>
-                                    {this.props.name}
-                            </Typography>
-                        }
+                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`뷔 (V)`} />}
+                        secondary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={'방탄소년단 (BTS)'} color="primary"/>}
                     />
                 </ListItem>
                 <Divider sx={{marginLeft : 0}} variant="inset" component="li" />

@@ -11,7 +11,7 @@ export default class MyArticleList extends Component {
                     bgcolor: 'background.paper', 
                     position: 'relative',
                     overflow: 'auto',
-                    maxHeight: 300,
+                    maxHeight: 400,
                 }}>
                     <MyArticle></MyArticle>
                     <MyArticle></MyArticle>
