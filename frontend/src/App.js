@@ -14,6 +14,10 @@ import Signup from './containers/Signup';
 import FindAccount from './containers/FindAccount';
 import Main from './containers/Main';
 
+// video indexing / searching / result
+import VideoIndexing from './containers/VideoIndexing';
+import VideoSearching from './containers/VideoSearching';
+import VideoResult from './containers/VideoResult';
 
 function App(props) {
   return (
@@ -28,6 +32,10 @@ function App(props) {
           <Route path='/mypage/:id' exact render={() => <MyPage />} />
           <Route path='/rank' exact render={() => <Ranking />} />
           <Route path="/search/:id" exact component={SearchResult} />
+
+          <Route path='/video' exact render={() => <VideoIndexing />} />
+          <Route path='/video/search' exact render={() => <VideoSearching />} />
+          <Route path='/video/result' exact render={() => <VideoResult />} />
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </div >

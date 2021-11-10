@@ -4,7 +4,6 @@ import {
     Button,
     Menu,
     MenuItem,
-    Typography,
 } from '@mui/material'
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'

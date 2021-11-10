@@ -1,0 +1,31 @@
+div.timeline-container{
+    position:relative;
+    width:100%;
+    margin:12px 0px;
+}
+div.timeline-box{
+    position:relative;
+    width:100%;
+    border:1px solid #007aff;
+    overflow-x:scroll;
+    overflow-y:hidden;
+    white-space:nowrap;
+    height:72px;
+    text-align:left;
+}
+div.timeline-box div.active-box{
+    position:reltive;
+    height:72px;
+    width:12px;
+    display:inline-block;
+    vertical-align:middle;
+    background-color:#007aff;
+}
+div.timeline-box div.deactive-box{
+    position:reltive;
+    height:72px;
+    width:12px;
+    display:inline-block;
+    vertical-align:middle;
+    background-color:#ffffff;
+}
