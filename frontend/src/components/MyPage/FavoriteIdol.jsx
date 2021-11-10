@@ -30,7 +30,6 @@ class FavoriteIdol extends Component {
                     </ListItemAvatar>
                     <ListItemText
                         primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`뷔 (V)`} />}
-                        secondary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={'방탄소년단 (BTS)'} color="primary"/>}
                     />
                     <Button onClick={() => {this.cancelFavoriteIdol()}} variant="contained">cancel</Button>
                 </ListItem>

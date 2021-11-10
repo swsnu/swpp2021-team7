@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';;
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
 import { ConnectedRouter } from 'connected-react-router';
-import FavoriteIdol from './FavoriteIdol';
+import MyArticle from './MyArticle'
 
 
-
+const TITLE = '타블로와 슬기, 빅나티, 노보가 함께한 라코스테 X 피너츠 협업 캠페인'
 const mockStore = getMockStore({});
 
 describe('<FavoriteIdol />', () => {
@@ -16,7 +16,7 @@ describe('<FavoriteIdol />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <FavoriteIdol></FavoriteIdol>
+                    <MyArticle></MyArticle>
                 </ConnectedRouter>
             </Provider>
         )
@@ -24,22 +24,10 @@ describe('<FavoriteIdol />', () => {
     it('should render without errors', () => {
         setComponent()
         const listItem = component.find('ForwardRef(ListItem)')
-        expect(listItem.length).toBe(1);
-    })
-    it('should redirect to Search Result Page', () => {
-        const spyHistory = jest.spyOn(history, 'push')
-        setComponent()
-
-        let idolInfos = component.find('ForwardRef(Chip)')
-        expect(idolInfos.length).toBe(1)
-
-        idolInfos.at(0).simulate('click')
-        expect(spyHistory).toBeCalledWith('/search/1')
-
-        spyHistory.mockRestore()
+        expect(listItem.text().includes(TITLE)).toBe(true);
     })
 
-    it('should cancel favorite idol', () => {
+    it('should delete scraped article', () => {
         const spyConsole = jest.spyOn(global.console, 'log')
         setComponent()
 
@@ -47,7 +35,7 @@ describe('<FavoriteIdol />', () => {
         expect(cancelBtn.length).toBe(1)
 
         cancelBtn.first().simulate('click')
-        expect(spyConsole).toBeCalledWith('cancelFavoriteIdol')
+        expect(spyConsole).toBeCalledWith('click deleteScrapedArticle')
 
         spyConsole.mockRestore()
     })

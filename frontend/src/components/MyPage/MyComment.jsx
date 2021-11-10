@@ -21,8 +21,7 @@ class MyComment extends Component {
                 <ListItem>
                     <ListItemText
                         sx={{ display: 'block' }}
-                        primary={[<Chip key="1" onClick={() => this.redirectSearchResult()} clickable label={`뷔 (V)`} />,
-                        <Chip key="2" onClick={() => this.redirectSearchResult()} clickable label={'방탄소년단 (BTS)'} color="primary" />]}
+                        primary={<Chip key="1" onClick={() => this.redirectSearchResult()} clickable label={`뷔 (V)`} />}
                         secondary={
                             <React.Fragment>
                                 <div style={{ marginTop: "10px" }}></div>
