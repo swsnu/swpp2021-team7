@@ -31,14 +31,13 @@ class RankItem extends Component {
                         flexGrow : 1,
                         height: '50%'
                         }}>
-                        <Avatar alt="Remy Sharp" src="/images/BTS_V.jpg" />
+                        <Avatar alt="Remy Sharp" src="https://img.insight.co.kr/static/2019/01/31/700/18nd52ajs5z4750u7p6f.jpg" />
                     </ListItemAvatar>
                     <ListItemText
                         sx={{
                             flexGrow : 10,
                         }}
-                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`뷔 (V)`} />}
-                        secondary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={'방탄소년단 (BTS)'} color="primary"/>}
+                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`강슬기 (Seulgi)`} color="primary" />}
                     />
                 </ListItem>
                 <Divider sx={{marginLeft : 0}} variant="inset" component="li" />

@@ -26,10 +26,10 @@ class FavoriteIdol extends Component {
             <React.Fragment>
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/images/BTS_V.jpg" />
+                        <Avatar alt="Remy Sharp" src="https://img.insight.co.kr/static/2019/01/31/700/18nd52ajs5z4750u7p6f.jpg" />
                     </ListItemAvatar>
                     <ListItemText
-                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`뷔 (V)`} />}
+                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`강슬기 (Seulgi)`} color="primary"/>}
                     />
                     <Button onClick={() => {this.cancelFavoriteIdol()}} variant="contained">cancel</Button>
                 </ListItem>
