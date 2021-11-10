@@ -1,7 +1,7 @@
 export const groupDummy = {
     basicInfo: {
         image: 'https://pbs.twimg.com/media/E85o_8MVgAM58Gd.jpg',
-        info: {name: {kor: '레드벨벳', eng: 'Red Velvet'}, group: 'Red Velvet', birth: '1994.02.10', debut: '2014.08.01'},
+        info: {name: {kor: '레드벨벳', eng: 'Red Velvet'}, group: 'Red Velvet', debut: '2014.08.01', members: [{name: 'Irene', image: 'https://cdn.idsn.co.kr/news/photo/202010/35374_27074_598.jpg'} , {name: 'Seulgi', image: 'https://img.insight.co.kr/static/2019/01/31/700/18nd52ajs5z4750u7p6f.jpg'}, {name: 'Wendy', image: "https://pbs.twimg.com/profile_images/1424955372779888645/9NQK35LU_400x400.jpg"}, {name: 'Yeri', image: 'https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2021/04/PS21040700087.jpg'}, {name: 'Joy', image: 'https://image.newsis.com/2021/06/11/NISI20210611_0000764859_web.jpg'}]},
         news: [ {title: '레드벨벳 조이 \'사랑스런 가을여인\'[영상]', url: 'https://entertain.naver.com/read?oid=108&aid=0003003508'},
                 {title: '레드벨벳 웬디였어? 실감나는 연기, 사랑스러운 매력', url: 'http://entertain.naver.com/read?oid=015&aid=0004625540'},
                 {title: '레드벨벳 예리, 마스크도 명품으로..심장 녹이는 윙크', url: 'https://entertain.naver.com/read?oid=112&aid=0003496002'}]
