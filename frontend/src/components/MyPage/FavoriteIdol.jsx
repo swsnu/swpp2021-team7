@@ -18,7 +18,7 @@ class FavoriteIdol extends Component {
     }
 
     redirectSearchResult = () => {
-        this.props.history.push('/search/1');
+        this.props.history.push(`/search/${this.props.isGroup ? "group/" :  ""}1`);
     }
 
     render() {
@@ -26,10 +26,10 @@ class FavoriteIdol extends Component {
             <React.Fragment>
                 <ListItem>
                     <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="https://img.insight.co.kr/static/2019/01/31/700/18nd52ajs5z4750u7p6f.jpg" />
+                        <Avatar alt="Remy Sharp" src={this.props.img} />
                     </ListItemAvatar>
                     <ListItemText
-                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`강슬기 (Seulgi)`} color="primary"/>}
+                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`${this.props.name.kor} ${this.props.name.eng}`} color="primary"/>}
                     />
                     <Button onClick={() => {this.cancelFavoriteIdol()}} variant="contained">cancel</Button>
                 </ListItem>
