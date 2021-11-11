@@ -19,6 +19,14 @@ const SearchResult = (props) => {
     const dummy = isGroup ? groupDummy : memberDummy;
     const { id } = useParams();
 
+    const addComment = (newComment) => {
+        let comments = data.comments;
+        comments.push(newComment);
+        let newData = data;
+        newData.comments = comments;
+        setData({...newData});
+    }
+
     useEffect(() => {
         // id 없으면 홈으로 리다이렉트
         // 있으면 이용해서 search api call
@@ -34,12 +42,12 @@ const SearchResult = (props) => {
 
     if (isLoading) return <CircularProgress />
     return <SearchResultRoot>
-        <CustomGridRow components={[<BasicInfo {...dummy.basicInfo} isGroup={isGroup} key="basicInfo" />, <Twitter key="twitter" tweets={dummy.tweets} />]} />
+        <CustomGridRow components={[<BasicInfo {...data.basicInfo} isGroup={isGroup} key="basicInfo" />, <Twitter key="twitter" tweets={data.tweets} />]} />
         <div style={{height: "30px"}}></div>
-        <Youtube videos={dummy.youtubes} />
-        <SharedVideos videos={dummy.shared} />
-        <CommentInput />
-        <Comments comments={dummy.comments} />
+        <Youtube videos={data.youtubes} />
+        <SharedVideos videos={data.shared} />
+        <CommentInput addComment={addComment} />
+        <Comments comments={data.comments} />
         <div style={{height: "150px"}}></div>
     </SearchResultRoot>
 }
