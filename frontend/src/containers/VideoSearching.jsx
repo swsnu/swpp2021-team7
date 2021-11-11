@@ -32,7 +32,7 @@ export default class VideoSearching extends Component {
                     }}>
                         <IdolItem num="1" active={"active"} name="V" icon="/images/BTS_V.jpg"></IdolItem>
                         <IdolItem num="2" active={"active"} name="IU" icon="/images/IU.jpg"></IdolItem>
-                        <IdolItem num="3" active={"non-active"} name="SinB" icon="/images/IU.jpg"></IdolItem>
+                        <IdolItem num="3" active={"non-active"} name="SinB" icon="/images/girlfriend_sinbi.jpeg"></IdolItem>
                         <IdolItem num="4" active={"active"} name="Joy" icon="/images/redbelvet_joy.jpeg"></IdolItem>
                     </List>
                 </Container>
