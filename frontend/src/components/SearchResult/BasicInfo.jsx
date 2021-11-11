@@ -1,9 +1,11 @@
 import { Avatar, Chip, List, ListItemButton, ListItemText, ListItem, Stack, Button } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import Members from "./Members";
 
 const BasicInfo = ({image, info: {name, group, birth, debut, members}, news, isGroup}) => {
+
+    const [likeClicked, setLikeClicked] = useState(false);
 
     return <>
         <Box sx={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
@@ -20,7 +22,8 @@ const BasicInfo = ({image, info: {name, group, birth, debut, members}, news, isG
                     <Chip label={debut} />
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                <Chip label={`❤️ Like ${name.eng}`} color="info" />
+                {likeClicked ? <Chip label={`❤️ Like ${name.eng}`} color="primary" onClick={() => setLikeClicked(!likeClicked)}/> : 
+                <Chip label={`❤️ Like ${name.eng}`} color="primary" variant="outlined" onClick={() => setLikeClicked(!likeClicked)}/>}
             </Box>
         </Box>
 
