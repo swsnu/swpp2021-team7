@@ -23,7 +23,8 @@ export default class VideoSearching extends Component {
                         width="200px"
                         src="/images/vidol_text_512.png"/>
                 </Container>
-                <SearchIdol></SearchIdol>
+                <SearchIdol
+                    hint="Keywords (searching Idols)"></SearchIdol>
                 <Container maxWidth="sm">
                     <List sx={{
                         width: '100%',

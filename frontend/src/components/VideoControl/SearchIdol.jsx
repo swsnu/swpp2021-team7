@@ -43,7 +43,7 @@ class SearchIdol extends Component {
 
                     <TextField
                         id="input-with-icon-textfield"
-                        label="Keywords ( or Youtube link )"
+                        label={this.props.hint}
                         width="100%"
                         onKeyDown={this.keyPress} 
                         InputProps={{

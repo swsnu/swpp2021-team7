@@ -9,8 +9,15 @@ import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 
 import SearchIdol from '../components/VideoControl/SearchIdol';
+import ChooseType from '../components/VideoControl/ChooseType';
 
 class VideoIndexing extends Component {
+    cutScene(e){
+
+    }
+    extractParts(e){
+
+    }
     render() {
         return (
             <React.Fragment>
@@ -19,18 +26,10 @@ class VideoIndexing extends Component {
                         width="200px"
                         src="/images/vidol_text_512.png"/>
                 </Container>
-                <SearchIdol></SearchIdol>
+                <SearchIdol
+                    hint="Youtube link url"></SearchIdol>
                 <Container maxWidth="sm">
-                    <Stack direction="row" spacing={2}
-                        justifyContent="center"
-                        alignItems="center">
-                        <Button variant="outlined">
-                            Cut scenes
-                        </Button>
-                        <Button variant="contained">
-                            Extract My Idol Parts
-                        </Button>
-                    </Stack>
+                    <ChooseType></ChooseType>
                 </Container>
             </React.Fragment>
         )
