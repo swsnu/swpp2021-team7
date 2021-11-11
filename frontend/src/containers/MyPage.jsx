@@ -4,7 +4,6 @@ import {
     Button,
     Menu,
     MenuItem,
-    Typography,
 } from '@mui/material'
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
@@ -56,18 +55,22 @@ export default function MyPage(props) {
                 </Menu>
             </Container>
             <h1>My Page</h1>
+            <div style={{ height: "20px" }}></div>
             <Container maxWidth="sm">
                 <h2>My Idols</h2>
                 <FavoriteIdolList></FavoriteIdolList>
             </Container>
+            <div style={{ height: "20px" }}></div>
             <Container maxWidth="sm">
                 <h2>My Comments</h2>
                 <MyCommentList></MyCommentList>
             </Container>
+            <div style={{ height: "20px" }}></div>
             <Container maxWidth="sm">
                 <h2>My Scraps</h2>
                 <MyArticleList></MyArticleList>
             </Container>
+            <div style={{ height: "100px" }}></div>
         </React.Fragment>
     )
 }
