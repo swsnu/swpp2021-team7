@@ -1,8 +1,9 @@
 import { Avatar, Chip, List, ListItemButton, ListItemText, ListItem, Stack, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
+import Members from "./Members";
 
-const BasicInfo = ({image, info: {name, group, birth, debut}, news}) => {
+const BasicInfo = ({image, info: {name, group, birth, debut, members}, news, isGroup}) => {
 
     return <>
         <Box sx={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
@@ -11,17 +12,23 @@ const BasicInfo = ({image, info: {name, group, birth, debut}, news}) => {
             <Box>
                 <Stack direction="row" spacing={3} justifyContent="center">
                     <Chip label={`${name.kor} (${name.eng})`} />
-                    <Chip label={group} clickable href="/group/1" component="a" color="primary" />
+                    {!isGroup && <Chip label={group} clickable href="/search/group/1" component="a" color="primary" />}
                 </Stack>
-                <div style={{marginTop: "30px"}}></div>
+                <div style={{marginTop: "20px"}}></div>
                 <Stack direction="row" spacing={3} justifyContent="center">
-                    <Chip label={birth} />
+                    {!isGroup && <Chip label={birth} />}
                     <Chip label={debut} />
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                <Chip label="❤️ Like Seulgi" color="info" />
+                <Chip label={`❤️ Like ${name.eng}`} color="info" />
             </Box>
         </Box>
+
+        <div style={{marginTop: "20px"}}></div>
+        {isGroup && <>
+            <h3>Members</h3>
+            <Members members={members} />
+        </>}
 
         <h3>Recent News</h3>
         <Box sx={{width: '100%', textAlign: "center"}}>

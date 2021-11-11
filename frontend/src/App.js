@@ -31,7 +31,8 @@ function App(props) {
           <Route path="/sign/findAccount" exact render={() => <FindAccount />} />
           <Route path='/mypage/:id' exact render={() => <MyPage />} />
           <Route path='/rank' exact render={() => <Ranking />} />
-          <Route path="/search/:id" exact component={SearchResult} />
+          <Route path="/search/:id" exact render={() => <SearchResult />} />
+          <Route path="/search/group/:id" exact render={() => <SearchResult isGroup={true} />} />
 
           <Route path='/video' exact render={() => <VideoIndexing />} />
           <Route path='/video/search' exact render={() => <VideoSearching />} />
