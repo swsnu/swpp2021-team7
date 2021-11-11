@@ -76,6 +76,11 @@ function Main() {
                             <Link href="/search" variant="body2"> {"#Blackpink"} </Link>
                         </Grid>
                     </Box>
+                    <Box>
+                        <Grid item columnSpacing={1}>
+                            <Link href="/video" variant="body2"> {"new! Generate video clips"} </Link>
+                        </Grid>
+                    </Box>
                     {   
                         submitDone && (
                             <Box xs={{mt:2}}>

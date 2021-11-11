@@ -14,7 +14,7 @@ export default class Timeline extends Component {
         for(let i = 0 ; i < 100 ; i++){
             test.push(getRandomInt(100,20));
         }
-        console.log(test);
+        
         this.state = {test:test};
     }
     render(){

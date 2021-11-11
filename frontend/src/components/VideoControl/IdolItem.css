@@ -1,0 +1,11 @@
+.not-ready{
+    background-color:#eeeeee;
+    opacity:0.5;
+}
+.not-ready-p{
+    text-align:left;
+    color:#ff4444;
+    font-size:14px;
+    margin:8px 0px;
+
+}
