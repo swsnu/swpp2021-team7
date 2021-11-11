@@ -2,13 +2,17 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Button, TextField } from "@mui/material";
 
-const CommentInput = () => {
+const CommentInput = ({addComment}) => {
+
+    const onSubmit = () => {
+        addComment({author: "TEST1", content: "Comment content", timestamp: "just now"})
+    }
 
     return <CommentInputConatiner>
         <h4>Leave Comment!</h4>
         <TextButtonContainer>
             <TextField sx={{width: "50%"}} />
-            <Button variant="contained" sx={{marginLeft: "15px"}}>Submit</Button>
+            <Button variant="contained" sx={{marginLeft: "15px"}} onClick={onSubmit}>Submit</Button>
         </TextButtonContainer>
     </CommentInputConatiner>
 }
