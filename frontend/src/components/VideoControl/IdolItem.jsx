@@ -8,7 +8,7 @@ import {
     Chip
 } from '@mui/material';
 import { withRouter } from 'react-router';
-
+import "./IdolItem.css";
 
 class IdolItem extends Component {
     constructor(props){
@@ -22,7 +22,9 @@ class IdolItem extends Component {
     render() {
         return (
             <React.Fragment>
-                <ListItem alignItems="flex-start" onClick={this.handleClick}>
+                <ListItem 
+                    className={(this.props.active == "active") ? "" : "not-ready"}
+                    alignItems="flex-start" onClick={this.handleClick}>
                     <ListItemText
                         sx={{
                             flexGrow : 0.5,
@@ -44,6 +46,10 @@ class IdolItem extends Component {
                         primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={this.props.name} />}
                     />
                 </ListItem>
+                {(this.props.active == "active") ? 
+                "" : 
+                <p
+                    className="not-ready-p">Not Supported. Would You Request Support?</p>}
                 <Divider sx={{marginLeft : 0}} variant="inset" component="li" />
             </React.Fragment>
         )
