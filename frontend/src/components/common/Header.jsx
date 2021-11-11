@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router'
+import { useLocation } from 'react-router';
 
 function Header(props) {
     const [value, setValue] = React.useState('/');
@@ -12,6 +13,12 @@ function Header(props) {
         setValue(newValue);
         props.push(newValue)
     };
+
+    const location = useLocation();
+
+    React.useEffect(() => {
+        setValue(location.pathname);
+    }, [location.pathname])
 
     return (
         <Box sx={{ width: '100%' }}>
