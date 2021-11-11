@@ -83,9 +83,9 @@ function Main() {
                     </Box>
                     {   
                         submitDone && (
-                            <Box xs={{mt:2}}>
+                            <Box xs={{mt:10}}>
                                 <Typography variant="h6"> Search Result </Typography>
-                                <SearchResult name="IU" />
+                                <SearchResult name="레드벨벳 Red Velvet" />
                             </Box>
                         )
                     }
