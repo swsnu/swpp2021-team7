@@ -40,9 +40,8 @@ class HotRankingList extends Component {
                         bgcolor: 'background.paper',
                         position: 'relative',
                     }}>
-                        <RankItem rank="1" name="V"></RankItem>
-                        <RankItem rank="2" name="bts_V"></RankItem>
-                        <RankItem rank="3" name="방탄_V"></RankItem>
+                        <RankItem rank="1" name={{kor:"강슬기", eng:"Seulgi"}} isGroup={false} img={'https://img.insight.co.kr/static/2019/01/31/700/18nd52ajs5z4750u7p6f.jpg'}></RankItem>
+                        <RankItem rank="2" name={{kor:"레드벨벳", eng:"Red Velvet"}} isGroup={true} img={'https://pbs.twimg.com/media/E85o_8MVgAM58Gd.jpg'}></RankItem>
                     </List>
                 </Container>
             </React.Fragment>
