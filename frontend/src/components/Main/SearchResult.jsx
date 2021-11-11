@@ -5,12 +5,13 @@ import {
     ListItemText,
     ListItemAvatar,
     Avatar,
+    Chip,
 } from '@mui/material';
 import { withRouter } from 'react-router';
 
 class SearchResult extends Component {
     handleClick = () => {
-        this.props.history.push('/search/1');
+        this.props.history.push('/search/group/1');
     }
 
     render() {
@@ -21,20 +22,14 @@ class SearchResult extends Component {
                         flexGrow : 1,
                         height: '50%'
                         }}>
-                        <Avatar alt="IU" src="/images/IU.jpg" />
+                        <Avatar alt="Red Velvet" src="https://pbs.twimg.com/media/E85o_8MVgAM58Gd.jpg" />
                     </ListItemAvatar>
                     <ListItemText
                         sx={{
                             flexGrow : 10,
                         }}
                         primary={
-                            <Typography 
-                                component="span"
-                                sx={{ 
-                                    fontSize : 26
-                                }}>
-                                    {this.props.name}
-                            </Typography>
+                            <Chip color="primary" label = {this.props.name} />
                         }
                     />
                 </ListItem>
