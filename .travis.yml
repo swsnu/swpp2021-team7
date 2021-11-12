@@ -25,7 +25,7 @@ jobs:
       script:
         - cd frontend
         - ./node_modules/.bin/eslint src
-        - yarn test --coverage --watchAll=false
+        - yarn test --coverage --watchAll=false --passWithNoTests
         - coveralls-lcov -v -n coverage/lcov.info > coverage.json
         - cd ../backend
         - pylint **/*.py --load-plugins pylint_django
