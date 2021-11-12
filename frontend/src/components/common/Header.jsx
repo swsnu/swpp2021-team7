@@ -2,19 +2,18 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router'
+import { withRouter } from 'react-router';
 import { useLocation } from 'react-router';
 
 function Header(props) {
-    const [value, setValue] = React.useState('/');
+    const location = useLocation();
+    const [value, setValue] = React.useState(location.pathname);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        props.push(newValue)
+        props.history.push(newValue)
     };
 
-    const location = useLocation();
 
     React.useEffect(() => {
         setValue(location.pathname);
@@ -42,4 +41,4 @@ function Header(props) {
     );
 }
 
-export default connect(null, { push })(Header)
+export default withRouter(Header);
