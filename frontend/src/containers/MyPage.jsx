@@ -21,8 +21,7 @@ export default function MyPage(props) {
         event.preventDefault()
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = (e) => {
-        e.preventDefault()
+    const handleClose = () => {
         setAnchorEl(null);
     };
 
