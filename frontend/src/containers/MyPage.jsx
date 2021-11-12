@@ -18,11 +18,14 @@ export default function MyPage(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
+        event.preventDefault()
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    const handleClose = (e) => {
+        e.preventDefault()
         setAnchorEl(null);
     };
+
 
     return (
         <React.Fragment>
@@ -33,7 +36,7 @@ export default function MyPage(props) {
                 }}
             >
                 <Button
-                    id="basic-button"
+                    id="user-info-button"
                     aria-controls="basic-menu"
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
