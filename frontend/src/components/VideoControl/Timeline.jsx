@@ -7,21 +7,14 @@ import './Timeline.css';
 export default class Timeline extends Component {
     constructor(props){
         super(props);
-        function getRandomInt(max,min=0) {
-            return Math.floor(Math.random() * max)+min;
-          }
-        const test = [];
-        for(let i = 0 ; i < 100 ; i++){
-            test.push(getRandomInt(100,20));
-        }
-        
+        test=[12,34,123,40,102,30,12,34,65,76,10,32,67,90];
         this.state = {test:test};
     }
     render(){
         const timelines = this.state.test.map((num,i) => {
             const styleActive = {
                 width: (num+"px"),
-                "background-color":this.props.color
+                backgroundColor:this.props.color
             }
             const styleDeactive = {
                 width: (num+"px")
@@ -29,7 +22,7 @@ export default class Timeline extends Component {
             if(i % 2 == 0)
                 return <div className="active-box"
                             style={styleActive}></div>;
-            else if(i % 2 == 1)
+            else
                 return <div className="deactive-box"
                             style={styleDeactive}></div>;
         });

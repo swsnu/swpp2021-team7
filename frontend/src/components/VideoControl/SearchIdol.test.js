@@ -4,26 +4,33 @@ import { Provider } from 'react-redux';;
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
 import { ConnectedRouter } from 'connected-react-router';
-import IdolSelector from './IdolSelector';
+import SearchIdol from './SearchIdol';
 
 
 const mockStore = getMockStore({});
 
-describe('<IdolSelector />', () => {
+describe('<SearchIdol />', () => {
     let component = null
-    let setComponent = (isGroup) => {
+    let setComponent = () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <IdolSelector></IdolSelector>
+                    <SearchIdol></SearchIdol>
                 </ConnectedRouter>
             </Provider>
         )
     }
     it('should render without errors', () => {
+        
+        const spyHistory = jest.spyOn(history, 'push')
         setComponent()
-        const listItem = component.find('div.idol-image')
-        expect(listItem.length).toBe(2);
+        const textField = component.find('input#input-with-icon-textfield')
+        expect(textField.length).toBe(1);
+        
+        //textField.simulate('keydown', {keyCode: 13});
+        textField.simulate('keydown');
+        expect(spyHistory).toBeCalledWith('/video/search')
+        spyHistory.mockRestore();
 
     })
 

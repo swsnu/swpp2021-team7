@@ -9,18 +9,10 @@ export default class IdolSelector extends Component {
         this.state = {date: new Date()};
         this.myRef1 = React.createRef();
         this.myRef2 = React.createRef();
-        this.activeIdol = this.activeIdol.bind(this);
+        
         
     }
-    activeIdol(e,data){
-        console.log(e,data);
-        console.log(this);
-        if(e.target.classList.contains("is-active")){
-            e.target.classList.remove("is-active");
-        }else{
-            e.target.classList.add("is-active");
-        }
-    }
+
     render(){
         return (<>
             <Container maxWidth="sm">
@@ -30,8 +22,7 @@ export default class IdolSelector extends Component {
                         >{"Choose your IDOL"}</p>
                     <div 
                     className="idol-image" 
-                    ref={this.myRef1}
-                    onClick={this.activeIdol}>
+                    ref={this.myRef1}>
                         <img
                         className="idol-image"
                         src="/images/IU.jpg"></img>
@@ -43,8 +34,7 @@ export default class IdolSelector extends Component {
                     </div>
                     <div 
                     className="idol-image"
-                    ref={this.myRef2}
-                    onClick={this.activeIdol}>
+                    ref={this.myRef2}>
                         <img
                         className="idol-image"
                         src="/images/BTS_V.jpg"></img>
