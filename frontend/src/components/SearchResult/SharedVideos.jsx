@@ -5,10 +5,10 @@ import SharedVideo from "./SharedVideo";
 const SharedVideos = ({videos}) => {
 
     const videoComponents = videos.map((v, i) => <SharedVideo {...v} key={i} />);
-    return <>
+    return <div id="shared-videos">
         <h2>Shared Indexed Videos</h2>
         <CustomGridRow components={videoComponents} />
-    </>
+    </div>
 };
 
 export default SharedVideos;
