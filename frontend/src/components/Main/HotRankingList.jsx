@@ -33,7 +33,7 @@ class HotRankingList extends Component {
                         justifyContent="center"
                     >
                         <Fire sx={{color: 'red'}} onClick={this.handleClick}/>
-                        <Typography variant="h6" color="red" onClick={this.handleClick}> Hottest Idols </Typography>                    
+                        <Typography id="go-rank-button" variant="h6" color="red" onClick={this.handleClick}> Hottest Idols </Typography>                    
                     </Box>
                     <List sx={{
                         width: '100%',

@@ -66,7 +66,7 @@ function Main() {
                             autoFocus
                         />
                         <IconButton type="submit" sx={{margin: 1}}>
-                            <Search />    
+                            <Search id="search-button"/>    
                         </IconButton>
                     </Box>
                     <Box>
