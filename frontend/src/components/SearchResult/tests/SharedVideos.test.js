@@ -5,22 +5,23 @@ import { history } from '../../../store/store';
 import { ConnectedRouter } from 'connected-react-router';
 import SharedVideos from '../SharedVideos';
 import { getMockStore } from '../../../test-utils/mocks';
+import { memberDummy } from '../../../constants';
 
 const mockStore = getMockStore({});
 
 describe('<SharedVideos />', () => {
   let component = null;
-  let setComponent = (sharedVideos) => {
+  let setComponent = () => {
     component = mount(
       <Provider store={mockStore} >
           <ConnectedRouter history={history}>
-              <SharedVideos videos={sharedVideos} />
+              <SharedVideos videos={memberDummy.shared} />
           </ConnectedRouter>
       </Provider>
     )
   }
   it('should render without errors', () => {
-      setComponent([]);
+      setComponent();
       const sharedVideos = component.find('div#shared-videos');
       expect(sharedVideos.length).toBe(1);
   });
