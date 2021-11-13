@@ -7,7 +7,7 @@ const BasicInfo = ({image, info: {name, group, birth, debut, members}, news, isG
 
     const [likeClicked, setLikeClicked] = useState(false);
 
-    return <>
+    return <div id="basicInfo">
         <Box sx={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
             <Avatar src={image} sx={{width: "40%", height: "auto"}} />
 
@@ -22,16 +22,15 @@ const BasicInfo = ({image, info: {name, group, birth, debut, members}, news, isG
                     <Chip label={debut} />
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                {likeClicked ? <Chip label={`❤️ Like ${name.eng}`} color="primary" onClick={() => setLikeClicked(!likeClicked)}/> : 
-                <Chip label={`❤️ Like ${name.eng}`} color="primary" variant="outlined" onClick={() => setLikeClicked(!likeClicked)}/>}
+                <Chip id="likeBtn" label={`❤️ Like ${name.eng}`} color="primary" variant={likeClicked ? "filled" : "outlined"} onClick={() => setLikeClicked(!likeClicked)}/>
             </Box>
         </Box>
 
         <div style={{marginTop: "20px"}}></div>
-        {isGroup && <>
+        {isGroup && <div id="members">
             <h3>Members</h3>
             <Members members={members} />
-        </>}
+        </div>}
 
         <h3>Recent News</h3>
         <Box sx={{width: '100%', textAlign: "center"}}>
@@ -40,11 +39,11 @@ const BasicInfo = ({image, info: {name, group, birth, debut, members}, news, isG
                     <ListItemButton component="a" href={n.url}>
                         <ListItemText primary={n.title} />
                     </ListItemButton>
-                    <Button variant="contained" onClick={() => alert("Successfully scraped!")}>Scrap</Button>
+                    <Button variant="contained">Scrap</Button>
                 </ListItem>
             })}
         </Box>
-    </>
+    </div>
 }
 
 export default BasicInfo;
