@@ -3,26 +3,26 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';;
 import { history } from '../../../store/store';
 import { ConnectedRouter } from 'connected-react-router';
-import SharedVideos from '../SharedVideos';
+import YoutubeVideos from '../YoutubeVideos';
 import { getMockStore } from '../../../test-utils/mocks';
 import { memberDummy } from '../../../constants';
 
 const mockStore = getMockStore({});
 
-describe('<SharedVideos />', () => {
+describe('<YoutubeVideos />', () => {
   let component = null;
   let setComponent = () => {
     component = mount(
       <Provider store={mockStore} >
           <ConnectedRouter history={history}>
-              <SharedVideos videos={memberDummy.shared} />
+              <YoutubeVideos videos={memberDummy.youtubes} />
           </ConnectedRouter>
       </Provider>
     )
   }
   it('should render without errors', () => {
       setComponent();
-      const sharedVideos = component.find('div#shared-videos');
-      expect(sharedVideos.length).toBe(1);
+      const youtubeVideos = component.find('div#youtube-videos');
+      expect(youtubeVideos.length).toBe(1);
   });
 });

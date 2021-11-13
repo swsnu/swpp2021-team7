@@ -25,15 +25,15 @@ describe('<SearchResult />', () => {
         
         const searchResult = component.find("SearchResultRoot");
         const basicInfo = component.find("BasicInfo");
-        const twitter = component.find("Twitter");
-        const youtube = component.find("Youtube");
+        const tweets = component.find("Tweets");
+        const youtube = component.find("YoutubeVideos");
         const commentInput = component.find("CommentInput");
         const comments = component.find("Comments");
 
         setTimeout(() => {
             expect(searchResult.length).toBe(1);
             expect(basicInfo.length).toBe(1);
-            expect(twitter.length).toBe(1);
+            expect(tweets.length).toBe(1);
             expect(youtube.length).toBe(1);
             expect(commentInput.length).toBe(1);
             expect(comments.length).toBe(1);
