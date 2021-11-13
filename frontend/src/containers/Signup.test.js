@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';;
 import { getMockStore } from '../test-utils/mocks';
 import { history } from '../store/store';
 import { ConnectedRouter } from 'connected-react-router';
-import FindAccount from './FindAccount';
+import Signup from './Signup';
 
 
 const mockStore = getMockStore({});
@@ -15,7 +15,7 @@ describe('<FindAccount />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <FindAccount></FindAccount>
+                    <Signup></Signup>
                 </ConnectedRouter>
             </Provider>
         )
@@ -24,6 +24,7 @@ describe('<FindAccount />', () => {
     it('should render without errors', () => {
         setComponent();
         const container = component.find('ForwardRef(Container)');
+        // console.log(component.debug());
 
         expect(container.length).toBe(1);
     })

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';;
 import { getMockStore } from '../test-utils/mocks';
 import { history } from '../store/store';
 import { ConnectedRouter } from 'connected-react-router';
-import FindAccount from './FindAccount';
+import Signin from './Signin';
 
 
 const mockStore = getMockStore({});
@@ -15,7 +15,7 @@ describe('<FindAccount />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <FindAccount></FindAccount>
+                    <Signin></Signin>
                 </ConnectedRouter>
             </Provider>
         )
@@ -28,7 +28,7 @@ describe('<FindAccount />', () => {
         expect(container.length).toBe(1);
     })
 
-    it('should redirect to Login Page', () => {
+    it('should redirect to Main Page', () => {
         const spyHistory = jest.spyOn(history, 'push');
         setComponent();
         
@@ -37,7 +37,7 @@ describe('<FindAccount />', () => {
         expect(submitButton.length).toBe(1);
 
         submitButton.at(0).simulate('submit');
-        expect(spyHistory).toBeCalledWith('/sign/login');
+        expect(spyHistory).toBeCalledWith('/');
 
         spyHistory.mockRestore();
     })
