@@ -22,9 +22,9 @@ function Main() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         setSubmitDone(true);
-        console.log({
-        search: data.get('search-input'),
-        });
+        // console.log({
+        // search: data.get('search-input'),
+        // });
     };
 
     return (
