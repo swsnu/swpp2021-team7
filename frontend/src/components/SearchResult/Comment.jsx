@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import { Chip, ListItem, ListItemText, } from "@mui/material";
 
-const Comment = ({author, content, timestamp}) => {
+const Comment = ({author, content, timestamp, isMine}) => {
 
     const [likeClicked, setLikeClicked] = useState(false);
-    const isMine = author === "TEST1";
 
-    return <ListItem>
+    return <div className="comment">
+        <ListItem>
             <Chip label={author} color="primary" />
             <ListItemText primary={content} style={{marginLeft: "10px"}} />
-            {isMine ? null : likeClicked ? <Chip label="❤️ Like" style={{marginRight: "10px"}} color="primary" onClick={() => setLikeClicked(!likeClicked)}/> : 
-                <Chip label="❤️ Like" style={{marginRight: "10px"}} color="primary" variant="outlined" onClick={() => setLikeClicked(!likeClicked)}/>}
+            {!isMine && <Chip className="commentLikeBtn" label="❤️ Like" style={{marginRight: "10px"}} color="primary" variant={likeClicked ? "filled" : "outlined"} onClick={() => setLikeClicked(!likeClicked)}/>}
             {isMine && 
-            <>
+            <div className="edit-or-delete">
                 <Chip label="수정" style={{marginRight: "5px"}} color="primary"/>
                 <Chip label="삭제" style={{marginRight: "5px"}} color="primary"/>
-            </>}
-
-            <Chip label={timestamp}/>
-            
-</ListItem>
+            </div>}
+            <Chip label={timestamp}/>    
+        </ListItem>
+    </div>
 }
 
 export default Comment;
