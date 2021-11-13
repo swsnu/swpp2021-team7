@@ -23,7 +23,7 @@ describe('<IdolItem />', () => {
     it('should render without errors', () => {
         setComponent()
         const listItem = component.find('#IDOL-ITEM')
-        expect(listItem.length).toBe(1);
+        expect(listItem.length).toBe(3);
     })
 
     it('should redirect to Idol Item Page', () => {
