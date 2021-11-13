@@ -21,8 +21,6 @@ describe('<CommentInput />', () => {
   }
   it('should render without errors', () => {
       setComponent();
-      console.log(component.debug())
-
       const commentInput = component.find('div#comment-input');
       expect(commentInput.length).toBe(1);
   });
