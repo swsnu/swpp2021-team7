@@ -26,7 +26,7 @@ describe('<SearchResult />', () => {
         const searchResult = component.find("SearchResultRoot");
         const basicInfo = component.find("BasicInfo");
         const tweets = component.find("Tweets");
-        const youtube = component.find("Youtube");
+        const youtube = component.find("YoutubeVideos");
         const commentInput = component.find("CommentInput");
         const comments = component.find("Comments");
 
