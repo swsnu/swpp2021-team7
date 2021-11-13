@@ -4,7 +4,7 @@ import Tweet from './Tweet';
 
 export default function Tweets({tweets}) {
 
-  return <div className="tweets">
+  return <div id="tweets">
     <h3>On Twitter</h3>
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {tweets.map((tweet, i) => {
