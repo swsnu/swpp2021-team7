@@ -12,12 +12,7 @@ import SearchIdol from '../components/VideoControl/SearchIdol';
 import ChooseType from '../components/VideoControl/ChooseType';
 
 class VideoIndexing extends Component {
-    cutScene(e){
 
-    }
-    extractParts(e){
-
-    }
     render() {
         return (
             <React.Fragment>

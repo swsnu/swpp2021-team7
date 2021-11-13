@@ -13,7 +13,6 @@ import "./IdolItem.css";
 class IdolItem extends Component {
     constructor(props){
         super(props);
-        console.log(props);
     }
     redirectSearchResult = () => {
         this.props.history.push('/video/result');
@@ -23,6 +22,7 @@ class IdolItem extends Component {
         return (
             <React.Fragment>
                 <ListItem 
+                    id="IDOL-ITEM"
                     className={(this.props.active == "active") ? "" : "not-ready"}
                     alignItems="flex-start" onClick={this.handleClick}>
                     <ListItemText

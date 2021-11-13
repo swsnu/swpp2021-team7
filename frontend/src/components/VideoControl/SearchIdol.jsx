@@ -26,10 +26,10 @@ class SearchIdol extends Component {
         this.props.history.push('/video/search');
     }
     keyPress(e){
-        if(e.keyCode == 13){
+        //if(e.keyCode == 13){
            this.redirectSearchResult();
            // put the login here
-        }
+        //}
      }
     render() {
         return (
