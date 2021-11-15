@@ -8,11 +8,11 @@ const CommentInput = ({addComment}) => {
         addComment({author: "TEST1", content: "Comment content", timestamp: "just now"})
     }
 
-    return <CommentInputConatiner>
+    return <CommentInputConatiner id="comment-input">
         <h4>Leave Comment!</h4>
         <TextButtonContainer>
             <TextField sx={{width: "50%"}} />
-            <Button variant="contained" sx={{marginLeft: "15px"}} onClick={onSubmit}>Submit</Button>
+            <Button id="comment-submit" variant="contained" sx={{marginLeft: "15px"}} onClick={onSubmit}>Submit</Button>
         </TextButtonContainer>
     </CommentInputConatiner>
 }

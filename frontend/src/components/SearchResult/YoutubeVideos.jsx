@@ -2,13 +2,13 @@ import React from "react";
 import CustomGridRow from "../common/CustomGridRow";
 import YoutubeVideo from "./YoutubeVideo";
 
-const Youtube = ({videos}) => {
+const YoutubeVideos = ({videos}) => {
 
     const videoComponents = videos.map((v, i) => <YoutubeVideo {...v} key={i} />);
-    return <>
+    return <div id="youtube-videos">
         <h2>Youtube Uploads</h2>
         <CustomGridRow components={videoComponents} />
-    </>
+    </div>
 };
 
-export default Youtube;
+export default YoutubeVideos;

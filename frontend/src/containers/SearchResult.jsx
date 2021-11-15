@@ -2,8 +2,8 @@ import { CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import CustomGridRow from '../components/common/CustomGridRow';
 import BasicInfo from '../components/SearchResult/BasicInfo';
-import Twitter from '../components/SearchResult/Twitter';
-import Youtube from '../components/SearchResult/Youtube';
+import Tweets from '../components/SearchResult/Tweets';
+import YoutubeVideos from '../components/SearchResult/YoutubeVideos';
 import styled from "@emotion/styled";
 import SharedVideos from '../components/SearchResult/SharedVideos';
 import CommentInput from '../components/SearchResult/CommentInput';
@@ -42,9 +42,9 @@ const SearchResult = (props) => {
 
     if (isLoading) return <CircularProgress />
     return <SearchResultRoot>
-        <CustomGridRow components={[<BasicInfo {...data.basicInfo} isGroup={isGroup} key="basicInfo" />, <Twitter key="twitter" tweets={data.tweets} />]} />
+        <CustomGridRow components={[<BasicInfo {...data.basicInfo} isGroup={isGroup} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
         <div style={{height: "30px"}}></div>
-        <Youtube videos={data.youtubes} />
+        <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />
         <CommentInput addComment={addComment} />
         <Comments comments={data.comments} />
