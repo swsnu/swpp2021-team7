@@ -15,32 +15,32 @@ class idolViemMemberLog(models.Model):
 class idolGroup(models.Model):
     groupName = models.CharField(max_length=50)
     time = models.DateTimeField(auto_now_add=True)
-    valid = models.IntegerField(default=1)
+    valid = models.BooleanField(default=True)
     
 class idolGroupInfo(models.Model):
     groupId = models.ForeignKey(idolGroup, related_name='idolGroupInfos', on_delete=models.CASCADE)
     groupThumbnail = models.CharField(max_length=50)
     groupInfo = models.JSONField(default='{}')
     groupSource = models.JSONField(default='{}')
-    valid = models.IntegerField(default=1)
+    valid = models.BooleanField(default=True)
     
 class idolMember(models.Model):
     memberName = models.CharField(max_length=30)
     time = models.DateTimeField(auto_now_add=True)
-    valid = models.IntegerField(default=1)
+    valid = models.BooleanField(default=True)
     
 class idolMemberInfo(models.Model):
     memberId = models.ForeignKey(idolMember, related_name='idolMemberInfos', on_delete=models.CASCADE)
     memberThumbnail = models.CharField(max_length=50)
     memberInfo = models.JSONField(default='{}')
     memberSource = models.JSONField(default='{}')
-    valid = models.IntegerField(default=1)
+    valid = models.BooleanField(default=True)
     
 class idolMemberIncluded(models.Model):
     groupId = models.ForeignKey(idolGroup, related_name='memberIncluded', on_delete=models.CASCADE)
     memberId = models.ForeignKey(idolMember, related_name='groupIncluded', on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
-    valid = models.IntegerField(default=1)
+    valid = models.BooleanField(default=True)
     
 class groupComment(models.Model):
     content = models.TextField(blank=False)
