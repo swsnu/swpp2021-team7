@@ -1,17 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.base import Model
 
 class searchLog(models.Model):
-    query = models.TextField(blank=False)
+    query = models.TextField(blank=False, default="")
     time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, related_name='searchLogs',on_delete=models.CASCADE)
+
+class imageResource(models.Model):
+    address = models.TextField(blank=False, default="")
+    size = models.IntegerField(default=0)
+    time = models.DateTimeField(auto_now_add=True)
     
-class idolViewGroupLog(models.Model):
-    pass
-
-class idolViemMemberLog(models.Model):
-    pass
-
 class idolGroup(models.Model):
     groupName = models.CharField(max_length=50)
     time = models.DateTimeField(auto_now_add=True)
@@ -19,9 +19,9 @@ class idolGroup(models.Model):
     
 class idolGroupInfo(models.Model):
     groupId = models.ForeignKey(idolGroup, related_name='idolGroupInfos', on_delete=models.CASCADE)
-    groupThumbnail = models.CharField(max_length=50)
-    groupInfo = models.JSONField(default='{}')
-    groupSource = models.JSONField(default='{}')
+    groupThumbnail = models.ForeignKey(imageResource, related_name="idolGroups", on_delete=models.PROTECT)
+    groupInfo = models.JSONField(default=dict)
+    groupSource = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
     
 class idolMember(models.Model):
@@ -31,9 +31,9 @@ class idolMember(models.Model):
     
 class idolMemberInfo(models.Model):
     memberId = models.ForeignKey(idolMember, related_name='idolMemberInfos', on_delete=models.CASCADE)
-    memberThumbnail = models.CharField(max_length=50)
-    memberInfo = models.JSONField(default='{}')
-    memberSource = models.JSONField(default='{}')
+    memberThumbnail = models.ForeignKey(imageResource, related_name="idolMembers", on_delete=models.PROTECT)
+    memberInfo = models.JSONField(default=dict)
+    memberSource = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
     
 class idolMemberIncluded(models.Model):
@@ -43,26 +43,42 @@ class idolMemberIncluded(models.Model):
     valid = models.BooleanField(default=True)
     
 class groupComment(models.Model):
-    content = models.TextField(blank=False)
+    content = models.TextField(blank=False, default="")
     user = models.ForeignKey(User, related_name='groupComments', on_delete=models.CASCADE)
     groupId = models.ForeignKey(idolGroup, related_name='groupComments', on_delete=models.CASCADE)
     
 class memberComment(models.Model):
-    content = models.TextField(blank=False)
+    content = models.TextField(blank=False, default="")
     user = models.ForeignKey(User, related_name='memberComments', on_delete=models.CASCADE)
     memberId = models.ForeignKey(idolMember, related_name='memberComments', on_delete=models.CASCADE)
     
+class idolViewGroupLog(models.Model):
+    groupId = models.ForeignKey(idolGroup, related_name='idolViewGroupLogs', on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, related_name='idolViewGroupLogs', on_delete=models.CASCADE)
+
+
+class idolViemMemberLog(models.Model):
+    memberId = models.ForeignKey(idolMember, related_name='idolViemMemberLogs', on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, related_name='idolViemMemberLogs', on_delete=models.CASCADE)
+
 class videoResource(models.Model):
     pass
 
 class articleMemberScrap(models.Model):
-    pass
+    address = models.TextField(blank=False, default="")
+    time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, related_name='articleMemberScraps', on_delete=models.CASCADE)
+    memberId = models.ForeignKey(idolMember, related_name='articleMemberScraps', on_delete=models.CASCADE)
+    
 
 class articleGroupScrap(models.Model):
-    pass
+    address = models.TextField(blank=False, default="")
+    time = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, related_name='articleGroupScraps', on_delete=models.CASCADE)
+    groupId = models.ForeignKey(idolGroup, related_name='articleGroupScraps', on_delete=models.CASCADE)
 
-class imageResource(models.Model):
-    pass
 
 class idolMemberImage(models.Model):
     pass
@@ -71,10 +87,16 @@ class idolRequest(models.Model):
     pass
 
 class myIdolGroup(models.Model):
-    pass
+    groupId = models.ForeignKey(idolGroup, related_name="myIdolGroups", on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, related_name='myIdolGroups', on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now_add=True)
+    valid = models.BooleanField(default=True)
 
 class myIdolMember(models.Model):
-    pass
+    memberId = models.ForeignKey(idolMember, related_name="myIdolMembers", on_delete=models.CASCADE)
+    userId = models.ForeignKey(User, related_name='myIdolMembers', on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now_add=True)
+    valid = models.BooleanField(default=True)
 
 class videoRecognitionModel(models.Model):
     pass
