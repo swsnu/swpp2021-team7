@@ -25,7 +25,7 @@ def signup(request):
         except (KeyError, JSONDecodeError) as e: 
             return HttpResponseBadRequest() 
 
-        User.objects.create_user(email = email, password = password)
+        User.objects.create_user(username = email, password = password)
         return HttpResponse(status=201)
     else:
         return HttpResponseNotAllowed(['POST'])
@@ -35,7 +35,7 @@ def signin(request):
         req_data = json.loads(request.body.decode())
         email = req_data['email']
         password = req_data['password']
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
             return HttpResponse(status=204)
