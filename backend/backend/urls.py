@@ -19,10 +19,10 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('account.urls')),
-    path('api/', include('main.urls')),
-    path('api/', include('mypage.urls')),
-    path('api/', include('searchResult.urls')),
-    path('api/', include('video.urls'))
+    # path('api/', include('account.urls')),
+    # path('api/', include('main.urls')),
+    # path('api/', include('mypage.urls')),
+    # path('api/', include('searchResult.urls')),
+    # path('api/', include('video.urls'))
     
 ]
