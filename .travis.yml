@@ -29,7 +29,7 @@ jobs:
         - coveralls-lcov -v -n coverage/lcov.info > coverage.json
         - cd ../backend
         - pylint **/*.py --load-plugins pylint_django
-        - coverage run --source='.' --omit="./backend/settings.py" manage.py test
+        - coverage run --source='.' manage.py test
         - coverage xml
         - cd ..
         - sonar-scanner
