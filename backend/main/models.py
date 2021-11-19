@@ -88,13 +88,13 @@ class IdolRequest(models.Model):
 
 class MyIdolGroup(models.Model):
     groupId = models.ForeignKey(IdolGroup, related_name="myIdolGroups", on_delete=models.CASCADE)
-    userId = models.ForeignKey(User, related_name='myIdolGroups', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='myIdolGroups', on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField(default=True)
 
 class MyIdolMember(models.Model):
     memberId = models.ForeignKey(IdolMember, related_name="myIdolMembers", on_delete=models.CASCADE)
-    userId = models.ForeignKey(User, related_name='myIdolMembers', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='myIdolMembers', on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField(default=True)
 

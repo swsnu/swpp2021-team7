@@ -11,7 +11,9 @@ from django.http.response import HttpResponseBadRequest, JsonResponse
 from main.models import *
 import json
 
-@login_required(login_url="/")
+LOGIN_PATH = "/"
+
+@login_required(login_url=LOGIN_PATH)
 @require_http_methods(["GET", "POST"])
 def mmbrCmtGetPost(request, member_id):
     
@@ -27,7 +29,7 @@ def mmbrCmtGetPost(request, member_id):
         comments = [comment for comment in MemberComment.objects.filter(memberId=idolMbr).values()]
         return JsonResponse(comments, safe=False)
 
-@login_required(login_url="/")
+@login_required(login_url=LOGIN_PATH)
 @require_http_methods(["PUT", "DELETE"])
 def mmbrCmtPutDelete(request, comment_id):
     
@@ -43,12 +45,12 @@ def mmbrCmtPutDelete(request, comment_id):
         mbrCmt.delete()
         return HttpResponse(status=200)
     
-@login_required(login_url="/")    
+@login_required(login_url=LOGIN_PATH)    
 @require_http_methods(["GET", "POST"])
 def grpCmtGetPost():
     pass
 
-@login_required(login_url="/")
+@login_required(login_url=LOGIN_PATH)
 @require_http_methods(["PUT", "DELETE"])
 def grpCmtPutDelete():
     pass
