@@ -1,15 +1,11 @@
-from json.decoder import JSONDecodeError
+import json
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.http import response
-from django.http.response import HttpResponseBadRequest, JsonResponse
-from main.models import *
-import json
+from django.http.response import JsonResponse
+from main.models import IdolMember, MemberComment
 
 LOGIN_PATH = "/"
 
@@ -25,9 +21,9 @@ def mmbrCmtGetPost(request, member_id):
         mbrCmt = MemberComment(content=content, user=request.user, memberId=idolMbr)
         mbrCmt.save()
         return JsonResponse(model_to_dict(mbrCmt), safe=False)
-    else:
-        comments = [comment for comment in MemberComment.objects.filter(memberId=idolMbr).values()]
-        return JsonResponse(comments, safe=False)
+    
+    comments = [MemberComment.objects.filter(memberId=idolMbr).values()]
+    return JsonResponse(comments, safe=False)
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["PUT", "DELETE"])
@@ -41,9 +37,9 @@ def mmbrCmtPutDelete(request, comment_id):
         mbrCmt.content = content
         mbrCmt.save()
         return JsonResponse(model_to_dict(mbrCmt), safe=False)
-    else:
-        mbrCmt.delete()
-        return HttpResponse(status=200)
+    
+    mbrCmt.delete()
+    return HttpResponse(status=200)
     
 @login_required(login_url=LOGIN_PATH)    
 @require_http_methods(["GET", "POST"])
