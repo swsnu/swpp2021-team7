@@ -3,7 +3,7 @@ DATABASE= {
         'ENGINE' : 'django.db.backends.mysql',
         'NAME' : 'team7',
         'USER' : 'root',
-        'PASSWORD' : "b116941515!",
+        'PASSWORD' : "",
         'HOST' : 'localhost',
         'PORT' : '3306',
     }
