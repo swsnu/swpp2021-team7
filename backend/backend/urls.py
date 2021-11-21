@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
+api_url = [
+    path("account/", include('account.urls')),
+    # path('main/', include('main.urls')),
+    path('mypage/', include('mypage.urls')),
+    path('search-result/', include('searchResult.urls')),
+    # path('video/', include('video.urls'))
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('account.urls')),
-    # path('api/', include('main.urls')),
-    path('api/', include('mypage.urls')),
-    path('api/', include('searchResult.urls')),
-    # path('api/', include('video.urls'))
-    
+    path("api/", include(api_url))
 ]
