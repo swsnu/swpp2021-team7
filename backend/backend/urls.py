@@ -23,6 +23,6 @@ urlpatterns = [
     # path('api/', include('main.urls')),
     path('api/', include('mypage.urls')),
     path('api/', include('searchResult.urls')),
-    # path('api/', include('video.urls'))
+    path('api/', include('video.urls'))
     
 ]
