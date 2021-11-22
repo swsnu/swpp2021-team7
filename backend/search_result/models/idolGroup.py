@@ -25,7 +25,7 @@ class IdolGroupInfo(models.Model):
             "info": {
                 "name": self.group.name,
                 "debut": self.info["debut"],
-                "members": [member.name_and_thumbnail for member in self.group.members],
+                "members": [member.to_group_response for member in self.group.members],
             },
             "news": self.info["news"],
         }
@@ -33,12 +33,8 @@ class IdolGroupInfo(models.Model):
 
 class GroupComment(models.Model):
     content = models.TextField(blank=False, default="")
-    user = models.ForeignKey(
-        User, related_name="groupComments", on_delete=models.CASCADE
-    )
-    group = models.ForeignKey(
-        IdolGroup, related_name="groupComments", on_delete=models.CASCADE
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(IdolGroup, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
