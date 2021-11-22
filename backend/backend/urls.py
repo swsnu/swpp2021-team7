@@ -18,14 +18,11 @@ from django.urls import path
 from django.urls.conf import include
 
 api_url = [
-    path("account/", include('account.urls')),
+    path("account/", include("account.urls")),
     # path('main/', include('main.urls')),
-    path('mypage/', include('mypage.urls')),
-    path('search-result/', include('searchResult.urls')),
+    path("mypage/", include("mypage.urls")),
+    path("search-result/", include("search_result.urls")),
     # path('video/', include('video.urls'))
 ]
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("api/", include(api_url))
-]
+urlpatterns = [path("admin/", admin.site.urls), path("api/", include(api_url))]
