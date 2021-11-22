@@ -3,11 +3,16 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
+import django.utils.timezone
 
 
 class Migration(migrations.Migration):
 
-    initial = True
+    replaces = [
+        ("search_result", "0001_initial"),
+        ("search_result", "0002_auto_20211122_0934"),
+        ("search_result", "0003_auto_20211122_0956"),
+    ]
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

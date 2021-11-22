@@ -1,7 +1,18 @@
-from django.urls import path
-from .views import mmbrCmtGetPost, grpCmtGetPost, mmbrCmtPutDelete, grpCmtPutDelete
+from django.urls import path, re_path
+from .views import (
+    mmbrCmtGetPost,
+    grpCmtGetPost,
+    mmbrCmtPutDelete,
+    grpCmtPutDelete,
+    search_result,
+)
 
 urlpatterns = [
+    re_path(
+        r"^(?P<scope>group|member)/(?P<instance_id>[0-9]+)",
+        search_result,
+        name="search_result",
+    ),
     path(
         "comment/member/<int:member_id>/",
         mmbrCmtGetPost,

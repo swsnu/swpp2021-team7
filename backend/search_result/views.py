@@ -5,7 +5,7 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
-from .models import IdolMember, MemberComment
+from .models import IdolMember, MemberComment, IdolGroup, IdolMember
 
 LOGIN_PATH = "/"
 
@@ -52,3 +52,34 @@ def grpCmtGetPost():
 @require_http_methods(["PUT", "DELETE"])
 def grpCmtPutDelete():
     pass
+
+
+@require_http_methods(["GET"])
+def search_result(request, scope, instance_id):
+
+    if scope == "member":
+        model = IdolMember
+    else:
+        model = IdolGroup
+
+    instance = get_object_or_404(model, id=instance_id)
+    basicInfo = instance.to_basic_info()
+    ig_posts = instance.info["ig_posts"]
+    youtubes = instance.info["youtubes"]
+
+    if scope == "member":
+        comments_qs = instance.membercomment_set.all()
+    else:
+        comments_qs = instance.groupcomment_set.all()
+
+    comments = [comment.to_response_format for comment in comments_qs]
+
+    return JsonResponse(
+        {
+            "basicInfo": basicInfo,
+            "ig_posts": ig_posts,
+            "youtubes": youtubes,
+            "comments": comments,
+        },
+        status=200,
+    )
