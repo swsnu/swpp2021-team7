@@ -14,9 +14,20 @@ class IdolGroupInfo(models.Model):
     thumbnail = models.OneToOneField(
         ImageResource, on_delete=models.SET_NULL, null=True, blank=True
     )
-    info = models.JSONField(default=dict)
+    info = models.JSONField(default=dict)  # news, tweets(instagram posts), youtubes
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
+
+    def to_basic_info(self):
+        return {
+            "thumbnail": self.thumbnail.address,
+            "info": {
+                "name": self.group.name,
+                "debut": self.info["debut"],
+                "members": [member.name_and_thumbnail for member in self.group.members],
+            },
+            "news": self.info["news"],
+        }
 
 
 class GroupComment(models.Model):
