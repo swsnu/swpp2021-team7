@@ -1,19 +1,22 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models.expressions import F
+from django.http.response import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_http_methods
 from django.core.paginator import Paginator
 from django.db.models import Count
 from .models import SearchLog
+from search_result.models import IdolGroup, IdolMember
 
 LOGIN_PATH = "/"
 DEFAULT_PAGE_SIZE = 10
 
 
-@login_required(login_url=LOGIN_PATH)
+# @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["GET"])
 def rankingInfoGet(request):
-    page = request.GET.get('page', 0)
-    size = request.GET.get('size', DEFAULT_PAGE_SIZE)
+    page = int(request.GET.get('page', 0))
+    size = int(request.GET.get('size', DEFAULT_PAGE_SIZE))
     
     startIndex = page * size
     lastIndex = (page + 1) * size
@@ -21,19 +24,32 @@ def rankingInfoGet(request):
     searchLogs = SearchLog.objects.all().values('query').annotate(
         total=Count('query'),
         isMember=F('isMember')
-        ).order_by('total')
+        ).order_by('-total')
     
     totalResultLen = len(searchLogs)
     if lastIndex > totalResultLen:
         lastIndex = totalResultLen
         
-    lastPage = (totalResultLen % size) + 1
+    lastPage = int((totalResultLen / size)) + 1
     
     searchLogs = searchLogs[startIndex:lastIndex]
     
+    indolInfos = []
     for srchLog in searchLogs:
         model = None
+        if srchLog['isMember']:
+            model = IdolMember
+        else:
+            model = IdolGroup
+            
+        idolInfo = get_object_or_404(model, name=srchLog['query'])
+        indolInfos.append(idolInfo)
+        
     
-    
-    pass
+    return JsonResponse(
+        {
+            "lastPage" : lastPage,
+            # "idolInfos" : indolInfos
+        }
+    )
 # Create your views here.
