@@ -6,8 +6,9 @@ from .idolGroup import IdolGroup
 
 class IdolMember(models.Model):
     name = models.JSONField(default=dict)  # kor, eng
-    time = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class IdolMemberInfo(models.Model):
@@ -43,12 +44,15 @@ class MemberComment(models.Model):
     content = models.TextField(blank=False, default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     member = models.ForeignKey(IdolMember, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class IdolViewMemberLog(models.Model):
     member = models.ForeignKey(IdolMember, on_delete=models.CASCADE)
-    time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class IdolMemberImage(models.Model):
