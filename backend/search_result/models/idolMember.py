@@ -21,6 +21,12 @@ class IdolMemberInfo(models.Model):
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
 
+    def to_name_thumbnail(self):
+        return {
+            "name": self.member.name["eng"],
+            "thumbnail": self.thumbnail.address,
+        }
+
 
 class IdolMemberIncluded(models.Model):
     group = models.ForeignKey(
