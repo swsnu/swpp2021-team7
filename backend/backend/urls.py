@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
-api_url = [
+api_urls = [
     path("account/", include("account.urls")),
     # path('main/', include('main.urls')),
     path("mypage/", include("mypage.urls")),
@@ -25,4 +25,4 @@ api_url = [
     # path('video/', include('video.urls'))
 ]
 
-urlpatterns = [path("admin/", admin.site.urls), path("api/", include(api_url))]
+urlpatterns = [path("admin/", admin.site.urls), path("api/", include(api_urls))]
