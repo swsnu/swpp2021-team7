@@ -5,8 +5,9 @@ from main.models import ImageResource
 
 class IdolGroup(models.Model):
     name = models.JSONField(default=dict)  # kor, eng
-    time = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class IdolGroupInfo(models.Model):
@@ -38,13 +39,29 @@ class GroupComment(models.Model):
     group = models.ForeignKey(
         IdolGroup, related_name="groupComments", on_delete=models.CASCADE
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def to_response_format(self):
+        obj = {
+            "author": self.user.username,
+            "content": self.content,
+        }
+
+        if self.created_at != self.updated_at:
+            obj["updated_at"] = self.updated_at
+        else:
+            obj["created_at"] = self.created_at
+
+        return obj
 
 
 class IdolViewGroupLog(models.Model):
     group = models.ForeignKey(
         IdolGroup, related_name="idolViewGroupLogs", on_delete=models.CASCADE
     )
-    time = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(
         User, related_name="idolViewGroupLogs", on_delete=models.CASCADE
     )
