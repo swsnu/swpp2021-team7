@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class VideoConfig(AppConfig):
+class SearchResultConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "video"
+    name = "search_result"
