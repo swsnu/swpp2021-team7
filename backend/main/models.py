@@ -15,4 +15,7 @@ class ImageResource(models.Model):
 
 
 class VideoResource(models.Model):
-    pass
+    videoType = models.IntegerField(default=0)
+    resource = models.TextField(blank=False, default="")
+    time = models.DateTimeField(auto_now_add=True)
+    size = models.IntegerField(default=0)
