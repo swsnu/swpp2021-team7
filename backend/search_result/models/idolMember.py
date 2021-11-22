@@ -22,10 +22,21 @@ class IdolMemberInfo(models.Model):
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
 
-    def to_name_thumbnail(self):
+    def to_group_response(self):
         return {
+            "id": self.member.id,
             "name": self.member.name["eng"],
             "thumbnail": self.thumbnail.address,
+        }
+
+    def to_basic_info(self):
+        return {
+            "thumbnail": self.thumbnail.address,
+            "info": {
+                "name": self.member.name,
+                "debut": self.info["debut"],
+            },
+            "news": self.info["news"],
         }
 
 
