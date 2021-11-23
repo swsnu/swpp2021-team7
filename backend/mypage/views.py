@@ -3,8 +3,8 @@ from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
-from .models import ArticleGroupScrap, ArticleMemberScrap, MyIdolMember, MyIdolGroup
 from search_result.models import MemberComment, GroupComment
+from .models import ArticleGroupScrap, ArticleMemberScrap, MyIdolMember, MyIdolGroup
 
 LOGIN_PATH = "/"
 TYPE = "type"

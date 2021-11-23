@@ -1,12 +1,11 @@
-from django.contrib.auth.decorators import login_required
 from django.db.models.expressions import F
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_http_methods
-from django.core.paginator import Paginator
 from django.db.models import Count
-from .models import SearchLog
 from search_result.models import IdolGroup, IdolMember
+from .models import SearchLog
+
 
 LOGIN_PATH = "/"
 DEFAULT_PAGE_SIZE = 10
@@ -27,8 +26,7 @@ def rankingInfoGet(request):
         ).order_by('-total')
     
     totalResultLen = len(searchLogs)
-    if lastIndex > totalResultLen:
-        lastIndex = totalResultLen
+    lastIndex = min(lastIndex, totalResultLen)
         
     lastPage = int((totalResultLen / size)) + 1
     
