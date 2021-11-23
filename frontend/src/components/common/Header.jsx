@@ -5,9 +5,21 @@ import Box from '@mui/material/Box';
 import { withRouter } from 'react-router';
 import { useLocation } from 'react-router';
 
+const pathName = ["/logout", "/mypage/1", "/"]
+
 function Header(props) {
+
+    const checkPathName = (path) => {
+        if(pathName.includes(path)){
+            return path
+        }
+        else{
+            return false
+        }
+    }
+
     const location = useLocation();
-    const [value, setValue] = React.useState(location.pathname);
+    const [value, setValue] = React.useState(checkPathName(location.pathname));
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -16,7 +28,7 @@ function Header(props) {
 
 
     React.useEffect(() => {
-        setValue(location.pathname);
+        setValue(checkPathName(location.pathname));
     }, [location.pathname])
 
     return (

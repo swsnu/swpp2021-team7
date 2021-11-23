@@ -44,5 +44,9 @@ describe('<MyPage />', () => {
 
         userInfoBtn.simulate('click', mEvent);
         expect(mEvent.preventDefault).toBeCalledTimes(1)
+
+        userInfoBtn.simulate('click', mEvent);
+        expect(component.find('MyPage').state().anchorEl).toBe(null)
+
     })
 })
