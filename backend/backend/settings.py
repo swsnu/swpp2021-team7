@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     "account",
     "mypage",
     "search_result",
-    "video",
+    "video"
 ]
 
 MIDDLEWARE = [
