@@ -25,7 +25,6 @@ class RankItem extends Component {
                             marginTop : 2
                         }}
                         primary={this.props.rank}
-                        dense
                     />
                     <ListItemAvatar sx={{
                         flexGrow : 1,

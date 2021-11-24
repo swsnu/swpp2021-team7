@@ -40,9 +40,15 @@ describe('<MyPage />', () => {
         let userInfo = component.find('#user-info-button')
         let userInfoBtn = userInfo.find('button')
 
-        expect(userInfoBtn.length).toBe(1)
 
+        expect(userInfoBtn.length).toBe(1)
         userInfoBtn.simulate('click', mEvent);
         expect(mEvent.preventDefault).toBeCalledTimes(1)
+
+        let menuItem = component.find("ForwardRef(MenuItem)").at(0)
+
+        menuItem.simulate('click', mEvent);
+        expect(component.find('MyPage').state().anchorEl).toBeNull()
+
     })
 })

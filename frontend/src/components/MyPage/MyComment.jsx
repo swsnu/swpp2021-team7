@@ -20,14 +20,17 @@ class MyComment extends Component {
             <React.Fragment>
                 <ListItem>
                     <ListItemText
-                        sx={{ display: 'block' }}
-                        primary={<Chip key="1" onClick={() => this.redirectSearchResult()} clickable label={`강슬기 (Seulgi)`} color="primary"/>}
+                        sx={{ 
+                            display: 'block',
+                            '& .MuiListItemText-secondary' : {
+                                marginTop : '10px'
+                            }
+                        }}
+                        primary={<Chip component="span" key="1" onClick={() => this.redirectSearchResult()} clickable label={`강슬기 (Seulgi)`} color="primary"/>}
                         secondary={
                             <React.Fragment>
-                                <div style={{ marginTop: "10px" }}></div>
-                                <Chip label={`USERNAME : TEST1`} />
-                                <Chip label={`DATE : 2021-11-08`} />
-                                <div style={{ marginTop: "10px" }}></div>
+                                <Chip component="span" label={`USERNAME : TEST1`} />
+                                <Chip component="span" label={`DATE : 2021-11-08`} />
                                 <Typography
                                     sx={{ display: 'block' }}
                                     component="span"

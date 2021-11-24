@@ -31,7 +31,6 @@ class IdolItem extends Component {
                             marginTop : 2
                         }}
                         primary={this.props.num}
-                        dense
                     />
                     <ListItemAvatar sx={{
                         flexGrow : 1,

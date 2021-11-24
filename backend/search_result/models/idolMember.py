@@ -67,4 +67,7 @@ class IdolViewMemberLog(models.Model):
 
 
 class IdolMemberImage(models.Model):
-    pass
+    image = models.ForeignKey(ImageResource, on_delete=models.CASCADE)
+    member = models.ForeignKey(IdolMember, on_delete=models.CASCADE)
+    position = models.JSONField(default=dict)
+    time = models.DateTimeField(auto_now_add=True)

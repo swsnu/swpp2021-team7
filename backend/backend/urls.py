@@ -19,7 +19,7 @@ from django.urls.conf import include
 
 api_urls = [
     path("account/", include("account.urls")),
-    # path('main/', include('main.urls')),
+    path('main/', include('main.urls')),
     path("mypage/", include("mypage.urls")),
     path("search-result/", include("search_result.urls")),
     # path('video/', include('video.urls'))

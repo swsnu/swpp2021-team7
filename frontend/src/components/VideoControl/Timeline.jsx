@@ -3,12 +3,11 @@ import YouTube from 'react-youtube';
 import Container from '@mui/material/Container';
 import './Timeline.css';
 
-
+const TEST = [12,34,123,40,102,30,12,34,65,76,10,32,67,90];
 export default class Timeline extends Component {
     constructor(props){
         super(props);
-        test=[12,34,123,40,102,30,12,34,65,76,10,32,67,90];
-        this.state = {test:test};
+        this.state = {test : TEST};
     }
     render(){
         const timelines = this.state.test.map((num,i) => {
@@ -20,10 +19,10 @@ export default class Timeline extends Component {
                 width: (num+"px")
             }
             if(i % 2 == 0)
-                return <div className="active-box"
+                return <div key={i} className="active-box"
                             style={styleActive}></div>;
             else
-                return <div className="deactive-box"
+                return <div key={i} className="deactive-box"
                             style={styleDeactive}></div>;
         });
         return (<Container maxWidth="sm">

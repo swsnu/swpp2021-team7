@@ -1,8 +1,12 @@
 from django.urls import path
-from account import views
+from .views import (
+    token,
+    signup,
+    signin
+)
 
 urlpatterns = [
-    path("token/", views.token, name="token"),
-    path("signup/", views.signup, name="signup"),
-    path("signin/", views.signin, name="signin"),
+    path("token/", token, name="token"),
+    path("signup/", signup, name="signup"),
+    path("signin/", signin, name="signin"),
 ]
