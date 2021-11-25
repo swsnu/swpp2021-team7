@@ -8,10 +8,6 @@ import IdolSelector from '../components/VideoControl/IdolSelector';
 import Timeline from '../components/VideoControl/Timeline';
 
 
-
-
-
-
 export default class VideoResult extends Component {
     
     render() {
