@@ -1,3 +1,3 @@
-from .idolGroup import *
-from .idolMember import *
-from .idolRequest import *
+from .idol_group import *
+from .idol_member import *
+from .idol_request import *

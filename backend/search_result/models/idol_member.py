@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from main.models import ImageResource
-from .idolGroup import IdolGroup
+from .idol_group import IdolGroup
 
 
 class IdolMember(models.Model):
