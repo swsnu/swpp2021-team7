@@ -5,7 +5,7 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
-from .models import IdolMember, MemberComment, IdolGroup
+from search_result.models import IdolMember, MemberComment, IdolGroup
 
 LOGIN_PATH = "/"
 
