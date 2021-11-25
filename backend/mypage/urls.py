@@ -1,27 +1,26 @@
 from django.urls import path
 from .views import (
-    grpArtcleDelete,
+    grp_artcle_delete,
     grpIdolDelete,
-    mmbrArtcleDelete,
+    mmbr_artcle_delete,
     mmbrIdolDelete,
-    myArtclGet,
-    myCmtGet,
-    myIdolGet,
-    
+    my_artcl_get,
+    my_cmt_get,
+    my_idol_get,
 )
 
 urlpatterns = [
-    path("comments/", myCmtGet, name="myCmtGet"),
-    path("idols/", myIdolGet, name="myIdolGet"),
-    path("articles/", myArtclGet, name="myArtclGet"),
+    path("comments/", my_cmt_get, name="myCmtGet"),
+    path("idols/", my_idol_get, name="myIdolGet"),
+    path("articles/", my_artcl_get, name="myArtclGet"),
     path(
         "articles/member/<int:article_id>/",
-        mmbrArtcleDelete,
+        mmbr_artcle_delete,
         name="mmbrArtcleDelete",
     ),
     path(
         "articles/group/<int:article_id>/",
-        grpArtcleDelete,
+        grp_artcle_delete,
         name="grpArtcleDelete",
     ),
     path("idols/member/<int:idol_id>/", mmbrIdolDelete, name="mmbrIdolDelete"),
