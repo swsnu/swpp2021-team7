@@ -64,7 +64,7 @@ def search_result(request, scope, instance_id):
 
     instance = get_object_or_404(model, id=instance_id)
     basicInfo = instance.to_basic_info()
-    ig_posts = instance.info["ig_posts"]
+    tweets = instance.info["tweets"]
     youtubes = instance.info["youtubes"]
 
     if scope == "member":
@@ -77,7 +77,7 @@ def search_result(request, scope, instance_id):
     return JsonResponse(
         {
             "basicInfo": basicInfo,
-            "ig_posts": ig_posts,
+            "tweets": tweets,
             "youtubes": youtubes,
             "comments": comments,
         },
