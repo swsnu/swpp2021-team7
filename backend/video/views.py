@@ -16,8 +16,8 @@ LOGIN_PATH = "/"
 @require_http_methods(["POST"])
 def getScnCut(request):
     req_data = json.loads(request.body.decode())
-    videoUrl = req_data["videoUrl"]
+    video_url = req_data["videoUrl"]
     return JsonResponse(
-        detectScene.find_scenes(youtube.linkToMp4(videoUrl, resoultion="low")),
+        detectScene.find_scenes(youtube.linkToMp4(video_url, resoultion="low")),
         safe=False,
     )

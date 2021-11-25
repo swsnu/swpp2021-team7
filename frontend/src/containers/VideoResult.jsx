@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import Pagination from '@mui/material/Pagination';
-import { withStyles } from "@material-ui/core/styles";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 
 import YoutubeVideo from '../components/VideoControl/YoutubeVideo';
