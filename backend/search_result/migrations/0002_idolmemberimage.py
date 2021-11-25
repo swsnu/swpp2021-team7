@@ -7,19 +7,39 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0001_initial'),
-        ('search_result', '0001_initial'),
+        ("main", "0001_initial"),
+        ("search_result", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='IdolMemberImage',
+            name="IdolMemberImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.JSONField(default=dict)),
-                ('time', models.DateTimeField(auto_now_add=True)),
-                ('image', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.imageresource')),
-                ('member', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='search_result.idolmember')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.JSONField(default=dict)),
+                ("time", models.DateTimeField(auto_now_add=True)),
+                (
+                    "image",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="main.imageresource",
+                    ),
+                ),
+                (
+                    "member",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="search_result.idolmember",
+                    ),
+                ),
             ],
         ),
     ]

@@ -15,32 +15,63 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ImageResource',
+            name="ImageResource",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('address', models.TextField(default='')),
-                ('size', models.IntegerField(default=0)),
-                ('time', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("address", models.TextField(default="")),
+                ("size", models.IntegerField(default=0)),
+                ("time", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name='VideoResource',
+            name="VideoResource",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('videoType', models.IntegerField(default=0)),
-                ('resource', models.TextField(default='')),
-                ('time', models.DateTimeField(auto_now_add=True)),
-                ('size', models.IntegerField(default=0)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("videoType", models.IntegerField(default=0)),
+                ("resource", models.TextField(default="")),
+                ("time", models.DateTimeField(auto_now_add=True)),
+                ("size", models.IntegerField(default=0)),
             ],
         ),
         migrations.CreateModel(
-            name='SearchLog',
+            name="SearchLog",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('query', models.TextField(default='')),
-                ('isMember', models.BooleanField(default=False)),
-                ('time', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='searchLogs', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("query", models.TextField(default="")),
+                ("isMember", models.BooleanField(default=False)),
+                ("time", models.DateTimeField(auto_now_add=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="searchLogs",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
