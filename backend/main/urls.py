@@ -1,13 +1,10 @@
 from django.urls import path
-from main.views import (
-    rankingInfoGet
-)
+from main.views import ranking_info_get
 
 urlpatterns = [
-    
     path(
         "ranking/",
-        rankingInfoGet,
+        ranking_info_get,
         name="rankingInfoGet",
     )
 ]
