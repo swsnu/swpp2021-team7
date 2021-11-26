@@ -1,11 +1,11 @@
 from django.db.models.expressions import F
 from django.http.response import HttpResponseNotFound, JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count
 from search_result.models import IdolGroup, IdolMember
 from .models import SearchLog
-from django.contrib.auth.decorators import login_required
 
 
 LOGIN_PATH = "/"
@@ -20,7 +20,6 @@ def ranking_info_get(request):
 
     startIndex = page * size
     lastIndex = (page + 1) * size
-    lastPage = 0
     total_result_len = (
         SearchLog.objects.all().values("query").annotate(total=Count("query")).count()
     )

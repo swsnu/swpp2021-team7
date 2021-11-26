@@ -101,7 +101,7 @@ class MyPageTestCase(TestCase):
         mmbr_article_scrp.save()
 
         response = self.client.delete(
-            "/api/mypage/articles/member/{}/".format(mmbr_article_scrp.id),
+            f"/api/mypage/articles/member/{mmbr_article_scrp.id}/"
         )
         self.assertEqual(response.status_code, 200)
 
@@ -114,6 +114,6 @@ class MyPageTestCase(TestCase):
         grp_article_scrp.save()
 
         response = self.client.delete(
-            "/api/mypage/articles/group/{}/".format(grp_article_scrp.id),
+            f"/api/mypage/articles/group/{grp_article_scrp.id}/"
         )
         self.assertEqual(response.status_code, 200)

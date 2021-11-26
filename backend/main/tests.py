@@ -35,11 +35,11 @@ class MainTestCase(TestCase):
         self.group.save()
 
     def test_ranking_info_get(self):
-        for i in range(0, MEMBER_SEARCH_LOGS_LEN):
+        for _ in range(0, MEMBER_SEARCH_LOGS_LEN):
             s = SearchLog(query=SAMPLE_MEMBER, isMember=True, user=self.user)
             s.save()
 
-        for i in range(0, GROUP_SEARCH_LOGS_LEN):
+        for _ in range(0, GROUP_SEARCH_LOGS_LEN):
             s = SearchLog(query=SAMPLE_GROUP, user=self.user)
             s.save()
 
