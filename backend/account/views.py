@@ -52,6 +52,6 @@ def signout(request):
         return HttpResponse('Unauthorized', status=401)
 
 
-@require_http_methods(['POST'])
-def findAccount(request):
-    pass
+# @require_http_methods(['POST'])
+# def findAccount(request):
+#     pass
