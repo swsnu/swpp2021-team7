@@ -9,18 +9,21 @@ import FavoriteIdol from './FavoriteIdol';
 
 const imgLink = "http://"
 const name = {
-    kor : "테스트",
-    eng : "test"
+    kor: "테스트",
+    eng: "test"
 }
 const mockStore = getMockStore({});
 
 describe('<FavoriteIdol />', () => {
     let component = null
-    let setComponent = () => {
+    let setComponent = (isGroup) => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <FavoriteIdol img={imgLink} name={name}></FavoriteIdol>
+                    <FavoriteIdol
+                        img={imgLink}
+                        isGroup={isGroup}
+                        name={name}></FavoriteIdol>
                 </ConnectedRouter>
             </Provider>
         )
@@ -35,11 +38,17 @@ describe('<FavoriteIdol />', () => {
     })
     it('should redirect to Search Result Page', () => {
         const spyHistory = jest.spyOn(history, 'push')
-        setComponent()
+
+        setComponent(true)
 
         let idolInfos = component.find('ForwardRef(Chip)')
         expect(idolInfos.length).toBe(1)
+        idolInfos.at(0).simulate('click')
+        expect(spyHistory).toBeCalledWith('/search/group/1')
 
+        setComponent(false)
+        idolInfos = component.find('ForwardRef(Chip)')
+        expect(idolInfos.length).toBe(1)
         idolInfos.at(0).simulate('click')
         expect(spyHistory).toBeCalledWith('/search/1')
 

@@ -67,12 +67,12 @@ def my_idol_get(request):
 def my_artcl_get(request):
     mmbrArtcl = list(
         ArticleMemberScrap.objects.filter(user=request.user).values(
-            "title", "address", "member__name"
+            "id", "title", "address", "member__name"
         )
     )
     grpArtcl = list(
         ArticleGroupScrap.objects.filter(user=request.user).values(
-            "title", "address", "group__name"
+            "id", "title", "address", "group__name"
         )
     )
     for artcle in mmbrArtcl:

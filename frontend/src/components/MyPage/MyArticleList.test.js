@@ -9,14 +9,18 @@ import MyArticleList from './MyArticleList';
 
 
 const mockStore = getMockStore({});
+const SCRAPS = [
+    { address: "http://test.com", id: 1, name: { eng: "", kor: "V" }, title: "test title", type: 'member' },
+    { address: "http://test.com", id: 2, name: { eng: "", kor: "BTS" }, title: "test title", type: 'group' }
 
+]
 describe('<MyArticleList />', () => {
     let component = null
     let setComponent = () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <MyArticleList></MyArticleList>
+                    <MyArticleList scraps={SCRAPS}></MyArticleList>
                 </ConnectedRouter>
             </Provider>
         )

@@ -8,15 +8,17 @@ import MyArticle from './MyArticle'
 
 
 const TITLE = '타블로와 슬기, 빅나티, 노보가 함께한 라코스테 X 피너츠 협업 캠페인'
+const ADDRESS = "http://test.com"
+
 const mockStore = getMockStore({});
 
-describe('<FavoriteIdol />', () => {
+describe('<MyArticle />', () => {
     let component = null
     let setComponent = () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <MyArticle></MyArticle>
+                    <MyArticle title={TITLE} address={ADDRESS}></MyArticle>
                 </ConnectedRouter>
             </Provider>
         )
