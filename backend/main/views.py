@@ -18,8 +18,8 @@ def ranking_info_get(request):
     page = int(request.GET.get("page", 1)) - 1  # page는 1부터 시작한다
     size = int(request.GET.get("size", DEFAULT_PAGE_SIZE))
 
-    startIndex = page * size
-    lastIndex = (page + 1) * size
+    start_index = page * size
+    last_index = (page + 1) * size
     total_result_len = (
         SearchLog.objects.all().values("query").annotate(total=Count("query")).count()
     )
@@ -30,14 +30,14 @@ def ranking_info_get(request):
         .order_by("-total")
     )
 
-    lastIndex = min(lastIndex, total_result_len)
+    lastIndex = min(last_index, total_result_len)
 
     last_page = min(
         int((total_result_len / size)) + (0 if total_result_len % size == 0 else 1),
         (int((page / size)) + 1) * 10,
     )
 
-    searchLogs = searchLogs[startIndex:lastIndex]
+    searchLogs = searchLogs[start_index:lastIndex]
 
     indolInfos = []
     for srchLog in searchLogs:
