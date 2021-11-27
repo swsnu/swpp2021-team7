@@ -45,12 +45,7 @@ def ranking_info_get(request):
         idol_info = get_object_or_404(model, name=srchLog["query"])
         idol_infos.append(idol_info)
 
-    return JsonResponse(
-        {
-            "lastPage": last_page,
-            # "idolInfos" : indolInfos
-        }
-    )
+    return JsonResponse({"lastPage": last_page, "idolInfos": idol_infos})
 
 
 # Create your views here.

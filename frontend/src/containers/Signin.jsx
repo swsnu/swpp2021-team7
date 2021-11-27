@@ -69,15 +69,6 @@ function Signin(props) {
               Login
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link 
-                    style={{textDecoration: 'none', color: 'gray'}} 
-                    href="/sign/findAccount" 
-                    variant="body2"
-                >
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
                 <Link 
                     style={{textDecoration: 'none', color: 'gray'}} 

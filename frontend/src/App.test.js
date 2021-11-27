@@ -43,12 +43,6 @@ describe('App', () => {
     expect(component.find('Signup').exists()).toBe(true);
   })
 
-  it('should be redirected findAccount page', () => {
-    history.push('/sign/findAccount');
-    const component = mount(app);
-    expect(component.find('FindAccount').exists()).toBe(true);
-  })
-
   it('should be redirected mypage page', () => {
     history.push('/mypage/1');
     const component = mount(app);
