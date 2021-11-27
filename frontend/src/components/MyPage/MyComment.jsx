@@ -6,13 +6,14 @@ import {
     Typography,
     Chip
 } from '@mui/material';
+import moment from 'moment'
 
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router'
 
 class MyComment extends Component {
     redirectSearchResult = () => {
-        this.props.push('/search/1')
+        this.props.push(`/search/${this.props.type}/${this.props.idolId}`)
     }
 
     render() {
@@ -20,24 +21,28 @@ class MyComment extends Component {
             <React.Fragment>
                 <ListItem>
                     <ListItemText
-                        sx={{ 
+                        sx={{
                             display: 'block',
-                            '& .MuiListItemText-secondary' : {
-                                marginTop : '10px'
+                            '& .MuiListItemText-secondary': {
+                                marginTop: '10px'
                             }
                         }}
-                        primary={<Chip component="span" key="1" onClick={() => this.redirectSearchResult()} clickable label={`강슬기 (Seulgi)`} color="primary"/>}
+                        primary={<Chip
+                            component="span"
+                            key="1" onClick={() => this.redirectSearchResult()}
+                            clickable
+                            label={`${this.props.name.kor} ${this.props.name.eng}`}
+                            color="primary" />}
                         secondary={
                             <React.Fragment>
-                                <Chip component="span" label={`USERNAME : TEST1`} />
-                                <Chip component="span" label={`DATE : 2021-11-08`} />
+                                <Chip component="span" label={`DATE : ${moment(this.props.createAt).format("YYYY-MM-DD / HH:mm:ss")}`} />
                                 <Typography
                                     sx={{ display: 'block' }}
                                     component="span"
                                     variant="body1"
                                     color="text.primary"
                                 >
-                                    {"Comment content"}
+                                    {`${this.props.content}`}
                                 </Typography>
                             </React.Fragment>
                         }

@@ -12,7 +12,7 @@ import { withRouter } from 'react-router';
 
 class RankItem extends Component {
     redirectSearchResult = () => {
-        this.props.history.push(`/search/${this.props.isGroup ? "group/" :  ""}1`);
+        this.props.history.push(`/search/${this.props.type}/${this.props.id}`);
     }
 
     render() {
@@ -21,25 +21,25 @@ class RankItem extends Component {
                 <ListItem alignItems="flex-start" onClick={this.handleClick}>
                     <ListItemText
                         sx={{
-                            flexGrow : 0.5,
-                            marginTop : 2
+                            flexGrow: 0.5,
+                            marginTop: 2
                         }}
                         primary={this.props.rank}
                     />
                     <ListItemAvatar sx={{
-                        flexGrow : 1,
+                        flexGrow: 1,
                         height: '50%'
-                        }}>
+                    }}>
                         <Avatar alt="Remy Sharp" src={this.props.img} />
                     </ListItemAvatar>
                     <ListItemText
                         sx={{
-                            flexGrow : 10,
+                            flexGrow: 10,
                         }}
-                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={`${this.props.name.kor} ${this.props.name.eng}`} color="primary" />}
+                        primary={<Chip onClick={() => this.redirectSearchResult()} clickable label={`${this.props.name.kor} ${this.props.name.eng}`} color="primary" />}
                     />
                 </ListItem>
-                <Divider sx={{marginLeft : 0}} variant="inset" component="li" />
+                <Divider sx={{ marginLeft: 0 }} variant="inset" component="li" />
             </React.Fragment>
         )
     }

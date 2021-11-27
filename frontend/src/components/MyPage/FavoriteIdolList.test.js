@@ -9,6 +9,12 @@ import FavoriteIdolList from './FavoriteIdolList';
 
 
 const mockStore = getMockStore({});
+const IDOLS = [
+    { id: 1, member: 1, name: { eng: "", kor: "V" }, type: "member" },
+    { id: 2, group: 1, name: { eng: "", kor: "BTS" }, type: "group" }
+
+]
+
 
 describe('<FavoriteIdolList />', () => {
     let component = null
@@ -16,7 +22,7 @@ describe('<FavoriteIdolList />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <FavoriteIdolList></FavoriteIdolList>
+                    <FavoriteIdolList idols={IDOLS}></FavoriteIdolList>
                 </ConnectedRouter>
             </Provider>
         )

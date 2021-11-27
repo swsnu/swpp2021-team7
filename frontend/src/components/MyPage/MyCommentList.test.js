@@ -9,6 +9,10 @@ import MyCommentList from './MyCommentList';
 
 
 const mockStore = getMockStore({});
+const COMMENTS = [
+    { content: "testcontent", created_at: "2021-11-27", id: 1, member: 1, name: { eng: "", kor: "V" }, type: "member" },
+    { content: "testcontent2", created_at: "2021-11-27", id: 1, group: 1, name: { eng: "", kor: "BTS" }, type: "group" }
+]
 
 describe('<MyCommentList />', () => {
     let component = null
@@ -16,7 +20,7 @@ describe('<MyCommentList />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <MyCommentList></MyCommentList>
+                    <MyCommentList comments={COMMENTS}></MyCommentList>
                 </ConnectedRouter>
             </Provider>
         )

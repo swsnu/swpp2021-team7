@@ -26,6 +26,7 @@ class MyIdolMember(models.Model):
 
 
 class ArticleGroupScrap(models.Model):
+    title = models.TextField(blank=False, default="")
     address = models.TextField(blank=False, default="")
     time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
@@ -37,11 +38,12 @@ class ArticleGroupScrap(models.Model):
 
 
 class ArticleMemberScrap(models.Model):
+    title = models.TextField(blank=False, default="")
     address = models.TextField(blank=False, default="")
     time = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         User, related_name="articleMemberScraps", on_delete=models.CASCADE
     )
-    memberId = models.ForeignKey(
+    member = models.ForeignKey(
         IdolMember, related_name="articleMemberScraps", on_delete=models.CASCADE
     )

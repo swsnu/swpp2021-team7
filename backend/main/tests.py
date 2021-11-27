@@ -1,3 +1,78 @@
+<<<<<<< HEAD
+import json
+from django.test import TestCase, Client
+from django.contrib.auth.models import User
+from search_result.models import IdolGroup, IdolMember
+from main.models import SearchLog
+
+SIGNIN_EMAIL = "jiho@nav.com"
+SIGNIN_PASSWORD = "1234"
+SAMPLE_MEMBER = "V"
+SAMPLE_GROUP = "BTS"
+MEMBER_SEARCH_LOGS_LEN = 10
+GROUP_SEARCH_LOGS_LEN = 11
+
+
+# Create your tests here.
+class MainTestCase(TestCase):
+    client = None
+    user = None
+    member = None
+    group = None
+
+    def setUp(self):
+        self.client = Client(enforce_csrf_checks=False)
+        User.objects.create_user(username=SIGNIN_EMAIL, password=SIGNIN_PASSWORD)
+        self.user = User.objects.get(username=SIGNIN_EMAIL)
+        self.client.post(
+            "/api/account/signin/",
+            json.dumps({"email": SIGNIN_EMAIL, "password": SIGNIN_PASSWORD}),
+            content_type="application/json",
+        )
+
+        self.member = IdolMember(name={"eng": SAMPLE_MEMBER})
+        self.member.save()
+        self.group = IdolGroup(name={"eng": SAMPLE_GROUP})
+        self.group.save()
+
+    def test_ranking_info_get(self):
+        for _ in range(0, MEMBER_SEARCH_LOGS_LEN):
+            s = SearchLog(query=SAMPLE_MEMBER, isMember=True, user=self.user)
+            s.save()
+
+        for _ in range(0, GROUP_SEARCH_LOGS_LEN):
+            s = SearchLog(query=SAMPLE_GROUP, user=self.user)
+            s.save()
+
+        response = self.client.get("/api/main/ranking/?page=1&size=10")
+        last_page = 1
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(SAMPLE_GROUP, response.content.decode())
+        self.assertIn(SAMPLE_MEMBER, response.content.decode())
+        self.assertIn(str(last_page), response.content.decode())
+
+        response = self.client.get("/api/main/ranking/?page=2&size=1")
+        last_page = 2
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(SAMPLE_MEMBER, response.content.decode())
+        self.assertIn(str(last_page), response.content.decode())
+
+        # MemberComment(
+        #     content=MEMBER_COMMENT_CONTENT, user=self.user, member=self.member
+        # ).save()
+        # GroupComment(
+        #     content=GROUP_COMMENT_CONTENT, user=self.user, group=self.group
+        # ).save()
+
+        # response = self.client.get(
+        #     "/api/mypage/comments/",
+        # )
+        # self.assertEqual(response.status_code, 200)
+        # self.assertIn(MEMBER_COMMENT_CONTENT, response.content.decode())
+        # self.assertIn(GROUP_COMMENT_CONTENT, response.content.decode())
+        # self.assertIn("member", response.content.decode())
+        # self.assertIn("group", response.content.decode())
+=======
 from django.test import TestCase, Client
 # from unittest.mock import patch
 from .models import SearchLog
@@ -25,3 +100,4 @@ class MainTestCase(TestCase):
         # self.assertEqual(response.status_code, 200)
         # self.assertEqual(json.dumps(response)["lastPage"], 1)
         # self.assertEqual(json.dumps(response)["idolInfos"], [])
+>>>>>>> a8028afa38a7748e5dd4fae45858ff84c7bb7485

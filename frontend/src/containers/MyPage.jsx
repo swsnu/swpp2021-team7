@@ -12,14 +12,38 @@ import FavoriteIdolList from '../components/MyPage/FavoriteIdolList';
 import MyCommentList from '../components/MyPage/MyCommentList';
 import MyArticleList from '../components/MyPage/MyArticleList';
 
+import axios from "axios"
+
 
 
 export default class MyPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            anchorEl: null
+            anchorEl: null,
+            comments: [],
+            idols: [],
+            scraps: []
         }
+    }
+
+    componentDidMount() {
+        const getMyCmts = axios.get('mypage/comments/')
+        const getMyIdols = axios.get('mypage/idols/')
+        const getMyScraps = axios.get('mypage/articles/')
+
+        axios.all([getMyCmts, getMyIdols, getMyScraps]).then(axios.spread((...responses) => {
+            this.setState({
+                comments: responses[0].data,
+                idols: responses[1].data,
+                scraps: responses[2].data
+            })
+
+        })).catch(errors => {
+            // console.log(errors)
+        })
+
+
     }
 
     handleClick = (event) => {
@@ -37,7 +61,6 @@ export default class MyPage extends Component {
 
     render() {
         const open = Boolean(this.state.anchorEl);
-
         return (
             <React.Fragment>
                 <Container
@@ -72,17 +95,17 @@ export default class MyPage extends Component {
                 <div style={{ height: "20px" }}></div>
                 <Container maxWidth="sm">
                     <h2>My Idols</h2>
-                    <FavoriteIdolList></FavoriteIdolList>
+                    <FavoriteIdolList idols={this.state.idols}></FavoriteIdolList>
                 </Container>
                 <div style={{ height: "20px" }}></div>
                 <Container maxWidth="sm">
                     <h2>My Comments</h2>
-                    <MyCommentList></MyCommentList>
+                    <MyCommentList comments={this.state.comments}></MyCommentList>
                 </Container>
                 <div style={{ height: "20px" }}></div>
                 <Container maxWidth="sm">
                     <h2>My Scraps</h2>
-                    <MyArticleList></MyArticleList>
+                    <MyArticleList scraps={this.state.scraps}></MyArticleList>
                 </Container>
                 <div style={{ height: "100px" }}></div>
             </React.Fragment>
