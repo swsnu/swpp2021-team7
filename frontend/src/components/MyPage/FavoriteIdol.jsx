@@ -14,7 +14,7 @@ import axios from 'axios';
 
 class FavoriteIdol extends Component {
     cancelFavoriteIdol = () => {
-        axios.delete(`mypage/idols/${this.props.type}/${this.props.id}`)
+        axios.delete(`mypage/idols/${this.props.type}/${this.props.id}/`)
             .then(function (res) {
                 window.location.reload();
             })

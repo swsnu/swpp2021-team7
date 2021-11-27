@@ -13,7 +13,7 @@ export default class FavoriteIdolList extends Component {
                 name={idol.name}
                 idolId={idol[idol.type]}
                 type={idol.type}
-                img={'https://img.insight.co.kr/static/2019/01/31/700/18nd52ajs5z4750u7p6f.jpg'}>
+                img={idol.address}>
             </FavoriteIdol>)
         }
         return (

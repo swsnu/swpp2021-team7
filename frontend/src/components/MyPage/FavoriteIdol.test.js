@@ -81,7 +81,7 @@ describe('<FavoriteIdol />', () => {
         let type = "member"
         let axiosMock = new axiosMockAdapter(axios)
         axiosMock
-            .onDelete(`mypage/idols/${type}/${ID}`)
+            .onDelete(`mypage/idols/${type}/${ID}/`)
             .reply(200, [])
 
         setComponent(type)
@@ -96,7 +96,7 @@ describe('<FavoriteIdol />', () => {
         //error test
         const spy = jest.spyOn(global.console, "log");
         axiosMock
-            .onDelete(`mypage/idols/${type}/${ID}`)
+            .onDelete(`mypage/idols/${type}/${ID}/`)
             .reply(403, [])
 
         setComponent()

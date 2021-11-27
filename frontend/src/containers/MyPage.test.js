@@ -10,7 +10,6 @@ import MyPage from './MyPage';
 
 
 const mockStore = getMockStore({});
-const flushPromises = () => new Promise(setImmediate);
 
 
 describe('<MyPage />', () => {
