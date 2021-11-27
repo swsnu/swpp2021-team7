@@ -1,5 +1,5 @@
-import detectScene
-import youtube
+from ml import detectScene
+from ml import youtube
 
 TEST_URL = "https://www.youtube.com/watch?v=tuPMVKmeaJM"
 

@@ -1,4 +1,3 @@
-import hashlib
 import os
 import platform
 import shutil
@@ -8,7 +7,6 @@ import boto3
 from boto3.s3.transfer import TransferConfig
 from botocore.exceptions import ClientError
 from botocore.exceptions import ParamValidationError
-from botocore.exceptions import NoCredentialsError
 
 import file_transfer
 
