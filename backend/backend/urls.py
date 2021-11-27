@@ -22,7 +22,7 @@ api_urls = [
     path("main/", include("main.urls")),
     path("mypage/", include("mypage.urls")),
     path("search-result/", include("search_result.urls")),
-    # path('video/', include('video.urls'))
+    path("video/", include("video.urls")),
 ]
 
 urlpatterns = [path("admin/", admin.site.urls), path("api/", include(api_urls))]

@@ -4,13 +4,18 @@ import { Provider } from 'react-redux';;
 import { getMockStore } from '../test-utils/mocks';
 import { history } from '../store/store';
 import { ConnectedRouter } from 'connected-react-router';
+import axiosMockAdapter from 'axios-mock-adapter';
+import axios from "axios";
 import MyPage from './MyPage';
 
 
 const mockStore = getMockStore({});
 
+
 describe('<MyPage />', () => {
     let component = null
+    let axiosMock = null
+
     let setComponent = () => {
         component = mount(
             <Provider store={mockStore} >
@@ -20,7 +25,16 @@ describe('<MyPage />', () => {
             </Provider>
         )
     }
-    it('should render without errors', () => {
+
+    beforeAll(() => {
+        axiosMock = new axiosMockAdapter(axios);
+        axiosMock.onGet('mypage/comments/').reply(200, [])
+        axiosMock.onGet('mypage/idols/').reply(200, [])
+        axiosMock.onGet('mypage/articles/').reply(200, [])
+
+    })
+
+    it('should render without errors', async () => {
         setComponent()
         const menu = component.find('ForwardRef(Menu)')
         const favoriteIdolList = component.find('FavoriteIdolList')
@@ -33,7 +47,7 @@ describe('<MyPage />', () => {
         expect(myArticleList.length).toBe(1);
 
     })
-    it('should show user info when click button', () => {
+    it('should show user info when click button', async () => {
         setComponent()
         const mEvent = { preventDefault: jest.fn() };
 

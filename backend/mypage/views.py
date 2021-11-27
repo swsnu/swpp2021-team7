@@ -14,13 +14,23 @@ TYPE_GROUP = "group"
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["GET"])
-def myCmtGet(request):
-    mmbrCmt = [MemberComment.objects.filter(user=request.user).values()]
-    grpCmt = [GroupComment.objects.filter(user=request.user).values()]
+def my_cmt_get(request):
+    mmbrCmt = list(
+        MemberComment.objects.filter(user=request.user).values(
+            "id", "content", "member", "member__name", "created_at"
+        )
+    )
+    grpCmt = list(
+        GroupComment.objects.filter(user=request.user).values(
+            "id", "content", "group", "group__name", "created_at"
+        )
+    )
     for cmt in mmbrCmt:
+        cmt["name"] = cmt.pop("member__name")
         cmt[TYPE] = TYPE_MEMBER
 
     for cmt in grpCmt:
+        cmt["name"] = cmt.pop("group__name")
         cmt[TYPE] = TYPE_GROUP
 
     myComment = mmbrCmt + grpCmt
@@ -29,13 +39,26 @@ def myCmtGet(request):
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["GET"])
-def myIdolGet(request):
-    myMmbr = [MyIdolMember.objects.filter(user=request.user)]
-    myGrp = [MyIdolGroup.objects.filter(user=request.user)]
+def my_idol_get(request):
+    myMmbr = list(
+        MyIdolMember.objects.filter(user=request.user).values(
+            "id", "member", "member__name", "member__info__thumbnail__address"
+        )
+    )
+    myGrp = list(
+        MyIdolGroup.objects.filter(user=request.user).values(
+            "id", "group", "group__name", "group__info__thumbnail__address"
+        )
+    )
     for myIdol in myMmbr:
+        myIdol["name"] = myIdol.pop("member__name")
+        myIdol["address"] = myIdol.pop("member__info__thumbnail__address")
         myIdol[TYPE] = TYPE_MEMBER
 
     for myIdol in myGrp:
+        myIdol["name"] = myIdol.pop("group__name")
+        myIdol["address"] = myIdol.pop("group__info__thumbnail__address")
+
         myIdol[TYPE] = TYPE_GROUP
 
     myIdol = myMmbr + myGrp
@@ -44,13 +67,23 @@ def myIdolGet(request):
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["GET"])
-def myArtclGet(request):
-    mmbrArtcl = [ArticleMemberScrap.objects.filter(user=request.user)]
-    grpArtcl = [ArticleGroupScrap.objects.filter(user=request.user)]
+def my_artcl_get(request):
+    mmbrArtcl = list(
+        ArticleMemberScrap.objects.filter(user=request.user).values(
+            "id", "title", "address", "member__name"
+        )
+    )
+    grpArtcl = list(
+        ArticleGroupScrap.objects.filter(user=request.user).values(
+            "id", "title", "address", "group__name"
+        )
+    )
     for artcle in mmbrArtcl:
+        artcle["name"] = artcle.pop("member__name")
         artcle[TYPE] = TYPE_MEMBER
 
     for artcle in grpArtcl:
+        artcle["name"] = artcle.pop("group__name")
         artcle[TYPE] = TYPE_GROUP
 
     myArticle = mmbrArtcl + grpArtcl
@@ -59,7 +92,7 @@ def myArtclGet(request):
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["DELETE"])
-def mmbrArtcleDelete(request, article_id):
+def mmbr_artcle_delete(request, article_id):
     myMmbrArtcl = get_object_or_404(ArticleMemberScrap, pk=article_id)
     myMmbrArtcl.delete()
     return HttpResponse(status=200)
@@ -67,7 +100,7 @@ def mmbrArtcleDelete(request, article_id):
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["DELETE"])
-def grpArtcleDelete(request, article_id):
+def grp_artcle_delete(request, article_id):
     myGrpArtcl = get_object_or_404(ArticleGroupScrap, pk=article_id)
     myGrpArtcl.delete()
     return HttpResponse(status=200)
@@ -75,16 +108,16 @@ def grpArtcleDelete(request, article_id):
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["DELETE"])
-def mmbrIdolDelete(request, idol_id):
-    myMmbrIdol = get_object_or_404(MyIdolMember, pk=idol_id)
+def mmbrIdolDelete(request, my_idol_id):
+    myMmbrIdol = get_object_or_404(MyIdolMember, pk=my_idol_id)
     myMmbrIdol.delete()
     return HttpResponse(status=200)
 
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["DELETE"])
-def grpIdolDelete(request, idol_id):
-    myGrpIdol = get_object_or_404(MyIdolGroup, pk=idol_id)
+def grpIdolDelete(request, my_idol_id):
+    myGrpIdol = get_object_or_404(MyIdolGroup, pk=my_idol_id)
     myGrpIdol.delete()
     return HttpResponse(status=200)
 

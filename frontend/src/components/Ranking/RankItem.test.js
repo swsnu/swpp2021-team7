@@ -11,23 +11,24 @@ const mockStore = getMockStore({});
 const rank = 1
 const imgLink = 'http://'
 const name = {
-    kor : '테스트',
-    eng : 'test'
+    kor: '테스트',
+    eng: 'test'
 }
+const ID = 1
 
 describe('<RankItem />', () => {
     let component = null
-    let setComponent = (isGroup) => {
+    let setComponent = (type) => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <RankItem isGroup={isGroup} rank={rank} img={imgLink} name={name}></RankItem>
+                    <RankItem type={type} id={ID} rank={rank} img={imgLink} name={name}></RankItem>
                 </ConnectedRouter>
             </Provider>
         )
     }
     it('should render without errors', () => {
-        setComponent()
+        setComponent("member")
         const listItem = component.find('ForwardRef(ListItem)')
         const listItemTexts = component.find('ForwardRef(ListItemText)')
         expect(listItem.length).toBe(1);
@@ -38,21 +39,21 @@ describe('<RankItem />', () => {
     })
     it('should redirect to Search Result Page', () => {
         const spyHistory = jest.spyOn(history, 'push')
-        setComponent(false)
+        setComponent("member")
 
         let idolInfos = component.find('ForwardRef(Chip)')
         expect(idolInfos.length).toBe(1)
 
         idolInfos.at(0).simulate('click')
-        expect(spyHistory).toBeCalledWith('/search/1')
+        expect(spyHistory).toBeCalledWith(`/search/member/${ID}`)
 
-        setComponent(true)
+        setComponent("group")
 
         idolInfos = component.find('ForwardRef(Chip)')
         expect(idolInfos.length).toBe(1)
 
         idolInfos.at(0).simulate('click')
-        expect(spyHistory).toBeCalledWith('/search/group/1')
+        expect(spyHistory).toBeCalledWith(`/search/group/${ID}`)
 
         spyHistory.mockRestore()
     })
