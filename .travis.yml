@@ -41,7 +41,6 @@ jobs:
         - mysql -e "GRANT ALL PRIVILEGES ON *.* to 'team7'@'localhost';"
         - mysql -e "SET GLOBAL character_set_server = 'utf8mb4'"
         - mysql -e "SET GLOBAL character_set_database = 'utf8mb4'"
-        - mysql -e "show variables like 'c%';
         - pylint **/*.py --load-plugins pylint_django
         - coverage run --source='.' manage.py test
         - coverage xml -i
