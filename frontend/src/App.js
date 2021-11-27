@@ -28,7 +28,6 @@ function App(props) {
           <Route path='/' exact render={() => <Main />} />
           <Route path="/sign/login" exact render={() => <Signin />} />
           <Route path="/sign/join" exact render={() => <Signup />} />
-          <Route path="/sign/findAccount" exact render={() => <FindAccount />} />
           <Route path='/mypage/:id' exact render={() => <MyPage />} />
           <Route path='/rank' exact render={() => <Ranking />} />
           <Route path="/search/:id" exact render={() => <SearchResult />} />
