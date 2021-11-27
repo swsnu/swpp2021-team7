@@ -11,7 +11,6 @@ import Ranking from './containers/Ranking';
 import SearchResult from './containers/SearchResult';
 import Signin from './containers/Signin';
 import Signup from './containers/Signup';
-import FindAccount from './containers/FindAccount';
 import Main from './containers/Main';
 
 // video indexing / searching / result
