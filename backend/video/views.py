@@ -11,7 +11,6 @@ from .models import (
     VideoFaceRecognitionShare,
 )
 
-sys.path.append("/Desktop/dev/swpp2021-team7/ml")
 from ml import detectScene
 from ml import youtube
 

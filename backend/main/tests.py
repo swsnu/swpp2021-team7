@@ -56,18 +56,19 @@ class MainTestCase(TestCase):
         self.assertIn(SAMPLE_MEMBER, response.content.decode())
         self.assertIn(str(last_page), response.content.decode())
 
-        # MemberComment(
-        #     content=MEMBER_COMMENT_CONTENT, user=self.user, member=self.member
-        # ).save()
-        # GroupComment(
-        #     content=GROUP_COMMENT_CONTENT, user=self.user, group=self.group
-        # ).save()
+        def test_get_ranking(self):
+            client = Client(enforce_csrf_checks=False)
 
-        # response = self.client.get(
-        #     "/api/mypage/comments/",
-        # )
-        # self.assertEqual(response.status_code, 200)
-        # self.assertIn(MEMBER_COMMENT_CONTENT, response.content.decode())
-        # self.assertIn(GROUP_COMMENT_CONTENT, response.content.decode())
-        # self.assertIn("member", response.content.decode())
-        # self.assertIn("group", response.content.decode())
+            response = client.get("/api/main/ranking/")
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.json()["lastPage"], 1)
+            self.assertEqual(response.json()["idolInfos"], [])
+
+            user = User.objects.create_user(username="Me")
+            IdolMember.objects.create(name="Seulgi")
+            SearchLog.objects.create(query="Red Velvet", isMember=False, user=user)
+
+            response = client.get("/api/main/ranking/")
+            self.assertEqual(response.status_code, 404)
+
+            SearchLog.objects.create(query="Seulgi", isMember=True, user=user)

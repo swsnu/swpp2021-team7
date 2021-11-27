@@ -42,7 +42,10 @@ def my_cmt_get(request):
 def my_idol_get(request):
     myMmbr = list(
         MyIdolMember.objects.filter(user=request.user).values(
-            "id", "member", "member__name", "member__info__thumbnail__address"
+            "id",
+            "member",
+            "member__name",
+            "member__info__thumbnail__address",
         )
     )
     myGrp = list(

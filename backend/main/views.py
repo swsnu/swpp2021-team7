@@ -40,14 +40,14 @@ def ranking_info_get(request):
     searchLogs = searchLogs[start_index:lastIndex]
 
     idol_infos = []
-    type = None
+    idol_type = None
     for srchLog in searchLogs:
         model = None
         if srchLog["isMember"]:
-            type = "member"
+            idol_type = "member"
             model = IdolMember
         else:
-            type = "group"
+            idol_type = "group"
             model = IdolGroup
 
         idol_info = model.objects.filter(
@@ -57,7 +57,7 @@ def ranking_info_get(request):
             return HttpResponseNotFound()
         idol_info = idol_info.values("id", "name", "info__thumbnail__address").first()
         idol_info["address"] = idol_info.pop("info__thumbnail__address")
-        idol_info["type"] = type
+        idol_info["type"] = idol_type
         idol_infos.append(idol_info)
 
     return JsonResponse({"lastPage": last_page, "idolInfos": idol_infos})
