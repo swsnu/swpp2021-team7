@@ -42,22 +42,25 @@ def my_cmt_get(request):
 def my_idol_get(request):
     myMmbr = list(
         MyIdolMember.objects.filter(user=request.user).values(
-            "id", "member", "member__name", "member__info__thumbnail__address"
+            "id",
+            "member",
+            "member__name",
+            "member__idolmemberinfo__thumbnail__address",
         )
     )
     myGrp = list(
         MyIdolGroup.objects.filter(user=request.user).values(
-            "id", "group", "group__name", "group__info__thumbnail__address"
+            "id", "group", "group__name", "group__idolgroupinfo__thumbnail__address"
         )
     )
     for myIdol in myMmbr:
         myIdol["name"] = myIdol.pop("member__name")
-        myIdol["address"] = myIdol.pop("member__info__thumbnail__address")
+        myIdol["address"] = myIdol.pop("member__idolmemberinfo__thumbnail__address")
         myIdol[TYPE] = TYPE_MEMBER
 
     for myIdol in myGrp:
         myIdol["name"] = myIdol.pop("group__name")
-        myIdol["address"] = myIdol.pop("group__info__thumbnail__address")
+        myIdol["address"] = myIdol.pop("group__idolgroupinfo__thumbnail__address")
 
         myIdol[TYPE] = TYPE_GROUP
 

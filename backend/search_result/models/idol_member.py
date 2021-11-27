@@ -13,7 +13,7 @@ class IdolMember(models.Model):
 
 class IdolMemberInfo(models.Model):
     member = models.OneToOneField(
-        IdolMember, related_name="info", on_delete=models.CASCADE, primary_key=True
+        IdolMember, on_delete=models.CASCADE, primary_key=True
     )
     thumbnail = models.OneToOneField(
         ImageResource, on_delete=models.SET_NULL, null=True, blank=True

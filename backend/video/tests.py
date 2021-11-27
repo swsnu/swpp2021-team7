@@ -55,7 +55,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
 
         # if type is TYPE_FILE
         response = client.post(
@@ -69,7 +69,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
         # if type is TYPE_FILE
         response = client.post(
@@ -83,7 +83,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
     def test_face_recog(self):
         # Wrong type
@@ -98,7 +98,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
 
         # is type is TYPE_FILE
         response = client.post(
@@ -112,7 +112,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
         # is type is TYPE_YOUTUBE
         response = client.post(
@@ -126,7 +126,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
     def test_face_re_recog(self):
         # Check re-recognition return status 200
@@ -135,7 +135,7 @@ class VideoTestCase(TestCase):
             json.dumps({"user_name": "chris", "pass_word": "chris"}),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
     def test_face_share(self):
         # Check (KeyError, JSonDecodeError) returns 400 response
@@ -146,7 +146,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 404)
 
         # if type is SCENE
         response = client.post(
@@ -156,7 +156,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
         # if type is Recog
         response = client.post(
@@ -166,4 +166,4 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)

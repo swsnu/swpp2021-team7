@@ -11,9 +11,7 @@ class IdolGroup(models.Model):
 
 
 class IdolGroupInfo(models.Model):
-    group = models.OneToOneField(
-        IdolGroup, related_name="info", on_delete=models.CASCADE, primary_key=True
-    )
+    group = models.OneToOneField(IdolGroup, on_delete=models.CASCADE, primary_key=True)
     thumbnail = models.OneToOneField(
         ImageResource, on_delete=models.SET_NULL, null=True, blank=True
     )
