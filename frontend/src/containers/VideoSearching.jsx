@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import Container from '@mui/material/Container';
 import List from '@mui/material/List';
-import Pagination from '@mui/material/Pagination';
-import { withStyles } from "@material-ui/core/styles";
-
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
-import SearchIcon from '@mui/icons-material/Search';
-import Stack from '@mui/material/Stack';
 
 import IdolItem from '../components/VideoControl/IdolItem';
 import SearchIdol from '../components/VideoControl/SearchIdol';

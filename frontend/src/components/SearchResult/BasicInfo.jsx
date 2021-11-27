@@ -1,4 +1,4 @@
-import { Avatar, Chip, List, ListItemButton, ListItemText, ListItem, Stack, Button } from "@mui/material";
+import { Avatar, Chip, ListItemButton, ListItemText, ListItem, Stack, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import Members from "./Members";

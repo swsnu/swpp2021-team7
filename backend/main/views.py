@@ -13,28 +13,28 @@ DEFAULT_PAGE_SIZE = 10
 
 # @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["GET"])
-def rankingInfoGet(request):
+def ranking_info_get(request):
     page = int(request.GET.get("page", 0))
     size = int(request.GET.get("size", DEFAULT_PAGE_SIZE))
 
-    startIndex = page * size
-    lastIndex = (page + 1) * size
-    lastPage = 0
-    searchLogs = (
+    start_index = page * size
+    last_index = (page + 1) * size
+    last_page = 0
+    search_logs = (
         SearchLog.objects.all()
         .values("query")
         .annotate(total=Count("query"), isMember=F("isMember"))
         .order_by("-total")
     )
 
-    totalResultLen = len(searchLogs)
-    lastIndex = min(lastIndex, totalResultLen)
+    total_result_len = len(search_logs)
+    last_index = min(last_index, total_result_len)
 
-    lastPage = int((totalResultLen / size)) + 1
+    last_page = int((total_result_len / size)) + 1
 
-    searchLogs = searchLogs[startIndex:lastIndex]
+    searchLogs = search_logs[start_index:last_index]
 
-    indolInfos = []
+    idol_infos = []
     for srchLog in searchLogs:
         model = None
         if srchLog["isMember"]:
@@ -42,12 +42,12 @@ def rankingInfoGet(request):
         else:
             model = IdolGroup
 
-        idolInfo = get_object_or_404(model, name=srchLog["query"])
-        indolInfos.append(idolInfo)
+        idol_info = get_object_or_404(model, name=srchLog["query"])
+        idol_infos.append(idol_info)
 
     return JsonResponse(
         {
-            "lastPage": lastPage,
+            "lastPage": last_page,
             # "idolInfos" : indolInfos
         }
     )
