@@ -55,7 +55,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
         # if type is TYPE_FILE
         response = client.post(
@@ -69,7 +69,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
         # if type is TYPE_FILE
         response = client.post(
@@ -83,7 +83,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 302)
 
     def test_face_recog(self):
         # Wrong type

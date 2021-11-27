@@ -55,10 +55,8 @@ def ranking_info_get(request):
         ) | model.objects.filter(name__eng=srchLog["query"])
         if not idol_info.exists():
             return HttpResponseNotFound()
-        idol_info = idol_info.values(
-            "id", "name", f"idol{idol_type}info__thumbnail__address"
-        ).first()
-        idol_info["address"] = idol_info.pop(f"idol{idol_type}info__thumbnail__address")
+        idol_info = idol_info.values("id", "name", "info__thumbnail__address").first()
+        idol_info["address"] = idol_info.pop("info__thumbnail__address")
         idol_info["type"] = idol_type
         idol_infos.append(idol_info)
 

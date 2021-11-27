@@ -11,9 +11,8 @@ from .models import (
     VideoFaceRecognitionShare,
 )
 
-sys.path.append("../ml")
-import detectScene
-import youtube
+from ml import detectScene
+from ml import youtube
 
 
 LOGIN_PATH = "/"
