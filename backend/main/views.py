@@ -48,7 +48,7 @@ def ranking_info_get(request):
     return JsonResponse(
         {
             "lastPage": last_page,
-            # "idolInfos" : indolInfos
+            "idolInfos" : idol_infos
         }
     )
 
