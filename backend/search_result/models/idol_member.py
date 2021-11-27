@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from main.models import ImageResource
-from .idolGroup import IdolGroup
+from .idol_group import IdolGroup
 
 
 class IdolMember(models.Model):
@@ -22,21 +22,17 @@ class IdolMemberInfo(models.Model):
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
 
-    def to_group_response(self):
-        return {
-            "id": self.member.id,
-            "name": self.member.name["eng"],
-            "thumbnail": self.thumbnail.address,
-        }
-
     def to_basic_info(self):
         return {
-            "thumbnail": self.thumbnail.address,
+            "thumbnail": self.thumbnail.address if self.thumbnail else "",
             "info": {
                 "name": self.member.name,
-                "debut": self.info["debut"],
+                "birth": self.info["출생"] if "출생" in self.info else "",
+                "groups": [
+                    group.to_member_response() for group in self.member.groups.all()
+                ],
             },
-            "news": self.info["news"],
+            "news": self.info["news"] if "news" in self.info else [],
         }
 
 
@@ -50,6 +46,21 @@ class IdolMemberIncluded(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField(default=True)
 
+    def to_group_response(self):
+        return {
+            "id": self.member.id,
+            "name": self.member.name["kor"],
+            "thumbnail": self.member.idolmemberinfo.thumbnail.address
+            if self.member.idolmemberinfo.thumbnail
+            else "",
+        }
+
+    def to_member_response(self):
+        return {
+            "id": self.group.id,
+            "name": self.group.name["kor"],
+        }
+
 
 class MemberComment(models.Model):
     content = models.TextField(blank=False, default="")
@@ -57,6 +68,19 @@ class MemberComment(models.Model):
     member = models.ForeignKey(IdolMember, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def to_response_format(self):
+        obj = {
+            "author": self.user.username,
+            "content": self.content,
+        }
+
+        if self.created_at != self.updated_at:
+            obj["updated_at"] = self.updated_at
+        else:
+            obj["created_at"] = self.created_at
+
+        return obj
 
 
 class IdolViewMemberLog(models.Model):

@@ -14,16 +14,19 @@ import file_transfer
 
 MB = 1024 * 1024
 # These configuration attributes affect both uploads and downloads.
-CONFIG_ATTRS = ('multipart_threshold', 'multipart_chunksize', 'max_concurrency',
-                'use_threads')
+CONFIG_ATTRS = (
+    "multipart_threshold",
+    "multipart_chunksize",
+    "max_concurrency",
+    "use_threads",
+)
 # These configuration attributes affect only downloads.
-DOWNLOAD_CONFIG_ATTRS = ('max_io_queue', 'io_chunksize', 'num_download_attempts')
+DOWNLOAD_CONFIG_ATTRS = ("max_io_queue", "io_chunksize", "num_download_attempts")
 
 
 class TransferManager:
-    
     def __init__(self, local_url=None, bucket_url=None):
-        self._s3 = boto3.resource('s3')
+        self._s3 = boto3.resource("s3")
         self._chore_list = []
         self._create_file_cmd = None
         self._size_multiplier = 0
@@ -34,7 +37,7 @@ class TransferManager:
         self._terminal_width = shutil.get_terminal_size(fallback=(80, 80))[0]
 
     def collect_user_info(self):
-        
+
         if not os.path.isdir(self.folder_address):
             self.folder_address = None
             return False
@@ -48,36 +51,45 @@ class TransferManager:
             return False
         return True
 
-    def task(self, upload_func, download_func,
-             upload_args=None, download_args=None):
+    def task(self, upload_func, download_func, upload_args=None, download_args=None):
         if download_args is None:
             download_args = {}
         if upload_args is None:
             upload_args = {}
-        
-        local_file_path, object_key, download_file_path = \
-            self._create_demo_file()
 
-        file_transfer.TransferConfig = \
-            self._config_wrapper(TransferConfig, CONFIG_ATTRS)
-        self._report_transfer_params('Uploading', local_file_path,
-                                        object_key, **upload_args)
+        local_file_path, object_key, download_file_path = self._create_demo_file()
+
+        file_transfer.TransferConfig = self._config_wrapper(
+            TransferConfig, CONFIG_ATTRS
+        )
+        self._report_transfer_params(
+            "Uploading", local_file_path, object_key, **upload_args
+        )
         start_time = time.perf_counter()
-        thread_info = upload_func(local_file_path, self.bucket_address,
-                                    object_key, self.file_size_mb,
-                                    **upload_args)
+        thread_info = upload_func(
+            local_file_path,
+            self.bucket_address,
+            object_key,
+            self.file_size_mb,
+            **upload_args,
+        )
         end_time = time.perf_counter()
         self._report_transfer_result(thread_info, end_time - start_time)
 
-        file_transfer.TransferConfig = \
-            self._config_wrapper(TransferConfig,
-                                    CONFIG_ATTRS + DOWNLOAD_CONFIG_ATTRS)
-        self._report_transfer_params('Downloading', object_key,
-                                        download_file_path, **download_args)
+        file_transfer.TransferConfig = self._config_wrapper(
+            TransferConfig, CONFIG_ATTRS + DOWNLOAD_CONFIG_ATTRS
+        )
+        self._report_transfer_params(
+            "Downloading", object_key, download_file_path, **download_args
+        )
         start_time = time.perf_counter()
-        thread_info = download_func(self.bucket_address, object_key,
-                                    download_file_path, self.file_size_mb,
-                                    **download_args)
+        thread_info = download_func(
+            self.bucket_address,
+            object_key,
+            download_file_path,
+            self.file_size_mb,
+            **download_args,
+        )
         end_time = time.perf_counter()
         self._report_transfer_result(thread_info, end_time - start_time)
 
@@ -90,9 +102,8 @@ class TransferManager:
         Remove files from the demo folder, and uploaded objects from the
         Amazon S3 bucket.
         """
-        print('-' * self._terminal_width)
-        for local_file_path, s3_object_key, downloaded_file_path \
-                in self._chore_list:
+        print("-" * self._terminal_width)
+        for local_file_path, s3_object_key, downloaded_file_path in self._chore_list:
             print(f"Removing {local_file_path}")
             try:
                 os.remove(local_file_path)
@@ -108,8 +119,7 @@ class TransferManager:
             if self.bucket_address:
                 print(f"Removing {self.bucket_address}:{s3_object_key}")
                 try:
-                    self._s3.Bucket(self.bucket_address).Object(
-                        s3_object_key).delete()
+                    self._s3.Bucket(self.bucket_address).Object(s3_object_key).delete()
                 except ClientError as err:
                     print(err)
 
@@ -119,12 +129,12 @@ class TransferManager:
             self._create_file_cmd = "fsutil file createnew {} {}"
             self._size_multiplier = MB
         elif platform.system() == "Linux" or platform.system() == "Darwin":
-            self._create_file_cmd = f"dd if=/dev/urandom of={{}} " \
-                                    f"bs={MB} count={{}}"
+            self._create_file_cmd = f"dd if=/dev/urandom of={{}} " f"bs={MB} count={{}}"
             self._size_multiplier = 1
         else:
             raise EnvironmentError(
-                f"Demo of platform {platform.system()} isn't supported.")
+                f"Demo of platform {platform.system()} isn't supported."
+            )
 
     def _create_demo_file(self):
         """
@@ -145,21 +155,23 @@ class TransferManager:
         file_tag = len(self._chore_list) + 1
 
         local_file_path = os.path.join(
-            self.folder_address,
-            file_name_template.format(file_tag, local_suffix))
+            self.folder_address, file_name_template.format(file_tag, local_suffix)
+        )
 
         s3_object_key = file_name_template.format(file_tag, object_suffix)
 
         downloaded_file_path = os.path.join(
-            self.folder_address,
-            file_name_template.format(file_tag, download_suffix))
+            self.folder_address, file_name_template.format(file_tag, download_suffix)
+        )
 
         filled_cmd = self._create_file_cmd.format(
-            local_file_path,
-            self.file_size_mb * self._size_multiplier)
+            local_file_path, self.file_size_mb * self._size_multiplier
+        )
 
-        print(f"Creating file of size {self.file_size_mb} MB "
-              f"in {self.folder_address} by running:")
+        print(
+            f"Creating file of size {self.file_size_mb} MB "
+            f"in {self.folder_address} by running:"
+        )
         print(f"{'':4}{filled_cmd}")
         os.system(filled_cmd)
 
@@ -169,10 +181,10 @@ class TransferManager:
 
     def _report_transfer_params(self, verb, source_name, dest_name, **kwargs):
         """Report configuration and extra arguments used for a file transfer."""
-        print('-' * self._terminal_width)
-        print(f'{verb} {source_name} ({self.file_size_mb} MB) to {dest_name}')
+        print("-" * self._terminal_width)
+        print(f"{verb} {source_name} ({self.file_size_mb} MB) to {dest_name}")
         if kwargs:
-            print('With extra args:')
+            print("With extra args:")
             for arg, value in kwargs.items():
                 print(f'{"":4}{arg:<20}: {value}')
 
@@ -185,13 +197,13 @@ class TransferManager:
         True when the user answers 'y' or 'Y'; otherwise, False.
         """
         answer = input(f"{question} (y/n) ")
-        return answer.lower() == 'y'
+        return answer.lower() == "y"
 
     @staticmethod
     def _config_wrapper(func, config_attrs):
         def wrapper(*args, **kwargs):
             config = func(*args, **kwargs)
-            print('With configuration:')
+            print("With configuration:")
             for attr in config_attrs:
                 print(f'{"":4}{attr:<20}: {getattr(config, attr)}')
             return config
@@ -205,4 +217,3 @@ class TransferManager:
         for ident, byte_count in thread_info.items():
             print(f"{'':4}Thread {ident} copied {byte_count} bytes.")
         print(f"Your transfer took {elapsed:.2f} seconds.")
-

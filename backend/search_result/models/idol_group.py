@@ -23,13 +23,15 @@ class IdolGroupInfo(models.Model):
 
     def to_basic_info(self):
         return {
-            "thumbnail": self.thumbnail.address,
+            "thumbnail": self.thumbnail.address if self.thumbnail else "",
             "info": {
                 "name": self.group.name,
-                "debut": self.info["debut"],
-                "members": [member.to_group_response for member in self.group.members],
+                "debut": self.info["데뷔"] if "데뷔" in self.info else "",
+                "members": [
+                    member.to_group_response() for member in self.group.members.all()
+                ],
             },
-            "news": self.info["news"],
+            "news": self.info["news"] if "뉴스" in self.info else [],
         }
 
 

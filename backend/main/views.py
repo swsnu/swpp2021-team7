@@ -39,7 +39,7 @@ def ranking_info_get(request):
 
     searchLogs = searchLogs[start_index:lastIndex]
 
-    indolInfos = []
+    idol_infos = []
     type = None
     for srchLog in searchLogs:
         model = None
@@ -58,18 +58,6 @@ def ranking_info_get(request):
         idol_info = idol_info.values("id", "name", "info__thumbnail__address").first()
         idol_info["address"] = idol_info.pop("info__thumbnail__address")
         idol_info["type"] = type
-        indolInfos.append(idol_info)
+        idol_infos.append(idol_info)
 
-<<<<<<< HEAD
-    return JsonResponse({"lastPage": last_page, "idolInfos": indolInfos})
-=======
-    return JsonResponse(
-        {
-            "lastPage": last_page,
-            "idolInfos" : idol_infos
-        }
-    )
->>>>>>> a8028afa38a7748e5dd4fae45858ff84c7bb7485
-
-
-# Create your views here.
+    return JsonResponse({"lastPage": last_page, "idolInfos": idol_infos})

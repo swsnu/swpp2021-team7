@@ -27,7 +27,9 @@ def signup(request):
     except (KeyError, JSONDecodeError):
         return HttpResponseBadRequest()
 
-    User.objects.create_user(username=email, password=password, first_name=first_name, last_name=last_name)
+    User.objects.create_user(
+        username=email, password=password, first_name=first_name, last_name=last_name
+    )
     return HttpResponse(status=201)
 
 
@@ -43,11 +45,10 @@ def signin(request):
     return HttpResponse(status=401)
 
 
-@require_http_methods(['GET'])
+@require_http_methods(["GET"])
 def signout(request):
     if request.user.is_authenticated:
         logout(request)
         return HttpResponse(status=204)
     else:
-        return HttpResponse('Unauthorized', status=401)
-
+        return HttpResponse("Unauthorized", status=401)
