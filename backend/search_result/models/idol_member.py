@@ -24,7 +24,7 @@ class IdolMemberInfo(models.Model):
 
     def to_basic_info(self):
         return {
-            "thumbnail": self.thumbnail.address,
+            "thumbnail": self.thumbnail.address if self.thumbnail else "",
             "info": {
                 "name": self.member.name,
                 "birth": self.info["출생"] if "출생" in self.info else "",
@@ -50,7 +50,9 @@ class IdolMemberIncluded(models.Model):
         return {
             "id": self.member.id,
             "name": self.member.name["kor"],
-            "thumbnail": self.member.idolmemberinfo.thumbnail.address,
+            "thumbnail": self.member.idolmemberinfo.thumbnail.address
+            if self.member.idolmemberinfo.thumbnail
+            else "",
         }
 
     def to_member_response(self):

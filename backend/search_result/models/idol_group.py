@@ -21,7 +21,7 @@ class IdolGroupInfo(models.Model):
 
     def to_basic_info(self):
         return {
-            "thumbnail": self.thumbnail.address,
+            "thumbnail": self.thumbnail.address if self.thumbnail else "",
             "info": {
                 "name": self.group.name,
                 "debut": self.info["데뷔"] if "데뷔" in self.info else "",
