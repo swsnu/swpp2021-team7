@@ -28,6 +28,9 @@ class IdolMemberInfo(models.Model):
             "info": {
                 "name": self.member.name,
                 "birth": self.info["출생"] if "출생" in self.info else "",
+                "groups": [
+                    group.to_member_response() for group in self.member.groups.all()
+                ],
             },
             "news": self.info["news"] if "news" in self.info else [],
         }
@@ -48,6 +51,12 @@ class IdolMemberIncluded(models.Model):
             "id": self.member.id,
             "name": self.member.name["kor"],
             "thumbnail": self.member.idolmemberinfo.thumbnail.address,
+        }
+
+    def to_member_response(self):
+        return {
+            "id": self.group.id,
+            "name": self.group.name["kor"],
         }
 
 
