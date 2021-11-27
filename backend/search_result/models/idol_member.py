@@ -69,6 +69,19 @@ class MemberComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def to_response_format(self):
+        obj = {
+            "author": self.user.username,
+            "content": self.content,
+        }
+
+        if self.created_at != self.updated_at:
+            obj["updated_at"] = self.updated_at
+        else:
+            obj["created_at"] = self.created_at
+
+        return obj
+
 
 class IdolViewMemberLog(models.Model):
     member = models.ForeignKey(IdolMember, on_delete=models.CASCADE)
