@@ -8,6 +8,7 @@ export default class MyArticleList extends Component {
         for (let scrap of this.props.scraps) {
             myArticleLists.push(<MyArticle
                 key={scrap.id}
+                id={scrap.id}
                 type={scrap.type}
                 title={scrap.title}
                 address={scrap.address}

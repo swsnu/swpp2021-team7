@@ -23,6 +23,6 @@ urlpatterns = [
         grp_artcle_delete,
         name="grpArtcleDelete",
     ),
-    path("idols/member/<int:idol_id>/", mmbrIdolDelete, name="mmbrIdolDelete"),
-    path("idols/group/<int:idol_id>/", grpIdolDelete, name="grpIdolDelete"),
+    path("idols/member/<int:my_idol_id>/", mmbrIdolDelete, name="mmbrIdolDelete"),
+    path("idols/group/<int:my_idol_id>/", grpIdolDelete, name="grpIdolDelete"),
 ]

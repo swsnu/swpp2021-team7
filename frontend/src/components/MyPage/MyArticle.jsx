@@ -6,11 +6,20 @@ import {
     ListItemText,
     ListItemButton
 } from '@mui/material';
+import axios from "axios"
 
 
 export default class MyArticle extends Component {
     deleteScrapedArticle = () => {
-        console.log("click deleteScrapedArticle")
+        axios.delete(`mypage/articles/${this.props.type}/${this.props.id}`)
+            .then(function (res) {
+                if (res.status == 200) {
+                    window.location.reload();
+                }
+            })
+            .catch(function (errros) {
+                console.log("error occur in delete scraps")
+            })
     }
     render() {
         return (

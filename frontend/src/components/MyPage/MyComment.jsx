@@ -6,6 +6,7 @@ import {
     Typography,
     Chip
 } from '@mui/material';
+import moment from 'moment'
 
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router'
@@ -34,7 +35,7 @@ class MyComment extends Component {
                             color="primary" />}
                         secondary={
                             <React.Fragment>
-                                <Chip component="span" label={`DATE : ${this.props.createAt}`} />
+                                <Chip component="span" label={`DATE : ${moment(this.props.createAt).format("YYYY-MM-DD / HH:mm:ss")}`} />
                                 <Typography
                                     sx={{ display: 'block' }}
                                     component="span"

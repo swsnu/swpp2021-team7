@@ -28,9 +28,9 @@ export default class MyPage extends Component {
     }
 
     componentDidMount() {
-        const getMyCmts = axios.get('/api/mypage/comments/')
-        const getMyIdols = axios.get('/api/mypage/idols/')
-        const getMyScraps = axios.get('/api/mypage/articles/')
+        const getMyCmts = axios.get('mypage/comments/')
+        const getMyIdols = axios.get('mypage/idols/')
+        const getMyScraps = axios.get('mypage/articles/')
 
         axios.all([getMyCmts, getMyIdols, getMyScraps]).then(axios.spread((...responses) => {
             this.setState({

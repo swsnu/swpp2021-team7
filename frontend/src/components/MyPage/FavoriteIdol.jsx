@@ -9,16 +9,24 @@ import {
     Chip
 } from '@mui/material';
 import { withRouter } from 'react-router';
-
+import axios from 'axios';
 
 
 class FavoriteIdol extends Component {
     cancelFavoriteIdol = () => {
-        console.log("cancelFavoriteIdol")
+        axios.delete(`mypage/idols/${this.props.type}/${this.props.id}`)
+            .then(function (res) {
+                if (res.status == 200) {
+                    window.location.reload();
+                }
+            })
+            .catch(function (errros) {
+                console.log("error occur in delete favorite idol")
+            })
     }
 
     redirectSearchResult = () => {
-        this.props.history.push(`/search/${this.props.isGroup ? "group/" : ""}1`);
+        this.props.history.push(`/search/${this.props.type}/${this.props.idolId}`);
     }
 
     render() {

@@ -105,16 +105,16 @@ def grp_artcle_delete(request, article_id):
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["DELETE"])
-def mmbrIdolDelete(request, idol_id):
-    myMmbrIdol = get_object_or_404(MyIdolMember, pk=idol_id)
+def mmbrIdolDelete(request, my_idol_id):
+    myMmbrIdol = get_object_or_404(MyIdolMember, pk=my_idol_id)
     myMmbrIdol.delete()
     return HttpResponse(status=200)
 
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["DELETE"])
-def grpIdolDelete(request, idol_id):
-    myGrpIdol = get_object_or_404(MyIdolGroup, pk=idol_id)
+def grpIdolDelete(request, my_idol_id):
+    myGrpIdol = get_object_or_404(MyIdolGroup, pk=my_idol_id)
     myGrpIdol.delete()
     return HttpResponse(status=200)
 
