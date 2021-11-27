@@ -9,7 +9,7 @@ from .views import (
 
 urlpatterns = [
     re_path(
-        r"^(?P<scope>group|member)/(?P<instance_id>[0-9]+)",
+        r"^(?P<scope>group|member)/(?P<instance_id>[0-9]+)/",
         search_result,
         name="search_result",
     ),
