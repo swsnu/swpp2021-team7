@@ -11,7 +11,6 @@ import Ranking from './containers/Ranking';
 import SearchResult from './containers/SearchResult';
 import Signin from './containers/Signin';
 import Signup from './containers/Signup';
-import FindAccount from './containers/FindAccount';
 import Main from './containers/Main';
 
 // video indexing / searching / result
@@ -28,7 +27,6 @@ function App(props) {
           <Route path='/' exact render={() => <Main />} />
           <Route path="/sign/login" exact render={() => <Signin />} />
           <Route path="/sign/join" exact render={() => <Signup />} />
-          <Route path="/sign/findAccount" exact render={() => <FindAccount />} />
           <Route path='/mypage/:id' exact render={() => <MyPage />} />
           <Route path='/rank' exact render={() => <Ranking />} />
           <Route path="/search/:id" exact render={() => <SearchResult />} />

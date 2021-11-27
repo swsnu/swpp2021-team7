@@ -7,7 +7,15 @@ jobs:
     - language: node_js
       node_js: 14
       python: "3.7.9"
+      sudo: enabled
+      services:
+        - mysql
       addons:
+        apt:
+          sources:
+          - mysql-5.7-trusty
+          packages:
+          - mysql-server
         sonarcloud:
           organization: swsnu
           token: 
@@ -28,6 +36,12 @@ jobs:
         - yarn test --coverage --watchAll=false --passWithNoTests
         - coveralls-lcov -v -n coverage/lcov.info > coverage.json
         - cd ../backend
+        - mysql -e "CREATE DATABASE team7;"
+        - mysql -e "CREATE USER 'team7'@'localhost' IDENTIFIED BY 'team7-12345!';"
+        - mysql -e "GRANT ALL PRIVILEGES ON *.* to 'team7'@'localhost';"
+        - mysql -e "SET GLOBAL character_set_server = 'utf8mb4'"
+        - mysql -e "SET GLOBAL character_set_database = 'utf8mb4'"
+        - mysql -e "show variables like 'c%';
         - pylint **/*.py --load-plugins pylint_django
         - coverage run --source='.' manage.py test
         - coverage xml
@@ -35,10 +49,15 @@ jobs:
         - sonar-scanner
         - coveralls --merge=./frontend/coverage.json
         
+        
+# # CI Environment
+# dist: bionic
 
+# # Job Configurations
 # jobs:
 #   include:
-#     - language: python
+#     - language: node_js
+#       node_js: 14
 #       python: "3.7.9"
 #       addons:
 #         sonarcloud:
@@ -47,18 +66,24 @@ jobs:
 #             secure: "i1ge1XaZE74ld3rWtTurdJrGcNYqRwC5+omD8TNyZmmHoY0rY7TmX5hJF+qR2Xiz8sYxCcazFfvkShFun2BKswh/TVqSZ04ELpCAfS1Ujjfhn8bM0/7xXLjASCbdOVaGk1cI4SjCblx0T4VWanNdRg7/pddzvNz/LujFEq/0o2JmYPCIPY6XRdFuDjRoCBvsXZGB4jXdN0JH8siV+JG3MMjb7d7GD5L6uPu1uHRhbP/FGJBCN4/JBGZw8vg8E4qxXD92r76cEaDjimiArCO93gATIo8slYVsZ47wiU4iHiLKKK0DQo0tNJHWnBoRhzZapZ9ZUn867rcaffYooVkY3MZb6s4d4kdK56QcPpHJhrg9hDz5krxOwE2OAKVsD/R5FKTnvsElC69sWDeqOU+kqtgVk+mNHtkSQy1cQXWpj/1M7ARG39Hb5724K8VBIOGEDkM7i9YHcyITkrKNYf/zq/wgrqDw5m29G6RXaoc4HuhSQdcpHf3Q1NFq6JC4djuFyaAEVe9Bt2po/Q+8Z5qzJPH4Oe6J4JOZBmk3JhZcKPSxoJpo58pcPKTB19fRjditjqP7YxyT8S8Nt6yZmyFRRcmWvVjWQe8HgNCOe7dz7LjA0oFmjqePH3lBmn6bNLmIlyY65gVpFK9+8uN6jTUcY61pN10Y/mqwQd9k+PKUpPM="
 #       install:
 #         - cd backend
+#         - source ~/virtualenv/python3.7/bin/activate
 #         - pip install -r requirements.txt
+#         - pip install coveralls
+#         - cd ../frontend
+#         - yarn install
+#         - yarn global add coveralls
+#         - gem install coveralls-lcov
+#         - cd ..
 #       script:
+#         - cd frontend
+#         - ./node_modules/.bin/eslint src
+#         - yarn test --coverage --watchAll=false --passWithNoTests
+#         - coveralls-lcov -v -n coverage/lcov.info > coverage.json
+#         - cd ../backend
 #         - pylint **/*.py --load-plugins pylint_django
 #         - coverage run --source='.' manage.py test
 #         - coverage xml
-#         - cd .. && sonar-scanner
-        
-#     - language: node_js
-#       node_js: 14.17.0
-#       install:
-#         - cd frontend
-#         - yarn install
-#       script:
-#         - ./node_modules/.bin/eslint src
-#         - yarn test --coverage --watchAll=false
+#         - cd ..
+#         - sonar-scanner
+#         - coveralls --merge=./frontend/coverage.json
+   

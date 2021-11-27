@@ -60,7 +60,16 @@ def ranking_info_get(request):
         idol_info["type"] = type
         indolInfos.append(idol_info)
 
+<<<<<<< HEAD
     return JsonResponse({"lastPage": last_page, "idolInfos": indolInfos})
+=======
+    return JsonResponse(
+        {
+            "lastPage": last_page,
+            "idolInfos" : idol_infos
+        }
+    )
+>>>>>>> a8028afa38a7748e5dd4fae45858ff84c7bb7485
 
 
 # Create your views here.

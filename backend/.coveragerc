@@ -1,3 +1,6 @@
 [run]
 omit =
     venv/*
+    backend/asgi.py
+    backend/wsgi.py
+    manage.py
