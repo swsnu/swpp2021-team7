@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from main.models import ImageResource, VideoResource
-from search_result.models.idolMember import IdolMember
+from search_result.models import IdolMember
 
 
 class VideoFaceRecognition(models.Model):

@@ -50,8 +50,8 @@ class IdolMemberIncluded(models.Model):
         return {
             "id": self.member.id,
             "name": self.member.name["kor"],
-            "thumbnail": self.member.idolmemberinfo.thumbnail.address
-            if self.member.idolmemberinfo.thumbnail
+            "thumbnail": self.member.info.thumbnail.address
+            if self.member.info.thumbnail
             else "",
         }
 

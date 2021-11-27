@@ -62,7 +62,6 @@ class SearchResultTestCase(IdolTestCase):
         # then
         assert get_member.status_code == 405
         assert get_group.status_code == 405
-4
 
     def test_get으로_멤버정보를_불러올수있다(self):
         # when
@@ -94,4 +93,3 @@ class SearchResultTestCase(IdolTestCase):
         assert res_data["tweets"] == self.tweets
         assert res_data["youtubes"] == self.youtubes
         assert res_data["comments"][0]["content"] == self.group_comment.content
-
