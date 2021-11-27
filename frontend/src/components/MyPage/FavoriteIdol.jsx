@@ -16,9 +16,7 @@ class FavoriteIdol extends Component {
     cancelFavoriteIdol = () => {
         axios.delete(`mypage/idols/${this.props.type}/${this.props.id}`)
             .then(function (res) {
-                if (res.status == 200) {
-                    window.location.reload();
-                }
+                window.location.reload();
             })
             .catch(function (errros) {
                 console.log("error occur in delete favorite idol")

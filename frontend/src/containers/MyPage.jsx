@@ -40,7 +40,7 @@ export default class MyPage extends Component {
             })
 
         })).catch(errors => {
-            console.log(errors)
+            // console.log(errors)
         })
 
 

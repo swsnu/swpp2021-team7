@@ -13,9 +13,8 @@ export default class MyArticle extends Component {
     deleteScrapedArticle = () => {
         axios.delete(`mypage/articles/${this.props.type}/${this.props.id}`)
             .then(function (res) {
-                if (res.status == 200) {
-                    window.location.reload();
-                }
+                window.location.reload();
+
             })
             .catch(function (errros) {
                 console.log("error occur in delete scraps")
