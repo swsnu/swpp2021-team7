@@ -24,10 +24,12 @@ class IdolGroupInfo(models.Model):
             "thumbnail": self.thumbnail.address,
             "info": {
                 "name": self.group.name,
-                "debut": self.info["debut"],
-                "members": [member.to_group_response for member in self.group.members],
+                "debut": self.info["데뷔"] if "데뷔" in self.info else "",
+                "members": [
+                    member.to_group_response() for member in self.group.members.all()
+                ],
             },
-            "news": self.info["news"],
+            "news": self.info["news"] if "뉴스" in self.info else [],
         }
 
 

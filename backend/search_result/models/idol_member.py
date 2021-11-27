@@ -22,21 +22,14 @@ class IdolMemberInfo(models.Model):
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
 
-    def to_group_response(self):
-        return {
-            "id": self.member.id,
-            "name": self.member.name["eng"],
-            "thumbnail": self.thumbnail.address,
-        }
-
     def to_basic_info(self):
         return {
             "thumbnail": self.thumbnail.address,
             "info": {
                 "name": self.member.name,
-                "debut": self.info["debut"],
+                "birth": self.info["출생"] if "출생" in self.info else "",
             },
-            "news": self.info["news"],
+            "news": self.info["news"] if "news" in self.info else [],
         }
 
 
@@ -49,6 +42,13 @@ class IdolMemberIncluded(models.Model):
     )
     time = models.DateTimeField(auto_now_add=True)
     valid = models.BooleanField(default=True)
+
+    def to_group_response(self):
+        return {
+            "id": self.member.id,
+            "name": self.member.name["kor"],
+            "thumbnail": self.member.idolmemberinfo.thumbnail.address,
+        }
 
 
 class MemberComment(models.Model):

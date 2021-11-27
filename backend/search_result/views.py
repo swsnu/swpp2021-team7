@@ -5,7 +5,7 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
-from .models import IdolMember, MemberComment, IdolGroup
+from .models import IdolMember, MemberComment, IdolGroupInfo, IdolMemberInfo, IdolGroup
 
 LOGIN_PATH = "/"
 
@@ -58,21 +58,24 @@ def grpCmtPutDelete():
 def search_result(request, scope, instance_id):
 
     if scope == "member":
-        model = IdolMember
+        instance = get_object_or_404(IdolMember, id=instance_id)
+        info_instance = get_object_or_404(IdolMemberInfo, member_id=instance_id)
     else:
-        model = IdolGroup
+        instance = get_object_or_404(IdolGroup, id=instance_id)
+        info_instance = get_object_or_404(IdolGroupInfo, group_id=instance_id)
 
-    instance = get_object_or_404(model, id=instance_id)
-    basicInfo = instance.to_basic_info()
-    tweets = instance.info["tweets"]
-    youtubes = instance.info["youtubes"]
+    basicInfo = info_instance.to_basic_info()
+    tweets = info_instance.info["tweets"] if "tweets" in info_instance.info else []
+    youtubes = (
+        info_instance.info["youtubes"] if "youtubes" in info_instance.info else []
+    )
 
     if scope == "member":
         comments_qs = instance.membercomment_set.all()
     else:
         comments_qs = instance.groupcomment_set.all()
 
-    comments = [comment.to_response_format for comment in comments_qs]
+    comments = [comment.to_response_format() for comment in comments_qs]
 
     return JsonResponse(
         {
