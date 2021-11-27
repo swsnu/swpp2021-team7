@@ -33,3 +33,5 @@ typing_extensions==4.0.0
 wrapt==1.13.3
 youtube-dl==2021.6.6
 zipp==3.6.0
+bs4==0.0.1
+requests==2.25.0
