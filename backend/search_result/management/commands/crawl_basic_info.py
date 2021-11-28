@@ -51,7 +51,7 @@ class Command(BaseCommand):
 
         group_instance = IdolGroup.objects.filter(name__kor=group_kor)
 
-        if len(group_instance):
+        if len(group_instance):  # len 대신 exist를 쓰면 더 효율적으로 바뀔거 같음
             print("Already crawled group. Terminating process..")
             return
 
