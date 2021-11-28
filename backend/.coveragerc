@@ -6,3 +6,4 @@ omit =
     backend/wsgi.py
     manage.py
     ml/*
+    custom_util/*
