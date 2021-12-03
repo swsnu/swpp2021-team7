@@ -1,6 +1,7 @@
 from googleapiclient.discovery import build
 
 youtube_url = "https://www.youtube.com/results?search_query=kpop{}"
+video_url = "https://www.youtube.com/watch?v={}"
 
 
 def build_youtube_search():
@@ -32,6 +33,7 @@ def info_to_dict(videoId, title, description, thumnail):
         "title": title,
         "description": description,
         "thumnail": thumnail,
+        "url": video_url.format(videoId),
     }
     return result
 

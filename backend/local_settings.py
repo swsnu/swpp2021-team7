@@ -5,7 +5,7 @@ DATABASE = {
         "USER": "team7",
         "PASSWORD": "team7-12345!",
         # "USER": "root",
-        # "PASSWORD": "b116941515!",
+        # "PASSWORD": "!",
         "HOST": "localhost",
         "PORT": "3306",
     }

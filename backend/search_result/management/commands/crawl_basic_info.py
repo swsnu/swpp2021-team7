@@ -14,8 +14,20 @@ from main.models import ImageResource
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+
+        # Named (optional) arguments
+        parser.add_argument(
+            "--name",
+            type=str,
+            help="crawl about group name",
+        )
+
     def handle(self, *args, **options):
-        self.iterate()
+        if not options["name"]:
+            self.iterate()
+        else:
+            self.crawl_group(options["name"])
 
     def iterate(self):
         to_crawl = ["레드벨벳", "방탄소년단", "비투비"]
