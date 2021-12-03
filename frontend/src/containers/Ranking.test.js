@@ -40,7 +40,7 @@ describe('<Ranking />', () => {
         }
         )
     })
-    it('should render without errors', async () => {
+    test.only('should render without errors', async () => {
         setComponent()
         await flushPromises()
         component.update()
