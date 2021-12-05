@@ -9,7 +9,7 @@ from .models import SearchLog
 
 
 LOGIN_PATH = "/"
-DEFAULT_PAGE_SIZE = 1  # 한페이지에 보여질 데이터의 수
+DEFAULT_PAGE_SIZE = 10  # 한페이지에 보여질 데이터의 수
 DEFAULT_PAGE_INDEX = 2  # 한화면에 표시할 페이지 수
 
 

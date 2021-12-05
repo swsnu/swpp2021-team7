@@ -29,7 +29,7 @@ function App(props) {
           <Route path="/sign/join" exact render={() => <Signup />} />
           <Route path='/mypage/:id' exact render={() => <MyPage />} />
           <Route path='/rank' exact render={() => <Ranking />} />
-          <Route path="/search/:id" exact render={() => <SearchResult />} />
+          <Route path="/search/member/:id" exact render={() => <SearchResult />} />
           <Route path="/search/group/:id" exact render={() => <SearchResult isGroup={true} />} />
 
           <Route path='/video' exact render={() => <VideoIndexing />} />
