@@ -53,12 +53,12 @@ def get_video_info(search_response):
     return result_json
 
 
-def crawl_yotube(query):
+def crawl_youtube(query):
     return get_video_info(get_search_response(build_youtube_search(), query))
 
 
 if __name__ == "__main__":
-    print("test crawl yotube")
+    print("test crawl youtube")
     test_query = "레드벨벳"
     print(f"-----{test_query}의 결과-----")
-    print(crawl_yotube(test_query))
+    print(crawl_youtube(test_query))

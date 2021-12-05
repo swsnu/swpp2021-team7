@@ -62,7 +62,7 @@ class Command(BaseCommand):
         print(f"Crawling {group_kor}...")
 
         # crawl_youtube 로직 추가
-        youtube_info = crawl_youtube.crawl_yotube(group_kor)
+        youtube_info = crawl_youtube.crawl_youtube(group_kor)
 
         group_instance = IdolGroup.objects.filter(name__kor=group_kor)
 
@@ -133,7 +133,7 @@ class Command(BaseCommand):
         print(f"Crawling {member_kor}(member)...")
 
         # crawl_youtube 로직 추가
-        youtube_info = crawl_youtube.crawl_yotube(member_kor)
+        youtube_info = crawl_youtube.crawl_youtube(member_kor)
 
         member_eng, info_nodes, thumbnail_address = self.fetch_and_set(url)
 
