@@ -104,7 +104,7 @@ class Command(BaseCommand):
             info[key] = value
 
         # crawl_youtube 로직 추가
-        info["youtube"] = youtube_info
+        info["youtubes"] = youtube_info
 
         if len(group_instance) == 0:
             group_instance = IdolGroup.objects.create(name=name)
@@ -122,7 +122,7 @@ class Command(BaseCommand):
 
         else:
             group_info = IdolGroupInfo.objects.get(group=group_instance[0])
-            group_info.info["youtube"] = youtube_info
+            group_info.info["youtubes"] = youtube_info
             group_info.save()
             for member in member_urls:
                 self.crawl_member(group_instance[0].id, member)
@@ -145,7 +145,7 @@ class Command(BaseCommand):
 
         if instance_exists:
             member_info = IdolMemberInfo.objects.filter(member__name__kor=member_kor)[0]
-            member_info.info["youtube"] = youtube_info
+            member_info.info["youtubes"] = youtube_info
             member_info.save()
             print("Already crawled member. Terminating process..")
             return
@@ -175,7 +175,7 @@ class Command(BaseCommand):
             address=thumbnail_address
         )
 
-        info["youtube"] = youtube_info
+        info["youtubes"] = youtube_info
         IdolMemberInfo.objects.create(
             member=member_instance,
             thumbnail=image_resource_instance,

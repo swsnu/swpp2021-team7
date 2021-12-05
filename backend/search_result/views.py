@@ -5,6 +5,7 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
+from main.models import SearchLog
 from .models import IdolMember, MemberComment, IdolGroupInfo, IdolMemberInfo, IdolGroup
 
 LOGIN_PATH = "/"
@@ -63,6 +64,14 @@ def search_result(request, scope, instance_id):
     else:
         instance = get_object_or_404(IdolGroup, id=instance_id)
         info_instance = get_object_or_404(IdolGroupInfo, group_id=instance_id)
+
+    # 검색로그 쌓기
+    search_log = SearchLog(
+        query=instance.name["kor"],
+        isMember=True if scope == "member" else False,
+        user=request.user,
+    )
+    search_log.save()
 
     basicInfo = info_instance.to_basic_info()
     tweets = info_instance.info["tweets"] if "tweets" in info_instance.info else []
