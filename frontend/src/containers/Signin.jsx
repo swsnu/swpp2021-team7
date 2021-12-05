@@ -10,17 +10,34 @@ import {
 } from '@mui/material';
 import logo from '../image/256w/자산 1_256.png';
 import { withRouter } from 'react-router';
+import axios from 'axios';
 
 
 function Signin(props) {
+  async function postData(json) {
+    try {
+      const response = await axios.post('/account/signin/', json, {
+        headers:{
+          'Content-type': 'application/json'
+        }
+      });
+      console.log(response);
+      props.history.push('/')
+    } catch(err) {
+      alert('Email or Password does not exist')
+      console.error(err);
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
+    let data = new FormData(event.currentTarget);
+    data = {
       email: data.get('email'),
       password: data.get('password'),
-    });
-    props.history.push('/');
+    };
+    data = JSON.stringify(data);
+    postData(data);
   };
 
   return (
