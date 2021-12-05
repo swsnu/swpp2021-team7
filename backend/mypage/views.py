@@ -1,18 +1,17 @@
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
+from custom_util.login_required import login_required
 from search_result.models import MemberComment, GroupComment
 from .models import ArticleGroupScrap, ArticleMemberScrap, MyIdolMember, MyIdolGroup
 
-LOGIN_PATH = "/"
 TYPE = "type"
 TYPE_MEMBER = "member"
 TYPE_GROUP = "group"
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["GET"])
 def my_cmt_get(request):
     mmbrCmt = list(
@@ -37,7 +36,7 @@ def my_cmt_get(request):
     return JsonResponse(myComment, safe=False)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["GET"])
 def my_idol_get(request):
     myMmbr = list(
@@ -68,7 +67,7 @@ def my_idol_get(request):
     return JsonResponse(myIdol, safe=False)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["GET"])
 def my_artcl_get(request):
     mmbrArtcl = list(
@@ -93,7 +92,7 @@ def my_artcl_get(request):
     return JsonResponse(myArticle, safe=False)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["DELETE"])
 def mmbr_artcle_delete(request, article_id):
     myMmbrArtcl = get_object_or_404(ArticleMemberScrap, pk=article_id)
@@ -101,7 +100,7 @@ def mmbr_artcle_delete(request, article_id):
     return HttpResponse(status=200)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["DELETE"])
 def grp_artcle_delete(request, article_id):
     myGrpArtcl = get_object_or_404(ArticleGroupScrap, pk=article_id)
@@ -109,7 +108,7 @@ def grp_artcle_delete(request, article_id):
     return HttpResponse(status=200)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["DELETE"])
 def mmbrIdolDelete(request, my_idol_id):
     myMmbrIdol = get_object_or_404(MyIdolMember, pk=my_idol_id)
@@ -117,7 +116,7 @@ def mmbrIdolDelete(request, my_idol_id):
     return HttpResponse(status=200)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["DELETE"])
 def grpIdolDelete(request, my_idol_id):
     myGrpIdol = get_object_or_404(MyIdolGroup, pk=my_idol_id)

@@ -9,7 +9,8 @@ from .models import SearchLog
 
 
 LOGIN_PATH = "/"
-DEFAULT_PAGE_SIZE = 10
+DEFAULT_PAGE_SIZE = 10  # 한페이지에 보여질 데이터의 수
+DEFAULT_PAGE_INDEX = 2  # 한화면에 표시할 페이지 수
 
 
 @login_required(login_url=LOGIN_PATH)
@@ -34,7 +35,7 @@ def ranking_info_get(request):
 
     last_page = min(
         int((total_result_len / size)) + (0 if total_result_len % size == 0 else 1),
-        (int((page / size)) + 1) * 10,
+        (int(((page + 1) / DEFAULT_PAGE_INDEX)) + 1) * DEFAULT_PAGE_INDEX,
     )
 
     searchLogs = searchLogs[start_index:lastIndex]

@@ -18,20 +18,28 @@ export default class Ranking extends Component {
         super(props);
         this.state = {
             idolInfos: [],
-            page: 1
+            lastPage: 1
         }
     }
-    componentDidMount() {
-        axios.get('main/ranking/')
+    getIdolInPage = (page) => {
+        axios.get(`main/ranking/?page=${page}`)
             .then((res) => {
                 this.setState({
                     idolInfos: res.data.idolInfos,
-                    page: res.data.lastPage
+                    lastPage: res.data.lastPage
                 })
             })
             .catch(error => {
                 // console.log("ranking page error")
             })
+    }
+
+    componentDidMount() {
+        this.getIdolInPage(1)
+    }
+
+    handleChangePage = (e, newPage) => {
+        this.getIdolInPage(newPage)
     }
 
     render() {
@@ -59,7 +67,11 @@ export default class Ranking extends Component {
                     </List>
                 </Container>
                 <Container maxWidth="sm">
-                    <StyledPagination count={this.state.page} boundaryCount={3} shape="rounded" />
+                    <StyledPagination
+                        count={this.state.lastPage}
+                        onChange={this.handleChangePage}
+                        boundaryCount={0}
+                        shape="rounded" />
                 </Container>
             </React.Fragment>
         )

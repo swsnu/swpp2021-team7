@@ -6,7 +6,9 @@ class SearchLog(models.Model):
     query = models.TextField(blank=False, default="")
     isMember = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, related_name="searchLogs", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, related_name="searchLogs", on_delete=models.CASCADE, null=True
+    )
 
 
 class ImageResource(models.Model):

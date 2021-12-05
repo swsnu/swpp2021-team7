@@ -1,5 +1,4 @@
 import json
-
 from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from .models import (
@@ -54,6 +53,73 @@ class IdolTestCase(TestCase):
 
 
 class SearchResultTestCase(IdolTestCase):
+    def test_mmbr_cmt_get_post(self):
+        self.client.post(
+            "/api/account/signin/",
+            json.dumps({"email": "test", "password": "tetest"}),
+            content_type="application/json",
+        )
+
+        # when
+        resp = self.client.put("/api/search-result/comment/member/1/")
+
+        # then
+        assert resp.status_code == 405
+
+        # when
+        resp = self.client.get(f"/api/search-result/comment/member/{self.member.id}/")
+
+        # then
+        res_data = json.loads(resp.content)
+        assert resp.status_code == 200
+        assert len(res_data) == 1
+        assert res_data[0]["content"] == self.member_comment.content
+
+        # when
+        resp = self.client.post(
+            f"/api/search-result/comment/member/{self.member.id}/",
+            json.dumps({"content": "test"}),
+            content_type="application/json",
+        )
+
+        res_data = json.loads(resp.content)
+        assert resp.status_code == 200
+        assert res_data["content"] == "test"
+
+    def test_mmbr_cmt_put_delete(self):
+        self.client.post(
+            "/api/account/signin/",
+            json.dumps({"email": "test", "password": "tetest"}),
+            content_type="application/json",
+        )
+
+        # when
+        resp = self.client.get("/api/search-result/member/comment/1/")
+
+        # then
+        assert resp.status_code == 405
+
+        # when
+        resp = self.client.put(
+            f"/api/search-result/member/comment/{self.member_comment.id}/",
+            json.dumps({"content": "test update"}),
+            content_type="application/json",
+        )
+
+        # then
+        res_data = json.loads(resp.content)
+        assert resp.status_code == 200
+        assert res_data["content"] == "test update"
+
+        # when
+        resp = self.client.delete(
+            f"/api/search-result/member/comment/{self.member_comment.id}/"
+        )
+
+        # then
+        assert resp.status_code == 200
+        assert MemberComment.objects.filter(id=self.member_comment.id).exists() == False
+
     def test_검색결과_GET만_허용한다(self):
         # when
         get_member = self.client.delete(f"/api/search-result/member/{self.member.id}/")

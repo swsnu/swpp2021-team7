@@ -5,6 +5,7 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
+from main.models import SearchLog
 from .models import IdolMember, MemberComment, IdolGroupInfo, IdolMemberInfo, IdolGroup
 
 LOGIN_PATH = "/"
@@ -18,11 +19,11 @@ def mmbrCmtGetPost(request, member_id):
     if request.method == "POST":
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
-        mbrCmt = MemberComment(content=content, user=request.user, memberId=idolMbr)
+        mbrCmt = MemberComment(content=content, user=request.user, member=idolMbr)
         mbrCmt.save()
         return JsonResponse(model_to_dict(mbrCmt), safe=False)
 
-    comments = [MemberComment.objects.filter(memberId=idolMbr).values()]
+    comments = list(MemberComment.objects.filter(member=idolMbr).values())
     return JsonResponse(comments, safe=False)
 
 
@@ -63,6 +64,15 @@ def search_result(request, scope, instance_id):
     else:
         instance = get_object_or_404(IdolGroup, id=instance_id)
         info_instance = get_object_or_404(IdolGroupInfo, group_id=instance_id)
+
+    # 검색로그 쌓기
+    print(request.user)
+    search_log = SearchLog(
+        query=instance.name["kor"],
+        isMember=True if scope == "member" else False,
+        user=(None if request.user.is_anonymous else request.user),
+    )
+    search_log.save()
 
     basicInfo = info_instance.to_basic_info()
     tweets = info_instance.info["tweets"] if "tweets" in info_instance.info else []
