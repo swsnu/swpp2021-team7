@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.timezone import now
 from main.models import ImageResource
 from .idol_group import IdolGroup
 
@@ -35,6 +36,15 @@ class IdolMemberInfo(models.Model):
             },
             "news": self.info["news"] if "news" in self.info else [],
         }
+
+    def apply_updates(self, news, youtubes, twitter, save=False):
+        self.info["news"] = news
+        self.info["youtubes"] = youtubes
+        self.info["twitter"] = twitter
+        self.updated_at = now()
+
+        if save:
+            self.save(update_fields=["info", "updated_at"])
 
 
 class IdolMemberIncluded(models.Model):

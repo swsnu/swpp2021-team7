@@ -21,10 +21,7 @@ class Command(BaseCommand):
         member_name = member_info_instance.member.name["kor"]
         print(f"first crawling updates of {member_name}(member)...")
         news, youtubes, twitter = crawl_all(member_name)
-        member_info_instance.info["news"] = news
-        member_info_instance.info["youtubes"] = youtubes
-        member_info_instance.info["twitter"] = twitter
-        member_info_instance.updated_at = now()
+        member_info_instance.apply_updates(news, youtubes, twitter)
         return member_info_instance
 
     def update_group(self, group_info_instance):
@@ -32,8 +29,5 @@ class Command(BaseCommand):
         print(f"first crawling updates of {group_name}(group)...")
         twitter_id = getattr(group_info_instance.source, "twitter", None)
         news, youtubes, twitter = crawl_all(group_name, twitter_id)
-        group_info_instance.info["news"] = news
-        group_info_instance.info["youtubes"] = youtubes
-        group_info_instance.info["twitter"] = twitter
-        group_info_instance.updated_at = now()
+        group_info_instance.apply_updates(news, youtubes, twitter)
         return group_info_instance
