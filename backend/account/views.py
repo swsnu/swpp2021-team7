@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http.response import HttpResponseBadRequest
+from django.http.response import HttpResponseBadRequest, JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 
@@ -52,3 +52,11 @@ def signout(request):
         return HttpResponse(status=204)
     else:
         return HttpResponse("Unauthorized", status=401)
+
+
+@require_http_methods(["GET"])
+def isLogin(request):
+    if request.user.is_authenticated:
+        return JsonResponse({'status': True}, status = 200)
+    else:
+        return JsonResponse({'status': False}, status = 200)
