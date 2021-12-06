@@ -1,11 +1,11 @@
 from googleapiclient.discovery import build
 
-youtube_url = "https://www.youtube.com/results?search_query=kpop{}"
+youtube_url = "https://www.youtube.com/results?search_query=kpop%20{}"
 video_url = "https://www.youtube.com/watch?v={}"
 
 
 def build_youtube_search():
-    DEVELOPER_KEY = ""
+    DEVELOPER_KEY = "AIzaSyDSTdQmakKEKUr9CilsTlnkZ3dNlIrByjc"
     YOUTUBE_API_SERVICE_NAME = "youtube"
     YOUTUBE_API_VERSION = "v3"
     return build(
@@ -20,7 +20,7 @@ def get_search_response(youtube, query):
             q=youtube_url.format(query),
             order="relevance",
             part="snippet",
-            maxResults=10,
+            maxResults=3,
         )
         .execute()
     )
