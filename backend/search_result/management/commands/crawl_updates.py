@@ -3,6 +3,8 @@ from django.utils.timezone import now
 from search_result.models import IdolMemberInfo, IdolGroupInfo
 from search_result.management.functions.crawl_all import crawl_all
 
+from search_result.models import IdolMemberIncluded
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -19,8 +21,12 @@ class Command(BaseCommand):
 
     def update_member(self, member_info_instance):
         member_name = member_info_instance.member.name["kor"]
-        print(f"first crawling updates of {member_name}(member)...")
-        news, youtubes, twitter = crawl_all(member_name)
+        group_name = IdolMemberIncluded.objects.filter(
+            member=member_info_instance.member
+        )[0].group.name["kor"]
+        name = group_name + " " + member_name
+        print(f"first crawling updates of {name}(member)...")
+        news, youtubes, twitter = crawl_all(name)
         member_info_instance.apply_updates(news, youtubes, twitter)
         return member_info_instance
 
