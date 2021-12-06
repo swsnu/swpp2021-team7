@@ -8,7 +8,6 @@ class IdolMember(models.Model):
     name = models.JSONField(default=dict)  # kor, eng
     valid = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
 
 class IdolMemberInfo(models.Model):
@@ -21,6 +20,8 @@ class IdolMemberInfo(models.Model):
     info = models.JSONField(default=dict)
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
 
     def to_basic_info(self):
         return {

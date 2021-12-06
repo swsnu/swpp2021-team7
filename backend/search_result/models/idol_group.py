@@ -7,7 +7,6 @@ class IdolGroup(models.Model):
     name = models.JSONField(default=dict)  # kor, eng
     valid = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
 
 class IdolGroupInfo(models.Model):
@@ -20,6 +19,8 @@ class IdolGroupInfo(models.Model):
     info = models.JSONField(default=dict)  # news, tweets(instagram posts), youtubes
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
 
     def to_basic_info(self):
         return {
