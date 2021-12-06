@@ -1,6 +1,6 @@
 from googleapiclient.discovery import build
 
-youtube_url = "https://www.youtube.com/results?search_query=kpop%20{}"
+youtube_url = "https://www.youtube.com/results?search_query=kpop{}"
 video_url = "https://www.youtube.com/watch?v={}"
 
 
