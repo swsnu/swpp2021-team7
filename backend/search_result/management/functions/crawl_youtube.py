@@ -27,12 +27,12 @@ def get_search_response(youtube, query):
     return search_response
 
 
-def info_to_dict(videoId, title, description, thumnail):
+def info_to_dict(videoId, title, description, thumbnail):
     result = {
         "videoId": videoId,
         "title": title,
         "description": description,
-        "thumnail": thumnail,
+        "thumbnail": thumbnail,
         "url": video_url.format(videoId),
     }
     return result
