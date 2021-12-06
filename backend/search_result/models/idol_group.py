@@ -32,7 +32,7 @@ class IdolGroupInfo(models.Model):
                     member.to_group_response() for member in self.group.members.all()
                 ],
             },
-            "news": self.info["news"] if "뉴스" in self.info else [],
+            "news": self.info["news"] if "news" in self.info else [],
         }
 
 
