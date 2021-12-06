@@ -2,7 +2,7 @@ import React from "react";
 import CustomGridRow from "../common/CustomGridRow";
 import SharedVideo from "./SharedVideo";
 
-const SharedVideos = ({videos}) => {
+const SharedVideos = ({videos=[]}) => {
 
     const videoComponents = videos.map((v, i) => <SharedVideo {...v} key={i} />);
     return <div id="shared-videos">

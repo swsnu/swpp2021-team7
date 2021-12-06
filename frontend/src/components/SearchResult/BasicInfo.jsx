@@ -3,26 +3,26 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import Members from "./Members";
 
-const BasicInfo = ({image, info: {name, group, birth, debut, members}, news, isGroup}) => {
+const BasicInfo = ({thumbnail, info: {name, groups, birth, debut, members}, news, isGroup}) => {
 
     const [likeClicked, setLikeClicked] = useState(false);
 
     return <div id="basicInfo">
-        <Box sx={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
-            <Avatar src={image} sx={{width: "40%", height: "auto"}} />
-
+        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Avatar src={thumbnail} sx={{width: "100px", height: "auto"}} />
+            <div style={{width: "50px"}}></div>
             <Box>
                 <Stack direction="row" spacing={3} justifyContent="center">
-                    <Chip label={`${name.kor} (${name.eng})`} />
-                    {!isGroup && <Chip label={group} clickable href="/search/group/1" component="a" color="primary" />}
+                    <Chip label={`${name.kor} ${name.eng ? `(${name.eng})` : ""}`} />
+                    {!isGroup && <Chip label={groups[0].name} clickable href={`/search/group/${groups[0].id}`} component="a" color="primary" />}
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
                 <Stack direction="row" spacing={3} justifyContent="center">
-                    {!isGroup && <Chip label={birth} />}
-                    <Chip label={debut} />
+                    {!isGroup && birth && <Chip label={birth} />}
+                    {debut && <Chip label={debut} /> }
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                <Chip id="likeBtn" label={`❤️ Like ${name.eng}`} color="primary" variant={likeClicked ? "filled" : "outlined"} onClick={() => setLikeClicked(!likeClicked)}/>
+                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={likeClicked ? "filled" : "outlined"} onClick={() => setLikeClicked(!likeClicked)}/>
             </Box>
         </Box>
 
