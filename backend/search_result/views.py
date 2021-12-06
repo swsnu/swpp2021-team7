@@ -1,12 +1,23 @@
 import json
+from datetime import timedelta
 from django.contrib.auth.decorators import login_required
+from django.utils.timezone import now
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
 from main.models import SearchLog
-from .models import IdolMember, MemberComment, IdolGroupInfo, IdolMemberInfo, IdolGroup
+
+from .management.functions.crawl_all import crawl_all
+from .models import (
+    IdolMember,
+    MemberComment,
+    IdolGroupInfo,
+    IdolMemberInfo,
+    IdolGroup,
+    IdolMemberIncluded,
+)
 
 LOGIN_PATH = "/"
 
@@ -58,7 +69,9 @@ def grpCmtPutDelete():
 @require_http_methods(["GET"])
 def search_result(request, scope, instance_id):
 
-    if scope == "member":
+    is_member = scope == "member"
+
+    if is_member:
         instance = get_object_or_404(IdolMember, id=instance_id)
         info_instance = get_object_or_404(IdolMemberInfo, member_id=instance_id)
     else:
@@ -66,13 +79,30 @@ def search_result(request, scope, instance_id):
         info_instance = get_object_or_404(IdolGroupInfo, group_id=instance_id)
 
     # 검색로그 쌓기
-    print(request.user)
-    search_log = SearchLog(
+    SearchLog.objects.create(
         query=instance.name["kor"],
         isMember=True if scope == "member" else False,
         user=(None if request.user.is_anonymous else request.user),
     )
-    search_log.save()
+
+    if now() - info_instance.updated_at > timedelta(days=3):
+        name = instance.name["kor"]
+        if is_member:
+            group_name = IdolMemberIncluded.objects.filter(member=instance)[
+                0
+            ].group.name["kor"]
+            name = group_name + " " + name
+
+        twitter_id = getattr(info_instance.source, "twitter", None)
+        try:
+            print(
+                f"More than 3 days passed after last update.. crawling {name} starts.."
+            )
+            news, youtubes, twitter = crawl_all(name, twitter_id)
+            info_instance.apply_updates(news, youtubes, twitter, save=True)
+            info_instance.refresh_from_db()
+        except:
+            print("an error occured while crawling")
 
     basicInfo = info_instance.to_basic_info()
     tweets = info_instance.info["tweets"] if "tweets" in info_instance.info else []
@@ -80,7 +110,7 @@ def search_result(request, scope, instance_id):
         info_instance.info["youtubes"] if "youtubes" in info_instance.info else []
     )
 
-    if scope == "member":
+    if is_member:
         comments_qs = instance.membercomment_set.all()
     else:
         comments_qs = instance.groupcomment_set.all()
