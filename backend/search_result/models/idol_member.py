@@ -21,7 +21,7 @@ class IdolMemberInfo(models.Model):
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
 
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(null=True)
 
     def to_basic_info(self):
         return {
