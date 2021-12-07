@@ -6,6 +6,9 @@ import Button from '@mui/material/Button';
 
 import { withRouter } from 'react-router';
 
+import { lightBlue } from '@mui/material/colors';
+
+import "./ChooseType.css";
 
 class ChooseType extends Component {
     constructor(props){
@@ -22,16 +25,30 @@ class ChooseType extends Component {
     render() {
         return (
             <Stack direction="row" spacing={2}
-                justifyContent="center"
-                alignItems="center">
-                <Button id="CutScene" onClick={() => this.cutScene()} variant="outlined">
+                justifyContent="right"
+                alignItems="right">
+                <Button id="CutScene" 
+                    disabled={!this.props.isView}
+                    onClick={() => this.cutScene()} 
+                    variant="outlined"
+                    sx={{ 
+                        textTransform: 'none',
+                        color: '#b3e5fc',
+                        borderColor: '#b3e5fc' }}>
                     Cut scenes
                 </Button>
-                <Button id="ExtractPart" onClick={() => this.extractParts()} variant="contained">
+                <Button id="ExtractPart" 
+                    onClick={() => this.extractParts()} 
+                    disabled={!this.props.isView}
+                    variant="contained"
+                    sx={{ 
+                        textTransform: 'none',
+                        backgroundColor: '#b3e5fc',
+                        color: '#004ba0' }}>
                     Extract My Idol Parts
                 </Button>
             </Stack>
-        )
+        );
     }
 }
 

@@ -8,6 +8,26 @@ import Container from '@mui/material/Container';
 
 import { withRouter } from 'react-router';
 
+import { grey } from '@mui/material/colors';
+
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+      primary: {
+        light: '#757ce8',
+        main: '#ffffff',
+        dark: '#002884',
+        contrastText: '#fff',
+      },
+      secondary: {
+        light: '#ff7961',
+        main: '#f44336',
+        dark: '#ba000d',
+        contrastText: '#000',
+      },
+    },
+  });
 
 class SearchIdol extends Component {
     constructor(props){
@@ -18,14 +38,16 @@ class SearchIdol extends Component {
         this.props.history.push('/video/search');
     }
     keyPress(e){
-        //if(e.keyCode == 13){
+        if(e.keyCode == 13){
            this.redirectSearchResult();
            // put the login here
-        //}
+        }
      }
     render() {
         return (
-            <Container maxWidth="sm">
+            <Container 
+                className={this.props.className}
+                maxWidth="sm">
                     <Stack direction="row" spacing={1}
                             justifyContent="center"
                             alignItems="center"
@@ -38,14 +60,19 @@ class SearchIdol extends Component {
                         label={this.props.hint}
                         width="100%"
                         onKeyDown={this.keyPress} 
+                        onChange={this.props.changeInput}
                         InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                            <SearchIcon/>
+                            <SearchIcon
+                                sx={{ color: '#b3e5fc' }}/>
                             </InputAdornment>
                         ),
                         }}
                         variant="standard"
+                        sx={{ label: {color:'#ffffff'}, input: { color: '#ffffff' } }}
+                        color="primary" focused
+                        fullWidth
                         />
                     </Stack>
                 </Container>

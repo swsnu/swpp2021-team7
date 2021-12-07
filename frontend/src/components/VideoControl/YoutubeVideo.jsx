@@ -16,7 +16,7 @@ export default class YoutubeVideo extends Component {
         return (
             <>
             <YouTube
-                        videoId={"CuklIb9d3fI"}                  // defaults -> null
+                        videoId={this.props.videoUrl}                  // defaults -> null
                         id={"mainYoutube"}                       // defaults -> null
                         opts={opts}     
                         className={"youtubeBox"}                   // defaults -> {}
