@@ -15,7 +15,7 @@ describe('App', () => {
   beforeEach(() => {
     app = (
       <Provider store={mockStore}>
-        <App history={history}/>
+        <App history={history} />
       </Provider>
     )
   });
@@ -56,7 +56,7 @@ describe('App', () => {
   })
 
   it('should be redirected SearchResult page', () => {
-    history.push('/search/1');
+    history.push('/search/member/1');
     const component = mount(app);
     expect(component.find('SearchResult').exists()).toBe(true);
   })
