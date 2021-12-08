@@ -10,19 +10,41 @@ import {
 } from '@mui/material';
 import logo from '../image/256w/자산 1_256.png';
 import { withRouter } from 'react-router';
+import axios from 'axios';
 
 
 function Signup(props) { 
+    async function postData(json) {
+      try {
+        const response = await axios.post('/account/signup/', json, {
+          headers:{
+            'Content-type': 'application/json'
+          }
+        });
+        alert('Sign Up Complete!');     
+        console.log(response);
+      } catch(err) {
+        console.error(err);
+      }
+    }
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-        email: data.get('email'),
-        firstName: data.get('firstName'),
-        lastName: data.get('lastName'),
-        password: data.get('password'),
-        });
-        props.history.push('/sign/login');
+        let data = new FormData(event.currentTarget);
+        if (data.get('password') === data.get('password_check')) {
+          data = {
+            email: data.get('email'),
+            first_name: data.get('first_name'),
+            last_name: data.get('last_name'),
+            password: data.get('password'),
+          };
+          data = JSON.stringify(data);
+          postData(data);
+          props.history.push('/sign/login');
+        } else{
+          alert('Two passwords are different! Please Check')
+        }
     };
 
   return (
@@ -56,11 +78,11 @@ function Signup(props) {
                 <Grid item xs={12} sm={6}>
                     <TextField
                     autoComplete="given-name"
-                    name="firstName"
+                    name="first_name"
                     required
                     fullWidth
-                    id="firstName"
-                    label="Given Name"
+                    id="first_name"
+                    label="Fisrt Name"
                     autoFocus
                     />
                 </Grid>
@@ -68,9 +90,9 @@ function Signup(props) {
                     <TextField
                     required
                     fullWidth
-                    id="lastName"
-                    label="Surname"
-                    name="lastName"
+                    id="last_name"
+                    label="Last Name"
+                    name="last_name"
                     autoComplete="family-name"
                     />
                 </Grid>
@@ -89,10 +111,10 @@ function Signup(props) {
                     <TextField
                     required
                     fullWidth
-                    name="password"
+                    name="password_check"
                     label="Re-enter Password"
                     type="password"
-                    id="password"
+                    id="password_check"
                     autoComplete="new-password"
                     />
                 </Grid>

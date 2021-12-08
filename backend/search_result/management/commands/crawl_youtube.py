@@ -5,7 +5,7 @@ video_url = "https://www.youtube.com/watch?v={}"
 
 
 def build_youtube_search():
-    DEVELOPER_KEY = ""
+    DEVELOPER_KEY = "AIzaSyDSTdQmakKEKUr9CilsTlnkZ3dNlIrByjc"
     YOUTUBE_API_SERVICE_NAME = "youtube"
     YOUTUBE_API_VERSION = "v3"
     return build(

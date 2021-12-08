@@ -24,7 +24,6 @@ describe('<FindAccount />', () => {
     it('should render without errors', () => {
         setComponent();
         const container = component.find('ForwardRef(Container)');
-        // console.log(component.debug());
 
         expect(container.length).toBe(1);
     })
