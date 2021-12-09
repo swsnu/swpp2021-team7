@@ -6,7 +6,6 @@ import {
     List,
     Pagination,
 } from '@mui/material';
-import { withStyles } from "@material-ui/core/styles";
 import Fire from "@mui/icons-material/LocalFireDepartment"
 import RankItem from '../Ranking/RankItem';
 import { withRouter } from 'react-router';
@@ -37,7 +36,7 @@ class HotRankingList extends Component {
                             this.props.data.idolInfos === undefined ?
                             "Loading..." : 
                             this.props.data.idolInfos.map((items, index) => {
-                                return(<RankItem rank={index+1} name={items.name} isGroup={items.type !== "member"} img={items.address} key={index+1}></RankItem>)
+                                return(<RankItem id={items.id} rank={index+1} name={items.name} type={items.type === "member"? "member" : "group"} img={items.address} key={index+1}></RankItem>)
                             }) 
                         }
                     </List>

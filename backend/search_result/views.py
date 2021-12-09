@@ -7,6 +7,7 @@ from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
+from django.db.models import Q
 from main.models import SearchLog
 
 from .management.functions.crawl_all import crawl_all
@@ -155,3 +156,24 @@ def search_result(request, scope, instance_id):
         },
         status=200,
     )
+
+@require_http_methods((["GET"]))
+def search_by_keyword(request, keyword):
+    group_instance = IdolGroup.objects.filter(Q(name__kor__icontains=keyword)|Q(name__eng__icontains=keyword))
+    member_instance = IdolMember.objects.filter(Q(name__kor__icontains=keyword)|Q(name__eng__icontains=keyword))
+
+    results = []
+    for group in group_instance:
+        group_info = get_object_or_404(IdolGroupInfo, group_id=group.id)
+        results.append({'id': group.id, 'name': group.name, 'isGroup': True, 'thumbnail':group_info.info['youtubes'][0]['thumnail']})
+    for member in member_instance:
+        member_info = get_object_or_404(IdolMemberInfo, member_id=member.id)
+        results.append({'id': member.id, 'name': member.name, 'isGroup': False, 'thumbnail':member_info.info['youtubes'][0]['thumnail']})
+    
+    # for result in results:
+    #     print(result['id'], result['name'], result['isGroup']) 
+    
+    result = json.dumps(results)
+    # print(json.dumps(results))
+
+    return JsonResponse(results, status=200, safe=False)

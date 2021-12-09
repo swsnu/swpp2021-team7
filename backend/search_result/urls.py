@@ -3,6 +3,7 @@ from .views import (
     idolCmtGetPost,
     idolCmtPutDelete,
     search_result,
+    search_by_keyword,
 )
 
 urlpatterns = [
