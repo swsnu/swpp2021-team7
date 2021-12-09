@@ -47,6 +47,7 @@ def idolCmtGetPost(request, scope, idol_id):
         cmt_model.objects.filter(idol=idol).values(
             "id",
             "content",
+            "user__id",
             "user__last_name",
             "user__first_name",
             "idol__id",
@@ -58,8 +59,9 @@ def idolCmtGetPost(request, scope, idol_id):
         comment["author"] = comment.pop("user__last_name") + comment.pop(
             "user__first_name"
         )
+        comment["created_at"] = comment.pop("created_at").date()
         comment["idol"] = comment.pop("idol__id")
-        comment["isMine"] = True if request.user.id == comment["idol"] else False
+        comment["isMine"] = True if request.user.id == comment["user__id"] else False
     return JsonResponse(comments, safe=False)
 
 

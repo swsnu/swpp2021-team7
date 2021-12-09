@@ -40,7 +40,6 @@ const SearchResult = (props) => {
         const res = await axios.get(`/search-result/${isGroup ? "group" : "member"}/${id}`);
         const cmt = await axios.get(`/search-result/comment/${isGroup ? "group" : "member"}/${id}/`);
         res.data['comments'] = cmt.data
-        console.log(res.data)
         setData({ ...res.data });
     }, []);
 
@@ -55,7 +54,7 @@ const SearchResult = (props) => {
         <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />
         <CommentInput addComment={addComment} />
-        <Comments comments={data.comments} />
+        <Comments isGroup={isGroup} comments={data.comments} />
         <div style={{ height: "150px" }}></div>
     </SearchResultRoot>
 }
