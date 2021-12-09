@@ -14,18 +14,56 @@ import { withRouter } from 'react-router';
 import Search from '@mui/icons-material/Search';
 import HotRankingList from '../components/Main/HotRankingList';
 import SearchResult from '../components/Main/SearchResult';
+import axios from 'axios';
 
 function Main() {
     const [submitDone, setSubmitDone] = React.useState(false);
+    const [list, setList] = React.useState();
+    const [rankingData, setRankingData] = React.useState({});
 
+    async function postData(json) {
+        try {
+          const response = await axios.post('/account/signin/', json, {
+            headers:{
+              'Content-type': 'application/json'
+            }
+          });
+          console.log(response);
+          props.history.push('/')
+        } catch(err) {
+          alert('Email or Password does not exist')
+          console.error(err);
+        }
+    }
+
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         setSubmitDone(true);
+        // getRankingData();
         // console.log({
         // search: data.get('search-input'),
         // });
     };
+
+    
+
+    React.useEffect(() => { 
+        async function getRankingData() {
+            const response = await axios.get('/main/ranking/');
+            setRankingData(response.data);
+        }
+        getRankingData();
+    }, [])
+
+    React.useEffect(() => {
+        console.log(rankingData);
+        if(rankingData !== {}) {
+            setList(<HotRankingList data={rankingData}/>);
+        }
+        console.log(list)
+    }, [rankingData])
 
     return (
         <React.Fragment>
@@ -71,9 +109,9 @@ function Main() {
                     </Box>
                     <Box>
                         <Grid item columnSpacing={1}>
-                            <Link href="/search" variant="body2"> {"#IU"} </Link>
                             <Link href="/search" variant="body2"> {"#BTS"} </Link>
-                            <Link href="/search" variant="body2"> {"#Blackpink"} </Link>
+                            <Link href="/search" variant="body2"> {"#Red Velvet"} </Link>
+                            <Link href="/search" variant="body2"> {"#BTOB"} </Link>
                         </Grid>
                     </Box>
                     <Box>
@@ -97,8 +135,13 @@ function Main() {
                         <Typography variant="h6" width={350}>
                             Ranking
                         </Typography>
-                        <HotRankingList />
-                    </Box>
+                        {list ? list : "Loading..."}
+                        {/* <HotRankingList data={rankingData} /> */}
+                        {/* {
+                            (rankingData === {}) ? "Loading..." :
+                            <HotRankingList data={rankingData}/>
+                        } */}
+                     </Box>
                 </Box>
             </Container>
         </React.Fragment>

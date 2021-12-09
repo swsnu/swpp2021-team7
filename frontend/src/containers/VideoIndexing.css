@@ -1,0 +1,46 @@
+.breadcrumbs{
+    position:relative;
+    width:100%;
+    margin-top:36px;
+    margin-bottom:36px;
+    text-align:center;
+}
+.breadcrumbs > nav{
+    display:inline-block;
+}
+h2.vidol-search--title{
+    position:relative;
+    width:100%;
+    text-align:center;
+    color:#4fc3f7;
+    margin-top:48px;
+    margin-bottom:0px;
+    font-size:35px;
+}
+h3.vidol-search--title{
+    position:relative;
+    width:100%;
+    text-align:center;
+    color:#ffffff;
+    margin-top:12px;
+    font-size:24px;
+}
+img.background-image{
+    position:fixed;
+    z-index:-1;
+    width:100%;
+    height:100vh;
+    object-fit:cover;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+}
+.search-inputs{
+    position:relative;
+    max-width:500px;
+}
+.preview-video{
+    position:relative;
+    margin-bottom:24px;
+}

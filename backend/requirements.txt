@@ -28,6 +28,7 @@ Flask-BasicAuth==0.2.0
 Flask-Cors==3.0.10
 gevent==21.8.0
 geventhttpclient==1.5.3
+google-api-python-client==2.32.0
 greenlet==1.1.2
 idna==3.3
 importlib-metadata==4.8.1

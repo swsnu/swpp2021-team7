@@ -9,13 +9,18 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('main', '0001_initial'),
+        ("main", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='searchlog',
-            name='user',
-            field=models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='searchLogs', to=settings.AUTH_USER_MODEL),
+            model_name="searchlog",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="searchLogs",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
