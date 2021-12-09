@@ -20,17 +20,28 @@ const SearchResult = (props) => {
     const dummy = isGroup ? groupDummy : memberDummy;
     const { id } = useParams();
 
-    const addComment = (newComment) => {
-        let comments = data.comments;
-        comments.push(newComment);
-        let newData = data;
-        newData.comments = comments;
-        setData({...newData});
+    const addComment = async (newComment) => {
+        // let comments = data.comments;
+        // comments.push(newComment);
+        // let newData = data;
+        // newData.comments = comments;
+        // setData({...newData});
+        const res = await axios.post(
+            `/search-result/comment/${isGroup ? "group" : "member"}/${id}/`,
+            newComment,
+            {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
     }
 
     useEffect(async () => {
         const res = await axios.get(`/search-result/${isGroup ? "group" : "member"}/${id}`);
-        setData({...res.data});
+        const cmt = await axios.get(`/search-result/comment/${isGroup ? "group" : "member"}/${id}/`);
+        res.data['comments'] = cmt.data
+        console.log(res.data)
+        setData({ ...res.data });
     }, []);
 
     useEffect(() => {
@@ -40,12 +51,12 @@ const SearchResult = (props) => {
     if (isLoading) return <CircularProgress />
     return <SearchResultRoot>
         <CustomGridRow components={[<BasicInfo {...data.basicInfo} isGroup={isGroup} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
-        <div style={{height: "30px"}}></div>
+        <div style={{ height: "30px" }}></div>
         <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />
         <CommentInput addComment={addComment} />
         <Comments comments={data.comments} />
-        <div style={{height: "150px"}}></div>
+        <div style={{ height: "150px" }}></div>
     </SearchResultRoot>
 }
 

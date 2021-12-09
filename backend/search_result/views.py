@@ -42,7 +42,23 @@ def idolCmtGetPost(request, scope, idol_id):
         idol_cmt.save()
         return JsonResponse(model_to_dict(idol_cmt), safe=False)
 
-    comments = list(cmt_model.objects.filter(idol=idol).values())
+    comments = list(
+        cmt_model.objects.filter(idol=idol).values(
+            "id",
+            "content",
+            "user__last_name",
+            "user__first_name",
+            "idol__id",
+            "created_at",
+            "updated_at",
+        )
+    )
+    for comment in comments:
+        comment["author"] = comment.pop("user__last_name") + comment.pop(
+            "user__first_name"
+        )
+        comment["idol"] = comment.pop("idol__id")
+        comment["isMine"] = True if request.user.id == comment["idol"] else False
     return JsonResponse(comments, safe=False)
 
 

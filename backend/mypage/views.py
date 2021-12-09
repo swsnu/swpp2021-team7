@@ -16,20 +16,20 @@ TYPE_GROUP = "group"
 def my_cmt_get(request):
     mmbrCmt = list(
         MemberComment.objects.filter(user=request.user).values(
-            "id", "content", "member", "member__name", "created_at"
+            "id", "content", "idol", "idol__name", "created_at"
         )
     )
     grpCmt = list(
         GroupComment.objects.filter(user=request.user).values(
-            "id", "content", "group", "group__name", "created_at"
+            "id", "content", "idol", "idol__name", "created_at"
         )
     )
     for cmt in mmbrCmt:
-        cmt["name"] = cmt.pop("member__name")
+        cmt["name"] = cmt.pop("idol__name")
         cmt[TYPE] = TYPE_MEMBER
 
     for cmt in grpCmt:
-        cmt["name"] = cmt.pop("group__name")
+        cmt["name"] = cmt.pop("idol__name")
         cmt[TYPE] = TYPE_GROUP
 
     myComment = mmbrCmt + grpCmt

@@ -1,18 +1,20 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 
-const CommentInput = ({addComment}) => {
-
+const CommentInput = ({ addComment }) => {
+    const [input, setInput] = useState('');
     const onSubmit = () => {
-        addComment({author: "TEST1", content: "Comment content", timestamp: "just now"})
+        addComment({ content: input })
+        setInput("")
     }
 
     return <CommentInputConatiner id="comment-input">
         <h4>Leave Comment!</h4>
         <TextButtonContainer>
-            <TextField sx={{width: "50%"}} />
-            <Button id="comment-submit" variant="contained" sx={{marginLeft: "15px"}} onClick={onSubmit}>Submit</Button>
+            <TextField value={input} onInput={e => setInput(e.target.value)} sx={{ width: "50%" }} />
+            <Button id="comment-submit" variant="contained" sx={{ marginLeft: "15px" }} onClick={onSubmit}>Submit</Button>
         </TextButtonContainer>
     </CommentInputConatiner>
 }
