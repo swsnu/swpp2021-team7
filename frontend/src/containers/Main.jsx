@@ -20,18 +20,13 @@ function Main() {
     const [submitDone, setSubmitDone] = React.useState(false);
     const [list, setList] = React.useState();
     const [rankingData, setRankingData] = React.useState({});
+    const [searchResult, setSearchResult] = React.useState([]);
 
-    async function postData(json) {
+    async function getBySearchKeyword(keyword) {
         try {
-          const response = await axios.post('/account/signin/', json, {
-            headers:{
-              'Content-type': 'application/json'
-            }
-          });
-          console.log(response);
-          props.history.push('/')
+          const response = await axios.get(`search-result/search/${keyword}/`);
+          setSearchResult(response.data);
         } catch(err) {
-          alert('Email or Password does not exist')
           console.error(err);
         }
     }
@@ -39,14 +34,11 @@ function Main() {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        let keyword = new FormData(event.currentTarget);
+        keyword = keyword.get('search-input');
+        getBySearchKeyword(keyword);
         setSubmitDone(true);
-        // getRankingData();
-        // console.log({
-        // search: data.get('search-input'),
-        // });
     };
-
     
 
     React.useEffect(() => { 
@@ -57,12 +49,11 @@ function Main() {
         getRankingData();
     }, [])
 
+
     React.useEffect(() => {
-        console.log(rankingData);
         if(rankingData !== {}) {
             setList(<HotRankingList data={rankingData}/>);
         }
-        console.log(list)
     }, [rankingData])
 
     return (
@@ -109,9 +100,9 @@ function Main() {
                     </Box>
                     <Box>
                         <Grid item columnSpacing={1}>
-                            <Link href="/search" variant="body2"> {"#BTS"} </Link>
-                            <Link href="/search" variant="body2"> {"#Red Velvet"} </Link>
-                            <Link href="/search" variant="body2"> {"#BTOB"} </Link>
+                            <Link href="/search/group/2" variant="body2"> {"#BTS"} </Link>
+                            <Link href="/search/group/1" variant="body2"> {"#Red Velvet"} </Link>
+                            <Link href="/search/group/3" variant="body2"> {"#BTOB"} </Link>
                         </Grid>
                     </Box>
                     <Box>
@@ -123,7 +114,10 @@ function Main() {
                         submitDone && (
                             <Box xs={{mt:10}}>
                                 <Typography variant="h6"> Search Result </Typography>
-                                <SearchResult name="레드벨벳 Red Velvet" />
+                                {searchResult ? searchResult.map((item) => {
+                                    return (<SearchResult name={item.name.kor + ' ' + item.name.eng} id={item.id} key={item.id} thumbnail={item.thumbnail}/>)
+                                }) : "Loading..."
+                                } 
                             </Box>
                         )
                     }
@@ -136,11 +130,6 @@ function Main() {
                             Ranking
                         </Typography>
                         {list ? list : "Loading..."}
-                        {/* <HotRankingList data={rankingData} /> */}
-                        {/* {
-                            (rankingData === {}) ? "Loading..." :
-                            <HotRankingList data={rankingData}/>
-                        } */}
                      </Box>
                 </Box>
             </Container>
