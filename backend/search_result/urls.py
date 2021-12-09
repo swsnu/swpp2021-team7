@@ -22,4 +22,5 @@ urlpatterns = [
         idolCmtPutDelete,
         name="mmbrCmtPutDelete",
     ),
+    path("search/<str:keyword>/", search_by_keyword, name="search_by_keyword"),
 ]
