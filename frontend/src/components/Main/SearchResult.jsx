@@ -10,7 +10,7 @@ import { withRouter } from 'react-router';
 
 class SearchResult extends Component {
     handleClick = () => {
-        this.props.history.push('/search/group/1');
+        this.props.history.push(`/search/group/${this.props.id}`);
     }
 
     render() {
@@ -21,7 +21,7 @@ class SearchResult extends Component {
                         flexGrow : 1,
                         height: '50%'
                         }}>
-                        <Avatar alt="Red Velvet" src="https://pbs.twimg.com/media/E85o_8MVgAM58Gd.jpg" />
+                        <Avatar alt={this.props.name} src={this.props.thumbnail} />
                     </ListItemAvatar>
                     <ListItemText
                         sx={{

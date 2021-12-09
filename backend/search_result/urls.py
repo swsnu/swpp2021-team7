@@ -5,6 +5,7 @@ from .views import (
     mmbrCmtPutDelete,
     grpCmtPutDelete,
     search_result,
+    search_by_keyword,
 )
 
 urlpatterns = [
@@ -33,4 +34,9 @@ urlpatterns = [
         grpCmtPutDelete,
         name="grpCmtPutDelete",
     ),
+    path(
+        "search/<str:keyword>/",
+        search_by_keyword,
+        name="search_by_keyword"
+    )
 ]
