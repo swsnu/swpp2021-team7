@@ -10,6 +10,7 @@ import CommentInput from '../components/SearchResult/CommentInput';
 import Comments from '../components/SearchResult/Comments';
 import { groupDummy, memberDummy } from "../constants";
 import { useParams } from 'react-router';
+import axios from 'axios';
 
 const SearchResult = (props) => {
 
@@ -27,13 +28,9 @@ const SearchResult = (props) => {
         setData({...newData});
     }
 
-    useEffect(() => {
-        // id 없으면 홈으로 리다이렉트
-        // 있으면 이용해서 search api call
-        setTimeout(() => {
-            setData({...dummy})
-            console.log(`loaded ${isGroup ? "group" : "member"} data`);
-        }, 1000)
+    useEffect(async () => {
+        const res = await axios.get(`/search-result/${isGroup ? "group" : "member"}/${id}`);
+        setData({...res.data});
     }, []);
 
     useEffect(() => {

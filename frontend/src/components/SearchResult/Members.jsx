@@ -7,7 +7,7 @@ const Members = ({members}) => {
     return <MembersContainer>
         {members.map((member, i) => 
             <div key={i}>
-                <Avatar key={i} src={member.image} sx={{marginX: "20px"}} component="a" href="/search/1" />
+                <Avatar key={i} src={member.thumbnail} sx={{marginX: "20px"}} component="a" href={`/search/member/${member.id}`} />
                 {member.name}
             </div>)}
     </MembersContainer>
