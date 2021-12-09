@@ -139,7 +139,13 @@ def search_by_keyword(request, keyword):
         results.append({'id': group.id, 'name': group.name, 'isGroup': True, 'thumbnail':group_info.info['youtubes'][0]['thumnail']})
     for member in member_instance:
         member_info = get_object_or_404(IdolMemberInfo, member_id=member.id)
-        results.append({'id': member.id, 'name': member.name, 'isGroup': False, 'thumbnail':member_info.info['youtubes'][0]['thumnail']})
+        results.append({
+            'id': member.id, 
+            'name': member.name, 
+            'isGroup': False, 
+            'thumbnail':member_info.info['youtubes'][0]['thumnail'],
+            'hasModel' : member.hasModel
+            })
     
     # for result in results:
     #     print(result['id'], result['name'], result['isGroup']) 
