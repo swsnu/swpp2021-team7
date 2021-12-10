@@ -16,16 +16,11 @@ const SearchResult = (props) => {
 
     const [isLoading, setIsloading] = useState(true);
     const [data, setData] = useState({});
+    const [reload, setReload] = useState(false);
     const { isGroup } = props;
-    const dummy = isGroup ? groupDummy : memberDummy;
     const { id } = useParams();
 
     const addComment = async (newComment) => {
-        // let comments = data.comments;
-        // comments.push(newComment);
-        // let newData = data;
-        // newData.comments = comments;
-        // setData({...newData});
         const res = await axios.post(
             `/search-result/comment/${isGroup ? "group" : "member"}/${id}/`,
             newComment,
@@ -41,7 +36,7 @@ const SearchResult = (props) => {
         const cmt = await axios.get(`/search-result/comment/${isGroup ? "group" : "member"}/${id}/`);
         res.data['comments'] = cmt.data
         setData({ ...res.data });
-    }, []);
+    }, [reload]);
 
     useEffect(() => {
         if (Object.keys(data).length > 0) setIsloading(false);
@@ -53,8 +48,8 @@ const SearchResult = (props) => {
         <div style={{ height: "30px" }}></div>
         <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />
-        <CommentInput addComment={addComment} />
-        <Comments isGroup={isGroup} comments={data.comments} />
+        <CommentInput addComment={addComment} setReload={setReload} reload={reload} />
+        <Comments isGroup={isGroup} comments={data.comments} setReload={setReload} reload={reload} />
         <div style={{ height: "150px" }}></div>
     </SearchResultRoot>
 }

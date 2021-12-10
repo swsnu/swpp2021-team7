@@ -3,7 +3,7 @@ import React from "react";
 import axios from 'axios';
 import Comment from "./Comment";
 
-export default function Comments({ comments, isGroup }) {
+export default function Comments({ comments, isGroup, setReload, reload }) {
     const updateCmt = async (id, content) => {
         const res = await axios.put(
             `/search-result/${isGroup ? "group" : "member"}/comment/${id}/`,
@@ -17,6 +17,7 @@ export default function Comments({ comments, isGroup }) {
 
     const deleteCmt = async (id) => {
         const res = await axios.delete(`/search-result/${isGroup ? "group" : "member"}/comment/${id}/`);
+        setReload(!reload)
     }
 
     return <div id="comments">

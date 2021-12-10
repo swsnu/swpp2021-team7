@@ -3,10 +3,11 @@ import styled from "@emotion/styled";
 import { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 
-const CommentInput = ({ addComment }) => {
+const CommentInput = ({ addComment, setReload, reload }) => {
     const [input, setInput] = useState('');
     const onSubmit = () => {
         addComment({ content: input })
+        setReload(!reload)
         setInput("")
     }
 
