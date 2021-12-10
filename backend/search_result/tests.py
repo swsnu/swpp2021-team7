@@ -1,5 +1,6 @@
 import json
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 from django.test import TestCase, Client
 from .models import (
     IdolMember,
@@ -24,6 +25,7 @@ class IdolTestCase(TestCase):
         cls.member_birth = "1997.02.09"
         cls.group = IdolGroup.objects.create(name=cls.group_name)
         cls.group_info = IdolGroupInfo.objects.create(
+            updated_at=now(),
             group=cls.group,
             info={
                 "데뷔": cls.group_debut,
@@ -33,6 +35,7 @@ class IdolTestCase(TestCase):
         )
         cls.member = IdolMember.objects.create(name=cls.member_name)
         cls.member_info = IdolMemberInfo.objects.create(
+            updated_at=now(),
             member=cls.member,
             info={
                 "출생": cls.member_birth,
@@ -44,10 +47,10 @@ class IdolTestCase(TestCase):
             group=cls.group, member=cls.member
         )
         cls.member_comment = MemberComment.objects.create(
-            content="test", user=cls.user, member=cls.member
+            content="test", user=cls.user, idol=cls.member
         )
         cls.group_comment = GroupComment.objects.create(
-            content="test", user=cls.user, group=cls.group
+            content="test", user=cls.user, idol=cls.group
         )
         cls.client = Client()
 
@@ -86,6 +89,34 @@ class SearchResultTestCase(IdolTestCase):
         assert resp.status_code == 200
         assert res_data["content"] == "test"
 
+    def test_grp_cmt_get_post(self):
+        self.client.post(
+            "/api/account/signin/",
+            json.dumps({"email": "test", "password": "tetest"}),
+            content_type="application/json",
+        )
+
+        # when
+        resp = self.client.get(f"/api/search-result/comment/group/{self.group.id}/")
+
+        # then
+        res_data = json.loads(resp.content)
+        assert resp.status_code == 200
+        assert len(res_data) == 1
+        assert res_data[0]["content"] == self.group_comment.content
+
+        # when
+        resp = self.client.post(
+            f"/api/search-result/comment/group/{self.group.id}/",
+            json.dumps({"content": "test"}),
+            content_type="application/json",
+        )
+
+        # then
+        res_data = json.loads(resp.content)
+        assert resp.status_code == 200
+        assert res_data["content"] == "test"
+
     def test_mmbr_cmt_put_delete(self):
         self.client.post(
             "/api/account/signin/",
@@ -119,6 +150,34 @@ class SearchResultTestCase(IdolTestCase):
         # then
         assert resp.status_code == 200
         assert MemberComment.objects.filter(id=self.member_comment.id).exists() == False
+
+    def test_grp_cmt_put_delete(self):
+        self.client.post(
+            "/api/account/signin/",
+            json.dumps({"email": "test", "password": "tetest"}),
+            content_type="application/json",
+        )
+
+        # when
+        resp = self.client.put(
+            f"/api/search-result/group/comment/{self.group_comment.id}/",
+            json.dumps({"content": "test update"}),
+            content_type="application/json",
+        )
+
+        # then
+        res_data = json.loads(resp.content)
+        assert resp.status_code == 200
+        assert res_data["content"] == "test update"
+
+        # when
+        resp = self.client.delete(
+            f"/api/search-result/group/comment/{self.group_comment.id}/"
+        )
+
+        # then
+        assert resp.status_code == 200
+        assert GroupComment.objects.filter(id=self.group_comment.id).exists() == False
 
     def test_검색결과_GET만_허용한다(self):
         # when

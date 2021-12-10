@@ -43,10 +43,10 @@ class MyPageTestCase(TestCase):
 
     def test_my_cmt_get(self):
         MemberComment(
-            content=MEMBER_COMMENT_CONTENT, user=self.user, member=self.member
+            content=MEMBER_COMMENT_CONTENT, user=self.user, idol=self.member
         ).save()
         GroupComment(
-            content=GROUP_COMMENT_CONTENT, user=self.user, group=self.group
+            content=GROUP_COMMENT_CONTENT, user=self.user, idol=self.group
         ).save()
 
         response = self.client.get(
