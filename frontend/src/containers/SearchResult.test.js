@@ -22,7 +22,7 @@ describe('<SearchResult />', () => {
     }
     it('should render without errors', () => {
         setComponent();
-        
+
         const searchResult = component.find("SearchResultRoot");
         const basicInfo = component.find("BasicInfo");
         const tweets = component.find("Tweets");

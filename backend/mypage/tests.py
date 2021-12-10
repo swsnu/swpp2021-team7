@@ -13,6 +13,8 @@ from mypage.models import (
 
 SIGNIN_EMAIL = "jiho@nav.com"
 SIGNIN_PASSWORD = "1234"
+SIGNIN_LASTNAME = "jiho"
+SIGNIN_FIRSTNAME = "jiho"
 SAMPLE_MEMBER = "V"
 SAMPLE_GROUP = "BTS"
 MEMBER_COMMENT_CONTENT = "mmbr content test"
@@ -28,7 +30,12 @@ class MyPageTestCase(TestCase):
 
     def setUp(self):
         self.client = Client(enforce_csrf_checks=False)
-        User.objects.create_user(username=SIGNIN_EMAIL, password=SIGNIN_PASSWORD)
+        User.objects.create_user(
+            username=SIGNIN_EMAIL,
+            password=SIGNIN_PASSWORD,
+            first_name=SIGNIN_FIRSTNAME,
+            last_name=SIGNIN_LASTNAME,
+        )
         self.user = User.objects.get(username=SIGNIN_EMAIL)
         self.client.post(
             "/api/account/signin/",
@@ -41,12 +48,22 @@ class MyPageTestCase(TestCase):
         self.group = IdolGroup(name=SAMPLE_GROUP)
         self.group.save()
 
+    def test_myinfo(self):
+        response = self.client.get(f"/api/mypage/myinfo/{self.user.id}/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(SIGNIN_FIRSTNAME + SIGNIN_LASTNAME, response.content.decode())
+        self.assertIn(SIGNIN_EMAIL, response.content.decode())
+
+        response = self.client.get(f"/api/mypage/myinfo/{self.user.id}1/")
+        self.assertEqual(response.status_code, 403)
+
     def test_my_cmt_get(self):
         MemberComment(
-            content=MEMBER_COMMENT_CONTENT, user=self.user, member=self.member
+            content=MEMBER_COMMENT_CONTENT, user=self.user, idol=self.member
         ).save()
         GroupComment(
-            content=GROUP_COMMENT_CONTENT, user=self.user, group=self.group
+            content=GROUP_COMMENT_CONTENT, user=self.user, idol=self.group
         ).save()
 
         response = self.client.get(
@@ -116,4 +133,18 @@ class MyPageTestCase(TestCase):
         response = self.client.delete(
             f"/api/mypage/articles/group/{grp_article_scrp.id}/"
         )
+        self.assertEqual(response.status_code, 200)
+
+    def test_grp_idol_delete(self):
+        my_grp_idol = MyIdolGroup(user=self.user, group=self.group)
+        my_grp_idol.save()
+
+        response = self.client.delete(f"/api/mypage/idols/group/{my_grp_idol.id}/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_mmbr_idol_delete(self):
+        my_mmbr_idol = MyIdolMember(user=self.user, member=self.member)
+        my_mmbr_idol.save()
+
+        response = self.client.delete(f"/api/mypage/idols/member/{my_mmbr_idol.id}/")
         self.assertEqual(response.status_code, 200)

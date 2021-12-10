@@ -34,13 +34,13 @@ describe('<Ranking />', () => {
 
     beforeEach(() => {
         axiosMock = new axiosMockAdapter(axios);
-        axiosMock.onGet('main/ranking/').reply(200, {
+        axiosMock.onGet('main/ranking/?page=1').reply(200, {
             idolInfos: TEST_DATA,
             lastPage: 1
         }
         )
     })
-    test.only('should render without errors', async () => {
+    it('should render without errors', async () => {
         setComponent()
         await flushPromises()
         component.update()

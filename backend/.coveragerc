@@ -7,3 +7,4 @@ omit =
     manage.py
     ml/*
     custom_util/*
+    */migrations/*

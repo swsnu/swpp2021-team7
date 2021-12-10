@@ -1,9 +1,7 @@
 from django.urls import path, re_path
 from .views import (
-    mmbrCmtGetPost,
-    grpCmtGetPost,
-    mmbrCmtPutDelete,
-    grpCmtPutDelete,
+    idolCmtGetPost,
+    idolCmtPutDelete,
     search_result,
     search_by_keyword,
 )
@@ -14,25 +12,15 @@ urlpatterns = [
         search_result,
         name="search_result",
     ),
-    path(
-        "comment/member/<int:member_id>/",
-        mmbrCmtGetPost,
+    re_path(
+        r"^comment/(?P<scope>group|member)/(?P<idol_id>[0-9]+)/",
+        idolCmtGetPost,
         name="mmbrCmtGetPost",
     ),
-    path(
-        "comment/group/<int:member_id>/",
-        grpCmtGetPost,
-        name="grpCmtGetPost",
-    ),
-    path(
-        "member/comment/<int:comment_id>/",
-        mmbrCmtPutDelete,
+    re_path(
+        r"^(?P<scope>group|member)/comment/(?P<comment_id>[0-9]+)/",
+        idolCmtPutDelete,
         name="mmbrCmtPutDelete",
-    ),
-    path(
-        "group/comment/<int:comment_id>/",
-        grpCmtPutDelete,
-        name="grpCmtPutDelete",
     ),
     path("search/<str:keyword>/", search_by_keyword, name="search_by_keyword"),
 ]

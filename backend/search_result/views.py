@@ -14,6 +14,7 @@ from .management.functions.crawl_all import crawl_all
 from .models import (
     IdolMember,
     MemberComment,
+    GroupComment,
     IdolGroupInfo,
     IdolMemberInfo,
     IdolGroup,
@@ -25,24 +26,54 @@ LOGIN_PATH = "/"
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["GET", "POST"])
-def mmbrCmtGetPost(request, member_id):
-    idolMbr = get_object_or_404(IdolMember, pk=member_id)
+def idolCmtGetPost(request, scope, idol_id):
+    if scope == "member":
+        idol_model = IdolMember
+        cmt_model = MemberComment
+    else:
+        idol_model = IdolGroup
+        cmt_model = GroupComment
+
+    idol = get_object_or_404(idol_model, pk=idol_id)
 
     if request.method == "POST":
         req_data = json.loads(request.body.decode())
         content = req_data["content"]
-        mbrCmt = MemberComment(content=content, user=request.user, member=idolMbr)
-        mbrCmt.save()
-        return JsonResponse(model_to_dict(mbrCmt), safe=False)
+        idol_cmt = cmt_model(content=content, user=request.user, idol=idol)
+        idol_cmt.save()
+        return JsonResponse(model_to_dict(idol_cmt), safe=False)
 
-    comments = list(MemberComment.objects.filter(member=idolMbr).values())
+    comments = list(
+        cmt_model.objects.filter(idol=idol).values(
+            "id",
+            "content",
+            "user__id",
+            "user__last_name",
+            "user__first_name",
+            "idol__id",
+            "created_at",
+            "updated_at",
+        )
+    )
+    for comment in comments:
+        comment["author"] = comment.pop("user__last_name") + comment.pop(
+            "user__first_name"
+        )
+        comment["created_at"] = comment.pop("created_at").date()
+        comment["idol"] = comment.pop("idol__id")
+        comment["isMine"] = True if request.user.id == comment["user__id"] else False
     return JsonResponse(comments, safe=False)
 
 
 @login_required(login_url=LOGIN_PATH)
 @require_http_methods(["PUT", "DELETE"])
-def mmbrCmtPutDelete(request, comment_id):
-    mbrCmt = get_object_or_404(MemberComment, pk=comment_id)
+def idolCmtPutDelete(request, scope, comment_id):
+    if scope == "member":
+        cmt_model = MemberComment
+    else:
+        cmt_model = GroupComment
+
+    mbrCmt = get_object_or_404(cmt_model, pk=comment_id)
 
     if request.method == "PUT":
         req_data = json.loads(request.body.decode())
@@ -53,18 +84,6 @@ def mmbrCmtPutDelete(request, comment_id):
 
     mbrCmt.delete()
     return HttpResponse(status=200)
-
-
-@login_required(login_url=LOGIN_PATH)
-@require_http_methods(["GET", "POST"])
-def grpCmtGetPost():
-    pass
-
-
-@login_required(login_url=LOGIN_PATH)
-@require_http_methods(["PUT", "DELETE"])
-def grpCmtPutDelete():
-    pass
 
 
 @require_http_methods(["GET"])
@@ -146,7 +165,7 @@ def search_by_keyword(request, keyword):
                 "id": group.id,
                 "name": group.name,
                 "isGroup": True,
-                "thumbnail": group_info.info["youtubes"][0]["thumnail"],
+                "thumbnail": group_info.thumbnail.address,
             }
         )
     for member in member_instance:
@@ -156,7 +175,7 @@ def search_by_keyword(request, keyword):
                 "id": member.id,
                 "name": member.name,
                 "isGroup": False,
-                "thumbnail": member_info.info["youtubes"][0]["thumnail"],
+                "thumbnail": member_info.thumbnail.address,
                 "hasModel": member.hasModel,
             }
         )
