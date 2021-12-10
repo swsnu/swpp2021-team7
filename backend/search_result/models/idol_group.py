@@ -36,10 +36,10 @@ class IdolGroupInfo(models.Model):
             "news": self.info["news"] if "news" in self.info else [],
         }
 
-    def apply_updates(self, news, youtubes, twitter, save=False):
+    def apply_updates(self, news, youtubes, tweets, save=False):
         self.info["news"] = news
         self.info["youtubes"] = youtubes
-        self.info["twitter"] = twitter
+        self.info["tweets"] = tweets
         self.updated_at = now()
 
         if save:

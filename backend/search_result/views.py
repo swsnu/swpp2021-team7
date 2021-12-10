@@ -113,13 +113,12 @@ def search_result(request, scope, instance_id):
             ].group.name["kor"]
             name = group_name + " " + name
 
-        twitter_id = getattr(info_instance.source, "twitter", None)
         try:
             print(
                 f"More than 3 days passed after last update.. crawling {name} starts.."
             )
-            news, youtubes, twitter = crawl_all(name, twitter_id)
-            info_instance.apply_updates(news, youtubes, twitter, save=True)
+            news, youtubes, tweets = crawl_all(name)
+            info_instance.apply_updates(news, youtubes, tweets, save=True)
             info_instance.refresh_from_db()
         except:
             print("an error occured while crawling")
