@@ -128,28 +128,42 @@ def search_result(request, scope, instance_id):
         status=200,
     )
 
+
 @require_http_methods((["GET"]))
 def search_by_keyword(request, keyword):
-    group_instance = IdolGroup.objects.filter(Q(name__kor__icontains=keyword)|Q(name__eng__icontains=keyword))
-    member_instance = IdolMember.objects.filter(Q(name__kor__icontains=keyword)|Q(name__eng__icontains=keyword))
+    group_instance = IdolGroup.objects.filter(
+        Q(name__kor__icontains=keyword) | Q(name__eng__icontains=keyword)
+    )
+    member_instance = IdolMember.objects.filter(
+        Q(name__kor__icontains=keyword) | Q(name__eng__icontains=keyword)
+    )
 
     results = []
     for group in group_instance:
         group_info = get_object_or_404(IdolGroupInfo, group_id=group.id)
-        results.append({'id': group.id, 'name': group.name, 'isGroup': True, 'thumbnail':group_info.info['youtubes'][0]['thumnail']})
+        results.append(
+            {
+                "id": group.id,
+                "name": group.name,
+                "isGroup": True,
+                "thumbnail": group_info.info["youtubes"][0]["thumnail"],
+            }
+        )
     for member in member_instance:
         member_info = get_object_or_404(IdolMemberInfo, member_id=member.id)
-        results.append({
-            'id': member.id, 
-            'name': member.name, 
-            'isGroup': False, 
-            'thumbnail':member_info.info['youtubes'][0]['thumnail'],
-            'hasModel' : member.hasModel
-            })
-    
+        results.append(
+            {
+                "id": member.id,
+                "name": member.name,
+                "isGroup": False,
+                "thumbnail": member_info.info["youtubes"][0]["thumnail"],
+                "hasModel": member.hasModel,
+            }
+        )
+
     # for result in results:
-    #     print(result['id'], result['name'], result['isGroup']) 
-    
+    #     print(result['id'], result['name'], result['isGroup'])
+
     result = json.dumps(results)
     # print(json.dumps(results))
 

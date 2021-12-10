@@ -34,9 +34,5 @@ urlpatterns = [
         grpCmtPutDelete,
         name="grpCmtPutDelete",
     ),
-    path(
-        "search/<str:keyword>/",
-        search_by_keyword,
-        name="search_by_keyword"
-    )
+    path("search/<str:keyword>/", search_by_keyword, name="search_by_keyword"),
 ]

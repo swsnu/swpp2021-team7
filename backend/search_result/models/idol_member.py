@@ -34,7 +34,7 @@ class IdolMemberInfo(models.Model):
                     group.to_member_response() for group in self.member.groups.all()
                 ],
             },
-            "hasModel" : self.hasModel,
+            "hasModel": self.hasModel,
             "news": self.info["news"] if "news" in self.info else [],
         }
 
