@@ -1,5 +1,5 @@
 .not-ready{
-    background-color:#eeeeee;
+    background-color:#222222;
     opacity:0.5;
 }
 .not-ready-p{
@@ -8,4 +8,8 @@
     font-size:14px;
     margin:8px 0px;
 
+}
+.idol-items{
+    background-color:rgba(0,0,0,0);
+    cursor:pointer;
 }

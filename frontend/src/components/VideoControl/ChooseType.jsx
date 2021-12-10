@@ -17,10 +17,10 @@ class ChooseType extends Component {
         //this.cutextractParts = this.extractParts.bind(this);
     }
     cutScene(){
-        this.props.history.push('/video/result');
+        this.props.history.push('/video/result?video='+this.props.urlString);
     }
     extractParts(){
-        this.props.history.push('/video/search');
+        this.props.history.push('/video/search?video='+this.props.urlString);
     }
     render() {
         return (

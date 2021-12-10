@@ -15,12 +15,14 @@ class IdolItem extends Component {
         super(props);
     }
     redirectSearchResult = () => {
-        this.props.history.push('/video/result');
+        //this.props.history.push('/video/result');
     }
 
     render() {
         return (
-            <React.Fragment>
+            <div
+                onClick={this.props.onClick}
+                className="idol-items">
                 <ListItem 
                     id="IDOL-ITEM"
                     className={(this.props.active == "active") ? "" : "not-ready"}
@@ -28,7 +30,8 @@ class IdolItem extends Component {
                     <ListItemText
                         sx={{
                             flexGrow : 0.5,
-                            marginTop : 2
+                            marginTop : 2,
+                            color: "#ffffff"
                         }}
                         primary={this.props.num}
                     />
@@ -41,8 +44,12 @@ class IdolItem extends Component {
                     <ListItemText
                         sx={{
                             flexGrow : 10,
+                            color: "#ffffff"
                         }}
-                        primary={<Chip onClick={()=>this.redirectSearchResult()} clickable label={this.props.name} />}
+                        primary={<Chip 
+                            sx={{
+                                color: "#ffffff"
+                            }}onClick={()=>this.redirectSearchResult()} clickable label={this.props.name} />}
                     />
                 </ListItem>
                 {(this.props.active == "active") ? 
@@ -50,7 +57,7 @@ class IdolItem extends Component {
                 <p
                     className="not-ready-p">Not Supported. Would You Request Support?</p>}
                 <Divider sx={{marginLeft : 0}} variant="inset" component="li" />
-            </React.Fragment>
+            </div>
         )
     }
 }
