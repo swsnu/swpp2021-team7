@@ -21,7 +21,7 @@ class IdolMemberInfo(models.Model):
     info = models.JSONField(default=dict)
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
-
+    hasModel = models.BooleanField(default=False)
     updated_at = models.DateTimeField(null=True)
 
     def to_basic_info(self):
@@ -34,6 +34,7 @@ class IdolMemberInfo(models.Model):
                     group.to_member_response() for group in self.member.groups.all()
                 ],
             },
+            "hasModel" : self.hasModel,
             "news": self.info["news"] if "news" in self.info else [],
         }
 
