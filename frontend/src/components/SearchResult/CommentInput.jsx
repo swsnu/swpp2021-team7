@@ -5,8 +5,16 @@ import { Button, TextField } from "@mui/material";
 
 const CommentInput = ({ addComment, setReload, reload }) => {
     const [input, setInput] = useState('');
-    const onSubmit = () => {
-        addComment({ content: input })
+
+    const onSubmit = async () => {
+        const res = await axios.post(
+            `/search-result/comment/${isGroup ? "group" : "member"}/${id}/`,
+            { content: input },
+            {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
         setReload(!reload)
         setInput("")
     }

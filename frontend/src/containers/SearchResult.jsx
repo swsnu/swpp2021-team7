@@ -8,7 +8,6 @@ import styled from "@emotion/styled";
 import SharedVideos from '../components/SearchResult/SharedVideos';
 import CommentInput from '../components/SearchResult/CommentInput';
 import Comments from '../components/SearchResult/Comments';
-import { groupDummy, memberDummy } from "../constants";
 import { useParams } from 'react-router';
 import axios from 'axios';
 
@@ -19,17 +18,6 @@ const SearchResult = (props) => {
     const [reload, setReload] = useState(false);
     const { isGroup } = props;
     const { id } = useParams();
-
-    const addComment = async (newComment) => {
-        const res = await axios.post(
-            `/search-result/comment/${isGroup ? "group" : "member"}/${id}/`,
-            newComment,
-            {
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            });
-    }
 
     useEffect(async () => {
         const res = await axios.get(`/search-result/${isGroup ? "group" : "member"}/${id}`);
@@ -48,7 +36,7 @@ const SearchResult = (props) => {
         <div style={{ height: "30px" }}></div>
         <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />
-        <CommentInput addComment={addComment} setReload={setReload} reload={reload} />
+        <CommentInput setReload={setReload} reload={reload} />
         <Comments isGroup={isGroup} comments={data.comments} setReload={setReload} reload={reload} />
         <div style={{ height: "150px" }}></div>
     </SearchResultRoot>
