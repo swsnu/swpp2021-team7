@@ -36,7 +36,7 @@ const SearchResult = (props) => {
         <div style={{ height: "30px" }}></div>
         <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />
-        <CommentInput setReload={setReload} reload={reload} />
+        <CommentInput id={id} isGroup={isGroup} setReload={setReload} reload={reload} />
         <Comments isGroup={isGroup} comments={data.comments} setReload={setReload} reload={reload} />
         <div style={{ height: "150px" }}></div>
     </SearchResultRoot>

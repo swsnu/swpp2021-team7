@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
+import axios from 'axios';
 import { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 
-const CommentInput = ({ addComment, setReload, reload }) => {
+const CommentInput = ({ id, isGroup, setReload, reload }) => {
     const [input, setInput] = useState('');
 
     const onSubmit = async () => {
