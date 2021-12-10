@@ -23,17 +23,17 @@ function App(props) {
     <ConnectedRouter history={props.history}>
       <div className="App" >
         <Switch>
-          <Route path='/' exact render={() => <React.Fragment><Header/><Main /></React.Fragment>} />
-          <Route path="/sign/login" exact render={() => <React.Fragment><Header/><Signin /></React.Fragment>} />
-          <Route path="/sign/join" exact render={() => <React.Fragment><Header/><Signup /></React.Fragment>} />
-          <Route path='/mypage/:id' exact render={() => <React.Fragment><Header/><MyPage /></React.Fragment>} />
-          <Route path='/rank' exact render={() => <React.Fragment><Header/><Ranking /></React.Fragment>} />
-          <Route path="/search/member/:id" exact render={() => <React.Fragment><Header/><SearchResult /></React.Fragment>} />
+          <Route path='/' exact render={() => <React.Fragment><Header /><Main /></React.Fragment>} />
+          <Route path="/sign/login" exact render={() => <React.Fragment><Header /><Signin /></React.Fragment>} />
+          <Route path="/sign/join" exact render={() => <React.Fragment><Header /><Signup /></React.Fragment>} />
+          <Route path='/mypage/:id' exact render={(props) => <React.Fragment><Header /><MyPage {...props} /></React.Fragment>} />
+          <Route path='/rank' exact render={() => <React.Fragment><Header /><Ranking /></React.Fragment>} />
+          <Route path="/search/member/:id" exact render={() => <React.Fragment><Header /><SearchResult /></React.Fragment>} />
           <Route path="/search/group/:id" exact render={() => <React.Fragment><Header /><SearchResult isGroup={true} /></React.Fragment>} />
 
-          <Route path='/video' exact render={() => <React.Fragment><Header/><VideoIndexing /></React.Fragment>} />
-          <Route path='/video/search' exact render={() => <React.Fragment><Header/><VideoSearching /></React.Fragment>} />
-          <Route path='/video/result' exact render={() => <React.Fragment><Header/><VideoResult /></React.Fragment>} />
+          <Route path='/video' exact render={() => <React.Fragment><Header /><VideoIndexing /></React.Fragment>} />
+          <Route path='/video/search' exact render={() => <React.Fragment><Header /><VideoSearching /></React.Fragment>} />
+          <Route path='/video/result' exact render={() => <React.Fragment><Header /><VideoResult /></React.Fragment>} />
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </div >

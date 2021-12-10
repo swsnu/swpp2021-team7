@@ -7,9 +7,11 @@ from .views import (
     my_artcl_get,
     my_cmt_get,
     my_idol_get,
+    my_info,
 )
 
 urlpatterns = [
+    path("myinfo/<int:user_id>/", my_info, name="myinfo"),
     path("comments/", my_cmt_get, name="myCmtGet"),
     path("idols/", my_idol_get, name="myIdolGet"),
     path("articles/", my_artcl_get, name="myArtclGet"),

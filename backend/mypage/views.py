@@ -1,7 +1,7 @@
 from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
-from django.http.response import JsonResponse
+from django.shortcuts import get_object_or_404, resolve_url
+from django.http.response import HttpResponseForbidden, JsonResponse
 from custom_util.login_required import login_required
 from search_result.models import MemberComment, GroupComment
 from .models import ArticleGroupScrap, ArticleMemberScrap, MyIdolMember, MyIdolGroup
@@ -9,6 +9,20 @@ from .models import ArticleGroupScrap, ArticleMemberScrap, MyIdolMember, MyIdolG
 TYPE = "type"
 TYPE_MEMBER = "member"
 TYPE_GROUP = "group"
+
+
+@login_required
+@require_http_methods(["GET"])
+def my_info(request, user_id):
+    if request.user.id != int(user_id):
+        return HttpResponseForbidden()
+    return JsonResponse(
+        {
+            "email": request.user.username,
+            "username": request.user.first_name + request.user.last_name,
+        },
+        safe=False,
+    )
 
 
 @login_required
