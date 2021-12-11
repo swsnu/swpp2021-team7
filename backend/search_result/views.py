@@ -173,7 +173,9 @@ def search_by_keyword(request, keyword):
                 "id": group.id,
                 "name": group.name,
                 "isGroup": True,
-                "thumbnail": group_info.thumbnail.address,
+                "thumbnail": group_info.thumbnail.address
+                if group_info.thumbnail
+                else "https://icon-library.com/images/profile-icon-vector/profile-icon-vector-27.jpg",
             }
         )
     for member in member_instance:
@@ -183,7 +185,9 @@ def search_by_keyword(request, keyword):
                 "id": member.id,
                 "name": member.name,
                 "isGroup": False,
-                "thumbnail": member_info.thumbnail.address,
+                "thumbnail": member_info.thumbnail.address
+                if member_info.thumbnail
+                else "https://icon-library.com/images/profile-icon-vector/profile-icon-vector-27.jpg",
                 "hasModel": member_info.hasModel,
             }
         )
