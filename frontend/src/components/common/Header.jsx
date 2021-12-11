@@ -26,7 +26,6 @@ function Header(props) {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        console.log(newValue);
         if(newValue ==='/sign/login') getData();
         if(newValue === '/mypage') {
             if(userID) newValue += `/${userID}`
@@ -41,7 +40,6 @@ function Header(props) {
     async function getData() {
         try {
           const response = await axios.get('/account/signout/');
-          console.log(response);
         } catch(err) {
           console.error(err);
         }

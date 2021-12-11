@@ -13,7 +13,7 @@ export default class StyledBreadcrumb extends Component{
                     label={this.props.label}
                     variant="outlined"
                     sx={{ 
-                        cursor: 'pointer',
+                        // cursor: 'pointer',
                         borderColor  : '#b3e5fc',
                         padding : "16px",
                         color: '#b3e5fc' }}
