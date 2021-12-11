@@ -21,8 +21,6 @@ const SearchResult = (props) => {
 
     useEffect(async () => {
         const res = await axios.get(`/search-result/${isGroup ? "group" : "member"}/${id}`);
-        const cmt = await axios.get(`/search-result/comment/${isGroup ? "group" : "member"}/${id}/`);
-        res.data['comments'] = cmt.data
         setData({ ...res.data });
     }, [reload]);
 
