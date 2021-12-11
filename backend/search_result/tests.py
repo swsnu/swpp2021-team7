@@ -1,7 +1,12 @@
 import json
+from unittest.mock import patch
+
+from datetime import timedelta
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.test import TestCase, Client
+
+from .management.functions.crawl_all import CrawlUtil
 from .models import (
     IdolMember,
     IdolGroup,
@@ -218,3 +223,36 @@ class SearchResultTestCase(IdolTestCase):
         assert res_data["tweets"] == self.tweets
         assert res_data["youtubes"] == self.youtubes
         assert res_data["comments"][0]["content"] == self.group_comment.content
+
+    @patch.object(CrawlUtil, "crawl_all")
+    def test_업데이트_3일_넘었으면_또한다(self, mock_crawl):
+        # given
+        self.member_info.updated_at = now() - timedelta(days=5)
+        self.member_info.save()
+        new_news = [{"title": "제모오옥", "url": "afjlsfd.naver.com"}]
+        new_tweets = [{"author": "교통정리", "content": "우리가자주걸었던"}]
+        new_youtubes = [{"author": "잇섭", "url": "afjlasjdflk.youtube.com"}]
+        mock_crawl.return_value = new_news, new_youtubes, new_tweets
+
+        # when
+        get = self.client.get(f"/api/search-result/member/{self.member.id}/")
+        self.member_info.refresh_from_db()
+        get = json.loads(get.content)
+
+        # then
+        mock_crawl.assert_called_with(
+            self.group_name["kor"] + " " + self.member_name["kor"]
+        )
+        assert get["tweets"] == new_tweets
+        assert get["youtubes"] == new_youtubes
+        assert get["basicInfo"]["news"] == new_news
+        assert self.member_info.info["news"] == new_news
+        assert self.member_info.info["tweets"] == new_tweets
+        assert self.member_info.info["youtubes"] == new_youtubes
+        assert abs(self.member_info.updated_at - now()) < timedelta(seconds=30)
+
+    def test_멤버_업데이트를_잘반영한다(self):
+        pass
+
+    def test_그룹_업데이트를_잘반영한다(self):
+        pass
