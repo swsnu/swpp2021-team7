@@ -1,6 +1,6 @@
 import json
+import random
 from datetime import timedelta
-from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
@@ -10,7 +10,7 @@ from django.http.response import JsonResponse
 from django.db.models import Q
 from main.models import SearchLog
 
-from .management.functions.crawl_all import crawl_all
+from .management.functions.crawl_all import CrawlUtil
 from .models import (
     IdolMember,
     MemberComment,
@@ -20,11 +20,14 @@ from .models import (
     IdolGroup,
     IdolMemberIncluded,
 )
+from custom_util.login_required import login_required
+
+from mypage.models import MyIdolMember, MyIdolGroup
 
 LOGIN_PATH = "/"
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["GET", "POST"])
 def idolCmtGetPost(request, scope, idol_id):
     if scope == "member":
@@ -65,7 +68,7 @@ def idolCmtGetPost(request, scope, idol_id):
     return JsonResponse(comments, safe=False)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["PUT", "DELETE"])
 def idolCmtPutDelete(request, scope, comment_id):
     if scope == "member":
@@ -89,14 +92,17 @@ def idolCmtPutDelete(request, scope, comment_id):
 @require_http_methods(["GET"])
 def search_result(request, scope, instance_id):
 
+    user = request.user if not request.user.is_anonymous else None
     is_member = scope == "member"
 
     if is_member:
         instance = get_object_or_404(IdolMember, id=instance_id)
         info_instance = get_object_or_404(IdolMemberInfo, member_id=instance_id)
+        liked = MyIdolMember.objects.filter(user=user, member=instance).exists()
     else:
         instance = get_object_or_404(IdolGroup, id=instance_id)
         info_instance = get_object_or_404(IdolGroupInfo, group_id=instance_id)
+        liked = MyIdolGroup.objects.filter(user=user, group=instance).exists()
 
     # 검색로그 쌓기
     SearchLog.objects.create(
@@ -113,19 +119,20 @@ def search_result(request, scope, instance_id):
             ].group.name["kor"]
             name = group_name + " " + name
 
-        twitter_id = getattr(info_instance.source, "twitter", None)
         try:
             print(
                 f"More than 3 days passed after last update.. crawling {name} starts.."
             )
-            news, youtubes, twitter = crawl_all(name, twitter_id)
-            info_instance.apply_updates(news, youtubes, twitter, save=True)
+            news, youtubes, tweets = CrawlUtil.crawl_all(name)
+            info_instance.apply_updates(news, youtubes, tweets, save=True)
             info_instance.refresh_from_db()
         except:
             print("an error occured while crawling")
 
     basicInfo = info_instance.to_basic_info()
     tweets = info_instance.info["tweets"] if "tweets" in info_instance.info else []
+    if len(tweets) > 3:
+        tweets = random.choices(tweets, k=3)
     youtubes = (
         info_instance.info["youtubes"] if "youtubes" in info_instance.info else []
     )
@@ -135,10 +142,11 @@ def search_result(request, scope, instance_id):
     else:
         comments_qs = instance.groupcomment_set.all()
 
-    comments = [comment.to_response_format() for comment in comments_qs]
+    comments = [comment.to_response_format(request.user.id) for comment in comments_qs]
 
     return JsonResponse(
         {
+            "liked": liked,
             "basicInfo": basicInfo,
             "tweets": tweets,
             "youtubes": youtubes,
@@ -165,7 +173,9 @@ def search_by_keyword(request, keyword):
                 "id": group.id,
                 "name": group.name,
                 "isGroup": True,
-                "thumbnail": group_info.thumbnail.address,
+                "thumbnail": group_info.thumbnail.address
+                if group_info.thumbnail
+                else "https://icon-library.com/images/profile-icon-vector/profile-icon-vector-27.jpg",
             }
         )
     for member in member_instance:
@@ -175,8 +185,10 @@ def search_by_keyword(request, keyword):
                 "id": member.id,
                 "name": member.name,
                 "isGroup": False,
-                "thumbnail": member_info.thumbnail.address,
-                "hasModel": member.hasModel,
+                "thumbnail": member_info.thumbnail.address
+                if member_info.thumbnail
+                else "https://icon-library.com/images/profile-icon-vector/profile-icon-vector-27.jpg",
+                "hasModel": member_info.hasModel,
             }
         )
 

@@ -1,7 +1,7 @@
 from django.core.management import BaseCommand
 from django.utils.timezone import now
 from search_result.models import IdolMemberInfo, IdolGroupInfo
-from search_result.management.functions.crawl_all import crawl_all
+from search_result.management.functions.crawl_all import CrawlUtil
 
 from search_result.models import IdolMemberIncluded
 
@@ -26,14 +26,13 @@ class Command(BaseCommand):
         )[0].group.name["kor"]
         name = group_name + " " + member_name
         print(f"first crawling updates of {name}(member)...")
-        news, youtubes, twitter = crawl_all(name)
-        member_info_instance.apply_updates(news, youtubes, twitter)
+        news, youtubes, tweets = CrawlUtil.crawl_all(name)
+        member_info_instance.apply_updates(news, youtubes, tweets)
         return member_info_instance
 
     def update_group(self, group_info_instance):
         group_name = group_info_instance.group.name["kor"]
         print(f"first crawling updates of {group_name}(group)...")
-        twitter_id = getattr(group_info_instance.source, "twitter", None)
-        news, youtubes, twitter = crawl_all(group_name, twitter_id)
-        group_info_instance.apply_updates(news, youtubes, twitter)
+        news, youtubes, tweets = CrawlUtil.crawl_all(group_name)
+        group_info_instance.apply_updates(news, youtubes, tweets)
         return group_info_instance

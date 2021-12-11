@@ -1,10 +1,11 @@
 [run]
 omit =
     venv/*
-    */commands/*
+    search_result/management/*
     backend/asgi.py
     backend/wsgi.py
     manage.py
     ml/*
     custom_util/*
     */migrations/*
+    */apps.py
