@@ -61,7 +61,7 @@ def idolCmtGetPost(request, scope, idol_id):
         )
         comment["created_at"] = comment.pop("created_at").date()
         comment["idol"] = comment.pop("idol__id")
-        comment["isMine"] = True if request.user.id == comment["user__id"] else False
+        comment["isMine"] = request.user.id == comment["user__id"]
     return JsonResponse(comments, safe=False)
 
 
@@ -101,7 +101,7 @@ def search_result(request, scope, instance_id):
     # 검색로그 쌓기
     SearchLog.objects.create(
         query=instance.name["kor"],
-        isMember=True if scope == "member" else False,
+        isMember=scope == "member",
         user=(None if request.user.is_anonymous else request.user),
     )
 
