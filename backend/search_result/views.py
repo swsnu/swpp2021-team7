@@ -9,7 +9,7 @@ from django.http.response import JsonResponse
 from django.db.models import Q
 from main.models import SearchLog
 
-from .management.functions.crawl_all import crawl_all
+from .management.functions.crawl_all import CrawlUtil
 from .models import (
     IdolMember,
     MemberComment,
@@ -122,7 +122,7 @@ def search_result(request, scope, instance_id):
             print(
                 f"More than 3 days passed after last update.. crawling {name} starts.."
             )
-            news, youtubes, tweets = crawl_all(name)
+            news, youtubes, tweets = CrawlUtil.crawl_all(name)
             info_instance.apply_updates(news, youtubes, tweets, save=True)
             info_instance.refresh_from_db()
         except:
