@@ -35,7 +35,7 @@ const SearchResult = (props) => {
         <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />
         <CommentInput id={id} isGroup={isGroup} setReload={setReload} reload={reload} />
-        <Comments isGroup={isGroup} comments={data.comments} setReload={setReload} reload={reload} />
+        {data.comments.length ? <Comments isGroup={isGroup} comments={data.comments} setReload={setReload} reload={reload} /> : null}
         <div style={{ height: "150px" }}></div>
     </SearchResultRoot>
 }
