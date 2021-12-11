@@ -49,7 +49,7 @@ class IdolGroupInfo(models.Model):
 class GroupComment(models.Model):
     content = models.TextField(blank=False, default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(IdolGroup, on_delete=models.CASCADE)
+    idol = models.ForeignKey(IdolGroup, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

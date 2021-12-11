@@ -7,7 +7,6 @@ import {
 } from '@mui/material'
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-
 import FavoriteIdolList from '../components/MyPage/FavoriteIdolList';
 import MyCommentList from '../components/MyPage/MyCommentList';
 import MyArticleList from '../components/MyPage/MyArticleList';
@@ -23,24 +22,28 @@ export default class MyPage extends Component {
             anchorEl: null,
             comments: [],
             idols: [],
-            scraps: []
+            scraps: [],
+            myInfo: {}
         }
     }
 
     componentDidMount() {
+
         const getMyCmts = axios.get('mypage/comments/')
         const getMyIdols = axios.get('mypage/idols/')
         const getMyScraps = axios.get('mypage/articles/')
+        const getMyInfo = axios.get(`mypage/myinfo/${this.props.match.params.id}/`)
 
-        axios.all([getMyCmts, getMyIdols, getMyScraps]).then(axios.spread((...responses) => {
+        axios.all([getMyCmts, getMyIdols, getMyScraps, getMyInfo]).then(axios.spread((...responses) => {
             this.setState({
                 comments: responses[0].data,
                 idols: responses[1].data,
-                scraps: responses[2].data
+                scraps: responses[2].data,
+                myInfo: responses[3].data
             })
 
         })).catch(errors => {
-            // console.log(errors)
+            this.props.history.goBack()
         })
 
 
@@ -87,8 +90,8 @@ export default class MyPage extends Component {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={this.handleClose}>TestUserName</MenuItem>
-                        <MenuItem onClick={this.handleClose}>test@snu.ac.kr</MenuItem>
+                        <MenuItem onClick={this.handleClose}>{this.state.myInfo.username}</MenuItem>
+                        <MenuItem onClick={this.handleClose}>{this.state.myInfo.email}</MenuItem>
                     </Menu>
                 </Container>
                 <h1>My Page</h1>
@@ -112,3 +115,4 @@ export default class MyPage extends Component {
         )
     }
 }
+
