@@ -184,7 +184,7 @@ def search_by_keyword(request, keyword):
                 "name": member.name,
                 "isGroup": False,
                 "thumbnail": member_info.thumbnail.address,
-                "hasModel": member.hasModel,
+                "hasModel": member_info.hasModel,
             }
         )
 
