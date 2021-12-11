@@ -21,7 +21,6 @@ function Signin(props) {
           'Content-type': 'application/json'
         }
       });
-      console.log(response);
       props.history.push('/')
     } catch(err) {
       alert('Email or Password does not exist')

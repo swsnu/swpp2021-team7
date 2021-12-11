@@ -22,17 +22,24 @@ function Header(props) {
     const location = useLocation();
     const [value, setValue] = React.useState(checkPathName(location.pathname));
     const [isLogin, setIsLogin] = React.useState(false);
+    const [userID, setUserID] = React.useState(0);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
-        getData();
+        setValue(newValue);  
+        if(newValue ==='/sign/login') getData();
+        if(newValue === '/mypage/1') {
+            if(userID) newValue = `/mypage/${userID}`
+            else {
+                alert('Login is needed!');
+                newValue = '/sign/login';
+            }
+        }
         props.history.push(newValue)
     };
 
     async function getData() {
         try {
-          const response = await axios.get('/account/signout/');
-          console.log(response);
+          const response = await axios.get('/account/signout/').catch({});
         } catch(err) {
           console.error(err);
         }
@@ -45,7 +52,8 @@ function Header(props) {
     React.useEffect(() => {
         async function getLoginStatus() {
             const response = await axios.get('/account/islogin/').catch({});
-            setIsLogin(response.data['status'])       
+            setIsLogin(response.data['status']);
+            setUserID(response.data['id']);       
         }
         getLoginStatus();
     }, [props])
@@ -69,7 +77,7 @@ function Header(props) {
                     <Tab value="/sign/login" label="Logout" /> :
                     <Tab value="/sign/login" label="Login" />
                 }
-                <Tab value="/mypage/1" label="MyPage" />
+                <Tab value='/mypage/1' label="MyPage" />
                 <Tab value="/" label="Main" />
             </Tabs>
         </Box>

@@ -1,7 +1,5 @@
 from django.db.models.expressions import F
 from django.http.response import HttpResponseNotFound, JsonResponse
-from custom_util.login_required import login_required
-from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count
 from search_result.models import IdolGroup, IdolMember

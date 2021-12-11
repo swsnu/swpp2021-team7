@@ -48,6 +48,5 @@ describe('<Ranking />', () => {
         expect(list.length).toBe(1);
         const rankItem = component.find('RankItem')
         expect(rankItem.length).toBeGreaterThan(0);
-
     })
 })

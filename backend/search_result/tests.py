@@ -154,7 +154,7 @@ class SearchResultTestCase(IdolTestCase):
 
         # then
         assert resp.status_code == 200
-        assert MemberComment.objects.filter(id=self.member_comment.id).exists() == False
+        assert MemberComment.objects.filter(id=self.member_comment.id).exists() is False
 
     def test_grp_cmt_put_delete(self):
         self.client.post(
@@ -182,7 +182,7 @@ class SearchResultTestCase(IdolTestCase):
 
         # then
         assert resp.status_code == 200
-        assert GroupComment.objects.filter(id=self.group_comment.id).exists() == False
+        assert GroupComment.objects.filter(id=self.group_comment.id).exists() is False
 
     def test_검색결과_GET만_허용한다(self):
         # when
@@ -312,3 +312,4 @@ class SearchResultTestCase(IdolTestCase):
         assert len(get) == 2
         assert get[0]["id"] == self.group.id
         assert get[1]["id"] == self.member.id
+
