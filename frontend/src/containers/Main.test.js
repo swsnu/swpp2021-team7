@@ -33,7 +33,7 @@ describe('<Main />', () => {
         
         expect(searchButton.length).toBe(1);
         searchButton.simulate('submit', mEvent);
-        console.log(mEvent.preventDefault);
+        // console.log(mEvent.preventDefault);
         expect(mEvent.preventDefault).toBeCalledTimes(1)
     })
 }) 

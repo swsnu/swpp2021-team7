@@ -6,8 +6,9 @@ import { history } from '../store/store';
 import { ConnectedRouter } from 'connected-react-router';
 import Signin from './Signin';
 
-
 const mockStore = getMockStore({});
+const mockEvent = {currentTarget: {email: "test@test.test", password: "test"}};
+
 
 describe('<FindAccount />', () => {
     let component = null
@@ -37,7 +38,7 @@ describe('<FindAccount />', () => {
         expect(submitButton.length).toBe(1);
 
         submitButton.at(0).simulate('submit');
-        expect(spyHistory).toBeCalledWith('/');
+        expect(spyHistory).toHaveBeenCalledTimes(0);
 
         spyHistory.mockRestore();
     })
