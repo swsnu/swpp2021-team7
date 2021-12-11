@@ -22,10 +22,19 @@ function Header(props) {
     const location = useLocation();
     const [value, setValue] = React.useState(checkPathName(location.pathname));
     const [isLogin, setIsLogin] = React.useState(false);
+    const [userID, setUserID] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        console.log(newValue);
         if(newValue ==='/sign/login') getData();
+        if(newValue === '/mypage') {
+            if(userID) newValue += `/${userID}`
+            else {
+                alert('Login is needed!');
+                newValue = '/sign/login';
+            }
+        }
         props.history.push(newValue)
     };
 
@@ -45,7 +54,8 @@ function Header(props) {
     React.useEffect(() => {
         async function getLoginStatus() {
             const response = await axios.get('/account/islogin/').catch({});
-            setIsLogin(response.data['status'])       
+            setIsLogin(response.data['status']);
+            setUserID(response.data['id']);       
         }
         getLoginStatus();
     }, [props])
@@ -69,7 +79,7 @@ function Header(props) {
                     <Tab value="/sign/login" label="Logout" /> :
                     <Tab value="/sign/login" label="Login" />
                 }
-                <Tab value="/mypage/1" label="MyPage" />
+                <Tab value='/mypage' label="MyPage" />
                 <Tab value="/" label="Main" />
             </Tabs>
         </Box>
