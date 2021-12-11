@@ -1,6 +1,5 @@
 import json
 from datetime import timedelta
-from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
@@ -20,11 +19,12 @@ from .models import (
     IdolGroup,
     IdolMemberIncluded,
 )
+from custom_util.login_required import login_required
 
 LOGIN_PATH = "/"
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["GET", "POST"])
 def idolCmtGetPost(request, scope, idol_id):
     if scope == "member":
@@ -65,7 +65,7 @@ def idolCmtGetPost(request, scope, idol_id):
     return JsonResponse(comments, safe=False)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["PUT", "DELETE"])
 def idolCmtPutDelete(request, scope, comment_id):
     if scope == "member":
