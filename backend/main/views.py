@@ -13,7 +13,6 @@ DEFAULT_PAGE_SIZE = 10  # 한페이지에 보여질 데이터의 수
 DEFAULT_PAGE_INDEX = 2  # 한화면에 표시할 페이지 수
 
 
-# @login_required
 @require_http_methods(["GET"])
 def ranking_info_get(request):
     page = int(request.GET.get("page", 1)) - 1  # page는 1부터 시작한다

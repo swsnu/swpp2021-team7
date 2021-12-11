@@ -145,8 +145,9 @@ def search_by_keyword(request, keyword):
             'isGroup': False, 
             'thumbnail':member_info.info['youtubes'][0]['thumnail'],
             'hasModel' : member.hasModel
-            })
-    
+        })
+        
+         
     # for result in results:
     #     print(result['id'], result['name'], result['isGroup']) 
     
