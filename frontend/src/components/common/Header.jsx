@@ -25,10 +25,10 @@ function Header(props) {
     const [userID, setUserID] = React.useState(0);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        setValue(newValue);  
         if(newValue ==='/sign/login') getData();
-        if(newValue === '/mypage') {
-            if(userID) newValue += `/${userID}`
+        if(newValue === '/mypage/1') {
+            if(userID) newValue = `/mypage/${userID}`
             else {
                 alert('Login is needed!');
                 newValue = '/sign/login';
@@ -39,7 +39,7 @@ function Header(props) {
 
     async function getData() {
         try {
-          const response = await axios.get('/account/signout/');
+          const response = await axios.get('/account/signout/').catch({});
         } catch(err) {
           console.error(err);
         }
@@ -77,7 +77,7 @@ function Header(props) {
                     <Tab value="/sign/login" label="Logout" /> :
                     <Tab value="/sign/login" label="Login" />
                 }
-                <Tab value='/mypage' label="MyPage" />
+                <Tab value='/mypage/1' label="MyPage" />
                 <Tab value="/" label="Main" />
             </Tabs>
         </Box>
