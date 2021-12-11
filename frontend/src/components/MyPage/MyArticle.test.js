@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';;
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
 import { ConnectedRouter } from 'connected-react-router';
-import axiosMockAdapter from 'axios-mock-adapter';
 import axios from "axios";
 import MyArticle from './MyArticle'
 
@@ -52,11 +51,7 @@ describe('<MyArticle />', () => {
     })
 
     it('should delete scraped article', async () => {
-        let axiosMock = new axiosMockAdapter(axios)
-        axiosMock
-            .onDelete(`mypage/articles/${TYPE}/${ID}`)
-            .reply(200, [])
-
+        let mockDelete = jest.spyOn(axios, 'delete').mockResolvedValue({})
         setComponent()
 
         let cancelBtn = component.find('ForwardRef(Button)')
@@ -66,17 +61,35 @@ describe('<MyArticle />', () => {
         await flushPromises()
         expect(window.location.reload).toBeCalledTimes(1)
 
-        //error test
-        const spy = jest.spyOn(global.console, "log");
-        axiosMock
-            .onDelete(`mypage/articles/${TYPE}/${ID}`)
-            .reply(403, [])
-
-        setComponent()
-        cancelBtn.first().simulate('click')
-        await flushPromises()
-        expect(spy).toHaveBeenCalledWith('error occur in delete scraps');
-        spy.mockRestore();
-
+        mockDelete.mockRestore()
     })
+
+    // it('should delete scraped article', async () => {
+    //     let axiosMock = new axiosMockAdapter(axios)
+    //     axiosMock
+    //         .onDelete(`mypage/articles/${TYPE}/${ID}`)
+    //         .reply(200, [])
+
+    //     setComponent()
+
+    //     let cancelBtn = component.find('ForwardRef(Button)')
+    //     expect(cancelBtn.length).toBe(1)
+
+    //     cancelBtn.first().simulate('click')
+    //     await flushPromises()
+    //     expect(window.location.reload).toBeCalledTimes(1)
+
+    //     //error test
+    //     const spy = jest.spyOn(global.console, "log");
+    //     axiosMock
+    //         .onDelete(`mypage/articles/${TYPE}/${ID}`)
+    //         .reply(403, [])
+
+    //     setComponent()
+    //     cancelBtn.first().simulate('click')
+    //     await flushPromises()
+    //     expect(spy).toHaveBeenCalledWith('error occur in delete scraps');
+    //     spy.mockRestore();
+
+    // })
 })
