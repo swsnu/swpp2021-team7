@@ -61,6 +61,7 @@ def signout(request):
 @ensure_csrf_cookie
 def isLogin(request):
     if request.user.is_authenticated:
-        return JsonResponse({"status": True}, status=200)
+        return JsonResponse({'status': True, 'id': request.user.id}, status = 200)
     else:
-        return JsonResponse({"status": False}, status=200)
+        return JsonResponse({'status': False, 'id': 0}, status = 200)
+
