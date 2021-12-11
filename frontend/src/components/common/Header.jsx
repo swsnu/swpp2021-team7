@@ -25,7 +25,7 @@ function Header(props) {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        getData();
+        if(newValue ==='/sign/login') getData();
         props.history.push(newValue)
     };
 
