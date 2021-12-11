@@ -29,6 +29,9 @@ import "./VideoSearching.css";
 import { touchRippleClasses } from '@mui/material';
 import { withRouter } from 'react-router';
 
+const CutScene = 1001;
+const FaceRecognition = 1002;
+
 import axios from 'axios';
 const ListItem = styled('li')(({ theme }) => ({
     margin: theme.spacing(0.5),
@@ -63,7 +66,7 @@ class VideoSearching extends Component {
         this.nextStep = this.nextStep.bind(this);
     }
     nextStep(event){
-        console.log(this.state);
+        
         if(!this.state.video || this.state.video.length == 0){
             this.props.history.push("/video");
             return;
@@ -72,7 +75,7 @@ class VideoSearching extends Component {
         this.state.selectedIdol.forEach((el) => {
             idols += (el.id+",");
         });
-        this.props.history.push("/video/result?video="+this.state.video+"&idol="+idols);
+        this.props.history.push("/video/result?video="+this.state.video+"&type="+FaceRecognition+"&idol="+idols);
     }
     handlingLoad(){
         const timer = setInterval(() => {
@@ -105,9 +108,6 @@ class VideoSearching extends Component {
             this.setState({selectedIdol:newArray});
             
         }
-        console.log(typeof this.state.selectedIdol);
-        console.log(this.state.selectedIdol);
-        
     }
     handleDelete(item){
         let newArray = this.state.selectedIdol.slice();
@@ -211,10 +211,11 @@ class VideoSearching extends Component {
                         component="ul"
                         >
                         {this.state.selectedIdol.length > 0 ? this.state.selectedIdol.map((item) => {
-                                            console.log(item);
+                                            
                                             return (
                                                 <ListItem key={item.key}>
                                                     <Chip
+                                                    key={item.key}
                                                     sx={{color:"#ffffff"}}
                                                     avatar={<Avatar alt="Natacha" src={item.thumbnail} />}
                                                     icon={item.thumbnail}

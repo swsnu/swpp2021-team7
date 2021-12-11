@@ -2,20 +2,40 @@ import React, { Component } from 'react';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
+
+import { styled } from '@mui/material/styles';
 
 import YoutubeVideo from '../components/VideoControl/YoutubeVideo';
 import IdolSelector from '../components/VideoControl/IdolSelector';
 import Timeline from '../components/VideoControl/Timeline';
+
+import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
 
 import LinearProgressWithLabel from '../components/VideoControl/VideoLoading';
 
 import { withRouter } from 'react-router';
 import axios from 'axios';
 
+import StyledBreadCrumb from '../components/VideoControl/StyledBreadCrumb';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import OndemandVideoOutlinedIcon from '@mui/icons-material/OndemandVideoOutlined';
+import AutofpsSelectOutlinedIcon from '@mui/icons-material/AutofpsSelectOutlined';
+import SafetyDividerOutlinedIcon from '@mui/icons-material/SafetyDividerOutlined';
+
 import "./VideoResult.css";
 
+const ListItem = styled('li')(({ theme }) => ({
+    margin: theme.spacing(0.5),
+  }));
+  
 const CutScene = 1001;
 const FaceRecognition = 1002;
+
+const TYPE_YOUTUBE = 100
+const TYPE_FILE = 200
 class VideoResult extends Component {
     
     constructor(props){
@@ -25,8 +45,55 @@ class VideoResult extends Component {
             loading : true,
             progress : 10,
             video : "",
-            selectedIdol : []
+            selectedIdol : [],
+            selectedIdolInfo : [],
+            detectList : []
         }
+    }
+    async getBySearchMemberId(id) {
+        try {
+          const response = await axios.get(`search-result/member/${id}/`);
+          this.setSearchResult(response.data);
+        } catch(err) {
+          console.error(err);
+        }
+    }
+    async getVideoScene(video) {
+        try {
+          const response = await axios.post(`video/scene/`,{
+              type : TYPE_YOUTUBE,
+              target : video,
+              option : {}
+          });
+          this.setSceneResult(response.data);
+        } catch(err) {
+          console.error(err);
+        }
+    }
+    async getFaceRecognition(video) {
+        try {
+          const response = await axios.post(`video/recognition/`,{
+              type : TYPE_YOUTUBE,
+              target : video,
+              option : {
+                  idol : this.state.selected
+              }
+          });
+          this.setFaceRecognitionResult(response.data);
+        } catch(err) {
+          console.error(err);
+        }
+    }
+    setSearchResult(data){
+        if(Object.keys(data).includes("basicInfo")){
+            this.setState({"selectedIdolInfo":[...this.state.selectedIdolInfo, data.basicInfo]});
+        }
+    }
+    setFaceRecognitionResult(data){
+        this.setState({detectList : data.result});
+    }
+    setSceneResult(data){
+        this.setState({detectList : data.time});
     }
     handlingLoad(){
         const timer = setInterval(() => {
@@ -35,7 +102,7 @@ class VideoResult extends Component {
                 clearInterval(timer);
                 this.setState({"loading" : false});
             }
-          }, 800);
+          }, 50);
           return () => {
             clearInterval(timer);
           }
@@ -43,8 +110,40 @@ class VideoResult extends Component {
     componentDidMount(){
         this.handlingLoad();
         const params = new URLSearchParams(this.props.location.search);
-        const video = params.get('video');
-        this.setState({"video":video});
+        let video = params.get('video');
+        let type = params.get('type');
+        let idols = params.get('idol');
+        if(!video || !type){
+            this.props.history.push("/video");
+            return;
+        }
+        type = parseInt(type);
+        if(type == FaceRecognition && !idols){
+            this.props.history.push("/video/search?video="+video+"&type="+FaceRecognition);
+            return;
+        }
+        if(type == FaceRecognition){
+            let idol_list = idols.split(",");
+            let selected_idol = new Array();
+            idol_list.forEach(el => {
+                if(!isNaN(parseInt(el))){
+                    selected_idol.push(parseInt(el));
+                }
+            });
+            this.setState({"selectedIdol":selected_idol});
+            selected_idol.forEach(id => {
+                this.getBySearchMemberId(id);
+            });
+        }
+        
+        this.setState({"video":video, "type":type});
+        
+        
+        if(type == CutScene){
+            this.getVideoScene(video);
+        }else{
+            this.getFaceRecognition(video);
+        }
     }
     render() {
         
@@ -66,33 +165,114 @@ class VideoResult extends Component {
                 )}
                 <Container 
                     className="video-loading-container video-loading--background"></Container>
-                <React.Fragment>
+                <Grid container spacing={2} xs={{padding:"16px"}}>
+                <Grid item xs={12}>
                     <Container maxWidth="sm">
-                    <Box sx={{ flexGrow: 1 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <YoutubeVideo
-                                    videoUrl={this.state.video}></YoutubeVideo>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <IdolSelector></IdolSelector>
-                            </Grid>
-                            
-                        </Grid>
-                        </Box>
+                        <img
+                            width="200px"
+                            src="/images/vidol_text_512.png"/>
                     </Container>
-                    <Container maxWidth="sm">
-                        <Grid item xs={12}>
-                            <Timeline
-                                color={"#007aff"}
-                                time={[4,10,12,4,102]}/>
-                            <Timeline
-                                color={"#ff7aff"}
-                                time={[4,10,12,4,102]}/>
-                                
-                        </Grid>
+
+                    <Container
+                    className="breadcrumbs"
+                    maxWidth="sm">
+                    <Breadcrumbs
+                            separator={<ArrowRightAltIcon 
+                                sx={{ color: '#b3e5fc' }}
+                                fontSize="small" />}
+                            aria-label="breadcrumb">
+                            <StyledBreadCrumb
+                            component="a"
+                            href="#"
+                            label="Video upload"
+                            icon={<OndemandVideoOutlinedIcon fontSize="small" />}
+                            />
+                            <StyledBreadCrumb 
+                                component="a" 
+                                href="#" 
+                                label="find Idols"
+                                icon={<SafetyDividerOutlinedIcon fontSize="small"/>} />
+                            <StyledBreadCrumb 
+                                component="a" 
+                                href="#" 
+                                label="Get results"
+                                icon={<AutofpsSelectOutlinedIcon fontSize="small"/>} />
+                    </Breadcrumbs>
                     </Container>
-                </React.Fragment>
+                </Grid>
+                <Grid item xs={(this.state.type == FaceRecognition) ? 8 : 12}>
+                <YoutubeVideo
+                    videoUrl={this.state.video}></YoutubeVideo>
+                </Grid>
+                {(this.state.type == FaceRecognition) ? (
+                    <>
+                    <Grid item xs={4}>
+                    <div
+                        className="idol-selector-box">
+                        <p className="title">Options</p>
+                        <div className="idol-selector-box-row">
+                            <div className="option-title">
+                                <span className="option-title">
+                                    Idols
+                                </span>
+                            </div>
+                            <div className="option-list">
+                                <Paper
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        flexWrap: 'wrap',
+                                        listStyle: 'none',
+                                        p: 0.5,
+                                        m: 0,
+                                        bgcolor:"#222222",
+                                        height :  "48px"
+                                    }}
+                                    component="ul"
+                                    >
+                                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item) => {
+                                                        return (
+                                                            <ListItem key={item.key}>
+                                                                <Chip
+                                                                key={item.key}
+                                                                sx={{color:"#ffffff"}}
+                                                                avatar={<Avatar alt="Natacha" src={item.thumbnail} />}
+                                                                icon={item.thumbnail}
+                                                                label={item.name.kor + ' ' + item.name.eng}
+                                                                onDelete={(e) => this.handleDelete(item)}
+                                                                />
+                                                            </ListItem>
+                                                    )}) : <></>
+                                            }
+                                </Paper>
+                            </div>
+                        </div>
+                    </div>
+                    </Grid>
+                    <Grid item xs={12}>
+
+                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item) => {
+                                                        return (
+                                                            <Timeline
+                                                                key ={item.key}
+                                                                type={FaceRecognition}
+                                                                icon={item.thumbnail}
+                                                                color={"#007aff"}
+                                                                time={this.state.detectList[item.id]}/>
+                                                    )}) : <></>
+                                            }
+                    </Grid>
+                    </>
+                ) : (
+                    <Grid item xs={12}>
+                        <Timeline
+                            type={CutScene}
+                            color={"#007aff"}
+                            time={this.state.detectList}/>
+                    </Grid>
+                )}
+                </Grid>
+
             </>
         )
     }

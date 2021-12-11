@@ -3,14 +3,24 @@ import React, { Component } from 'react';
 import Container from '@mui/material/Container';
 import './Timeline.css';
 
+import { withRouter } from 'react-router';
+
+const CutScene = 1001;
+const FaceRecognition = 1002;
+
 const TEST = [12,34,123,40,102,30,12,34,65,76,10,32,67,90];
-export default class Timeline extends Component {
+class Timeline extends Component {
     constructor(props){
         super(props);
-        this.state = {test : TEST};
+        this.state = {
+            time : this.props.time,
+            type : this.props.type,
+            icon : "",
+            length : 0
+        };
     }
     render(){
-        const timelines = this.state.test.map((num,i) => {
+        const timelines = this.state.time.map((num,i) => {
             const styleActive = {
                 width: (num+"px"),
                 backgroundColor:this.props.color
@@ -25,12 +35,24 @@ export default class Timeline extends Component {
                 return <div key={i} className="deactive-box"
                             style={styleDeactive}></div>;
         });
-        return (<Container maxWidth="sm">
+        return (<Container>
             <div className="timeline-container">
-                <div className="timeline-box">
-                    {timelines}
-                </div>
+                {(this.state.type == FaceRecognition) ? (
+                    <>
+                    <div className="timeline-icon">
+                        <img 
+                            className="timeline-icon"
+                            src={this.state.icon}/>
+                    </div>
+                    <div className="timeline-list"></div>
+                    </>
+                ) : (
+                    <div className="timeline-box">
+                        {timelines}
+                    </div>
+                )}
             </div>
         </Container>);
     }
 }
+export default withRouter(Timeline);

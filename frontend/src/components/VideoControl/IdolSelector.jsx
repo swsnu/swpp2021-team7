@@ -3,7 +3,8 @@ import './IdolSelector.css';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
-export default class IdolSelector extends Component {
+import { withRouter } from 'react-router';
+class IdolSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {date: new Date()};
@@ -12,7 +13,6 @@ export default class IdolSelector extends Component {
         
         
     }
-
     render(){
         return (<>
             <Container maxWidth="sm">
@@ -50,3 +50,5 @@ export default class IdolSelector extends Component {
         </>);
     }
 }
+
+export default withRouter(IdolSelector);

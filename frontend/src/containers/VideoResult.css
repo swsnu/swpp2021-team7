@@ -34,3 +34,40 @@
     text-align:center;
     margin-bottom:24px;
 }
+div.idol-selector-box{
+    position:relative;
+    width:100%;
+    height:100%;
+    border-radius:4px;
+    padding:16px;
+    border:1px solid #007aff;
+}
+div.idol-selector-box p.title{
+    position:relative;
+    width:100%;
+    color:#ffffff;
+    font-size:24px;
+}
+div.idol-selector-box-row{
+    position:relative;
+    overflow:hidden;
+    white-space:nowrap;
+}
+div.idol-selector-box-row div.option-title{
+    position:relative;
+    display:inline-block;
+    vertical-align: top;
+    width:84px;
+}
+div.idol-selector-box-row div.option-title span.option-title{
+    position:relative;
+    font-size:18px;
+    color:#ffffff;
+}
+
+div.idol-selector-box-row div.option-list{
+    position:relative;
+    display:inline-block;
+    vertical-align: top;
+    width:calc(100% - 84px);
+}
