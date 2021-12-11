@@ -8,3 +8,4 @@ omit =
     ml/*
     custom_util/*
     */migrations/*
+    */apps.py
