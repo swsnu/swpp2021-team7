@@ -2,10 +2,10 @@ DATABASE = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "team7",
-        # "USER": "team7",
-        # "PASSWORD": "team7-12345!",
-        "USER": "root",
-        "PASSWORD": "1q2w3e4r",
+        "USER": "team7",
+        "PASSWORD": "team7-12345!",
+        # "USER": "root",
+        # "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "3306",
     }
