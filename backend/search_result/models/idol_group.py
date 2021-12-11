@@ -53,16 +53,14 @@ class GroupComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def to_response_format(self):
+    def to_response_format(self, user_id):
         obj = {
             "author": self.user.username,
+            "isMine": self.user.id == user_id,
             "content": self.content,
+            "created_at": self.created_at,
+            "id": self.id,
         }
-
-        if self.created_at != self.updated_at:
-            obj["updated_at"] = self.updated_at
-        else:
-            obj["created_at"] = self.created_at
 
         return obj
 
