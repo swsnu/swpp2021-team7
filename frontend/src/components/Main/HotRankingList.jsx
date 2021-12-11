@@ -36,6 +36,7 @@ class HotRankingList extends Component {
                             this.props.data.idolInfos === undefined ?
                             "Loading..." : 
                             this.props.data.idolInfos.map((items, index) => {
+                                // console.log(this.props.data.idolInfos);
                                 return(<RankItem id={items.id} rank={index+1} name={items.name} type={items.type === "member"? "member" : "group"} img={items.address} key={index+1}></RankItem>)
                             }) 
                         }

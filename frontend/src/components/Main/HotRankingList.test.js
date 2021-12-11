@@ -9,6 +9,11 @@ import HotRankingList from './HotRankingList';
 
 
 const mockStore = getMockStore({});
+const mockIdolInfos = [
+    {address: 'TEST1', id: '1', name:{eng: 'TEST1', kor: '테스트1'}, type: "group"},
+    {address: 'TEST2', id: '2', name:{eng: 'TEST2', kor: '테스트2'}, type: "member"}, 
+]
+const mockData = {idolInfos: mockIdolInfos}
 
 describe('<HotRankingList />', () => {
     let component = null
@@ -16,7 +21,7 @@ describe('<HotRankingList />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <HotRankingList></HotRankingList>
+                    <HotRankingList data={mockData}></HotRankingList>
                 </ConnectedRouter>
             </Provider>
         )

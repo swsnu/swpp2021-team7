@@ -6,18 +6,18 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('search_result', '0005_auto_20211209_1112'),
+        ("search_result", "0005_auto_20211209_1112"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='groupcomment',
-            old_name='group',
-            new_name='idol',
+            model_name="groupcomment",
+            old_name="group",
+            new_name="idol",
         ),
         migrations.RenameField(
-            model_name='membercomment',
-            old_name='member',
-            new_name='idol',
+            model_name="membercomment",
+            old_name="member",
+            new_name="idol",
         ),
     ]
