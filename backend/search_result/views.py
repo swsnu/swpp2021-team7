@@ -21,6 +21,8 @@ from .models import (
 )
 from custom_util.login_required import login_required
 
+from mypage.models import MyIdolMember, MyIdolGroup
+
 LOGIN_PATH = "/"
 
 
@@ -89,14 +91,17 @@ def idolCmtPutDelete(request, scope, comment_id):
 @require_http_methods(["GET"])
 def search_result(request, scope, instance_id):
 
+    user = request.user if not request.user.is_anonymous else None
     is_member = scope == "member"
 
     if is_member:
         instance = get_object_or_404(IdolMember, id=instance_id)
         info_instance = get_object_or_404(IdolMemberInfo, member_id=instance_id)
+        liked = MyIdolMember.objects.filter(user=user, member=instance).exists()
     else:
         instance = get_object_or_404(IdolGroup, id=instance_id)
         info_instance = get_object_or_404(IdolGroupInfo, group_id=instance_id)
+        liked = MyIdolGroup.objects.filter(user=user, group=instance).exists()
 
     # 검색로그 쌓기
     SearchLog.objects.create(
@@ -138,6 +143,7 @@ def search_result(request, scope, instance_id):
 
     return JsonResponse(
         {
+            "liked": liked,
             "basicInfo": basicInfo,
             "tweets": tweets,
             "youtubes": youtubes,
