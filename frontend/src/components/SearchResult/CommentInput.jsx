@@ -1,18 +1,30 @@
 import React from "react";
 import styled from "@emotion/styled";
+import axios from 'axios';
+import { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 
-const CommentInput = ({addComment}) => {
+const CommentInput = ({ id, isGroup, setReload, reload }) => {
+    const [input, setInput] = useState('');
 
-    const onSubmit = () => {
-        addComment({author: "TEST1", content: "Comment content", timestamp: "just now"})
+    const onSubmit = async () => {
+        const res = await axios.post(
+            `/search-result/comment/${isGroup ? "group" : "member"}/${id}/`,
+            { content: input },
+            {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+        setReload(!reload)
+        setInput("")
     }
 
     return <CommentInputConatiner id="comment-input">
         <h4>Leave Comment!</h4>
         <TextButtonContainer>
-            <TextField sx={{width: "50%"}} />
-            <Button id="comment-submit" variant="contained" sx={{marginLeft: "15px"}} onClick={onSubmit}>Submit</Button>
+            <TextField value={input} onInput={e => setInput(e.target.value)} sx={{ width: "50%" }} />
+            <Button id="comment-submit" variant="contained" sx={{ marginLeft: "15px" }} onClick={onSubmit}>Submit</Button>
         </TextButtonContainer>
     </CommentInputConatiner>
 }

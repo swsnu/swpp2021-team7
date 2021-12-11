@@ -15,12 +15,17 @@ const mockStore = getMockStore({});
 describe('<MyPage />', () => {
     let component = null
     let axiosMock = null
+    let matchProps = {
+        params: {
+            id: 1
+        }
+    }
 
     let setComponent = () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <MyPage></MyPage>
+                    <MyPage match={matchProps}></MyPage>
                 </ConnectedRouter>
             </Provider>
         )
