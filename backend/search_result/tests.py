@@ -300,3 +300,15 @@ class SearchResultTestCase(IdolTestCase):
         assert self.member_info.info["tweets"] == new_tweets
         assert self.member_info.info["youtubes"] == new_youtubes
         assert abs(self.member_info.updated_at - now()) < timedelta(seconds=30)
+
+    def test_키워드검색_잘된다(self):
+        # given
+        keyword = "테스트"
+
+        # when
+        get = self.client.get(f"/api/search-result/search/{keyword}/")
+        get = json.loads(get.content)
+        # then
+        assert len(get) == 2
+        assert get[0]["id"] == self.group.id
+        assert get[1]["id"] == self.member.id
