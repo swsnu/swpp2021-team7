@@ -251,8 +251,52 @@ class SearchResultTestCase(IdolTestCase):
         assert self.member_info.info["youtubes"] == new_youtubes
         assert abs(self.member_info.updated_at - now()) < timedelta(seconds=30)
 
-    def test_멤버_업데이트를_잘반영한다(self):
-        pass
+    def test_트윗_세개만_가져온다(self):
+        # given
+        self.member_info.info["tweets"] = [
+            {"author": "교통정리", "content": "우리가자주걸었던"},
+            {"author": "한걸음", "content": "closer내맘"},
+            {"author": "내위치에선", "content": "넌숨도못쉬어"},
+            {"author": "네번째", "content": "와다다다"},
+        ]
+        self.member_info.save()
+
+        # when
+        get = self.client.get(f"/api/search-result/member/{self.member.id}/")
+        self.member_info.refresh_from_db()
+        get = json.loads(get.content)
+
+        # then
+        assert len(get["tweets"]) == 3
 
     def test_그룹_업데이트를_잘반영한다(self):
-        pass
+        # given
+        new_news = [{"title": "제모오옥", "url": "afjlsfd.naver.com"}]
+        new_tweets = [{"author": "교통정리", "content": "우리가자주걸었던"}]
+        new_youtubes = [{"author": "잇섭", "url": "afjlasjdflk.youtube.com"}]
+
+        # when
+        self.group_info.apply_updates(new_news, new_youtubes, new_tweets, save=True)
+        self.group_info.refresh_from_db()
+
+        # then
+        assert self.group_info.info["news"] == new_news
+        assert self.group_info.info["tweets"] == new_tweets
+        assert self.group_info.info["youtubes"] == new_youtubes
+        assert abs(self.group_info.updated_at - now()) < timedelta(seconds=30)
+
+    def test_멤버_업데이트를_잘반영한다(self):
+        # given
+        new_news = [{"title": "제모오옥", "url": "afjlsfd.naver.com"}]
+        new_tweets = [{"author": "교통정리", "content": "우리가자주걸었던"}]
+        new_youtubes = [{"author": "잇섭", "url": "afjlasjdflk.youtube.com"}]
+
+        # when
+        self.member_info.apply_updates(new_news, new_youtubes, new_tweets, save=True)
+        self.member_info.refresh_from_db()
+
+        # then
+        assert self.member_info.info["news"] == new_news
+        assert self.member_info.info["tweets"] == new_tweets
+        assert self.member_info.info["youtubes"] == new_youtubes
+        assert abs(self.member_info.updated_at - now()) < timedelta(seconds=30)
