@@ -142,7 +142,7 @@ def search_result(request, scope, instance_id):
     else:
         comments_qs = instance.groupcomment_set.all()
 
-    comments = [comment.to_response_format() for comment in comments_qs]
+    comments = [comment.to_response_format(request.user.id) for comment in comments_qs]
 
     return JsonResponse(
         {
