@@ -20,6 +20,7 @@ const flushPromises = () => new Promise(setImmediate);
 
 
 describe('<MyArticle />', () => {
+    const { location } = window;
     let component = null
     let setComponent = () => {
         component = mount(
