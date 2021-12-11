@@ -56,19 +56,19 @@ class MainTestCase(TestCase):
         self.assertIn(SAMPLE_MEMBER, response.content.decode())
         self.assertIn(str(last_page), response.content.decode())
 
-        def test_get_ranking(self):
-            client = Client(enforce_csrf_checks=False)
+    # def test_get_ranking(self):
+    #     client = Client(enforce_csrf_checks=False)
 
-            response = client.get("/api/main/ranking/")
-            self.assertEqual(response.status_code, 200)
-            self.assertEqual(response.json()["lastPage"], 1)
-            self.assertEqual(response.json()["idolInfos"], [])
+    #     response = client.get("/api/main/ranking/")
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertEqual(response.json()["lastPage"], 1)
+    #     self.assertEqual(response.json()["idolInfos"], [])
 
-            user = User.objects.create_user(username="Me")
-            IdolMember.objects.create(name="Seulgi")
-            SearchLog.objects.create(query="Red Velvet", isMember=False, user=user)
+    #     user = User.objects.create_user(username="Me")
+    #     IdolMember.objects.create(name="Seulgi")
+    #     SearchLog.objects.create(query="Red Velvet", isMember=False, user=user)
 
-            response = client.get("/api/main/ranking/")
-            self.assertEqual(response.status_code, 404)
+    #     response = client.get("/api/main/ranking/")
+    #     self.assertEqual(response.status_code, 404)
 
-            SearchLog.objects.create(query="Seulgi", isMember=True, user=user)
+    #     SearchLog.objects.create(query="Seulgi", isMember=True, user=user)

@@ -218,3 +218,5 @@ class SearchResultTestCase(IdolTestCase):
         assert res_data["tweets"] == self.tweets
         assert res_data["youtubes"] == self.youtubes
         assert res_data["comments"][0]["content"] == self.group_comment.content
+
+    
