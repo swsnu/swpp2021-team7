@@ -38,7 +38,7 @@ describe('<SearchResult />', () => {
         expect(idolInfos.length).toBe(1)
 
         idolInfos.at(0).simulate('click');
-        expect(spyHistory).toBeCalledWith('/search/group/1')
+        expect(spyHistory).toBeCalledWith('/search/member/1')
 
         spyHistory.mockRestore()
     })
