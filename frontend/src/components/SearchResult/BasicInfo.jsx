@@ -4,15 +4,31 @@ import axios from "axios";
 import React, { useState } from "react";
 import Members from "./Members";
 
-const BasicInfo = ({id, liked, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup}) => {
+const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup}) => {
 
     const [like, setLike] = useState(liked);
+    const [scraps, setScraps] = useState(loadedScraps);
     const [isLoading, setIsLoading] = useState(false);
 
     const toggleLike = async () => {
+        if (isLoading) {
+            alert("Your last request is in progress!");
+            return;
+        }
         setIsLoading(true);
         await axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-like/${id}/`);
         setLike(!like);
+        setIsLoading(false);
+    }
+
+    const toggleScrap = async (url, title) => {
+        if (isLoading) {
+            alert("Your last request is in progress!");
+            return;
+        }
+        setIsLoading(true);
+        const res = await axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-scrap/${id}/`, {url, title});
+        setScraps([...res.data]);
         setIsLoading(false);
     }
 
@@ -31,7 +47,7 @@ const BasicInfo = ({id, liked, thumbnail, info: {name, groups, birth, debut, mem
                     {debut && <Chip label={debut} /> }
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={like ? "filled" : "outlined"} onClick={isLoading ? () => alert("Your last request is in progress!") : toggleLike}/>
+                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={like ? "filled" : "outlined"} onClick={toggleLike}/>
             </Box>
         </Box>
 
@@ -44,11 +60,12 @@ const BasicInfo = ({id, liked, thumbnail, info: {name, groups, birth, debut, mem
         <h3>Recent News</h3>
         <Box sx={{width: '100%', textAlign: "center"}}>
             {news.map((n,i) => {
+                const scrapped = scraps.includes(n.url);
                 return <ListItem disablePadding key={i}>
                     <ListItemButton component="a" href={n.url}>
                         <ListItemText primary={n.title} />
                     </ListItemButton>
-                    <Button variant="contained">Scrap</Button>
+                    <Button variant={scrapped ? "outlined" : "contained"} color="primary" onClick={() => toggleScrap(n.url, n.title)}>{scrapped ? "Cancel Scrap" : "Scrap"}</Button>
                 </ListItem>
             })}
         </Box>
