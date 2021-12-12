@@ -10,7 +10,7 @@ import { withRouter } from 'react-router';
 
 class SearchResult extends Component {
     handleClick = () => {
-        this.props.history.push(`/search/group/${this.props.id}`);
+        this.props.history.push(`/search/${this.props.isGroup ? 'group' : 'member'}/${this.props.id}`);
     }
 
     render() {

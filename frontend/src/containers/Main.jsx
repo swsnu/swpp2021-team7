@@ -116,7 +116,7 @@ function Main() {
                             <Box xs={{mt:10}}>
                                 <Typography variant="h6"> Search Result </Typography>
                                 {searchResult ? searchResult.map((item) => {
-                                    return (<SearchResult name={item.name.kor + ' ' + item.name.eng} id={item.id} key={item.id} thumbnail={item.thumbnail}/>)
+                                    return (<SearchResult name={item.name.kor + ' ' + item.name.eng} isGroup={item.isGroup} id={item.id} key={item.id} thumbnail={item.thumbnail}/>)
                                 }) : "Loading..."
                                 } 
                             </Box>
