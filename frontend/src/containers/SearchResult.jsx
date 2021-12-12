@@ -30,7 +30,7 @@ const SearchResult = (props) => {
 
     if (isLoading) return <CircularProgress />
     return <SearchResultRoot>
-        <CustomGridRow components={[<BasicInfo {...data.basicInfo} isGroup={isGroup} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
+        <CustomGridRow components={[<BasicInfo {...data.basicInfo} id={id} isGroup={isGroup} liked={data.liked} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
         <div style={{ height: "30px" }}></div>
         <YoutubeVideos videos={data.youtubes} />
         <SharedVideos videos={data.shared} />

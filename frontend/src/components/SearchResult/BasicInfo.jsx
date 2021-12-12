@@ -1,11 +1,20 @@
 import { Avatar, Chip, ListItemButton, ListItemText, ListItem, Stack, Button } from "@mui/material";
 import { Box } from "@mui/system";
+import axios from "axios";
 import React, { useState } from "react";
 import Members from "./Members";
 
-const BasicInfo = ({thumbnail, info: {name, groups, birth, debut, members}, news, isGroup}) => {
+const BasicInfo = ({id, liked, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup}) => {
 
-    const [likeClicked, setLikeClicked] = useState(false);
+    const [like, setLike] = useState(liked);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const toggleLike = async () => {
+        setIsLoading(true);
+        await axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-like/${id}/`);
+        setLike(!like);
+        setIsLoading(false);
+    }
 
     return <div id="basicInfo">
         <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -22,7 +31,7 @@ const BasicInfo = ({thumbnail, info: {name, groups, birth, debut, members}, news
                     {debut && <Chip label={debut} /> }
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={likeClicked ? "filled" : "outlined"} onClick={() => setLikeClicked(!likeClicked)}/>
+                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={like ? "filled" : "outlined"} onClick={isLoading ? () => alert("Your last request is in progress!") : toggleLike}/>
             </Box>
         </Box>
 
