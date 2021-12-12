@@ -1,5 +1,5 @@
 import json
-import random
+import secrets
 from datetime import timedelta
 from django.utils.timezone import now
 from django.views.decorators.http import require_http_methods
@@ -132,7 +132,7 @@ def search_result(request, scope, instance_id):
     basicInfo = info_instance.to_basic_info()
     tweets = info_instance.info["tweets"] if "tweets" in info_instance.info else []
     if len(tweets) > 3:
-        tweets = random.choices(tweets, k=3)
+        tweets = secrets.SystemRandom().choices(tweets, k=3)
     youtubes = (
         info_instance.info["youtubes"] if "youtubes" in info_instance.info else []
     )
