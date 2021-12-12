@@ -85,12 +85,11 @@ class AccountTestCase(TestCase):
         response = client.get("/api/account/signout/")
         self.assertEqual(response.status_code, 204)
 
-
     def test_isLogin(self):
         response = client.get("/api/account/islogin/")
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.content)
-        self.assertEqual(data['status'], False)
+        self.assertEqual(data["status"], False)
 
         response = client.post(
             "/api/account/signin/",
@@ -102,4 +101,4 @@ class AccountTestCase(TestCase):
         response = client.get("/api/account/islogin/")
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.content)
-        self.assertEqual(data['status'], True) 
+        self.assertEqual(data["status"], True)
