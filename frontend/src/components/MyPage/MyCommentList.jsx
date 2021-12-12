@@ -10,7 +10,7 @@ export default class MyCommentList extends Component {
             myCmtLists.push(<MyComment
                 key={this.props.comments.indexOf(cmt)}
                 content={cmt.content}
-                idolId={cmt[cmt.type]}
+                idolId={cmt["idol"]}
                 createAt={cmt.created_at}
                 name={cmt.name}
                 type={cmt.type}
