@@ -22,7 +22,12 @@ from .models import (
 )
 from custom_util.login_required import login_required
 
-from mypage.models import MyIdolMember, MyIdolGroup
+from mypage.models import (
+    MyIdolMember,
+    MyIdolGroup,
+    ArticleMemberScrap,
+    ArticleGroupScrap,
+)
 
 LOGIN_PATH = "/"
 
@@ -99,10 +104,18 @@ def search_result(request, scope, instance_id):
         instance = get_object_or_404(IdolMember, id=instance_id)
         info_instance = get_object_or_404(IdolMemberInfo, member_id=instance_id)
         liked = MyIdolMember.objects.filter(user=user, member=instance).exists()
+        scraps = [
+            a.address
+            for a in ArticleMemberScrap.objects.filter(user=user, member=instance)
+        ]
     else:
         instance = get_object_or_404(IdolGroup, id=instance_id)
         info_instance = get_object_or_404(IdolGroupInfo, group_id=instance_id)
         liked = MyIdolGroup.objects.filter(user=user, group=instance).exists()
+        scraps = [
+            a.address
+            for a in ArticleGroupScrap.objects.filter(user=user, group=instance)
+        ]
 
     # 검색로그 쌓기
     SearchLog.objects.create(
@@ -147,6 +160,7 @@ def search_result(request, scope, instance_id):
     return JsonResponse(
         {
             "liked": liked,
+            "scraps": scraps,
             "basicInfo": basicInfo,
             "tweets": tweets,
             "youtubes": youtubes,
@@ -220,3 +234,43 @@ def toggle_like(request, scope, idol_id):
             MyIdolGroup.objects.create(group_id=idol_id, user=user)
 
     return HttpResponse(status=204)
+
+
+@login_required
+@require_http_methods(["POST"])
+def toggle_scrap(request, scope, idol_id):
+    user = request.user
+    data = json.loads(request.body)
+    title = data["title"]
+    url = data["url"]
+
+    if scope == "member":
+        scrap = ArticleMemberScrap.objects.filter(
+            member_id=idol_id, user=user, address=url, title=title
+        )
+        if scrap.exists():
+            scrap[0].delete()
+        else:
+            ArticleMemberScrap.objects.create(
+                member_id=idol_id, user=user, address=url, title=title
+            )
+        scraps = [
+            a.address
+            for a in ArticleMemberScrap.objects.filter(member_id=idol_id, user=user)
+        ]
+        return JsonResponse(scraps, safe=False)
+    else:
+        scrap = ArticleGroupScrap.objects.filter(
+            group_id=idol_id, user=user, address=url, title=title
+        )
+        if scrap.exists():
+            scrap[0].delete()
+        else:
+            ArticleGroupScrap.objects.filter(
+                group_id=idol_id, user=user, address=url, title=title
+            )
+        scraps = [
+            a.address
+            for a in ArticleGroupScrap.objects.filter(group_id=idol_id, user=user)
+        ]
+        return JsonResponse(scraps, safe=False)
