@@ -199,3 +199,24 @@ def search_by_keyword(request, keyword):
     # print(json.dumps(results))
 
     return JsonResponse(results, status=200, safe=False)
+
+
+@login_required
+@require_http_methods(["POST"])
+def toggle_like(request, scope, idol_id):
+    user = request.user
+
+    if scope == "member":
+        like = MyIdolMember.objects.filter(member_id=idol_id, user=user)
+        if like.exists():
+            like[0].delete()
+        else:
+            MyIdolMember.objects.create(member_id=idol_id, user=user)
+    else:
+        like = MyIdolGroup.objects.filter(group_id=idol_id, user=user)
+        if like.exists():
+            like[0].delete()
+        else:
+            MyIdolGroup.objects.create(group_id=idol_id, user=user)
+
+    return HttpResponse(status=204)
