@@ -25,7 +25,6 @@ export default class Ranking extends Component {
     getIdolInPage = (page) => {
         axios.get(`main/ranking/?page=${page}`)
             .then((res) => {
-                console.log("res called")
                 this.setState({
                     idolInfos: res.data.idolInfos,
                     lastPage: res.data.lastPage

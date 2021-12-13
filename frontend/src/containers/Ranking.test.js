@@ -36,7 +36,7 @@ describe('<Ranking />', () => {
         axiosMock = new axiosMockAdapter(axios);
         axiosMock.onGet('main/ranking/?page=1').reply(200, {
             idolInfos: TEST_DATA,
-            lastPage: 1
+            lastPage: 2
         }
         )
     })
@@ -48,5 +48,19 @@ describe('<Ranking />', () => {
         expect(list.length).toBe(1);
         const rankItem = component.find('RankItem')
         expect(rankItem.length).toBeGreaterThan(0);
+    })
+
+    it('should change page', async () => {
+        setComponent()
+        // await flushPromises()
+        component.update()
+        const pagination = component.find('ForwardRef(Pagination)')
+        expect(pagination.length).toBe(1);
+
+        const page1 = pagination.find('ForwardRef(PaginationItem)').at(1)
+        expect(page1.length).toBe(1);
+
+        page1.simulate('click')
+        expect(axiosMock.handlers.get.length).toBe(1)
     })
 })
