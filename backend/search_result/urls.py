@@ -4,6 +4,8 @@ from .views import (
     idolCmtPutDelete,
     search_result,
     search_by_keyword,
+    toggle_like,
+    toggle_scrap,
 )
 
 urlpatterns = [
@@ -21,6 +23,16 @@ urlpatterns = [
         r"^(?P<scope>group|member)/comment/(?P<comment_id>[0-9]+)/",
         idolCmtPutDelete,
         name="mmbrCmtPutDelete",
+    ),
+    re_path(
+        r"^(?P<scope>group|member)/toggle-like/(?P<idol_id>[0-9]+)/",
+        toggle_like,
+        name="toggle_like",
+    ),
+    re_path(
+        r"^(?P<scope>group|member)/toggle-scrap/(?P<idol_id>[0-9]+)/",
+        toggle_scrap,
+        name="toggle_scrap",
     ),
     path("search/<str:keyword>/", search_by_keyword, name="search_by_keyword"),
 ]
