@@ -66,7 +66,7 @@ class IdolTestCase(TestCase):
         cls.client = Client()
 
 
-class SearchResultTestCase(IdolTestCase):
+class CommentTestCase(IdolTestCase):
     def setUp(self) -> None:
         self.client.force_login(self.user)
 
@@ -168,6 +168,11 @@ class SearchResultTestCase(IdolTestCase):
         # then
         assert resp.status_code == 200
         assert GroupComment.objects.filter(id=self.group_comment.id).exists() is False
+
+
+class SearchResultTestCase(IdolTestCase):
+    def setUp(self) -> None:
+        self.client.force_login(self.user)
 
     def test_검색결과_GET만_허용한다(self):
         # when
