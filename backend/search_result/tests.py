@@ -16,6 +16,12 @@ from .models import (
     MemberComment,
     GroupComment,
 )
+from mypage.models import (
+    MyIdolMember,
+    MyIdolGroup,
+    ArticleMemberScrap,
+    ArticleGroupScrap,
+)
 
 
 class IdolTestCase(TestCase):
@@ -61,13 +67,10 @@ class IdolTestCase(TestCase):
 
 
 class SearchResultTestCase(IdolTestCase):
-    def test_mmbr_cmt_get_post(self):
-        self.client.post(
-            "/api/account/signin/",
-            json.dumps({"email": "test", "password": "tetest"}),
-            content_type="application/json",
-        )
+    def setUp(self) -> None:
+        self.client.force_login(self.user)
 
+    def test_mmbr_cmt_get_post(self):
         # when
         resp = self.client.put("/api/search-result/comment/member/1/")
 
@@ -95,12 +98,6 @@ class SearchResultTestCase(IdolTestCase):
         assert res_data["content"] == "test"
 
     def test_grp_cmt_get_post(self):
-        self.client.post(
-            "/api/account/signin/",
-            json.dumps({"email": "test", "password": "tetest"}),
-            content_type="application/json",
-        )
-
         # when
         resp = self.client.get(f"/api/search-result/comment/group/{self.group.id}/")
 
@@ -123,12 +120,6 @@ class SearchResultTestCase(IdolTestCase):
         assert res_data["content"] == "test"
 
     def test_mmbr_cmt_put_delete(self):
-        self.client.post(
-            "/api/account/signin/",
-            json.dumps({"email": "test", "password": "tetest"}),
-            content_type="application/json",
-        )
-
         # when
         resp = self.client.get("/api/search-result/member/comment/1/")
 
@@ -157,12 +148,6 @@ class SearchResultTestCase(IdolTestCase):
         assert MemberComment.objects.filter(id=self.member_comment.id).exists() is False
 
     def test_grp_cmt_put_delete(self):
-        self.client.post(
-            "/api/account/signin/",
-            json.dumps({"email": "test", "password": "tetest"}),
-            content_type="application/json",
-        )
-
         # when
         resp = self.client.put(
             f"/api/search-result/group/comment/{self.group_comment.id}/",
@@ -313,3 +298,134 @@ class SearchResultTestCase(IdolTestCase):
         assert get[0]["id"] == self.group.id
         assert get[1]["id"] == self.member.id
 
+    def test_toggle_like_멤버_좋아요_없으면_생긴다(self):
+        # when
+        post = self.client.post(
+            f"/api/search-result/member/toggle-like/{self.member.id}/"
+        )
+
+        # then
+        assert post.status_code == 204
+        assert MyIdolMember.objects.filter(user=self.user, member=self.member).exists()
+
+    def test_toggle_like_그룹_좋아요_없으면_생긴다(self):
+        # when
+        post = self.client.post(
+            f"/api/search-result/group/toggle-like/{self.group.id}/"
+        )
+
+        # then
+        assert post.status_code == 204
+        assert MyIdolGroup.objects.filter(user=self.user, group=self.group).exists()
+
+    def test_toggle_like_멤버_좋아요_있으면_지운다(self):
+        # given
+        MyIdolMember.objects.create(user=self.user, member=self.member)
+
+        # when
+        post = self.client.post(
+            f"/api/search-result/member/toggle-like/{self.member.id}/"
+        )
+
+        # then
+        assert post.status_code == 204
+        assert not MyIdolMember.objects.filter(
+            user=self.user, member=self.member
+        ).exists()
+
+    def test_toggle_like_그룹_좋아요_있으면_지운다(self):
+        # given
+        MyIdolGroup.objects.create(user=self.user, group=self.group)
+
+        # when
+        post = self.client.post(
+            f"/api/search-result/group/toggle-like/{self.group.id}/"
+        )
+
+        # then
+        assert post.status_code == 204
+        assert not MyIdolGroup.objects.filter(user=self.user, group=self.group).exists()
+
+    def test_멤버_toggle_scrap_안했던거면_저장한다(self):
+        # given
+        url = "test.article.com"
+
+        # when
+        post = self.client.post(
+            f"/api/search-result/member/toggle-scrap/{self.member.id}/",
+            json.dumps({"url": url, "title": "test article"}),
+            content_type="application/json",
+        )
+
+        # then
+        assert post.status_code == 200
+        assert json.loads(post.content)[-1] == url
+        assert (
+            ArticleMemberScrap.objects.filter(user=self.user, member=self.member)
+            .last()
+            .address
+            == url
+        )
+
+    def test_그룹_toggle_scrap_안했던거면_저장한다(self):
+        # given
+        url = "test.article.com"
+
+        # when
+        post = self.client.post(
+            f"/api/search-result/group/toggle-scrap/{self.group.id}/",
+            json.dumps({"url": url, "title": "test article"}),
+            content_type="application/json",
+        )
+
+        # then
+        assert post.status_code == 200
+        assert json.loads(post.content)[-1] == url
+        assert (
+            ArticleGroupScrap.objects.filter(user=self.user, group=self.group)
+            .last()
+            .address
+            == url
+        )
+
+    def test_멤버_toggle_scrap_했던거면_지운다(self):
+        # given
+        url = "test.article.com"
+        ArticleMemberScrap.objects.create(
+            user=self.user, member=self.member, address=url, title="test"
+        )
+
+        # when
+        post = self.client.post(
+            f"/api/search-result/member/toggle-scrap/{self.member.id}/",
+            json.dumps({"url": url, "title": "test"}),
+            content_type="application/json",
+        )
+
+        # then
+        assert post.status_code == 200
+        assert json.loads(post.content) == []
+        assert not ArticleMemberScrap.objects.filter(
+            user=self.user, member=self.member, address=url
+        ).exists()
+
+    def test_그룹_toggle_scrap_했던거면_지운다(self):
+        # given
+        url = "this.is.test.com"
+        ArticleGroupScrap.objects.create(
+            user=self.user, group=self.group, address=url, title="test"
+        )
+
+        # when
+        post = self.client.post(
+            f"/api/search-result/group/toggle-scrap/{self.group.id}/",
+            json.dumps({"url": url, "title": "test"}),
+            content_type="application/json",
+        )
+
+        # then
+        assert post.status_code == 200
+        assert json.loads(post.content) == []
+        assert not ArticleGroupScrap.objects.filter(
+            user=self.user, group=self.group, address=url
+        ).exists()

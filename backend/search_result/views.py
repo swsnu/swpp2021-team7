@@ -258,7 +258,7 @@ def toggle_scrap(request, scope, idol_id):
             a.address
             for a in ArticleMemberScrap.objects.filter(member_id=idol_id, user=user)
         ]
-        return JsonResponse(scraps, safe=False)
+        return JsonResponse(scraps, safe=False, status=200)
     else:
         scrap = ArticleGroupScrap.objects.filter(
             group_id=idol_id, user=user, address=url, title=title
@@ -266,11 +266,11 @@ def toggle_scrap(request, scope, idol_id):
         if scrap.exists():
             scrap[0].delete()
         else:
-            ArticleGroupScrap.objects.filter(
+            ArticleGroupScrap.objects.create(
                 group_id=idol_id, user=user, address=url, title=title
             )
         scraps = [
             a.address
             for a in ArticleGroupScrap.objects.filter(group_id=idol_id, user=user)
         ]
-        return JsonResponse(scraps, safe=False)
+        return JsonResponse(scraps, safe=False, status=200)
