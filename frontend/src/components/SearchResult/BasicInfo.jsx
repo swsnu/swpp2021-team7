@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Members from "./Members";
 
-const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup}) => {
+const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup, toggleLikeAsProp, toggleScrapAsProp}) => {
 
     const [like, setLike] = useState(liked);
     const [scraps, setScraps] = useState(loadedScraps);
@@ -47,7 +47,7 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
                     {debut && <Chip label={debut} /> }
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={like ? "filled" : "outlined"} onClick={toggleLike}/>
+                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={like ? "filled" : "outlined"} onClick={toggleLikeAsProp || toggleLike}/>
             </Box>
         </Box>
 
@@ -65,7 +65,7 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
                     <ListItemButton component="a" href={n.url}>
                         <ListItemText primary={n.title} />
                     </ListItemButton>
-                    <Button variant={scrapped ? "outlined" : "contained"} color="primary" onClick={() => toggleScrap(n.url, n.title)}>{scrapped ? "Cancel Scrap" : "Scrap"}</Button>
+                    <Button className="scrap" variant={scrapped ? "outlined" : "contained"} color="primary" onClick={() => toggleScrapAsProp() || toggleScrap(n.url, n.title)}>{scrapped ? "Cancel Scrap" : "Scrap"}</Button>
                 </ListItem>
             })}
         </Box>
