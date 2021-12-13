@@ -190,8 +190,6 @@ class VideoSearching extends Component {
                             maxWidth="sm"
                             sx={{ mt: 1 }}
                             display="flex"
-                            flexDirection="row"
-                            alignItems="center"
                             width={500}>
                         <SearchIdol
                             changeInput={this.searchQuery}

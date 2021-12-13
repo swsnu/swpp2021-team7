@@ -165,7 +165,7 @@ class VideoResult extends Component {
                 )}
                 <Container 
                     className="video-loading-container video-loading--background"></Container>
-                <Grid container spacing={2} xs={{padding:"16px"}}>
+                <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Container maxWidth="sm">
                         <img

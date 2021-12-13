@@ -29,8 +29,28 @@ describe('<VideoResult />', () => {
 
         
         expect(youtubeVideo.length).toBe(1);
-        expect(idolSelector.length).toBe(1);
-        expect(timeline.length).toBe(2);
+        expect(idolSelector.length).toBe(0);
+        expect(timeline.length).toBe(1);
+
+    })
+
+    it('should render without errors', () => {
+        setComponent()
+        
+        const VideoResult = component.find('VideoResult');
+        const instance = VideoResult.instance();
+        instance.state.type = 1001;
+
+        let timelines = VideoResult.find('Timeline');
+        expect(timelines.length).toBe(1);
+
+        instance.state.type = 1002;
+        instance.state.selectedIdolInfo = [
+            {key : 1, thumbnail : ""},
+            {key : 2, thumbnail : ""}
+        ];
+        timelines = VideoResult.find('Timeline');
+        expect(timelines.length).toBe(1);
 
     })
 })
