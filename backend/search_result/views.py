@@ -165,6 +165,7 @@ def search_result(request, scope, instance_id):
 
     return JsonResponse(
         {
+            "isLoggedIn": not request.user.is_anonymous,
             "liked": liked,
             "scraps": scraps,
             "basicInfo": basicInfo,
