@@ -78,10 +78,4 @@ describe('App', () => {
     const component = mount(app);
     expect(component.find('VideoSearching').exists()).toBe(true);
   })
-
-  it('should be redirected VideoResult page', () => {
-    history.push('/video/result');
-    const component = mount(app);
-    expect(component.find('VideoResult').exists()).toBe(true);
-  })
 });
