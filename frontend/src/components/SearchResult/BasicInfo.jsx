@@ -65,7 +65,7 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
                     <ListItemButton component="a" href={n.url}>
                         <ListItemText primary={n.title} />
                     </ListItemButton>
-                    <Button className="scrap" variant={scrapped ? "outlined" : "contained"} color="primary" onClick={() => toggleScrapAsProp() || toggleScrap(n.url, n.title)}>{scrapped ? "Cancel Scrap" : "Scrap"}</Button>
+                    <Button className="scrap" variant={scrapped ? "outlined" : "contained"} color="primary" onClick={toggleScrapAsProp || toggleScrap.bind(null, n.url, n.title)}>{scrapped ? "Cancel Scrap" : "Scrap"}</Button>
                 </ListItem>
             })}
         </Box>
