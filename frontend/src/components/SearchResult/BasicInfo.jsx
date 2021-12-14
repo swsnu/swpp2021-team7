@@ -10,14 +10,23 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
     const [scraps, setScraps] = useState(loadedScraps);
     const [isLoading, setIsLoading] = useState(false);
 
-    const toggleLike = async () => {
+    const toggleLike = () => {
         if (isLoading) {
             alert("Your last request is in progress!");
             return;
         }
         setIsLoading(true);
-        await axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-like/${id}/`);
-        setLike(!like);
+
+        axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-like/${id}/`)
+        .then(() => {
+            setLike(!like);
+        })
+        .catch(e => {
+            if (e.response.status == 403) {
+                alert("Please log in!");
+            }
+        });
+        
         setIsLoading(false);
     }
 
@@ -27,8 +36,15 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
             return;
         }
         setIsLoading(true);
-        const res = await axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-scrap/${id}/`, {url, title});
-        setScraps([...res.data]);
+        axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-scrap/${id}/`, {url, title})
+        .then((res) => {
+            setScraps([...res.data]);
+        })
+        .catch(e => {
+            if (e.response.status == 403) {
+                alert("Please log in!");
+            }
+        });
         setIsLoading(false);
     }
 
