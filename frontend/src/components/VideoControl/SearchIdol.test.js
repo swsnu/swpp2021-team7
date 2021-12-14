@@ -24,12 +24,27 @@ describe('<SearchIdol />', () => {
         
         const spyHistory = jest.spyOn(history, 'push')
         setComponent()
+        const wrapper = component.find("SearchIdol");
+        const instance = wrapper.instance();
         const textField = component.find('input#input-with-icon-textfield')
         expect(textField.length).toBe(1);
-        
-        //textField.simulate('keydown', {keyCode: 13});
-        textField.simulate('keydown');
+        const mockedEvent = { keyCode : 13, target: {}, preventDefault: () => {} }
+        textField.simulate('keydown',mockedEvent);
         expect(spyHistory).toBeCalledWith('/video/search')
+        spyHistory.mockRestore();
+
+    })
+
+    it('should render without errors', () => {
+        
+        const spyHistory = jest.spyOn(history, 'push')
+        setComponent()
+        const wrapper = component.find("SearchIdol");
+        const instance = wrapper.instance();
+        const textField = component.find('input#input-with-icon-textfield')
+        expect(textField.length).toBe(1);
+        const mockedEvent = { keyCode : 10, target: {}, preventDefault: () => {} }
+        textField.simulate('keydown',mockedEvent);
         spyHistory.mockRestore();
 
     })

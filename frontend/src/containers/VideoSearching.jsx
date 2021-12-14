@@ -86,7 +86,7 @@ class VideoSearching extends Component {
             }
           }, 200);
           return () => {
-            clearInterval(timer);
+            //clearInterval(timer);
           }
     }
 
@@ -95,7 +95,7 @@ class VideoSearching extends Component {
           const response = await axios.get(`search-result/search/${keyword}/`);
           this.setSearchResult(response.data);
         } catch(err) {
-          console.error(err);
+          //console.error(err);
         }
     }
     handleIdols(item){
@@ -216,7 +216,6 @@ class VideoSearching extends Component {
                                                     key={item.key}
                                                     sx={{color:"#ffffff"}}
                                                     avatar={<Avatar alt="Natacha" src={item.thumbnail} />}
-                                                    icon={item.thumbnail}
                                                     label={item.name.kor + ' ' + item.name.eng}
                                                     onDelete={(e) => this.handleDelete(item)}
                                                     />
@@ -249,6 +248,7 @@ class VideoSearching extends Component {
                     </Container>
                     <Container maxWidth="sm">
                         <Button 
+                            className="TEST-BUTTON"
                             onClick={this.nextStep}
                             sx={{color:"#ffffff",textTransform:"none"}}
                             variant="contained" 

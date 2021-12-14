@@ -55,7 +55,7 @@ class VideoResult extends Component {
           const response = await axios.get(`search-result/member/${id}/`);
           this.setSearchResult(response.data);
         } catch(err) {
-          console.error(err);
+          //console.error(err);
         }
     }
     async getVideoScene(video) {
@@ -67,7 +67,7 @@ class VideoResult extends Component {
           });
           this.setSceneResult(response.data);
         } catch(err) {
-          console.error(err);
+          //console.error(err);
         }
     }
     async getFaceRecognition(video) {
@@ -81,7 +81,7 @@ class VideoResult extends Component {
           });
           this.setFaceRecognitionResult(response.data);
         } catch(err) {
-          console.error(err);
+          //console.error(err);
         }
     }
     setSearchResult(data){
@@ -104,12 +104,13 @@ class VideoResult extends Component {
             }
           }, 50);
           return () => {
-            clearInterval(timer);
+            //clearInterval(timer);
           }
     }
     componentDidMount(){
         this.handlingLoad();
         const params = new URLSearchParams(this.props.location.search);
+        
         let video = params.get('video');
         let type = params.get('type');
         let idols = params.get('idol');
@@ -231,13 +232,14 @@ class VideoResult extends Component {
                                     component="ul"
                                     >
                                     {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item) => {
+                                                    
                                                         return (
-                                                            <ListItem key={item.key}>
+                                                            <ListItem key={item.key}
+                                                                className="test-listitem">
                                                                 <Chip
                                                                 key={item.key}
                                                                 sx={{color:"#ffffff"}}
                                                                 avatar={<Avatar alt="Natacha" src={item.thumbnail} />}
-                                                                icon={item.thumbnail}
                                                                 label={item.name.kor + ' ' + item.name.eng}
                                                                 onDelete={(e) => this.handleDelete(item)}
                                                                 />

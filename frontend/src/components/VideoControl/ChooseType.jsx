@@ -15,8 +15,6 @@ const FaceRecognition = 1002;
 class ChooseType extends Component {
     constructor(props){
         super(props);
-        //this.cutScene = this.cutScene.bind(this);
-        //this.cutextractParts = this.extractParts.bind(this);
     }
     cutScene(){
         this.props.history.push('/video/result?video='+this.props.urlString+"&type="+CutScene);

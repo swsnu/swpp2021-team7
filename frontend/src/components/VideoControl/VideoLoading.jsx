@@ -20,10 +20,6 @@ function LinearProgressWithLabel(props) {
 }
 
 LinearProgressWithLabel.propTypes = {
-  /**
-   * The value of the progress indicator for the determinate and buffer variants.
-   * Value between 0 and 100.
-   */
   value: PropTypes.number.isRequired,
 };
 
@@ -32,12 +28,6 @@ export default function LinearWithValueLabel(props) {
 
   React.useEffect(() => {
     setProgress(props.value);
-    /*const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
-    }, 800);
-    return () => {
-      clearInterval(timer);
-    };*/
   }, []);
 
   return (

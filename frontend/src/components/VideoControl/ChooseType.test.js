@@ -16,6 +16,7 @@ describe('<ChooseType />', () => {
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
                     <ChooseType
+                        isView={true}
                         urlString="test"></ChooseType>
                 </ConnectedRouter>
             </Provider>
