@@ -4,10 +4,18 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 
-const CommentInput = ({ id, isGroup, setReload, reload }) => {
+const CommentInput = ({ id, isGroup, setReload, reload, isLoggedIn }) => {
     const [input, setInput] = useState('');
 
     const onSubmit = async () => {
+        if (!isLoggedIn) {
+            alert("Please log in!");
+            return;
+        } else if (input.length == 0) {
+            alert("Please fill the content!");
+            return;
+        }
+
         const res = await axios.post(
             `/search-result/comment/${isGroup ? "group" : "member"}/${id}/`,
             { content: input },

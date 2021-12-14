@@ -4,47 +4,37 @@ import axios from "axios";
 import React, { useState } from "react";
 import Members from "./Members";
 
-const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup, toggleLikeAsProp, toggleScrapAsProp}) => {
+const BasicInfo = ({id, isLoggedIn, liked, loadedScraps, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup, toggleLikeAsProp, toggleScrapAsProp}) => {
 
     const [like, setLike] = useState(liked);
     const [scraps, setScraps] = useState(loadedScraps);
     const [isLoading, setIsLoading] = useState(false);
 
-    const toggleLike = () => {
-        if (isLoading) {
+    const toggleLike = async () => {
+        if (!isLoggedIn) {
+            alert("Please log in!");
+            return;
+        } else if (isLoading) {
             alert("Your last request is in progress!");
             return;
         }
         setIsLoading(true);
-
-        axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-like/${id}/`)
-        .then(() => {
-            setLike(!like);
-        })
-        .catch(e => {
-            if (e.response.status == 403) {
-                alert("Please log in!");
-            }
-        });
-        
+        await axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-like/${id}/`);
+        setLike(!like);
         setIsLoading(false);
     }
 
     const toggleScrap = async (url, title) => {
-        if (isLoading) {
+        if (!isLoggedIn) {
+            alert("Please log in!");
+            return;
+        } else if (isLoading) {
             alert("Your last request is in progress!");
             return;
         }
         setIsLoading(true);
-        axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-scrap/${id}/`, {url, title})
-        .then((res) => {
-            setScraps([...res.data]);
-        })
-        .catch(e => {
-            if (e.response.status == 403) {
-                alert("Please log in!");
-            }
-        });
+        const res = await axios.post(`/search-result/${isGroup ? "group" : "member"}/toggle-scrap/${id}/`, {url, title});
+        setScraps([...res.data]);
         setIsLoading(false);
     }
 

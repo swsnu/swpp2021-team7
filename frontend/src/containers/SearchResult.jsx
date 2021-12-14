@@ -29,10 +29,10 @@ const SearchResult = (props) => {
 
     if (isLoading) return <Loader script={"Crawling data.."} />
     return <SearchResultRoot>
-        <CustomGridRow components={[<BasicInfo {...data.basicInfo} id={id} isGroup={isGroup} liked={data.liked} loadedScraps={data.scraps} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
+        <CustomGridRow components={[<BasicInfo {...data.basicInfo} id={id} isGroup={isGroup} liked={data.liked} loadedScraps={data.scraps} isLoggedIn={data.isLoggedIn} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
         <div style={{ height: "30px" }}></div>
         <YoutubeVideos videos={data.youtubes} />
-        <CommentInput id={id} isGroup={isGroup} setReload={setReload} reload={reload} />
+        <CommentInput id={id} isGroup={isGroup} setReload={setReload} reload={reload} isLoggedIn={data.isLoggedIn}/>
         {data.comments.length ? <Comments isGroup={isGroup} comments={data.comments} setReload={setReload} reload={reload} /> : null}
         <div style={{ height: "150px" }}></div>
     </SearchResultRoot>
