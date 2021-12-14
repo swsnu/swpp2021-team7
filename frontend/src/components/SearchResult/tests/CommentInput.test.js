@@ -17,7 +17,7 @@ describe('<CommentInput />', () => {
     component = mount(
       <Provider store={mockStore} >
         <ConnectedRouter history={history}>
-          <CommentInput id={1} isGroup={isGroup} setReload={mockReload} reload={false} />
+          <CommentInput id={1} isLoggedIn={true} defaultInput="test" isGroup={isGroup} setReload={mockReload} reload={false} />
         </ConnectedRouter>
       </Provider>
     )
@@ -59,8 +59,8 @@ describe('<CommentInput />', () => {
   it('should change value when text filled', async () => {
     setComponent({}, false);
     const textField = component.find('ForwardRef(TextField)');
-    textField.simulate('input', { target: { value: "test" } });
+    textField.simulate('change', { target: { value: "test" } });
 
-    expect(textField.props().value).toEqual("")
+    expect(textField.props().value).toEqual("test")
   });
 });
