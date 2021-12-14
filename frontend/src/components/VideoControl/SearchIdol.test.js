@@ -28,6 +28,7 @@ describe('<SearchIdol />', () => {
         const instance = wrapper.instance();
         const textField = component.find('input#input-with-icon-textfield')
         expect(textField.length).toBe(1);
+
         const mockedEvent = { keyCode : 13, target: {}, preventDefault: () => {} }
         textField.simulate('keydown',mockedEvent);
         expect(spyHistory).toBeCalledWith('/video/search')

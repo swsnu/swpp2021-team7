@@ -7,7 +7,8 @@ import {
     Typography,
     IconButton,
     Grid,
-    Link
+    Link,
+    Button
 } from '@mui/material';
 import logo from '../image/256w/자산 1_256.png';
 import { withRouter } from 'react-router';
@@ -98,16 +99,16 @@ function Main() {
                             <Search id="search-button"/>    
                         </IconButton>
                     </Box>
-                    <Box>
+                    <Box margin={1}>
                         <Grid item columnSpacing={1}>
-                            <Link href="/search/group/2" variant="body2"> {"#BTS"} </Link>
-                            <Link href="/search/group/1" variant="body2"> {"#Red Velvet"} </Link>
-                            <Link href="/search/group/3" variant="body2"> {"#BTOB"} </Link>
+                            <Button href="/search/group/2" variant="outlined"> {"#BTS"} </Button>
+                            <Button href="/search/group/1" variant="outlined"> {"#Red Velvet"} </Button>
+                            <Button href="/search/group/3" variant="outlined"> {"#BTOB"} </Button>
                         </Grid>
                     </Box>
                     <Box>
                         <Grid item columnSpacing={1}>
-                            <Link href="/video" variant="body2"> {"new! Generate video clips"} </Link>
+                            <Button href="/video" variant="contained" color="primary"> {"new! Generate video clips"} </Button>
                         </Grid>
                     </Box>
                     {   
@@ -115,7 +116,7 @@ function Main() {
                             <Box xs={{mt:10}}>
                                 <Typography variant="h6"> Search Result </Typography>
                                 {searchResult ? searchResult.map((item) => {
-                                    return (<SearchResult name={item.name.kor + ' ' + item.name.eng} id={item.id} key={item.id} thumbnail={item.thumbnail}/>)
+                                    return (<SearchResult name={item.name.kor + ' ' + item.name.eng} isGroup={item.isGroup} id={item.id} key={item.id} thumbnail={item.thumbnail}/>)
                                 }) : "Loading..."
                                 } 
                             </Box>

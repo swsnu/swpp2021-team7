@@ -12,13 +12,14 @@ const StyledPagination = withStyles({
     }
 })(Pagination);
 
-
+const numInPage = 10
 export default class Ranking extends Component {
     constructor(props) {
         super(props);
         this.state = {
             idolInfos: [],
-            lastPage: 1
+            lastPage: 1,
+            page: 1
         }
     }
     getIdolInPage = (page) => {
@@ -39,6 +40,9 @@ export default class Ranking extends Component {
     }
 
     handleChangePage = (e, newPage) => {
+        this.setState({
+            page: newPage
+        })
         this.getIdolInPage(newPage)
     }
 
@@ -46,7 +50,7 @@ export default class Ranking extends Component {
         let rankings = []
         for (let idol of this.state.idolInfos) {
             rankings.push(<RankItem
-                rank={this.state.idolInfos.indexOf(idol) + 1}
+                rank={this.state.idolInfos.indexOf(idol) + 1 + ((this.state.page - 1) * numInPage)}
                 key={this.state.idolInfos.indexOf(idol) + 1}
                 id={idol.id}
                 name={idol.name}

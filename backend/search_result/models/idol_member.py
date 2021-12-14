@@ -21,7 +21,7 @@ class IdolMemberInfo(models.Model):
     info = models.JSONField(default=dict)
     source = models.JSONField(default=dict)
     valid = models.BooleanField(default=True)
-
+    hasModel = models.BooleanField(default=False)
     updated_at = models.DateTimeField(null=True)
 
     def to_basic_info(self):
@@ -34,13 +34,14 @@ class IdolMemberInfo(models.Model):
                     group.to_member_response() for group in self.member.groups.all()
                 ],
             },
+            "hasModel": self.hasModel,
             "news": self.info["news"] if "news" in self.info else [],
         }
 
-    def apply_updates(self, news, youtubes, twitter, save=False):
+    def apply_updates(self, news, youtubes, tweets, save=False):
         self.info["news"] = news
         self.info["youtubes"] = youtubes
-        self.info["twitter"] = twitter
+        self.info["tweets"] = tweets
         self.updated_at = now()
 
         if save:
@@ -76,20 +77,18 @@ class IdolMemberIncluded(models.Model):
 class MemberComment(models.Model):
     content = models.TextField(blank=False, default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    member = models.ForeignKey(IdolMember, on_delete=models.CASCADE)
+    idol = models.ForeignKey(IdolMember, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def to_response_format(self):
+    def to_response_format(self, user_id):
         obj = {
             "author": self.user.username,
+            "isMine": self.user.id == user_id,
             "content": self.content,
+            "created_at": self.created_at,
+            "id": self.id,
         }
-
-        if self.created_at != self.updated_at:
-            obj["updated_at"] = self.updated_at
-        else:
-            obj["created_at"] = self.created_at
 
         return obj
 

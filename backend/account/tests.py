@@ -84,3 +84,21 @@ class AccountTestCase(TestCase):
         # Signout correctly
         response = client.get("/api/account/signout/")
         self.assertEqual(response.status_code, 204)
+
+    def test_isLogin(self):
+        response = client.get("/api/account/islogin/")
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.content)
+        self.assertEqual(data["status"], False)
+
+        response = client.post(
+            "/api/account/signin/",
+            json.dumps({"email": "eunbin@jjang.com", "password": "veryjjang"}),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 204)
+
+        response = client.get("/api/account/islogin/")
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.content)
+        self.assertEqual(data["status"], True)

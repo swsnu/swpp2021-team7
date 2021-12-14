@@ -1,21 +1,32 @@
 import React, { useState } from "react";
-import { Chip, ListItem, ListItemText, } from "@mui/material";
+import { Chip, ListItem, ListItemText, Input } from "@mui/material";
+import moment from 'moment';
 
-const Comment = ({author, content, timestamp, isMine}) => {
+const Comment = ({ id, author, content, created_at, isMine, updateCmt, deleteCmt }) => {
 
-    const [likeClicked, setLikeClicked] = useState(false);
+    const [editable, setEditable] = useState(false);
+    const [contentVal, setContentVal] = useState(content);
+    const onEdit = () => {
+        if (editable) {
+            updateCmt(id, contentVal)
+        }
+        setEditable(!editable)
+    }
+    const onDelete = () => {
+        deleteCmt(id);
+    }
 
+    const cmtContent = editable ? <Input value={contentVal} onChange={e => setContentVal(e.target.value)}></Input> : <ListItemText primary={contentVal} style={{ marginLeft: "10px" }} />
     return <div className="comment">
         <ListItem>
             <Chip label={author} color="primary" />
-            <ListItemText primary={content} style={{marginLeft: "10px"}} />
-            {!isMine && <Chip className="commentLikeBtn" label="❤️ Like" style={{marginRight: "10px"}} color="primary" variant={likeClicked ? "filled" : "outlined"} onClick={() => setLikeClicked(!likeClicked)}/>}
-            {isMine && 
-            <div className="edit-or-delete">
-                <Chip label="수정" style={{marginRight: "5px"}} color="primary"/>
-                <Chip label="삭제" style={{marginRight: "5px"}} color="primary"/>
-            </div>}
-            <Chip label={timestamp}/>    
+            {cmtContent}
+            <Chip label={moment(created_at).fromNow()} style={{marginRight: "5px"}} />
+            {isMine &&
+                <div className="edit-or-delete">
+                    <Chip label="수정" onClick={onEdit} style={{ marginRight: "5px" }} color="primary" />
+                    <Chip label="삭제" onClick={onDelete} style={{ marginRight: "5px" }} color="primary" />
+                </div>}
         </ListItem>
     </div>
 }

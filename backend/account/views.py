@@ -17,6 +17,7 @@ def token(request):
 
 
 @require_http_methods(["POST"])
+@ensure_csrf_cookie
 def signup(request):
     try:
         req_data = json.loads(request.body.decode())
@@ -34,6 +35,7 @@ def signup(request):
 
 
 @require_http_methods(["POST"])
+@ensure_csrf_cookie
 def signin(request):
     req_data = json.loads(request.body.decode())
     email = req_data["email"]
@@ -46,6 +48,7 @@ def signin(request):
 
 
 @require_http_methods(["GET"])
+@ensure_csrf_cookie
 def signout(request):
     if request.user.is_authenticated:
         logout(request)
@@ -55,8 +58,9 @@ def signout(request):
 
 
 @require_http_methods(["GET"])
+@ensure_csrf_cookie
 def isLogin(request):
     if request.user.is_authenticated:
-        return JsonResponse({'status': True}, status = 200)
+        return JsonResponse({"status": True, "id": request.user.id}, status=200)
     else:
-        return JsonResponse({'status': False}, status = 200)
+        return JsonResponse({"status": False, "id": 0}, status=200)

@@ -8,6 +8,7 @@ import SearchResult from './SearchResult';
 
 const mockStore = getMockStore({});
 const name = '테스트 Test'
+const id = 1
 
 describe('<SearchResult />', () => {
     let component = null;
@@ -15,7 +16,7 @@ describe('<SearchResult />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <SearchResult name={name}></SearchResult>
+                    <SearchResult name={name} id={id}></SearchResult>
                 </ConnectedRouter>
             </Provider>
         )
@@ -36,8 +37,8 @@ describe('<SearchResult />', () => {
         let idolInfos = component.find('ForwardRef(Chip)')
         expect(idolInfos.length).toBe(1)
 
-        idolInfos.at(0).simulate('click')
-        expect(spyHistory).toBeCalledWith('/search/group/1')
+        idolInfos.at(0).simulate('click');
+        expect(spyHistory).toBeCalledWith('/search/member/1')
 
         spyHistory.mockRestore()
     })

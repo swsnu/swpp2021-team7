@@ -24,25 +24,26 @@ class HotRankingList extends Component {
                         flexDirection="row"
                         justifyContent="center"
                     >
-                        <Fire sx={{color: 'red'}} onClick={this.handleClick}/>
-                        <Typography id="go-rank-button" variant="h6" color="red" onClick={this.handleClick}> Hottest Idols </Typography>                    
+                        <Fire sx={{ color: 'red', cursor: 'pointer' }} onClick={this.handleClick} />
+                        <Typography sx={{ cursor: 'pointer' }} id="go-rank-button" variant="h6" color="red" onClick={this.handleClick}> Hottest Idols </Typography>
                     </Box>
                     <List sx={{
                         width: '100%',
                         bgcolor: 'background.paper',
                         position: 'relative',
                     }}>
-                        {      
+                        {
                             this.props.data.idolInfos === undefined ?
-                            "Loading..." : 
-                            this.props.data.idolInfos.map((items, index) => {
-                                return(<RankItem id={items.id} rank={index+1} name={items.name} type={items.type === "member"? "member" : "group"} img={items.address} key={index+1}></RankItem>)
-                            }) 
+                                "Loading..." :
+                                this.props.data.idolInfos.map((items, index) => {
+                                    // console.log(this.props.data.idolInfos);
+                                    return (<RankItem id={items.id} rank={index + 1} name={items.name} type={items.type === "member" ? "member" : "group"} img={items.address} key={index + 1}></RankItem>)
+                                })
                         }
                     </List>
                 </Container>
             </React.Fragment>
-        ) 
+        )
     }
 }
 

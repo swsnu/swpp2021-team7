@@ -37,7 +37,7 @@ describe('<ChooseType />', () => {
 
         extractPart.simulate('click')
         expect(spyHistory).toBeCalledWith('/video/search?video=test&type=1002')
-
+  
         spyHistory.mockRestore()
     })
 })
