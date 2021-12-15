@@ -32,7 +32,6 @@ function Main() {
         }
     }
 
-    
     const handleSubmit = (event) => {
         event.preventDefault();
         let keyword = new FormData(event.currentTarget);
@@ -40,6 +39,19 @@ function Main() {
         getBySearchKeyword(keyword);
         setSubmitDone(true);
     };
+
+    const handleRequestClick = async () => {
+        const name = prompt("Enter the name of the idol you want to request support on:");
+        await axios.post("/search-result/request-support/", {"name": name})
+        .then(() => {
+            alert(`Successfully submitted. We would make [${name}] available shortly.`)
+        })
+        .catch((e) => {
+            if (e.response.status == 400) {
+                alert("Excessive requests in short time. Request again after a while.");
+            }
+        });
+    }
     
 
     React.useEffect(() => { 
@@ -115,6 +127,7 @@ function Main() {
                         submitDone && (
                             <Box xs={{mt:10}}>
                                 <Typography variant="h6"> Search Result </Typography>
+                                {searchResult.length == 0 && <>No idol found. Would you request support? <Button variant="outlined" color="error" onClick={handleRequestClick}>Request Support</Button></>}
                                 {searchResult ? searchResult.map((item) => {
                                     return (<SearchResult name={item.name.kor + ' ' + item.name.eng} isGroup={item.isGroup} id={item.id} key={item.id} thumbnail={item.thumbnail}/>)
                                 }) : "Loading..."

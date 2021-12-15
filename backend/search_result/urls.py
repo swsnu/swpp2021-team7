@@ -5,7 +5,7 @@ from .views import (
     search_result,
     search_by_keyword,
     toggle_like,
-    toggle_scrap,
+    toggle_scrap, request_support,
 )
 
 urlpatterns = [
@@ -35,4 +35,5 @@ urlpatterns = [
         name="toggle_scrap",
     ),
     path("search/<str:keyword>/", search_by_keyword, name="search_by_keyword"),
+    path("request-support/", request_support, name="request_support")
 ]
