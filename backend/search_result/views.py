@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
 from django.db.models import Q
 from main.models import SearchLog
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .management.functions.crawl_all import CrawlUtil
 from .models import (
@@ -178,6 +179,7 @@ def search_result(request, scope, instance_id):
 
 
 @require_http_methods((["GET"]))
+@ensure_csrf_cookie
 def search_by_keyword(request, keyword):
     group_instance = IdolGroup.objects.filter(
         Q(name__kor__icontains=keyword) | Q(name__eng__icontains=keyword)

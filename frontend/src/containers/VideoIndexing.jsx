@@ -46,10 +46,6 @@ class VideoIndexing extends Component {
         this.state = {type : "FACE", url:""};
         this.changeInput = this.changeInput.bind(this);
     }
-    handleClick(event) {
-        event.preventDefault();
-        console.info('You clicked a breadcrumb.');
-    }
     getParameterByName(name, url = window.location.href) {
         name = name.replace(/[\[\]]/g, '\\$&');
         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -70,11 +66,9 @@ class VideoIndexing extends Component {
         let value = event.target.value;
         if(this.matchYoutubeUrl(value.trim())){
             let id = this.getParameterByName('v',value.trim());
-            if(id != null){
-                this.setState({url:id.trim()});
-            }else{
-                this.setState({url:false});
-            }
+            
+            this.setState({url:id.trim()});
+            
         }else{
             this.setState({url:false});
         }

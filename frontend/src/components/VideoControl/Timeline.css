@@ -3,6 +3,18 @@ div.timeline-container{
     width:100%;
     margin:12px 0px;
 }
+div.timeline-icon{
+    position:relative;
+    width:84px;
+    display:inline-block;
+    vertical-align: middle;
+}
+div.timeline-icon img.timeline-icon{
+    position:relative;
+    width:60px;
+    height:60px;
+    object-fit:cover;
+}
 div.timeline-box{
     position:relative;
     width:100%;
@@ -27,5 +39,5 @@ div.timeline-box div.deactive-box{
     width:12px;
     display:inline-block;
     vertical-align:middle;
-    background-color:#ffffff;
+    background-color:#222222;
 }
