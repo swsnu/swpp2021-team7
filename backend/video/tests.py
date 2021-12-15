@@ -5,9 +5,11 @@ import json
 # Create your tests here.
 client = Client()
 
+TYPE_YOUTUBE = 100
+TYPE_FILE = 200
 
 class VideoTestCase(TestCase):
-    @tag("skip_setup")
+    
     def test_csrf(self):
         client = Client(enforce_csrf_checks=True)
 
@@ -42,7 +44,7 @@ class VideoTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 204)
 
-    def test_scncut(self):
+    def test_getScnCut(self):
         # Check (KeyError, JSonDecodeError) returns 400 response
         response = client.post(
             "/api/video/scene/",
@@ -55,7 +57,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 400)
 
         # if type is TYPE_FILE
         response = client.post(
@@ -64,12 +66,12 @@ class VideoTestCase(TestCase):
                 {
                     "target": "https://www.youtube.com/watch?v=WMweEpGlu_U",
                     "option": "{}",
-                    "type": 100,
+                    "type": TYPE_YOUTUBE,
                 }
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
         # if type is TYPE_FILE
         response = client.post(
@@ -77,16 +79,19 @@ class VideoTestCase(TestCase):
             json.dumps(
                 {
                     "target": "https://www.youtube.com/watch?v=WMweEpGlu_U",
-                    "option": "{}",
-                    "type": 200,
+                    "option": {
+                        "path" : "test.mp4"
+                    },
+                    "type": TYPE_FILE,
                 }
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
-    def test_face_recog(self):
+    def test_getFaceRecog(self):
         # Wrong type
+        
         response = client.post(
             "/api/video/recognition/",
             json.dumps(
@@ -128,7 +133,7 @@ class VideoTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 404)
 
-    def test_face_re_recog(self):
+    def test_getReFaceRecog(self):
         # Check re-recognition return status 200
         response = client.post(
             "/api/video/re-recognition/",
@@ -137,7 +142,7 @@ class VideoTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 404)
 
-    def test_face_share(self):
+    def test_postShare(self):
         # Check (KeyError, JSonDecodeError) returns 400 response
         response = client.post(
             "/api/video/share/",
