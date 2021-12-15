@@ -4,10 +4,18 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Button, TextField } from "@mui/material";
 
-const CommentInput = ({ id, isGroup, setReload, reload }) => {
-    const [input, setInput] = useState('');
+const CommentInput = ({ id, isGroup, setReload, reload, isLoggedIn, defaultInput="" }) => {
+    const [input, setInput] = useState(defaultInput);
 
     const onSubmit = async () => {
+        if (!isLoggedIn) {
+            alert("Please log in!");
+            return;
+        } else if (input.length == 0) {
+            alert("Please fill the content!");
+            return;
+        }
+
         const res = await axios.post(
             `/search-result/comment/${isGroup ? "group" : "member"}/${id}/`,
             { content: input },
@@ -23,7 +31,7 @@ const CommentInput = ({ id, isGroup, setReload, reload }) => {
     return <CommentInputConatiner id="comment-input">
         <h4>Leave Comment!</h4>
         <TextButtonContainer>
-            <TextField value={input} onInput={e => setInput(e.target.value)} sx={{ width: "50%" }} />
+            <TextField value={input} onChange={e => setInput(e.target.value)} sx={{ width: "50%" }} />
             <Button id="comment-submit" variant="contained" sx={{ marginLeft: "15px" }} onClick={onSubmit}>Submit</Button>
         </TextButtonContainer>
     </CommentInputConatiner>

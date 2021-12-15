@@ -124,7 +124,9 @@ def search_result(request, scope, instance_id):
         user=(None if request.user.is_anonymous else request.user),
     )
 
-    if now() - info_instance.updated_at > timedelta(days=3):
+    if not info_instance.updated_at or now() - info_instance.updated_at > timedelta(
+        days=3
+    ):
         name = instance.name["kor"]
         if is_member:
             group_name = IdolMemberIncluded.objects.filter(member=instance)[
@@ -133,9 +135,13 @@ def search_result(request, scope, instance_id):
             name = group_name + " " + name
 
         try:
-            print(
-                f"More than 3 days passed after last update.. crawling {name} starts.."
-            )
+            if info_instance.updated_at:
+                print(
+                    f"More than 3 days passed after last update.. crawling {name} starts.."
+                )
+            else:
+                print(f"Never crawled before. Crawling {name} starts..")
+
             news, youtubes, tweets = CrawlUtil.crawl_all(name)
             info_instance.apply_updates(news, youtubes, tweets, save=True)
             info_instance.refresh_from_db()
@@ -159,6 +165,7 @@ def search_result(request, scope, instance_id):
 
     return JsonResponse(
         {
+            "isLoggedIn": not request.user.is_anonymous,
             "liked": liked,
             "scraps": scraps,
             "basicInfo": basicInfo,

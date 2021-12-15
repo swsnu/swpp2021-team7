@@ -13,11 +13,11 @@ const flushPromises = () => new Promise(setImmediate);
 
 describe('<CommentInput />', () => {
   let component = null;
-  let setComponent = (mockReload, isGroup) => {
+  let setComponent = (mockReload, isGroup, isLoggedIn=true, defaultInput="test") => {
     component = mount(
       <Provider store={mockStore} >
         <ConnectedRouter history={history}>
-          <CommentInput id={1} isGroup={isGroup} setReload={mockReload} reload={false} />
+          <CommentInput id={1} isLoggedIn={isLoggedIn} defaultInput={defaultInput} isGroup={isGroup} setReload={mockReload} reload={false} />
         </ConnectedRouter>
       </Provider>
     )
@@ -59,8 +59,24 @@ describe('<CommentInput />', () => {
   it('should change value when text filled', async () => {
     setComponent({}, false);
     const textField = component.find('ForwardRef(TextField)');
-    textField.simulate('input', { target: { value: "test" } });
+    textField.simulate('change', { target: { value: "test" } });
 
-    expect(textField.props().value).toEqual("")
+    expect(textField.props().value).toEqual("test")
+  });
+
+  it("should block posting comment when not logged in", () => {
+    window.alert = jest.fn();
+    setComponent(true, false, false);
+    const submitBtn = component.find('#comment-submit').first();
+    submitBtn.simulate('click');
+    expect(window.alert).toHaveBeenCalledWith("Please log in!");
+  });
+
+  it("should block posting comment when no content is written", () => {
+    window.alert = jest.fn();
+    setComponent(true, true, true, "");
+    const submitBtn = component.find('#comment-submit').first();
+    submitBtn.simulate('click');
+    expect(window.alert).toHaveBeenCalledWith("Please fill the content!");
   });
 });

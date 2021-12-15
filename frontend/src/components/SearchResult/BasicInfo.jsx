@@ -4,14 +4,17 @@ import axios from "axios";
 import React, { useState } from "react";
 import Members from "./Members";
 
-const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup, toggleLikeAsProp, toggleScrapAsProp}) => {
+const BasicInfo = ({id, isLoggedIn, defaultLoading=false, liked, loadedScraps, thumbnail, info: {name, groups, birth, debut, members}, news, isGroup}) => {
 
+    const [isLoading, setIsLoading] = useState(defaultLoading);
     const [like, setLike] = useState(liked);
     const [scraps, setScraps] = useState(loadedScraps);
-    const [isLoading, setIsLoading] = useState(false);
 
     const toggleLike = async () => {
-        if (isLoading) {
+        if (!isLoggedIn) {
+            alert("Please log in!");
+            return;
+        } else if (isLoading) {
             alert("Your last request is in progress!");
             return;
         }
@@ -22,7 +25,10 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
     }
 
     const toggleScrap = async (url, title) => {
-        if (isLoading) {
+        if (!isLoggedIn) {
+            alert("Please log in!");
+            return;
+        } else if (isLoading) {
             alert("Your last request is in progress!");
             return;
         }
@@ -47,7 +53,7 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
                     {debut && <Chip label={debut} /> }
                 </Stack>
                 <div style={{marginTop: "20px"}}></div>
-                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={like ? "filled" : "outlined"} onClick={toggleLikeAsProp || toggleLike}/>
+                <Chip id="likeBtn" label={`❤️ Like ${name.eng || name.kor}`} color="primary" variant={like ? "filled" : "outlined"} onClick={toggleLike}/>
             </Box>
         </Box>
 
@@ -65,7 +71,7 @@ const BasicInfo = ({id, liked, loadedScraps, thumbnail, info: {name, groups, bir
                     <ListItemButton component="a" href={n.url}>
                         <ListItemText primary={n.title} />
                     </ListItemButton>
-                    <Button className="scrap" variant={scrapped ? "outlined" : "contained"} color="primary" onClick={toggleScrapAsProp || toggleScrap.bind(null, n.url, n.title)}>{scrapped ? "Cancel Scrap" : "Scrap"}</Button>
+                    <Button className="scrap" variant={scrapped ? "outlined" : "contained"} color="primary" onClick={() => toggleScrap(n.url, n.title)}>{scrapped ? "Cancel Scrap" : "Scrap"}</Button>
                 </ListItem>
             })}
         </Box>
