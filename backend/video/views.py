@@ -4,7 +4,8 @@ from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http.response import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 
 from .models import (
     VideoFaceRecognition,
@@ -38,8 +39,7 @@ TYPE_FACE_RECOG = 200
 
 SAVE_PATH = "/home/data/"
 
-
-@csrf_exempt
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getScnCut(request):
     global TYPE_YOUTUBE, TYPE_FILE, SAVE_PATH, TYPE_SCENE, TYPE_FACE_RECOG
@@ -59,8 +59,8 @@ def getScnCut(request):
 
     if video_type is TYPE_YOUTUBE:
         yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
-        filename = yt.randomString(10)
-        filePath = yt.saveVideo(filename)
+        filename = yt.random_string(10)
+        filePath = yt.save_video(filename)
         ds = detectScene(filePath)
         return JsonResponse(
             ds.find_scenes(),
@@ -77,8 +77,7 @@ def getScnCut(request):
             status=404, data={"status": "false", "message": "type error"}
         )
 
-
-@csrf_exempt
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getFaceRecog(request):
     req_data = json.loads(request.body.decode())
@@ -112,8 +111,8 @@ def getFaceRecog(request):
         )
     if video_type is TYPE_YOUTUBE:
         yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
-        filename = yt.randomString(10)
-        filePath = yt.saveVideo(filename)
+        filename = yt.random_string(10)
+        filePath = yt.save_video(filename)
         fr = faceRecognition(filePath, idol_image)
         return JsonResponse(
             fr.parse(),
@@ -125,13 +124,12 @@ def getFaceRecog(request):
             fr.parse(),
             safe=False,
         )
-
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getReFaceRecog(request):
     return HttpResponse(status=200)
 
-
-@login_required
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def postShare(request):
 

@@ -9,7 +9,7 @@ TYPE_YOUTUBE = 100
 TYPE_FILE = 200
 
 class VideoTestCase(TestCase):
-    @tag("skip_setup")
+    
     def test_csrf(self):
         client = Client(enforce_csrf_checks=True)
 
