@@ -67,7 +67,7 @@ class VideoResult extends Component {
           });
           this.setSceneResult(response.data);
         } catch(err) {
-          //console.error(err);
+          console.error(err);
         }
     }
     async getFaceRecognition(video) {
@@ -93,7 +93,10 @@ class VideoResult extends Component {
         this.setState({detectList : data.result});
     }
     setSceneResult(data){
-        this.setState({detectList : data.time});
+        console.log(data)
+        this.setState({detectList : data});
+        console.log(this.state.detectList)
+        console.log(typeof this.state.detectList)
     }
     handlingLoad(){
         const timer = setInterval(() => {
