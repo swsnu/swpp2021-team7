@@ -1,9 +1,12 @@
 import sys
 import json
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http.response import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+
 from .models import (
     VideoFaceRecognition,
     VideoScene,
@@ -11,11 +14,22 @@ from .models import (
     VideoFaceRecognitionShare,
 )
 
-from ml import detectScene
-from ml import youtube
+from custom_util.login_required import login_required
 
+from search_result.models import (
+    IdolMember,
+    MemberComment,
+    GroupComment,
+    IdolGroupInfo,
+    IdolMemberInfo,
+    IdolGroup,
+    IdolMemberIncluded,
+)
 
-LOGIN_PATH = "/"
+from ml.analyze.detectScene import detectScene
+from ml.analyze.faceRecognition import faceRecognition
+from ml.video.YoutubeVideo import YoutubeVideo
+
 
 TYPE_YOUTUBE = 100
 TYPE_FILE = 200
@@ -23,11 +37,12 @@ TYPE_FILE = 200
 TYPE_SCENE = 100
 TYPE_FACE_RECOG = 200
 
+SAVE_PATH = "/home/data/"
 
-@login_required(login_url=LOGIN_PATH)
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getScnCut(request):
-    global TYPE_YOUTUBE, TYPE_FILE
+    global TYPE_YOUTUBE, TYPE_FILE, SAVE_PATH, TYPE_SCENE, TYPE_FACE_RECOG
 
     req_data = json.loads(request.body.decode())
     # video url / cut options / type
@@ -43,19 +58,26 @@ def getScnCut(request):
     video_type = int(video_type)
 
     if video_type is TYPE_YOUTUBE:
+        yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
+        filename = yt.random_string(10)
+        filePath = yt.save_video(filename)
+        ds = detectScene(filePath)
         return JsonResponse(
-            detectScene.find_scenes(youtube.linkToMp4(target.trim(), resoultion="low")),
+            ds.find_scenes(),
             safe=False,
         )
     elif video_type is TYPE_FILE:
-        return HttpResponse(status=200)
+        ds = detectScene(options["path"].strip())
+        return JsonResponse(
+            ds.find_scenes(),
+            safe=False,
+        )
     else:
         return JsonResponse(
             status=404, data={"status": "false", "message": "type error"}
         )
 
-
-@login_required(login_url=LOGIN_PATH)
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getFaceRecog(request):
     req_data = json.loads(request.body.decode())
@@ -70,19 +92,44 @@ def getFaceRecog(request):
         return JsonResponse(
             status=400, data={"status": "false", "message": "type error"}
         )
+    video_type = int(video_type)
+    idols = options["idols"]
+    if len(idols) == 0:
+        return JsonResponse(
+            status = 400,  data={"status" : "false", "message" : "idol error"}
+        )
+    idol_image = [] 
+    for idol_id in idols:
+        instance = get_object_or_404(IdolMember, id=idol_id)
+        info_instance = get_object_or_404(IdolMemberInfo, member_id=idol_id)
+        basicInfo = info_instance.to_basic_info()
+        if(basicInfo.thumbnail):
+            idol_image.append(basicInfo.thumbnail.address)
+    if len(idol_image) == 0:
+        return JsonResponse(
+            status = 400,  data={"status" : "false", "message" : "idol image error"}
+        )
     if video_type is TYPE_YOUTUBE:
-        return HttpResponse(status=200)
+        yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
+        filename = yt.random_string(10)
+        filePath = yt.save_video(filename)
+        fr = faceRecognition(filePath, idol_image)
+        return JsonResponse(
+            fr.parse(),
+            safe=False,
+        )
     if video_type is TYPE_FILE:
-        return HttpResponse(status=200)
-
-
-@login_required(login_url=LOGIN_PATH)
+        fr = faceRecognition(options.path.strip(), idol_image)
+        return JsonResponse(
+            fr.parse(),
+            safe=False,
+        )
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getReFaceRecog(request):
     return HttpResponse(status=200)
 
-
-@login_required(login_url=LOGIN_PATH)
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def postShare(request):
 
