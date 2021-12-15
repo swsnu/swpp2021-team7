@@ -37,8 +37,7 @@ TYPE_FILE = 200
 TYPE_SCENE = 100
 TYPE_FACE_RECOG = 200
 
-# SAVE_PATH = "/home/data/"
-SAVE_PATH = "C:/Users/iks15/university/2021fall/swpp/data"
+SAVE_PATH = "/home/data/"
 
 
 @ensure_csrf_cookie
@@ -64,7 +63,6 @@ def getScnCut(request):
         filename = yt.random_string(10)
         filePath = yt.save_video(filename)
         ds = detectScene(filePath)
-        print(ds.find_scenes())
         return JsonResponse(
             ds.find_scenes(),
             safe=False,
