@@ -68,20 +68,23 @@ class VideoResult extends Component {
           this.setSceneResult(response.data);
         } catch(err) {
           console.error(err);
+          this.setState({"loading" : false});
         }
     }
-    async getFaceRecognition(video) {
+    async getFaceRecognition(video,selected_idol) {
+        
         try {
           const response = await axios.post(`video/recognition/`,{
               type : TYPE_YOUTUBE,
               target : video,
               option : {
-                  idol : this.state.selected
+                  idol : selected_idol
               }
           });
           this.setFaceRecognitionResult(response.data);
         } catch(err) {
           //console.error(err);
+          this.setState({"loading" : false});
         }
     }
     setSearchResult(data){
@@ -127,15 +130,20 @@ class VideoResult extends Component {
             this.props.history.push("/video/search?video="+video+"&type="+FaceRecognition);
             return;
         }
+        let selected_idol = new Array();
         if(type == FaceRecognition){
             let idol_list = idols.split(",");
-            let selected_idol = new Array();
+            
+            
             idol_list.forEach(el => {
+                
                 if(!isNaN(parseInt(el))){
                     selected_idol.push(parseInt(el));
                 }
             });
+            
             this.setState({"selectedIdol":selected_idol});
+            console.log(selected_idol);
             selected_idol.forEach(id => {
                 this.getBySearchMemberId(id);
             });
@@ -147,7 +155,7 @@ class VideoResult extends Component {
         if(type == CutScene){
             this.getVideoScene(video);
         }else{
-            this.getFaceRecognition(video);
+            this.getFaceRecognition(video,selected_idol);
         }
     }
     render() {
