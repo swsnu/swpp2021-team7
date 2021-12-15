@@ -1,16 +1,19 @@
 import sys
 import json
-from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http.response import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import (
     VideoFaceRecognition,
     VideoScene,
     VideoSceneShare,
     VideoFaceRecognitionShare,
 )
+
+from custom_util.login_required import login_required
 
 from search_result.models import (
     IdolMember,
@@ -22,13 +25,10 @@ from search_result.models import (
     IdolMemberIncluded,
 )
 
+from ml.analyze.detectScene import detectScene
+from ml.analyze.faceRecognition import faceRecognition
+from ml.video.YoutubeVideo import YoutubeVideo
 
-from ml.analyze import detectScene
-from ml.analyze import faceRecognition
-from ml.video import YoutubeVideo
-
-
-LOGIN_PATH = "/"
 
 TYPE_YOUTUBE = 100
 TYPE_FILE = 200
@@ -39,8 +39,7 @@ TYPE_FACE_RECOG = 200
 SAVE_PATH = "/home/data/"
 
 
-
-@login_required(login_url=LOGIN_PATH)
+@csrf_exempt
 @require_http_methods(["POST"])
 def getScnCut(request):
     global TYPE_YOUTUBE, TYPE_FILE, SAVE_PATH, TYPE_SCENE, TYPE_FACE_RECOG
@@ -59,7 +58,7 @@ def getScnCut(request):
     video_type = int(video_type)
 
     if video_type is TYPE_YOUTUBE:
-        yt = YoutubeVideo(target.trim(), save=SAVE_PATH)
+        yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
         filename = yt.randomString(10)
         filePath = yt.saveVideo(filename)
         ds = detectScene(filePath)
@@ -68,7 +67,7 @@ def getScnCut(request):
             safe=False,
         )
     elif video_type is TYPE_FILE:
-        ds = detectScene(options.path.trim())
+        ds = detectScene(options["path"].strip())
         return JsonResponse(
             ds.find_scenes(),
             safe=False,
@@ -79,7 +78,7 @@ def getScnCut(request):
         )
 
 
-@login_required(login_url=LOGIN_PATH)
+@csrf_exempt
 @require_http_methods(["POST"])
 def getFaceRecog(request):
     req_data = json.loads(request.body.decode())
@@ -112,7 +111,7 @@ def getFaceRecog(request):
             status = 400,  data={"status" : "false", "message" : "idol image error"}
         )
     if video_type is TYPE_YOUTUBE:
-        yt = YoutubeVideo(target.trim(), save=SAVE_PATH)
+        yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
         filename = yt.randomString(10)
         filePath = yt.saveVideo(filename)
         fr = faceRecognition(filePath, idol_image)
@@ -121,20 +120,18 @@ def getFaceRecog(request):
             safe=False,
         )
     if video_type is TYPE_FILE:
-        fr = faceRecognition(options.path.trim(), idol_image)
+        fr = faceRecognition(options.path.strip(), idol_image)
         return JsonResponse(
             fr.parse(),
             safe=False,
         )
 
-
-@login_required(login_url=LOGIN_PATH)
 @require_http_methods(["POST"])
 def getReFaceRecog(request):
     return HttpResponse(status=200)
 
 
-@login_required(login_url=LOGIN_PATH)
+@login_required
 @require_http_methods(["POST"])
 def postShare(request):
 
