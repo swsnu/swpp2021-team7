@@ -1,9 +1,10 @@
 from pytube import YouTube 
+from pytube.exceptions import PytubeError 
    
 import random  
 import string 
 from .FileController import FileController
-  
+#import FileController
 class YoutubeVideo:
     def __init__(self, video="", save="", name="temp"):
         self.video = video
@@ -26,12 +27,11 @@ class YoutubeVideo:
         except ValueError: 
             print("Connection Error") #to handle exception 
             return False
-        
-        mp4files = yt.streams.filter(progressive=True,file_extension='mp4') 
-        
+        yt.streams.filter(progressive=True,file_extension='mp4')
         try: 
-            mp4files.download(self.save+name + ".mp4") 
-        except ValueError: 
+            stream = yt.streams.get_by_itag(22)
+            stream.download(output_path=self.save,filename=name + ".mp4") 
+        except PytubeError: 
             print("Some Error!") 
             return False
         print('Task Completed!') 

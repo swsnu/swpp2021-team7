@@ -7,6 +7,8 @@ class FileController:
         if os.path.exists(path) and os.path.isdir(path):
             return True
         if not os.access(path,os.W_OK):
+            print(path)
+            print("not access")
             return False
         try:
             os.makedirs(path)
