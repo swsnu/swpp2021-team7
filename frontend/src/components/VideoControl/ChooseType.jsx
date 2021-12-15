@@ -10,17 +10,17 @@ import { lightBlue } from '@mui/material/colors';
 
 import "./ChooseType.css";
 
+const CutScene = 1001;
+const FaceRecognition = 1002;
 class ChooseType extends Component {
     constructor(props){
         super(props);
-        //this.cutScene = this.cutScene.bind(this);
-        //this.cutextractParts = this.extractParts.bind(this);
     }
     cutScene(){
-        this.props.history.push('/video/result');
+        this.props.history.push('/video/result?video='+this.props.urlString+"&type="+CutScene);
     }
     extractParts(){
-        this.props.history.push('/video/search');
+        this.props.history.push('/video/search?video='+this.props.urlString+"&type="+FaceRecognition);
     }
     render() {
         return (

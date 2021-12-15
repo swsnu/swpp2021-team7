@@ -5,7 +5,6 @@ import BasicInfo from '../components/SearchResult/BasicInfo';
 import Tweets from '../components/SearchResult/Tweets';
 import YoutubeVideos from '../components/SearchResult/YoutubeVideos';
 import styled from "@emotion/styled";
-import SharedVideos from '../components/SearchResult/SharedVideos';
 import CommentInput from '../components/SearchResult/CommentInput';
 import Comments from '../components/SearchResult/Comments';
 import { useParams } from 'react-router';
@@ -30,10 +29,9 @@ const SearchResult = (props) => {
 
     if (isLoading) return <CircularProgress />
     return <SearchResultRoot>
-        <CustomGridRow components={[<BasicInfo {...data.basicInfo} isGroup={isGroup} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
+        <CustomGridRow components={[<BasicInfo {...data.basicInfo} id={id} isGroup={isGroup} liked={data.liked} loadedScraps={data.scraps} key="basicInfo" />, <Tweets key="tweets" tweets={data.tweets} />]} />
         <div style={{ height: "30px" }}></div>
         <YoutubeVideos videos={data.youtubes} />
-        <SharedVideos videos={data.shared} />
         <CommentInput id={id} isGroup={isGroup} setReload={setReload} reload={reload} />
         {data.comments.length ? <Comments isGroup={isGroup} comments={data.comments} setReload={setReload} reload={reload} /> : null}
         <div style={{ height: "150px" }}></div>

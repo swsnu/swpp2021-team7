@@ -15,7 +15,9 @@ describe('<ChooseType />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <ChooseType></ChooseType>
+                    <ChooseType
+                        isView={true}
+                        urlString="test"></ChooseType>
                 </ConnectedRouter>
             </Provider>
         )
@@ -28,16 +30,14 @@ describe('<ChooseType />', () => {
         expect(cutScene.length).toBe(1)
 
         cutScene.simulate('click')
-        // expect(spyHistory).toBeCalledWith('/video/result')
-        expect(spyHistory).toHaveBeenCalledTimes(0);
+        expect(spyHistory).toBeCalledWith('/video/result?video=test&type=1001')
 
         let extractPart = component.find('button#ExtractPart')
         expect(extractPart.length).toBe(1)
 
         extractPart.simulate('click')
-        // expect(spyHistory).toBeCalledWith('/video/search')
-        expect(spyHistory).toHaveBeenCalledTimes(0);
-
+        expect(spyHistory).toBeCalledWith('/video/search?video=test&type=1002')
+  
         spyHistory.mockRestore()
     })
 })

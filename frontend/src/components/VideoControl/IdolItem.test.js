@@ -39,7 +39,6 @@ describe('<IdolItem />', () => {
         expect(idolInfos.length).toBe(1)
 
         idolInfos.at(0).simulate('click')
-        expect(spyHistory).toBeCalledWith('/video/result')
 
         spyHistory.mockRestore()
     })
