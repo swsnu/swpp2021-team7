@@ -42,7 +42,7 @@ class Timeline extends Component {
                     <div className="timeline-icon">
                         <img 
                             className="timeline-icon"
-                            src={this.state.icon}/>
+                            src={this.props.icon}/>
                     </div>
                     <div className="timeline-list">
                         <div className="timeline-box">
