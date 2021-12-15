@@ -19,7 +19,7 @@ from .models import (
     IdolGroupInfo,
     IdolMemberInfo,
     IdolGroup,
-    IdolMemberIncluded,
+    IdolMemberIncluded, IdolRequest
 )
 from custom_util.login_required import login_required
 
@@ -283,3 +283,13 @@ def toggle_scrap(request, scope, idol_id):
             for a in ArticleGroupScrap.objects.filter(group_id=idol_id, user=user)
         ]
         return JsonResponse(scraps, safe=False, status=200)
+
+
+@require_http_methods(["POST"])
+def request_support(request):
+    idol_name = json.loads(request.body)["name"]
+    if IdolRequest.objects.filter(idol_name=idol_name):
+        if now() - IdolRequest.objects.filter(idol_name=idol_name).last().created_at < timedelta(seconds=15):
+            return HttpResponse(status=400)
+    IdolRequest.objects.create(idol_name=idol_name)
+    return HttpResponse(status=204)
