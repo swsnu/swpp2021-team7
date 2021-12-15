@@ -37,7 +37,9 @@ TYPE_FILE = 200
 TYPE_SCENE = 100
 TYPE_FACE_RECOG = 200
 
-SAVE_PATH = "/home/data/"
+# SAVE_PATH = "/home/data/"
+SAVE_PATH = "C:/Users/iks15/university/2021fall/swpp/data"
+
 
 @ensure_csrf_cookie
 @require_http_methods(["POST"])
@@ -62,6 +64,7 @@ def getScnCut(request):
         filename = yt.random_string(10)
         filePath = yt.save_video(filename)
         ds = detectScene(filePath)
+        print(ds)
         return JsonResponse(
             ds.find_scenes(),
             safe=False,
@@ -76,6 +79,7 @@ def getScnCut(request):
         return JsonResponse(
             status=404, data={"status": "false", "message": "type error"}
         )
+
 
 @ensure_csrf_cookie
 @require_http_methods(["POST"])
@@ -96,18 +100,18 @@ def getFaceRecog(request):
     idols = options["idols"]
     if len(idols) == 0:
         return JsonResponse(
-            status = 400,  data={"status" : "false", "message" : "idol error"}
+            status=400, data={"status": "false", "message": "idol error"}
         )
-    idol_image = [] 
+    idol_image = []
     for idol_id in idols:
         instance = get_object_or_404(IdolMember, id=idol_id)
         info_instance = get_object_or_404(IdolMemberInfo, member_id=idol_id)
         basicInfo = info_instance.to_basic_info()
-        if(basicInfo.thumbnail):
+        if basicInfo.thumbnail:
             idol_image.append(basicInfo.thumbnail.address)
     if len(idol_image) == 0:
         return JsonResponse(
-            status = 400,  data={"status" : "false", "message" : "idol image error"}
+            status=400, data={"status": "false", "message": "idol image error"}
         )
     if video_type is TYPE_YOUTUBE:
         yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
@@ -124,10 +128,13 @@ def getFaceRecog(request):
             fr.parse(),
             safe=False,
         )
+
+
 @ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getReFaceRecog(request):
     return HttpResponse(status=200)
+
 
 @ensure_csrf_cookie
 @require_http_methods(["POST"])

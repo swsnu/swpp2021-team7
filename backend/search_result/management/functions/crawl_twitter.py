@@ -1,6 +1,6 @@
 import requests
 
-bearer_token = ""
+bearer_token = "AAAAAAAAAAAAAAAAAAAAAHomWwEAAAAAGlTtG%2B%2FWrYYgccADme%2FrgmhFEpI%3DE4oOhZaDJmrPwSPHF19AyZgTYkQeqydW0NMYs0uyau7BGq0szT"
 search_url = "https://api.twitter.com/2/tweets/search/recent"
 
 
