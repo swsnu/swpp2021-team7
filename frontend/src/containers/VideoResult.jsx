@@ -46,7 +46,9 @@ class VideoResult extends Component {
             progress : 10,
             video : "",
             selectedIdol : [],
-            selectedIdolInfo : [],
+            selectedIdolInfo : [
+                
+            ],
             detectList : []
         }
     }
@@ -243,16 +245,16 @@ class VideoResult extends Component {
                                     }}
                                     component="ul"
                                     >
-                                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item) => {
+                                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item,key) => {
                                                     
                                                         return (
-                                                            <ListItem key={item.key}
+                                                            <ListItem key={key}
                                                                 className="test-listitem">
                                                                 <Chip
-                                                                key={item.key}
+                                                                key={key}
                                                                 sx={{color:"#ffffff"}}
                                                                 avatar={<Avatar alt="Natacha" src={item.thumbnail} />}
-                                                                label={item.name.kor + ' ' + item.name.eng}
+                                                                label={item.info.name.kor + ' ' + item.info.name.eng}
                                                                 onDelete={(e) => this.handleDelete(item)}
                                                                 />
                                                             </ListItem>
@@ -265,14 +267,14 @@ class VideoResult extends Component {
                     </Grid>
                     <Grid item xs={12}>
 
-                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item) => {
+                    {this.state.selectedIdolInfo.length > 0 && this.state.selectedIdolInfo.length == this.state.detectList.length ? this.state.selectedIdolInfo.map((item,key) => {
                                                         return (
                                                             <Timeline
-                                                                key ={item.key}
+                                                                key ={key}
                                                                 type={FaceRecognition}
                                                                 icon={item.thumbnail}
                                                                 color={"#007aff"}
-                                                                time={this.state.detectList[item.key]}/>
+                                                                time={this.state.detectList[key]}/>
                                                     )}) : <></>
                                             }
                     </Grid>
