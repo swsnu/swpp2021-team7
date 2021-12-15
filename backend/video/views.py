@@ -4,6 +4,7 @@ from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http.response import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 from .models import (
@@ -38,7 +39,7 @@ TYPE_FACE_RECOG = 200
 
 SAVE_PATH = "/home/data/"
 
-
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getScnCut(request):
     global TYPE_YOUTUBE, TYPE_FILE, SAVE_PATH, TYPE_SCENE, TYPE_FACE_RECOG
@@ -76,7 +77,7 @@ def getScnCut(request):
             status=404, data={"status": "false", "message": "type error"}
         )
 
-
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getFaceRecog(request):
     req_data = json.loads(request.body.decode())
@@ -123,12 +124,12 @@ def getFaceRecog(request):
             fr.parse(),
             safe=False,
         )
-
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getReFaceRecog(request):
     return HttpResponse(status=200)
 
-
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def postShare(request):
 
