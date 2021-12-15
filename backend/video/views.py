@@ -124,10 +124,7 @@ def getFaceRecog(request):
             fr.parse(),
             safe=False,
         )
-@ensure_csrf_cookie
-@require_http_methods(["POST"])
-def getReFaceRecog(request):
-    return HttpResponse(status=200)
+
 
 @ensure_csrf_cookie
 @require_http_methods(["POST"])
