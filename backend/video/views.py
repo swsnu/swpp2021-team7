@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
-
+import os
 
 from .models import (
     VideoFaceRecognition,
@@ -63,14 +63,20 @@ def getScnCut(request):
         filename = yt.random_string(10)
         filePath = yt.save_video(filename)
         ds = detectScene(filePath)
+        results = ds.find_scenes()
+        if os.path.exists(filePath):
+            os.remove(filePath)
         return JsonResponse(
-            ds.find_scenes(),
+            results,
             safe=False,
         )
     elif video_type is TYPE_FILE:
         ds = detectScene(options["path"].strip())
+        results = ds.find_scenes()
+        if os.path.exists(options["path"].strip()):
+            os.remove(options["path"].strip())
         return JsonResponse(
-            ds.find_scenes(),
+            results,
             safe=False,
         )
     else:
@@ -115,14 +121,20 @@ def getFaceRecog(request):
         filename = yt.random_string(10)
         filePath = yt.save_video(filename)
         fr = faceRecognition(filePath, idol_image)
+        results = fr.parse()
+        if os.path.exists(filePath):
+            os.remove(filePath)
         return JsonResponse(
-            fr.parse(),
+            results,
             safe=False,
         )
     if video_type is TYPE_FILE:
         fr = faceRecognition(options.path.strip(), idol_image)
+        results = fr.parse()
+        if os.path.exists(options.path.strip()):
+            os.remove(options.path.strip())
         return JsonResponse(
-            fr.parse(),
+            results,
             safe=False,
         )
 

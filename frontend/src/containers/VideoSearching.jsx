@@ -238,7 +238,9 @@ class VideoSearching extends Component {
                                         {this.state.searchResult ? this.state.searchResult.map((item) => {
                                             return (<IdolItem 
                                                         onClick={(e) => {this.handleIdols(item)}}
-                                                        name={item.name.kor + ' ' + item.name.eng} num={item.id} key={item.id} icon={item.thumbnail} active={item.hasModel}/>)
+                                                        name={item.name.kor + ' ' + item.name.eng} 
+                                                        num={item.id} key={item.id} 
+                                                        icon={item.thumbnail} active={item.hasModel}/>)
                                         }) : "Loading..."
                                         } 
                                     </Box>
