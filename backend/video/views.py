@@ -38,6 +38,7 @@ TYPE_SCENE = 100
 TYPE_FACE_RECOG = 200
 
 SAVE_PATH = "/home/data/"
+#SAVE_PATH = "/Users/youngchaeyoon/Documents/temp/"
 
 @ensure_csrf_cookie
 @require_http_methods(["POST"])
