@@ -90,22 +90,23 @@ class VideoResult extends Component {
         }
     }
     setFaceRecognitionResult(data){
-        this.setState({detectList : data.result});
+        this.setState({detectList : data});
+        this.setState({"loading" : false});
     }
     setSceneResult(data){
         console.log(data)
         this.setState({detectList : data});
-        console.log(this.state.detectList)
-        console.log(typeof this.state.detectList)
+        this.setState({"loading" : false});
+        
     }
     handlingLoad(){
         const timer = setInterval(() => {
             this.setState({"progress" : ((this.state.progress >= 100 ? 10 : this.state.progress + 10))});
             if(this.state.progress >= 100 ){
                 clearInterval(timer);
-                this.setState({"loading" : false});
+                
             }
-          }, 50);
+          }, 200);
           return () => {
             //clearInterval(timer);
           }
@@ -263,7 +264,7 @@ class VideoResult extends Component {
                                                                 type={FaceRecognition}
                                                                 icon={item.thumbnail}
                                                                 color={"#007aff"}
-                                                                time={this.state.detectList[item.id]}/>
+                                                                time={this.state.detectList[item.key]}/>
                                                     )}) : <></>
                                             }
                     </Grid>

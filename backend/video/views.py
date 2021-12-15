@@ -39,7 +39,6 @@ TYPE_FACE_RECOG = 200
 
 SAVE_PATH = "/home/data/"
 
-
 @ensure_csrf_cookie
 @require_http_methods(["POST"])
 def getScnCut(request):
