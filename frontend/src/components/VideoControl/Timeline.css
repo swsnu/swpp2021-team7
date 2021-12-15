@@ -9,6 +9,12 @@ div.timeline-icon{
     display:inline-block;
     vertical-align: middle;
 }
+div.timeline-list{
+    position:relative;
+    width:calc(100% - 84px);
+    display:inline-block;
+    vertical-align:middle;
+}
 div.timeline-icon img.timeline-icon{
     position:relative;
     width:60px;
