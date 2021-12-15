@@ -100,7 +100,7 @@ def getFaceRecog(request):
             status=400, data={"status": "false", "message": "type error"}
         )
     video_type = int(video_type)
-    idols = options["idols"]
+    idols = options["idol"]
     if len(idols) == 0:
         return JsonResponse(
             status = 400,  data={"status" : "false", "message" : "idol error"}
