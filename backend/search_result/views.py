@@ -3,14 +3,13 @@ import secrets
 from datetime import timedelta
 from django.utils.timezone import now
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
 from django.db.models import Q
 from main.models import SearchLog
-from django.views.decorators.csrf import ensure_csrf_cookie
-
 from .management.functions.crawl_all import CrawlUtil
 from .models import (
     IdolMember,
