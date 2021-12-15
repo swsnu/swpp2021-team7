@@ -133,14 +133,6 @@ class VideoTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 404)
 
-    def test_getReFaceRecog(self):
-        # Check re-recognition return status 200
-        response = client.post(
-            "/api/video/re-recognition/",
-            json.dumps({"user_name": "chris", "pass_word": "chris"}),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 404)
 
     def test_postShare(self):
         # Check (KeyError, JSonDecodeError) returns 400 response

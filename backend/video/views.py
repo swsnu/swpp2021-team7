@@ -64,7 +64,7 @@ def getScnCut(request):
         filename = yt.random_string(10)
         filePath = yt.save_video(filename)
         ds = detectScene(filePath)
-        print(ds)
+        print(ds.find_scenes())
         return JsonResponse(
             ds.find_scenes(),
             safe=False,
@@ -128,12 +128,6 @@ def getFaceRecog(request):
             fr.parse(),
             safe=False,
         )
-
-
-@ensure_csrf_cookie
-@require_http_methods(["POST"])
-def getReFaceRecog(request):
-    return HttpResponse(status=200)
 
 
 @ensure_csrf_cookie
