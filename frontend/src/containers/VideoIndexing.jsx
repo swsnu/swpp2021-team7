@@ -136,6 +136,7 @@ class VideoIndexing extends Component {
                 )}
                 <Container maxWidth="sm">
                     <ChooseType
+                        urlString={this.state.url}
                         isView={(this.state.url)? true : false}></ChooseType>
                 </Container>
             </React.Fragment>
