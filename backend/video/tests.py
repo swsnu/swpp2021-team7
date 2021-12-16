@@ -103,7 +103,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 400)
 
         # is type is TYPE_FILE
         response = client.post(
@@ -143,7 +143,7 @@ class VideoTestCase(TestCase):
             ),
             content_type="application/json",
         )
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 400)
 
         # if type is SCENE
         response = client.post(

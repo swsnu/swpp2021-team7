@@ -61,6 +61,10 @@ def getScnCut(request):
         yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
         filename = yt.random_string(10)
         filePath = yt.save_video(filename)
+        if not filePath:
+            return JsonResponse(
+                status=404, data={"status": "false", "message": "can't save the file"}
+            )
         ds = detectScene(filePath)
         results = ds.find_scenes()
         if os.path.exists(filePath):
@@ -121,6 +125,10 @@ def getFaceRecog(request):
         yt = YoutubeVideo(target.strip(), save=SAVE_PATH)
         filename = yt.random_string(10)
         filePath = yt.save_video(filename)
+        if not filePath:
+            return JsonResponse(
+                status=404, data={"status": "false", "message": "can't save the file"}
+            )
         fr = faceRecognition(filePath, idol_image)
         results = fr.parse()
         if os.path.exists(filePath):
