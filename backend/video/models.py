@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from main.models import ImageResource, VideoResource
+from main.models import VideoResource
 from search_result.models import IdolMember
 
 

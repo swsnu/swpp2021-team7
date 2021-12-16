@@ -18,7 +18,8 @@ from .models import (
     IdolGroupInfo,
     IdolMemberInfo,
     IdolGroup,
-    IdolMemberIncluded, IdolRequest
+    IdolMemberIncluded,
+    IdolRequest,
 )
 from custom_util.login_required import login_required
 
@@ -288,7 +289,9 @@ def toggle_scrap(request, scope, idol_id):
 def request_support(request):
     idol_name = json.loads(request.body)["name"]
     if IdolRequest.objects.filter(idol_name=idol_name):
-        if now() - IdolRequest.objects.filter(idol_name=idol_name).last().created_at < timedelta(seconds=15):
+        if now() - IdolRequest.objects.filter(
+            idol_name=idol_name
+        ).last().created_at < timedelta(seconds=15):
             return HttpResponse(status=400)
     IdolRequest.objects.create(idol_name=idol_name)
     return HttpResponse(status=204)

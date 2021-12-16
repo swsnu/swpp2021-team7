@@ -1,6 +1,10 @@
+from unittest.mock import patch
 from django.test import TestCase, Client, tag
 from django.http import response
 import json
+from ml.analyze.detectScene import detectScene
+
+from ml.video.YoutubeVideo import YoutubeVideo
 
 # Create your tests here.
 client = Client()
@@ -8,8 +12,8 @@ client = Client()
 TYPE_YOUTUBE = 100
 TYPE_FILE = 200
 
+
 class VideoTestCase(TestCase):
-    
     def test_csrf(self):
         client = Client(enforce_csrf_checks=True)
 
@@ -44,8 +48,14 @@ class VideoTestCase(TestCase):
         )
         self.assertEqual(response.status_code, 204)
 
-    def test_getScnCut(self):
+    @patch.object(YoutubeVideo, "random_string")
+    @patch.object(YoutubeVideo, "save_video")
+    @patch.object(detectScene, "find_scenes")
+    def test_getScnCut(self, mock_radom_str, mock_save_video, mock_find_scene):
         # Check (KeyError, JSonDecodeError) returns 400 response
+        mock_radom_str.return_value = "random_file_path"
+        mock_save_video.return_value = "video_file_path"
+        mock_find_scene.return_value = [1, 2, 3, 4]
         response = client.post(
             "/api/video/scene/",
             json.dumps(
@@ -79,9 +89,7 @@ class VideoTestCase(TestCase):
             json.dumps(
                 {
                     "target": "https://www.youtube.com/watch?v=WMweEpGlu_U",
-                    "option": {
-                        "path" : "test.mp4"
-                    },
+                    "option": {"path": "test.mp4"},
                     "type": TYPE_FILE,
                 }
             ),
@@ -91,7 +99,7 @@ class VideoTestCase(TestCase):
 
     def test_getFaceRecog(self):
         # Wrong type
-        
+
         response = client.post(
             "/api/video/recognition/",
             json.dumps(
@@ -111,7 +119,7 @@ class VideoTestCase(TestCase):
             json.dumps(
                 {
                     "target": "https://www.youtube.com/watch?v=WMweEpGlu_U",
-                    "option": "{}",
+                    "option": {"idol": [22]},
                     "type": 100,
                 }
             ),
@@ -125,41 +133,9 @@ class VideoTestCase(TestCase):
             json.dumps(
                 {
                     "target": "https://www.youtube.com/watch?v=WMweEpGlu_U",
-                    "option": "{}",
+                    "option": {"idol": [22]},
                     "type": 200,
                 }
-            ),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 404)
-
-
-    def test_postShare(self):
-        # Check (KeyError, JSonDecodeError) returns 400 response
-        response = client.post(
-            "/api/video/share/",
-            json.dumps(
-                {"result_id": 0, "result_description": "test", "result_type": 0}
-            ),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 400)
-
-        # if type is SCENE
-        response = client.post(
-            "/api/video/share/",
-            json.dumps(
-                {"result_id": 0, "result_description": "test", "result_type": 100}
-            ),
-            content_type="application/json",
-        )
-        self.assertEqual(response.status_code, 404)
-
-        # if type is Recog
-        response = client.post(
-            "/api/video/share/",
-            json.dumps(
-                {"result_id": 0, "result_description": "test", "result_type": 200}
             ),
             content_type="application/json",
         )

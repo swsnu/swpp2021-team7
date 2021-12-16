@@ -1,31 +1,13 @@
-import sys
 import json
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 import os
-
-from .models import (
-    VideoFaceRecognition,
-    VideoScene,
-    VideoSceneShare,
-    VideoFaceRecognitionShare,
-)
-
-from custom_util.login_required import login_required
-
 from search_result.models import (
     IdolMember,
-    MemberComment,
-    GroupComment,
-    IdolGroupInfo,
     IdolMemberInfo,
-    IdolGroup,
-    IdolMemberIncluded,
 )
-
 from ml.analyze.detectScene import detectScene
 from ml.analyze.faceRecognition import faceRecognition
 from ml.video.YoutubeVideo import YoutubeVideo
@@ -38,6 +20,7 @@ TYPE_SCENE = 100
 TYPE_FACE_RECOG = 200
 
 SAVE_PATH = "/home/data/"
+
 
 @ensure_csrf_cookie
 @require_http_methods(["POST"])
@@ -115,7 +98,7 @@ def getFaceRecog(request):
         info_instance = get_object_or_404(IdolMemberInfo, member_id=idol_id)
         basicInfo = info_instance.to_basic_info()
 
-        if(basicInfo["thumbnail"]):
+        if basicInfo["thumbnail"]:
             idol_image.append(basicInfo["thumbnail"])
     if len(idol_image) == 0:
         return JsonResponse(
@@ -146,28 +129,3 @@ def getFaceRecog(request):
             results,
             safe=False,
         )
-
-
-@ensure_csrf_cookie
-@require_http_methods(["POST"])
-def postShare(request):
-
-    req_data = json.loads(request.body.decode())
-    # video result sharing
-    # video result id
-    result_id = int(req_data["result_id"])
-    description = req_data["result_description"]
-    video_type = int(req_data["result_type"])
-    des = json.dumps({"description": description})
-    # if type is not correct ( not youtube or file )
-    if video_type not in [TYPE_SCENE, TYPE_FACE_RECOG]:
-        return JsonResponse(
-            status=400, data={"status": "false", "message": "type error"}
-        )
-    if video_type is TYPE_SCENE:
-        ss = VideoSceneShare(result_id=result_id, description=des)
-        ss.save()
-    elif video_type is TYPE_FACE_RECOG:
-        fr = VideoFaceRecognitionShare(result_id=result_id, description=des)
-        fr.save()
-    return HttpResponse(status=200)
