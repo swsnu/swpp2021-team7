@@ -20,20 +20,20 @@ import { withRouter } from 'react-router';
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
+    palette: {
+        primary: {
+            light: '#757ce8',
+            main: '#3f50b5',
+            dark: '#002884',
+            contrastText: '#fff',
+        },
+        secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            contrastText: '#000',
+        },
     },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
 });
 
 import { lightBlue } from '@mui/material/colors';
@@ -41,9 +41,9 @@ import { lightBlue } from '@mui/material/colors';
 import './VideoIndexing.css';
 
 class VideoIndexing extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {type : "FACE", url:""};
+        this.state = { type: "FACE", url: "" };
         this.changeInput = this.changeInput.bind(this);
     }
     getParameterByName(name, url = window.location.href) {
@@ -56,78 +56,78 @@ class VideoIndexing extends Component {
     }
     matchYoutubeUrl(url) {
         var p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-        if(url.match(p)){
+        if (url.match(p)) {
             return url.match(p)[1];
         }
         return false;
     }
-    changeInput(event){
+    changeInput(event) {
         event.preventDefault();
         let value = event.target.value;
-        if(this.matchYoutubeUrl(value.trim())){
-            let id = this.getParameterByName('v',value.trim());
-            
-            this.setState({url:id.trim()});
-            
-        }else{
-            this.setState({url:false});
+        if (this.matchYoutubeUrl(value.trim())) {
+            let id = this.getParameterByName('v', value.trim());
+
+            this.setState({ url: id.trim() });
+
+        } else {
+            this.setState({ url: false });
         }
     }
     render() {
         return (
             <React.Fragment>
                 <img
-                className="background-image"
-                width="100%"
-                src="/images/video-background.jpg"
+                    className="background-image"
+                    width="100%"
+                    src="/images/video-background.jpg"
                 />
                 <Container maxWidth="sm">
                     <img
                         width="200px"
-                        src="/images/vidol_text_512.png"/>
+                        src="/images/vidol_text_512.png" />
                 </Container>
                 <Container maxWidth="sm">
                     <h2
-                    className="vidol-search--title">
+                        className="vidol-search--title">
                         Generate your video clips
                     </h2>
                     <h3
-                    className="vidol-search--title">
+                        className="vidol-search--title">
                         Find the video by Youtube link and generate video clips with VIDOL AI
                     </h3>
                 </Container>
                 <Container
                     className="breadcrumbs"
                     maxWidth="sm">
-                <Breadcrumbs
-                        separator={<ArrowRightAltIcon 
+                    <Breadcrumbs
+                        separator={<ArrowRightAltIcon
                             sx={{ color: '#b3e5fc' }}
                             fontSize="small" />}
                         aria-label="breadcrumb">
                         <StyledBreadCrumb
-                        component="a"
-                        //href="#"
-                        label="Video upload"
-                        icon={<OndemandVideoOutlinedIcon fontSize="small" />}
+                            component="a"
+                            //href="#"
+                            label="Video upload"
+                            icon={<OndemandVideoOutlinedIcon fontSize="small" />}
                         />
-                        <StyledBreadCrumb 
-                            component="a" 
-                            href="#" 
+                        <StyledBreadCrumb
+                            component="a"
+                            href="#"
                             label="find Idols"
-                            icon={<SafetyDividerOutlinedIcon fontSize="small"/>} />
-                        <StyledBreadCrumb 
-                            component="a" 
-                            href="#" 
+                            icon={<SafetyDividerOutlinedIcon fontSize="small" />} />
+                        <StyledBreadCrumb
+                            component="a"
+                            href="#"
                             label="Get results"
-                            icon={<AutofpsSelectOutlinedIcon fontSize="small"/>} />
-                </Breadcrumbs>
+                            icon={<AutofpsSelectOutlinedIcon fontSize="small" />} />
+                    </Breadcrumbs>
                 </Container>
                 <SearchIdol
                     className="search-inputs"
                     changeInput={this.changeInput}
                     color={lightBlue[500]}
                     hint="Youtube link url"></SearchIdol>
-                {this.state.url && (<Container 
+                {this.state.url && (<Container
                     className="preview-video"
                     maxWidth="sm">
                     <YoutubeVideo
@@ -136,7 +136,8 @@ class VideoIndexing extends Component {
                 )}
                 <Container maxWidth="sm">
                     <ChooseType
-                        isView={(this.state.url)? true : false}></ChooseType>
+                        urlString={this.state.url}
+                        isView={(this.state.url) ? true : false}></ChooseType>
                 </Container>
             </React.Fragment>
         )

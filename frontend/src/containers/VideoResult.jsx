@@ -46,7 +46,9 @@ class VideoResult extends Component {
             progress : 10,
             video : "",
             selectedIdol : [],
-            selectedIdolInfo : [],
+            selectedIdolInfo : [
+                
+            ],
             detectList : []
         }
     }
@@ -67,21 +69,24 @@ class VideoResult extends Component {
           });
           this.setSceneResult(response.data);
         } catch(err) {
-          //console.error(err);
+          console.error(err);
+          this.setState({"loading" : false});
         }
     }
-    async getFaceRecognition(video) {
+    async getFaceRecognition(video,selected_idol) {
+        
         try {
           const response = await axios.post(`video/recognition/`,{
               type : TYPE_YOUTUBE,
               target : video,
               option : {
-                  idol : this.state.selected
+                  idol : selected_idol
               }
           });
           this.setFaceRecognitionResult(response.data);
         } catch(err) {
           //console.error(err);
+          this.setState({"loading" : false});
         }
     }
     setSearchResult(data){
@@ -90,19 +95,23 @@ class VideoResult extends Component {
         }
     }
     setFaceRecognitionResult(data){
-        this.setState({detectList : data.result});
+        this.setState({detectList : data});
+        this.setState({"loading" : false});
     }
     setSceneResult(data){
-        this.setState({detectList : data.time});
+        console.log(data)
+        this.setState({detectList : data});
+        this.setState({"loading" : false});
+        
     }
     handlingLoad(){
         const timer = setInterval(() => {
             this.setState({"progress" : ((this.state.progress >= 100 ? 10 : this.state.progress + 10))});
             if(this.state.progress >= 100 ){
                 clearInterval(timer);
-                this.setState({"loading" : false});
+                
             }
-          }, 50);
+          }, 200);
           return () => {
             //clearInterval(timer);
           }
@@ -123,15 +132,20 @@ class VideoResult extends Component {
             this.props.history.push("/video/search?video="+video+"&type="+FaceRecognition);
             return;
         }
+        let selected_idol = new Array();
         if(type == FaceRecognition){
             let idol_list = idols.split(",");
-            let selected_idol = new Array();
+            
+            
             idol_list.forEach(el => {
+                
                 if(!isNaN(parseInt(el))){
                     selected_idol.push(parseInt(el));
                 }
             });
+            
             this.setState({"selectedIdol":selected_idol});
+            console.log(selected_idol);
             selected_idol.forEach(id => {
                 this.getBySearchMemberId(id);
             });
@@ -143,7 +157,7 @@ class VideoResult extends Component {
         if(type == CutScene){
             this.getVideoScene(video);
         }else{
-            this.getFaceRecognition(video);
+            this.getFaceRecognition(video,selected_idol);
         }
     }
     render() {
@@ -231,16 +245,16 @@ class VideoResult extends Component {
                                     }}
                                     component="ul"
                                     >
-                                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item) => {
+                                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item,key) => {
                                                     
                                                         return (
-                                                            <ListItem key={item.key}
+                                                            <ListItem key={key}
                                                                 className="test-listitem">
                                                                 <Chip
-                                                                key={item.key}
+                                                                key={key}
                                                                 sx={{color:"#ffffff"}}
                                                                 avatar={<Avatar alt="Natacha" src={item.thumbnail} />}
-                                                                label={item.name.kor + ' ' + item.name.eng}
+                                                                label={item.info.name.kor + ' ' + item.info.name.eng}
                                                                 onDelete={(e) => this.handleDelete(item)}
                                                                 />
                                                             </ListItem>
@@ -253,14 +267,14 @@ class VideoResult extends Component {
                     </Grid>
                     <Grid item xs={12}>
 
-                    {this.state.selectedIdolInfo.length > 0 ? this.state.selectedIdolInfo.map((item) => {
+                    {this.state.selectedIdolInfo.length > 0 && this.state.selectedIdolInfo.length == this.state.detectList.length ? this.state.selectedIdolInfo.map((item,key) => {
                                                         return (
                                                             <Timeline
-                                                                key ={item.key}
+                                                                key ={key}
                                                                 type={FaceRecognition}
                                                                 icon={item.thumbnail}
                                                                 color={"#007aff"}
-                                                                time={this.state.detectList[item.id]}/>
+                                                                time={this.state.detectList[key]}/>
                                                     )}) : <></>
                                             }
                     </Grid>

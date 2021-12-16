@@ -20,7 +20,7 @@ class Timeline extends Component {
         };
     }
     render(){
-        const timelines = this.state.time.map((num,i) => {
+        const timelines = this.props.time.map((num,i) => {
             const styleActive = {
                 width: (num+"px"),
                 backgroundColor:this.props.color
@@ -42,9 +42,13 @@ class Timeline extends Component {
                     <div className="timeline-icon">
                         <img 
                             className="timeline-icon"
-                            src={this.state.icon}/>
+                            src={this.props.icon}/>
                     </div>
-                    <div className="timeline-list"></div>
+                    <div className="timeline-list">
+                        <div className="timeline-box">
+                            {timelines}
+                        </div>
+                    </div>
                     </>
                 ) : (
                     <div className="timeline-box">

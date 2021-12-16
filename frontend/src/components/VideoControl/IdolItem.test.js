@@ -15,7 +15,7 @@ describe('<IdolItem />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <IdolItem active={(isActive)? "active":"not-active"}></IdolItem>
+                    <IdolItem active={isActive}></IdolItem>
                 </ConnectedRouter>
             </Provider>
         )

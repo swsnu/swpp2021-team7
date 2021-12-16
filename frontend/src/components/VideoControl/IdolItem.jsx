@@ -33,11 +33,11 @@ class IdolItem extends Component {
     render() {
         return (
             <div
-                onClick={this.props.active == "active" ? this.props.onClick : null}
-                className="idol-items" style={{cursor: this.props.active == "active" ? "pointer" : "unset"}}>
+                onClick={this.props.active ? this.props.onClick : null}
+                className="idol-items" style={{cursor: this.props.active ? "pointer" : "unset"}}>
                 <ListItem 
                     id="IDOL-ITEM"
-                    className={(this.props.active == "active") ? "" : "not-ready"}
+                    className={(this.props.active) ? "" : "not-ready"}
                     alignItems="flex-start" onClick={this.handleClick}>
                     <ListItemText
                         sx={{
@@ -64,7 +64,7 @@ class IdolItem extends Component {
                             }}onClick={()=>this.redirectSearchResult()} clickable label={this.props.name} />}
                     />
                 </ListItem>
-                {(this.props.active !== "active") && <>
+                {(!this.props.active) && <>
                 <p className="not-ready-p">Not Supported. Would You Request Support?</p>
                 <Button variant="outlined" color="error" onClick={this.handleRequestClick}>Request Support</Button>
                 </>}
