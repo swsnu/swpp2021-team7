@@ -5,7 +5,7 @@ from scenedetect.detectors import ContentDetector
 
 """
 If local
-
+"""
 import sys
 sys.path.append("../video/FileController")
 import os
@@ -30,12 +30,12 @@ class FileController:
             return True
         else:
             return False
-"""        
+    
 """
 If server
-"""
-from ml.video.FileController import FileController;
 
+from ml.video.FileController import FileController;
+"""
 class detectScene:
     def __init__(self, video=""):
         self.video = video
@@ -68,6 +68,7 @@ class detectScene:
         if len(scenes) == 0:
             return []
         result = []
+        
         for time in scenes:
             result.append(round(time[1].get_seconds()*10) - round(time[0].get_seconds()*10))
             
