@@ -16,15 +16,14 @@ import axios from 'axios';
 function Signin(props) {
   async function postData(json) {
     try {
-      const response = await axios.post('/account/signin/', json, {
+      props.testAxios ? props.testAxios() : await axios.post('/account/signin/', json, {
         headers:{
           'Content-type': 'application/json'
         }
       });
-      props.history.push('/')
+      props.testAxios ? alert("Success") : props.history.push('/');
     } catch(err) {
-      alert('Email or Password does not exist')
-      console.error(err);
+      alert('Email or Password does not exist');
     }
   }
 
