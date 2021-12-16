@@ -126,7 +126,7 @@ def search_result(request, scope, instance_id):
     )
 
     if not info_instance.updated_at or now() - info_instance.updated_at > timedelta(
-        days=3
+        days=1
     ):
         name = instance.name["kor"]
         if is_member:
