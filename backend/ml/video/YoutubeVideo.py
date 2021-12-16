@@ -14,7 +14,7 @@ class YoutubeVideo:
         result = ''.join((random.choice(string.ascii_lowercase) for x in range(length))) # run loop until the define length  
         return result
     def save_video(self, name):
-        video_id = self.video
+        video_id =   self.video
         fs = FileController()
         if not fs.checkPath(self.save):
             return False

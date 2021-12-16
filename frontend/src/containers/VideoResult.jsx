@@ -47,7 +47,6 @@ class VideoResult extends Component {
             video: "",
             selectedIdol: [],
             selectedIdolInfo: [
-
             ],
             detectList: []
         }
@@ -235,7 +234,7 @@ class VideoResult extends Component {
                                                     p: 0.5,
                                                     m: 0,
                                                     bgcolor: "#222222",
-                                                    height: "48px"
+                                                    height: "auto"
                                                 }}
                                                 component="ul"
                                             >
@@ -249,7 +248,6 @@ class VideoResult extends Component {
                                                                 sx={{ color: "#ffffff" }}
                                                                 avatar={<Avatar alt="Natacha" src={item.thumbnail} />}
                                                                 label={item.info.name.kor + ' ' + item.info.name.eng}
-                                                                onDelete={(e) => this.handleDelete(item)}
                                                             />
                                                         </ListItem>
                                                     )
