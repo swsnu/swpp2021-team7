@@ -17,7 +17,7 @@ import HotRankingList from '../components/Main/HotRankingList';
 import SearchResult from '../components/Main/SearchResult';
 import axios from 'axios';
 
-function Main() {
+function Main({isTest=false, testAxios=null}) {
     const [submitDone, setSubmitDone] = React.useState(false);
     const [list, setList] = React.useState();
     const [rankingData, setRankingData] = React.useState({});
@@ -25,10 +25,10 @@ function Main() {
 
     async function getBySearchKeyword(keyword) {
         try {
-          const response = await axios.get(`search-result/search/${keyword}/`);
-          setSearchResult(response.data);
+          const response = testAxios ? testAxios() : await axios.get(`search-result/search/${keyword}/`);
+          testAxios ? alert("Searched") : setSearchResult(response.data);
         } catch(err) {
-          console.error(err);
+          alert("Search failed");
         }
     }
 
@@ -41,16 +41,13 @@ function Main() {
     };
 
     const handleRequestClick = async () => {
-        const name = prompt("Enter the name of the idol you want to request support on:");
-        await axios.post("/search-result/request-support/", {"name": name})
-        .then(() => {
-            alert(`Successfully submitted. We would make [${name}] available shortly.`)
-        })
-        .catch((e) => {
-            if (e.response.status == 400) {
-                alert("Excessive requests in short time. Request again after a while.");
-            }
-        });
+        const name = isTest ? "test" : prompt("Enter the name of the idol you want to request support on:");
+        try {
+            testAxios ? testAxios() : await axios.post("/search-result/request-support/", {"name": name});
+            alert(`Successfully submitted. We would make [${name}] available shortly.`);
+        } catch {
+            alert("Excessive requests in short time. Request again after a while.");
+        }
     }
     
 
@@ -127,7 +124,7 @@ function Main() {
                         submitDone && (
                             <Box xs={{mt:10}}>
                                 <Typography variant="h6"> Search Result </Typography>
-                                {searchResult.length == 0 && <>No idol found. Would you request support? <Button variant="outlined" color="error" onClick={handleRequestClick}>Request Support</Button></>}
+                                {searchResult.length == 0 && <>No idol found. Would you request support? <Button id="requestBtn" variant="outlined" color="error" onClick={handleRequestClick}>Request Support</Button></>}
                                 {searchResult ? searchResult.map((item) => {
                                     return (<SearchResult name={item.name.kor + ' ' + item.name.eng} isGroup={item.isGroup} id={item.id} key={item.id} thumbnail={item.thumbnail}/>)
                                 }) : "Loading..."
