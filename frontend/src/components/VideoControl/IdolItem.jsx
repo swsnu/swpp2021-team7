@@ -21,13 +21,12 @@ class IdolItem extends Component {
     }
 
     handleRequestClick = async () => {
-        await axios.post("/search-result/request-support/", {"name": this.props.name})
-        .then(() => {
+        try {
+            this.props.testPost ? this.props.testPost() : await axios.post("/search-result/request-support/", {"name": this.props.name});
             alert(`Successfully submitted. We would make [${this.props.name}] available shortly.`)
-        })
-        .catch((e) => {
+        } catch {
             alert("Excessive requests in short time. Request again after a while.");
-        })
+        }
     }
 
     render() {
@@ -66,7 +65,7 @@ class IdolItem extends Component {
                 </ListItem>
                 {(!this.props.active) && <>
                 <p className="not-ready-p">Not Supported. Would You Request Support?</p>
-                <Button variant="outlined" color="error" onClick={this.handleRequestClick}>Request Support</Button>
+                <Button variant="outlined" color="error" onClick={this.handleRequestClick} id="requestBtn">Request Support</Button>
                 </>}
                 <Divider sx={{marginLeft : 0}} variant="inset" component="li" />
             </div>

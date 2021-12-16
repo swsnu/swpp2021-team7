@@ -14,7 +14,7 @@ from .models import (
     IdolMemberInfo,
     IdolMemberIncluded,
     MemberComment,
-    GroupComment,
+    GroupComment, IdolRequest,
 )
 from mypage.models import (
     MyIdolMember,
@@ -434,3 +434,39 @@ class SearchResultTestCase(IdolTestCase):
         assert not ArticleGroupScrap.objects.filter(
             user=self.user, group=self.group, address=url
         ).exists()
+
+class IdolRequestTestCase(IdolTestCase):
+    def test_아이돌_요청하면_요청인스턴스_생긴다(self):
+        # when
+        post = self.client.post(
+            "/api/search-result/request-support/",
+            json.dumps({"name": "test-idol"}),
+            content_type="application/json"
+        )
+
+        # then
+        assert post.status_code == 204
+        assert IdolRequest.objects.count() == 1
+        assert IdolRequest.objects.last().idol_name == "test-idol"
+
+
+    def test_아이돌_15초내로_또요청하면_400준다(self):
+        # given
+        post_first = self.client.post(
+            "/api/search-result/request-support/",
+            json.dumps({"name": "test-idol"}),
+            content_type="application/json"
+        )
+
+
+        # when
+        post_again = self.client.post(
+            "/api/search-result/request-support/",
+            json.dumps({"name": "test-idol"}),
+            content_type="application/json"
+        )
+
+        # then
+        assert post_again.status_code == 400
+        assert IdolRequest.objects.count() == 1
+

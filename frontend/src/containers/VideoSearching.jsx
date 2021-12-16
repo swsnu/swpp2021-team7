@@ -47,7 +47,16 @@ class VideoSearching extends Component {
             progress : 10,
             video: "",
             submitDone : true,
-            searchResult : [],
+            searchResult : props.testing ? [{
+                'id': 1, 
+                'name': {
+                    'kor':"뷔",
+                    'eng':"V"
+                },
+                'isGroup': false, 
+                'thumbnail':"/images/BTS_V.jpg",
+                'hasModel' : true
+            }] : [],
             selectedIdol : []
         }
         this.searchQuery = this.searchQuery.bind(this);

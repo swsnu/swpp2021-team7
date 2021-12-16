@@ -20,7 +20,7 @@ describe('<VideoSearching />', () => {
         component = mount(
             <Provider store={mockStore} >
                 <ConnectedRouter history={history}>
-                    <VideoSearching></VideoSearching>
+                    <VideoSearching testing={true}></VideoSearching>
                 </ConnectedRouter>
             </Provider>
         )
