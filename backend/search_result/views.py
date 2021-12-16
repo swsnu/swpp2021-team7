@@ -138,7 +138,7 @@ def search_result(request, scope, instance_id):
         try:
             if info_instance.updated_at:
                 print(
-                    f"More than 3 days passed after last update.. crawling {name} starts.."
+                    f"More than a day passed after last update.. crawling {name} starts.."
                 )
             else:
                 print(f"Never crawled before. Crawling {name} starts..")
