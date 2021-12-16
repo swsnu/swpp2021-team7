@@ -57,7 +57,7 @@ class VideoResult extends Component {
           const response = await axios.get(`search-result/member/${id}/`);
           this.setSearchResult(response.data);
         } catch(err) {
-          //console.error(err);
+          
         }
     }
     async getVideoScene(video) {
@@ -69,7 +69,7 @@ class VideoResult extends Component {
           });
           this.setSceneResult(response.data);
         } catch(err) {
-          console.error(err);
+          
           this.setState({"loading" : false});
         }
     }
@@ -85,7 +85,7 @@ class VideoResult extends Component {
           });
           this.setFaceRecognitionResult(response.data);
         } catch(err) {
-          //console.error(err);
+          
           this.setState({"loading" : false});
         }
     }
@@ -99,7 +99,7 @@ class VideoResult extends Component {
         this.setState({"loading" : false});
     }
     setSceneResult(data){
-        console.log(data)
+        
         this.setState({detectList : data});
         this.setState({"loading" : false});
         
@@ -145,7 +145,7 @@ class VideoResult extends Component {
             });
             
             this.setState({"selectedIdol":selected_idol});
-            console.log(selected_idol);
+            
             selected_idol.forEach(id => {
                 this.getBySearchMemberId(id);
             });

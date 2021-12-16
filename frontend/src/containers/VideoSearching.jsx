@@ -86,7 +86,7 @@ class VideoSearching extends Component {
           const response = await axios.get(`search-result/search/${keyword}/`);
           this.setSearchResult(response.data);
         } catch(err) {
-          //console.error(err);
+          
         }
     }
     handleIdols(item){
