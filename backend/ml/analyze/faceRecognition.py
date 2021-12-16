@@ -13,17 +13,13 @@ class faceRecognition:
     def setIdol(self, idol = []):
         self.idol = idol
 
-    def parse(self):
+    def parse(self, real_fps=0.1, tolerance=0.50):
         if(len(self.video) == 0):
             print("no video file, please set the video url.")
-            return
+            return []
         if(len(self.idol) == 0):
             print("no targeted idols.")
-            return
-
-        real_fps = 0.1
-        prev_time = 0
-        
+            return []
         
         input_movie = cv2.VideoCapture(self.video)
         input_movie.set(cv2.CAP_PROP_FPS, 1)
@@ -32,10 +28,6 @@ class faceRecognition:
         length = int(input_movie.get(cv2.CAP_PROP_FRAME_COUNT))
         fps = float(input_movie.get(cv2.CAP_PROP_FPS))
         time = length / fps
-        
-        # Create an output movie file (make sure resolution/frame rate matches input video!)
-        fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        output_movie = cv2.VideoWriter('output.avi', fourcc, 29.97, (640, 360))
 
         # Load some sample pictures and learn how to recognize them.
         known_faces = []
@@ -73,41 +65,23 @@ class faceRecognition:
 
                 face_names = []
                 
-                print(face_encodings)
                 for face_encoding in face_encodings:
                     # See if the face is a match for the known face(s)
-                    match = face_recognition.compare_faces(known_faces, face_encoding, tolerance=0.50)
-                    print(face_encoding,match)
-                    # If you had more than 2 faces, you could make this logic a lot prettier
-                    # but I kept it simple for the demo
+                    match = face_recognition.compare_faces(known_faces, face_encoding, tolerance=tolerance)
+                    
                     name = None
                     index_number = 0
                     for i in known_faces:
                         if match[index_number]:
                             name = self.idol[index_number]
-                            results[index_number].append(frame_number/10)
+                            results[index_number].append(frame_number * real_fps)
                         index_number += 1
                     face_names.append(name)
-                    
 
-                # Label the results
-                for (top, right, bottom, left), name in zip(face_locations, face_names):
-                    if not name:
-                        continue
-
-                    # Draw a box around the face
-                    cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-
-                    # Draw a label with a name below the face
-                    cv2.rectangle(frame, (left, bottom - 25), (right, bottom), (0, 0, 255), cv2.FILLED)
-                    font = cv2.FONT_HERSHEY_DUPLEX
-                    cv2.putText(frame, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
-
-                # Write the resulting image to the output video file
+                # Check the progress
                 print("Writing frame {} / {}".format(frame_number, length))
-                #output_movie.write(frame)
 
-        # All done!
+        #  finish the file
         input_movie.release()
         cv2.destroyAllWindows()
         return results
